@@ -1,0 +1,88 @@
+START OF FILE 2 BYTE
+
+05 length of next field
+
+64 75 6D 6D 79 (dummy) song name ja
+
+05 length of next field
+
+64 75 6D 6D 79 (dummy) song name en
+
+03 F6 auto-incrementing ID
+
+05 length of next field
+
+64 75 6D 6D 79 (dummy) artist ja
+
+05 length of next field
+
+64 75 6D 6D 79 (dummy) artist en
+
+06 length of next field
+
+28 32 3A 33 32 29 ((2:32)) length string
+
+02 04 06 03 06 0C (2,4,6,3,6,12) diff levels
+
+03 length of next field
+
+31 38 30 (180) BPM
+
+0F length of next field
+
+64 75 6D 6D 79 5F 73 61 6D 70 6C 65 (dummy_sample) sample file name
+
+05 length of next field
+
+64 75 6D 6D 79 (dummy) perhaps song ID
+
+64 64 (dd) unknown string, constant
+
+01 unknown field (very random)
+
+0D length of next field
+
+64 75 6D 6D 79 5F 65 61 73 79 (dummy_easy) easy string
+
+0F length of next field
+
+64 75 6D 6D 79 5F 6E 6F 72 6D 61 6C (dummy_normal) normal string
+
+0D length of next field
+
+64 75 6D 6D 79 5F 68 61 72 64 (dummy_hard) hard string
+
+Last section based off IDA REing:
+
+        *(_DWORD *)(v13 + 80) = RomReadIntBig();
+        *(_DWORD *)(v13 + 84) = RomReadIntBig();
+        *(_DWORD *)(v13 + 88) = RomReadIntBig();
+        *(_DWORD *)(v13 + 92) = RomReadIntBig();
+        *(_DWORD *)(v13 + 96) = RomReadIntBig();
+        *(_DWORD *)(v13 + 100) = RomReadIntBig();
+        *(_DWORD *)(v13 + 208) = RomReadIntBig();
+        *(_DWORD *)v13 = (unsigned __int8)RomReadUByte();
+        *(_DWORD *)(v13 + 4) = RomReadIntBig();
+        *(_DWORD *)(v13 + 8) = (unsigned __int8)RomReadUByte();
+        *(_DWORD *)(v13 + 12) = RomReadIntBig();
+        *(_QWORD *)(v13 + 216) = RomReadString();
+        *(_DWORD *)(v13 + 16) = (unsigned __int8)RomReadUByte();
+        *(_DWORD *)(v13 + 20) = RomReadIntBig();
+        *(_DWORD *)(v13 + 112) = (unsigned __int8)RomReadUByte();
+
+
+00 1B 7B F0 	maximumscore 1
+00 4F 86 48 
+00 A6 CB F6 
+00 11 0C E2 	maximumscore 2
+00 3B 2D 10 
+00 82 38 18 
+FF FF FF FF 
+00 
+00 00 00 00 
+03 
+00 00 00 00 
+00 //str 	just use 00
+00 		isEnableAC (>6th bit, just use 7C)
+00 00 03 F9 
+03		isAvailable (>2nd bit, just use 03)

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?><response>
+<code>0</code>
+<area>en</area>
+<is_tutorial>0</is_tutorial>
+<stage_pak>
+	<id>5</id>
+	<name>DrumnBass</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>34</id>
+	<name>Shadow</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>48</id>
+	<name>rewrite</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>49</id>
+	<name>tsukema</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>120</id>
+	<name>konton</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>126</id>
+	<name>konoha</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>135</id>
+	<name>departure</name>
+	<date>20160310</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>136</id>
+	<name>walking</name>
+	<date>20160310</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>137</id>
+	<name>orb</name>
+	<date>20160310</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>140</id>
+	<name>worldcall</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>146</id>
+	<name>ayano</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>147</id>
+	<name>yukei</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>157</id>
+	<name>sakuram</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>158</id>
+	<name>mssplanet</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>164</id>
+	<name>outer</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>169</id>
+	<name>extremegrv</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>171</id>
+	<name>pzddragon</name>
+	<date>20160310</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>202</id>
+	<name>bbragna</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>206</id>
+	<name>yowamushi</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>215</id>
+	<name>pmneo</name>
+	<date>201508182208</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>238</id>
+	<name>kero9</name>
+	<date>201509161108</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>268</id>
+	<name>msphantom</name>
+	<date>20160401</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>272</id>
+	<name>redeparture</name>
+	<date>20160310</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>277</id>
+	<name>ghost</name>
+	<date>20160401</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>359</id>
+	<name>smash</name>
+	<date>201706011100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>360</id>
+	<name>asuno</name>
+	<date>201708311100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>385</id>
+	<name>alien</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>423</id>
+	<name>kemono</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>459</id>
+	<name>jumpee</name>
+	<date>201901311100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>558</id>
+	<name>yscolabo</name>
+	<date>202012031500</date>
+	<update>63</update>
+</stage_pak>
+
+<icon_badge>
+	<icon_no>98</icon_no>
+	<icon_index>4</icon_index>
+	<badge_id>0</badge_id>
+</icon_badge>
+<result_banner>0</result_banner>
+<information_badge>
+	<icon_index>1</icon_index>
+	<badge_id>2</badge_id>
+</information_badge>
+
+</response>

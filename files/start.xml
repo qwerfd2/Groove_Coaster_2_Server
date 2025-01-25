@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?><response>
+<code>0</code>
+<area>us</area>
+<is_tutorial>0</is_tutorial>
+
+<stage_pak>
+	<id>5</id>
+	<name>DrumnBass</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>34</id>
+	<name>Shadow</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>48</id>
+	<name>rewrite</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>49</id>
+	<name>tsukema</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>120</id>
+	<name>konton</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>126</id>
+	<name>konoha</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>135</id>
+	<name>departure</name>
+	<date>20160310</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>136</id>
+	<name>walking</name>
+	<date>20160310</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>137</id>
+	<name>orb</name>
+	<date>20160310</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>140</id>
+	<name>worldcall</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>146</id>
+	<name>ayano</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>147</id>
+	<name>yukei</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>157</id>
+	<name>sakuram</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>158</id>
+	<name>mssplanet</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>164</id>
+	<name>outer</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>169</id>
+	<name>extremegrv</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>171</id>
+	<name>pzddragon</name>
+	<date>20160310</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>202</id>
+	<name>bbragna</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>206</id>
+	<name>yowamushi</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>215</id>
+	<name>pmneo</name>
+	<date>201508182208</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>238</id>
+	<name>kero9</name>
+	<date>201509161108</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>268</id>
+	<name>msphantom</name>
+	<date>20160401</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>272</id>
+	<name>redeparture</name>
+	<date>20160310</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>277</id>
+	<name>ghost</name>
+	<date>20160401</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>359</id>
+	<name>smash</name>
+	<date>201706011100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>360</id>
+	<name>asuno</name>
+	<date>201708311100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>385</id>
+	<name>alien</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>423</id>
+	<name>kemono</name>
+	<date>201903291100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>459</id>
+	<name>jumpee</name>
+	<date>201901311100</date>
+	<update>0</update>
+</stage_pak>
+<stage_pak>
+	<id>558</id>
+	<name>yscolabo</name>
+	<date>202012031500</date>
+	<update>63</update>
+</stage_pak>
+<cm_button_level>10</cm_button_level>
+<login_bonus>
+	<status>1</status>
+	<last_count>28</last_count>
+	<count_update>1</count_update>
+	<reward> 
+		<count>1</count> 
+		<cnt_type>3</cnt_type> 
+		<cnt_id>1</cnt_id> 
+		<num>1</num> 
+	</reward>
+    <reward> 
+		<count>2</count> 
+		<cnt_type>3</cnt_type> 
+		<cnt_id>2</cnt_id> 
+		<num>1</num> 
+	</reward>
+    <reward> 
+		<count>3</count> 
+		<cnt_type>2</cnt_type> 
+		<cnt_id>10</cnt_id> 
+		<num>1</num> 
+	</reward>
+    <reward> 
+		<count>4</count> 
+		<cnt_type>3</cnt_type> 
+		<cnt_id>3</cnt_id> 
+		<num>1</num> 
+	</reward>
+    <reward> 
+		<count>5</count> 
+		<cnt_type>3</cnt_type> 
+		<cnt_id>4</cnt_id> 
+		<num>1</num> 
+	</reward>
+    <reward> 
+		<count>6</count> 
+		<cnt_type>3</cnt_type> 
+		<cnt_id>5</cnt_id> 
+		<num>1</num> 
+	</reward>
+	<reward> 
+		<count>7</count> 
+		<cnt_type>1</cnt_type> 
+		<cnt_id>213</cnt_id> 
+		<num>1</num> 
+	</reward>
+    <reward> 
+	    <count>8</count> 
+		<cnt_type>3</cnt_type> 
+		<cnt_id>6</cnt_id> 
+		<num>1</num> 
+	</reward>
+    <reward> 
+	    <count>9</count> 
+		<cnt_type>3</cnt_type> 
+		<cnt_id>7</cnt_id> 
+		<num>1</num> 
+	</reward>
+    <reward> 
+		<count>10</count> 
+		<cnt_type>2</cnt_type> 
+		<cnt_id>11</cnt_id> 
+		<num>1</num> 
+	</reward>
+    <reward> 
+	    <count>11</count> 
+		<cnt_type>3</cnt_type> 
+		<cnt_id>8</cnt_id> 
+		<num>1</num> 
+	</reward>
+    <reward> 
+	    <count>12</count> 
+		<cnt_type>3</cnt_type> 
+		<cnt_id>9</cnt_id> 
+		<num>1</num> 
+	</reward>
+    <reward> 
+	    <count>13</count> 
+		<cnt_type>3</cnt_type> 
+		<cnt_id>10</cnt_id> 
+		<num>1</num> 
+	</reward>
+    <reward> 
+		<count>14</count> 
+		<cnt_type>1</cnt_type> 
+		<cnt_id>277</cnt_id> 
+		<num>1</num> 
+	</reward>
+	<reward> 
+		<count>15</count> 
+		<cnt_type>3</cnt_type> 
+		<cnt_id>1</cnt_id> 
+		<num>1</num> 
+	</reward>
+    <reward> 
+		<count>16</count> 
+		<cnt_type>3</cnt_type> 
+		<cnt_id>2</cnt_id> 
+		<num>1</num> 
+	</reward>
+    <reward> 
+		<count>17</count> 
+		<cnt_type>2</cnt_type> 
+		<cnt_id>12</cnt_id> 
+		<num>1</num> 
+	</reward>
+    <reward> 
+		<count>18</count> 
+		<cnt_type>3</cnt_type> 
+		<cnt_id>3</cnt_id> 
+		<num>1</num> 
+	</reward>
+    <reward> 
+		<count>19</count> 
+		<cnt_type>3</cnt_type> 
+		<cnt_id>4</cnt_id> 
+		<num>1</num> 
+	</reward>
+    <reward> 
+		<count>20</count> 
+		<cnt_type>3</cnt_type> 
+		<cnt_id>5</cnt_id> 
+		<num>1</num> 
+	</reward>
+    <reward> 
+		<count>21</count> 
+		<cnt_type>1</cnt_type> 
+		<cnt_id>397</cnt_id> 
+		<num>1</num> 
+	</reward>
+    <reward> 
+		<count>22</count> 
+		<cnt_type>3</cnt_type> 
+		<cnt_id>6</cnt_id> 
+		<num>1</num> 
+	</reward>
+    <reward> 
+		<count>23</count> 
+		<cnt_type>3</cnt_type> 
+		<cnt_id>7</cnt_id> 
+		<num>1</num> 
+	</reward>
+    <reward> 
+		<count>24</count> 
+		<cnt_type>2</cnt_type> 
+		<cnt_id>13</cnt_id> 
+		<num>1</num> 
+	</reward>
+    <reward> 
+		<count>25</count> 
+		<cnt_type>3</cnt_type> 
+		<cnt_id>8</cnt_id> 
+		<num>1</num> 
+	</reward>
+    <reward> 
+		<count>26</count> 
+		<cnt_type>3</cnt_type> 
+		<cnt_id>9</cnt_id> 
+		<num>1</num> 
+	</reward>
+    <reward> 
+		<count>27</count> 
+		<cnt_type>3</cnt_type> 
+		<cnt_id>10</cnt_id> 
+		<num>1</num> 
+	</reward>
+    <reward> 
+		<count>28</count> 
+		<cnt_type>1</cnt_type> 
+		<cnt_id>121</cnt_id> 
+		<num>1</num> 
+	</reward>
+<message>Connected to private server.
+You can edit start.xml to grant items via login bonus.</message>
+</login_bonus>
+<app_data_sync>1</app_data_sync>
+</response>

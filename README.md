@@ -1,6 +1,6 @@
 ## Introduction 简介
 
-A small local server for ```Groove Coaster 2: Original Style```, implemented with ```Python``` and ```Flask```. Supports asset delivery (paks and song/stage files) and basic (static full-unlock) account. Supports save file backup using a recreation of the Taito ID system. Supports account whitelisting and banning. Does not support shop, mission, status, and leaderboard. Tested on Android 1.0.18 client.
+A small local server for ```Groove Coaster 2: Original Style```, implemented with ```Python``` and ```Flask```. Supports asset delivery (paks and song/stage files) and basic shop, which unlocks content via Groove Coin (a removed feature in-game). Support save file backup using a recreation of the TAlT0 ID system. Supports account whitelisting and banning. Does not mission, status, and leaderboard as of now (score submissions are saved in the database). Tested on Android/ios 1.0.18 client.
 
 This project is for game preservation purposes only. This github repo does not contain any proprietary code or content. It is provided as-is.
 
@@ -8,15 +8,19 @@ You are not allowed to use it for commercial purposes. You shall bare all the re
 
 Inspiration: [Lost-MSth/Arcaea-server](https://github.com/Lost-MSth/Arcaea-server)
 
+Special thanks: [Walter-o/gcm-downloader]https://github.com/Walter-o/gcm-downloader
+
 Warning: Do not put personal files under the folders in the private server directory - all files within these sub-folders will be accessible by anyone with your server address!
 
-一个基于```Python```和```Flask```的微型```Groove Coaster 2: Original Style```本地服务器。支持文件下载 (pak和谱面，歌曲文件)，基础的全解锁存档，和重做的Taito ID系统支持的存档备份功能。支持账号白名单和封禁。不支持商店，任务，状态，和排行榜。通过安卓1.0.18客户端测试。
+一个基于```Python```和```Flask```的微型```Groove Coaster 2: Original Style```本地服务器。支持文件下载 (pak和谱面，歌曲文件)，基础的商店（使用GCoin解锁内容），和重做的TAlT0 ID系统支持的存档备份功能。支持账号白名单和封禁。不支持任务，状态，和排行榜（分数提交有被服务器记载）。通过安卓/ios1.0.18客户端测试。
 
 此项目的目标是保持游戏的长远可用性 (game preservation)。此repo内没有任何侵犯知识产权的代码和文件。此项目在“按现状” (as-is) 条件下提供。
 
 你不得将此项目用于商业行为。你应对因运行本服务器而产生的任何潜在后果承担全部责任。如果您不同意这些要求，则不允许您复制或运行该程序。
 
 灵感: [Lost-MSth/Arcaea-server](https://github.com/Lost-MSth/Arcaea-server)
+
+鸣谢: [Walter-o/gcm-downloader]https://github.com/Walter-o/gcm-downloader
 
 警告：不要将私人文件放至私服内的文件夹里。自带的文件夹内所有文件都可被私服抓取！
 
@@ -63,9 +67,6 @@ server/
 ├─ 7001.py
 
 ├─ config.py
-
-https://github.com/Walter-o/gcm-downloader
-
 
 </details>
 
@@ -165,3 +166,11 @@ If you want to make your service only available to whitelisted devices, turn on 
 数据库可以用DB Browser打开。
 
 如果你想只对在白名单里的设备提供服务，开启```config.py```里的```AUTHORIZATION_NEEDED```，并将.php请求后面的设备ID加入```whitelist```列表。如果你想封禁设备或者Taito ID，将设备ID或者用户名加入```blacklist```列表。```reason```列可供你记录封禁原因。如果设备登陆该Taito ID，它将无法下载数据，不能登出，而且不能改名。如果设备在白名单开启后不在白名单里，或者设备被封禁，它将无法下载任何东西。
+
+## About Account Implementation
+
+Account is only used for save file saving/loading (song ownership and coins are tied to devices. However, songs unlocked in the save file will remain unlocked on a new device). Unlike the official version, you can rename and log out of your account. However, only one device may be connected to an account at a time.
+
+## Logical next step
+
+Porting charts from PC and 4MAX to mobile. Once figuring out stage_param.dat, this should be quite easy...

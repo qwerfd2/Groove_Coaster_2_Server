@@ -1,6 +1,6 @@
 ## Introduction 简介
 
-A small local server for ```Groove Coaster 2: Original Style```, implemented with ```Python``` and ```Flask```. Supports asset delivery (paks and song/stage files) and basic shop, which unlocks content via Groove Coin (a removed feature in-game). Support save file backup using a recreation of the TAlT0 ID system. Supports account whitelisting and banning. Does not mission, status, and leaderboard as of now (score submissions are saved in the database). Tested on Android/ios 1.0.18 client.
+A small local server for ```Groove Coaster 2: Original Style```, implemented with ```Python``` and ```Flask```. Supports asset delivery (paks and song/stage files) and basic shop, which unlocks content via Groove Coin (a removed feature in-game). Support save file backup using a recreation of the TAlT0 ID system. Supports account whitelisting and banning. Does not support mission, status, and leaderboard as of now (score submissions are saved in the database). Tested on Android/ios 1.0.18 client.
 
 This project is for game preservation purposes only. This github repo does not contain any proprietary code or content. It is provided as-is.
 

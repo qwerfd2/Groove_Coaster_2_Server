@@ -179,9 +179,16 @@ Account is only used for save file saving/loading (song ownership and coins are 
 
 ## Logical next step 接下来。。。
 
+### SAVE NETWORK PACKETS!!!
+
+Implement leaderboard, personalization (title), maybe mission. 1:1 representation of the offical server is nigh impossible for my skill level. Those features are glorified web pages.
+
 Porting charts from PC and 4MAX to mobile. Once figuring out stage_param.dat, this should be quite easy...
-SAVE NETWORK PACKETS!!!
+
+### 赶 紧 抓 包 ！ ！ ！
+
+实装排行榜，title个性化，甚至任务。官服1：1还原对我来说太难了。毕竟这些功能实际上不是游戏，而是网页。
 
 将pc版和4max歌曲加入2OS. 琢磨透stage_param.dat之后，应该就是轻而易举的了。
 
-赶 紧 抓 包 ！ ！ ！
+

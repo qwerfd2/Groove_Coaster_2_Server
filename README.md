@@ -145,6 +145,8 @@ Make sure the private server is running on your PC. Make sure Charles acknowledg
 By modifying the apk's obb verification function and `obb`'s `settings.cfg`, you can connect to the server without using any proxy software. To do so, decompile `classes.dex` using your favorite `smali` decompiler, and go to `jp.co.groovecoasterzero/BootActivity`. Delete the part in `e()` where the loop is checking for a size, and, if mismatch, override a variable that causes the code to branch into `DownloadActivity`. We want the game to load the obb regardless of its size.
 
 After this, open the game's `obb` with password `eiprblFFv69R83J5`, extract everything, open `settings.cfg`, and edit the `serverUrl` to the `http://ip:port/` of your server. Compress every file with `WinRAR` to zip, using the password to encrypt it. Use `ZIP legacy encryption`. Override the `obb` in `Android/obb/jp.co.groovecoasterzero` and you should be able to connect directly. Just start the game and observe the server.
+
+With iOS, none of the above is necessary as the installation package is a single .ipa. Just edit `settings.cfg` and sideload the ipa.
 </details>
 
 <details>
@@ -154,6 +156,8 @@ After this, open the game's `obb` with password `eiprblFFv69R83J5`, extract ever
 你可以通过修改apk里的obb校验函数然后修改`obb`里的`settings.cfg`来直连私服，无需中继软件。用顺手的`smali`反编译器来反编译`classes.dex`，然后去`jp.co.groovecoasterzero/BootActivity`。删除`e()`里循环检查文件大小的部分。这部分会检查obb文件的大小，如果不一致会修改一个变量跳至`DownloadActivity`。我们想强制游戏读取。
 
 然后打开游戏的`obb`，密码是`eiprblFFv69R83J5`。提取全部文件，打开`settings.cfg`，将`serverUrl`改成私服的`http://ip:端口/`。用`WinRAR`压缩全部文件至zip，用密码加密。用`ZIP legacy encryption`。覆盖`Android/obb/jp.co.groovecoasterzero`里的`obb`，应该就可以直连了。打开游戏，观察私服的输出。
+
+iOS简单得多，只要修改ipa中的`settings.cfg`并侧载即可。
 </details>
 
 
@@ -167,10 +171,17 @@ If you want to make your service only available to whitelisted devices, turn on 
 
 如果你想只对在白名单里的设备提供服务，开启```config.py```里的```AUTHORIZATION_NEEDED```，并将.php请求后面的设备ID加入```whitelist```列表。如果你想封禁设备或者Taito ID，将设备ID或者用户名加入```blacklist```列表。```reason```列可供你记录封禁原因。如果设备登陆该Taito ID，它将无法下载数据，不能登出，而且不能改名。如果设备在白名单开启后不在白名单里，或者设备被封禁，它将无法下载任何东西。
 
-## About Account Implementation
+## About Account Implementation 关于账号设置
 
-Account is only used for save file saving/loading (song ownership and coins are tied to devices. However, songs unlocked in the save file will remain unlocked on a new device). Unlike the official version, you can rename and log out of your account. However, only one device may be connected to an account at a time.
+Account is only used for save file saving/loading (song ownership and coins are tied to devices. However, songs unlocked in the save file will remain unlocked on a new device). Unlike the official version, you can rename and log out of your account. However, only one device may be connected to an account at a time. The old device will be logged off if a new device logs in.
 
-## Logical next step
+账号仅用于保存/同步存档。Gcoin和歌曲所有权和设备绑定。不过，存档中已经解锁的曲目将在新的设备上可用。官方版不允许重命名及登出账号。私服则可以进行这些操作。不过，一个账号只能同时登陆一台设备，如果登录第二台设备，第一台设备将被挤掉。
+
+## Logical next step 接下来。。。
 
 Porting charts from PC and 4MAX to mobile. Once figuring out stage_param.dat, this should be quite easy...
+SAVE NETWORK PACKETS!!!
+
+将pc版和4max歌曲加入2OS. 琢磨透stage_param.dat之后，应该就是轻而易举的了。
+
+赶 紧 抓 包 ！ ！ ！

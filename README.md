@@ -82,7 +82,7 @@ server/
 
 For android 9+ devices, you need to bypass the https protection in order to MITM the connection between game client and server. If you have root, you can install Certificate Authorities to system level, allowing the device to trust it. If you don't have root, I don't think it is possible and you might have to modify the client slightly using the next section.
 
-I don’t have an iOS device, so I cannot test iOS compatibility. I've heard that https is enforced there, meaning the stack below likely won't work. You likely need a server, with a domain and SSL, to serve https from the get-go.
+I did not test this method on iOS. If you know how to proxy stuff there, feel free to continue reading and try the equivalent there.
 
 I will demonstrate the VProxid + Charles method. Install VProxid on your android device. Install Charles on your Windows PC. Charles has a free trial period, but there are ways to register it for free. Please do your own research on that subject.
 
@@ -112,7 +112,7 @@ Make sure the private server is running on your PC. Make sure Charles acknowledg
 
 对于 Android 9+ 设备，您需要绕过 https 保护才能对游戏客户端和服务器之间的连接进行中间人攻击。 这可以通过至少两种方式完成： 如果您拥有 root 权限，则可以将证书安装到系统级别，从而允许设备信任中间人软件。 或者您可以补丁游戏的客户端数据包里的设置文件。
 
-如果您使用的是 iOS，由于我没有iOS设备，所以无法测试iOS兼容性。我听说iOS强制https，意味着以下的方法可能不可行。你可能需要一个有域名和SSL的服务器来从源头使用https。
+下方是基于安卓的教程。我不了解iOS系统，如果你了解ios的代理软件，可以继续阅读，然后照葫芦画瓢（
 
 这里展示 VProxid 加 Charles 方法。 在您的 Android 设备上安装 VProxid。 在 Windows PC 上安装 Charles。 Charles 有免费试用期，但有多种方法可以免费注册。 请对此主题进行自己的研究。
 

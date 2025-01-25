@@ -20,7 +20,7 @@ Warning: Do not put personal files under the folders in the private server direc
 
 灵感: [Lost-MSth/Arcaea-server](https://github.com/Lost-MSth/Arcaea-server)
 
-鸣谢: [Walter-o/gcm-downloader]https://github.com/Walter-o/gcm-downloader
+鸣谢: [Walter-o/gcm-downloader](https://github.com/Walter-o/gcm-downloader)
 
 警告：不要将私人文件放至私服内的文件夹里。自带的文件夹内所有文件都可被私服抓取！
 
@@ -95,7 +95,6 @@ After you’re done, open command on windows. Type “ipconfig”, and remember 
 In Charles, open top bar: Proxy – Proxy Settings. Enable SOCKS proxy on port 8889. Enable http proxying over socks, include default ports. Then, in top bar: Tools – Map Remote, map a URL to your Server IP address:port, under http. The URL is: https://gc2018.gczero.com. 
 
 ![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/help1.JPG)
-
 
 ![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/test2.JPG)
 
@@ -191,4 +190,4 @@ Porting charts from PC and 4MAX to mobile. Once figuring out stage_param.dat, th
 
 将pc版和4max歌曲加入2OS. 琢磨透stage_param.dat之后，应该就是轻而易举的了。
 
-
+![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/stage_back10_big.PNG)

@@ -8,7 +8,7 @@ START OF FILE 2 BYTE
 
 64 75 6D 6D 79 (dummy) song name en
 
-03 F6 image id on the grid
+03 F6 thumbnail grid id
 
 05 length of next field
 
@@ -52,31 +52,13 @@ START OF FILE 2 BYTE
 
 64 75 6D 6D 79 5F 68 61 72 64 (dummy_hard) hard string
 
-Last section based off IDA REing:
-
-        *(_DWORD *)(v13 + 80) = RomReadIntBig();
-        *(_DWORD *)(v13 + 84) = RomReadIntBig();
-        *(_DWORD *)(v13 + 88) = RomReadIntBig();
-        *(_DWORD *)(v13 + 92) = RomReadIntBig();
-        *(_DWORD *)(v13 + 96) = RomReadIntBig();
-        *(_DWORD *)(v13 + 100) = RomReadIntBig();
-        *(_DWORD *)(v13 + 208) = RomReadIntBig();
-        *(_DWORD *)v13 = (unsigned __int8)RomReadUByte();
-        *(_DWORD *)(v13 + 4) = RomReadIntBig();
-        *(_DWORD *)(v13 + 8) = (unsigned __int8)RomReadUByte();
-        *(_DWORD *)(v13 + 12) = RomReadIntBig();
-        *(_QWORD *)(v13 + 216) = RomReadString();
-        *(_DWORD *)(v13 + 16) = (unsigned __int8)RomReadUByte();
-        *(_DWORD *)(v13 + 20) = RomReadIntBig();
-        *(_DWORD *)(v13 + 112) = (unsigned __int8)RomReadUByte();
-
 
 00 1B 7B F0 	maximumscore 1
-00 4F 86 48 
-00 A6 CB F6 
-00 11 0C E2 	maximumscore 2
-00 3B 2D 10 
-00 82 38 18 
+00 4F 86 48 	maximumscore 2
+00 A6 CB F6 	maximumscore 3
+00 11 0C E2 	maxscore 1 w/o ad-lib
+00 3B 2D 10 	maxscore 2 2/o ad-lib
+00 82 38 18 	maxscore 3 w/o ad-lib
 FF FF FF FF 
 00 
 00 00 00 00 

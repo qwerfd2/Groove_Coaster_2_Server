@@ -8,7 +8,7 @@ START OF FILE 2 BYTE
 
 64 75 6D 6D 79 (dummy) song name en
 
-03 F6 auto-incrementing ID
+03 F6 image id on the grid
 
 05 length of next field
 

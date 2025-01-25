@@ -26,11 +26,17 @@ Warning: Do not put personal files under the folders in the private server direc
 
 ## Download 下载
 
-TBA
+Server download: Simply download the project as zip.
+
+Asset download: Will be made available after IAP sales end (1/31/2025)
 
 You need to get the CDN files from the game Server. I will not include this within this project as it is copyrighted material, and because it is quite sizable (3.7GB+ for Android only, double if including iOS). I will also not provide the script I used to scrape the website, as I don't want the developer to face a massive bill. If the game's server shuts down in the future, this might change. I will only provide the directory hierarchy to show you what is needed.
 
 If you want to use the official client, you would need some proxying software to redirect the traffic to your server. If you are okay with modifying the client, you can connect directly and please read the next tutorial。
+
+服务器下载：将此repo以zip形式下载。
+
+资源下载：将在应用内购买关闭后（2025年1月31日）放出。
 
 你需要从游戏服务器获取 CDN 文件。我不会将其包含在该项目中，因为它受版权保护，而且很大（安卓3.7GB+，ios加倍）。不会提供用来抓取网站的脚本，因为我不希望开发者收到巨额账单。如果游戏的服务器将来关闭，情况可能会改变。我只会提供目录层次结构来向您展示需要哪些文件。
 

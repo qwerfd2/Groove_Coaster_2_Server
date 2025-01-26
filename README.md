@@ -196,4 +196,31 @@ Porting charts from PC and 4MAX to mobile. Once figuring out stage_param.dat, th
 
 将pc版和4max歌曲加入2OS. 琢磨透stage_param.dat之后，应该就是轻而易举的了。
 
-[](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/stage_back10_big.png)
+![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/stage_back10_big.png)
+![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/test2.JPG)
+
+## Journal
+
+Im forcing myself to document the process for personal project. So here goes.
+
+<details>
+<summary>English</summary>
+<br>
+Project Taiyo started on Feb. 19, 2024, as the effort to create a private server for Groove Coaster 2: Original Style. No prior effort was spent on the game, since the save file acquired from lp did unlock the majority of the track.
+
+However, as updates slowed down and Groove Coaster 4max is scheduled to shut down, time were allocated to investigate the viability of a private server. Asset scraping was tedius as each song has multiple downloadable files, and there is no naming convention. Every zip file was acquired by hand(!) via manual downloading, which was soon proven unnecessary with the discovery of gcm-downloader.
+The obb's decryption key was discovered in the android executable's lib file, and, during investigation of a config file within the obb, the server's address is directly editable. On the iOS, this config file is within the ipa. A proxy can be setup to mitm traffic for the same result. A simple server that handles asset delivery and static full-unlock profile was quickly developed.
+An account system was developed that facilitates the save/load feature. The server request's GET field is encrypted, and, initially, the key and encryption method was not found. However, due to CBC encryption's flaw, part of the encrypted mess can still be used to identify users. Later, the key and IV to decrypt request was found in gcm-downloader, and used to implement a correct implementation of the server.
+
+Besides from an additional information here. All other functionality remains unimplemented. This was completed within a week, and project OverRide is still the major goal. Some effort was spent on documenting the scraping, setup, and scripting, uploaded to a github repo, and the MVP is shelved.
+
+In Janurary 2025, renewed effort was put on the project as Taito announced the cease of additional DLC, after a lackluster 2024 season. Groove Coin, a removed feature in-game, has been revived to facilitate a shop system. No longer is the server delivering static full-unlock save file, but the user can now acquire their own content in a balanced progression.
+
+Additional effort was put on researching and REing various aspect of the game. 5 removed songs were re-enabled by lib editing. Effort was spent on scripting a .pak unpacker and packer, which is successful and allow us to create own .pak files for delivery.
+
+Effort was spent on the PC and Switch (waiwai) port, investigating the possiblilty of chart porting to Mobile. Switch version uses a significantly different system, charts lack critical elements and music is stored in header-removed opus. Porting from switch is deemed hard.
+
+The PC version has exclusive songs/packs, and the chart/model files are an exact match from mobile asset. Music is in header-appended OGG, which is also compatible with Mobile. Porting is technically feasible if the format of stage_param can be RE'd.
+
+On Jan. 24, 2025, Taito announced the end of service of the game. This prompted the creation of this repo and release of private server.
+</details>

@@ -2,7 +2,7 @@
 
 A small local server for ```Groove Coaster 2: Original Style```, implemented with ```Python``` and ```Flask```. Supports asset delivery (paks and song/stage files) and basic shop, which unlocks content via Groove Coin (a removed feature in-game). Support score upload and leaderboard. Support save file backup using a recreation of the TAlT0 ID system. Supports account whitelisting and banning. Does not support mission, status, and friend as of now. Tested on Android/ios 1.0.18 client.
 
-This project is for game preservation purposes only. This github repo does not contain any proprietary code or content. It is provided as-is.
+This project is for game preservation purposes only. It is provided as-is, per the MIT license.
 
 You are not allowed to use it for commercial purposes. You shall bare all the responsibility for any potential consequences as a result of running this server. If you do not agree to these requirements, you are not allowed to replicate or run this program.
 
@@ -14,7 +14,7 @@ Warning: Do not put personal files under the folders in the private server direc
 
 一个基于```Python```和```Flask```的微型```Groove Coaster 2: Original Style```本地服务器。支持文件下载 (pak和谱面，歌曲文件)，基础的商店（使用GCoin解锁内容），分数上传和排行榜，和重做的TAlT0 ID系统支持的存档备份功能。支持账号白名单和封禁。不支持任务，状态，和好友功能。通过安卓/ios1.0.18客户端测试。
 
-此项目的目标是保持游戏的长远可用性 (game preservation)。此repo内没有任何侵犯知识产权的代码和文件。此项目在“按现状” (as-is) 条件下提供。
+此项目的目标是保持游戏的长远可用性 (game preservation)。此项目在MIT许可证的“按现状” (as-is) 条件下提供。
 
 你不得将此项目用于商业行为。你应对因运行本服务器而产生的任何潜在后果承担全部责任。如果您不同意这些要求，则不允许您复制或运行该程序。
 

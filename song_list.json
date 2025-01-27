@@ -9,10 +9,7 @@
         "difficulty_levels": [
             2,
             3,
-            4,
-            0,
-            0,
-            0
+            4
         ],
         "bpm": "126",
         "sample_file_name": "",
@@ -101,10 +98,7 @@
         "difficulty_levels": [
             1,
             3,
-            4,
-            0,
-            0,
-            0
+            4
         ],
         "bpm": "75",
         "sample_file_name": "Hiphop_sample",
@@ -147,10 +141,7 @@
         "difficulty_levels": [
             2,
             3,
-            4,
-            0,
-            0,
-            0
+            4
         ],
         "bpm": "95",
         "sample_file_name": "Arkanoid_sample",
@@ -170,10 +161,7 @@
         "difficulty_levels": [
             4,
             5,
-            6,
-            0,
-            0,
-            0
+            6
         ],
         "bpm": "136",
         "sample_file_name": "Happy_sample",
@@ -216,10 +204,7 @@
         "difficulty_levels": [
             2,
             4,
-            5,
-            0,
-            0,
-            0
+            5
         ],
         "bpm": "133",
         "sample_file_name": "InvadeYou_sample",
@@ -239,10 +224,7 @@
         "difficulty_levels": [
             3,
             5,
-            8,
-            0,
-            0,
-            0
+            8
         ],
         "bpm": "134",
         "sample_file_name": "Neptune_sample",
@@ -262,10 +244,7 @@
         "difficulty_levels": [
             3,
             4,
-            6,
-            0,
-            0,
-            0
+            6
         ],
         "bpm": "125",
         "sample_file_name": "JET_sample",
@@ -308,10 +287,7 @@
         "difficulty_levels": [
             4,
             5,
-            7,
-            0,
-            0,
-            0
+            7
         ],
         "bpm": "130",
         "sample_file_name": "House_sample",
@@ -400,10 +376,7 @@
         "difficulty_levels": [
             4,
             6,
-            8,
-            0,
-            0,
-            0
+            8
         ],
         "bpm": "133",
         "sample_file_name": "TRIP1_sample",
@@ -814,10 +787,7 @@
         "difficulty_levels": [
             3,
             6,
-            7,
-            0,
-            0,
-            0
+            7
         ],
         "bpm": "128",
         "sample_file_name": "eclipse_sample",
@@ -906,10 +876,7 @@
         "difficulty_levels": [
             3,
             4,
-            6,
-            0,
-            0,
-            0
+            6
         ],
         "bpm": "160",
         "sample_file_name": "treeclimb_sample",
@@ -929,10 +896,7 @@
         "difficulty_levels": [
             2,
             4,
-            7,
-            0,
-            0,
-            0
+            7
         ],
         "bpm": "160",
         "sample_file_name": "backon_sample",
@@ -952,10 +916,7 @@
         "difficulty_levels": [
             2,
             4,
-            5,
-            0,
-            0,
-            0
+            5
         ],
         "bpm": "130",
         "sample_file_name": "niji_sample",
@@ -975,10 +936,7 @@
         "difficulty_levels": [
             2,
             5,
-            7,
-            0,
-            0,
-            0
+            7
         ],
         "bpm": "132",
         "sample_file_name": "star_sample",
@@ -1021,10 +979,7 @@
         "difficulty_levels": [
             1,
             2,
-            5,
-            0,
-            0,
-            0
+            5
         ],
         "bpm": "133",
         "sample_file_name": "",
@@ -1044,10 +999,7 @@
         "difficulty_levels": [
             3,
             5,
-            8,
-            0,
-            0,
-            0
+            8
         ],
         "bpm": "134",
         "sample_file_name": "cyber_sample",
@@ -1090,10 +1042,7 @@
         "difficulty_levels": [
             2,
             4,
-            6,
-            0,
-            0,
-            0
+            6
         ],
         "bpm": "160",
         "sample_file_name": "monster_sample",
@@ -1113,10 +1062,7 @@
         "difficulty_levels": [
             2,
             5,
-            7,
-            0,
-            0,
-            0
+            7
         ],
         "bpm": "179",
         "sample_file_name": "Rewrite_sample",
@@ -1182,10 +1128,7 @@
         "difficulty_levels": [
             2,
             3,
-            6,
-            0,
-            0,
-            0
+            6
         ],
         "bpm": "117",
         "sample_file_name": "traveling_sample",
@@ -1205,10 +1148,7 @@
         "difficulty_levels": [
             3,
             4,
-            5,
-            0,
-            0,
-            0
+            5
         ],
         "bpm": "121",
         "sample_file_name": "joy_sample",
@@ -1251,10 +1191,7 @@
         "difficulty_levels": [
             3,
             5,
-            6,
-            0,
-            0,
-            0
+            6
         ],
         "bpm": "159",
         "sample_file_name": "Joyful_sample",
@@ -1274,10 +1211,7 @@
         "difficulty_levels": [
             2,
             4,
-            6,
-            0,
-            0,
-            0
+            6
         ],
         "bpm": "119",
         "sample_file_name": "supernova_sample",
@@ -1343,10 +1277,7 @@
         "difficulty_levels": [
             3,
             5,
-            6,
-            0,
-            0,
-            0
+            6
         ],
         "bpm": "128",
         "sample_file_name": "choco_sample",
@@ -1366,10 +1297,7 @@
         "difficulty_levels": [
             2,
             5,
-            7,
-            0,
-            0,
-            0
+            7
         ],
         "bpm": "135",
         "sample_file_name": "laser_sample",
@@ -1389,10 +1317,7 @@
         "difficulty_levels": [
             2,
             4,
-            7,
-            0,
-            0,
-            0
+            7
         ],
         "bpm": "130",
         "sample_file_name": "lovetheworld_sample",
@@ -1412,10 +1337,7 @@
         "difficulty_levels": [
             4,
             5,
-            6,
-            0,
-            0,
-            0
+            6
         ],
         "bpm": "128",
         "sample_file_name": "nee_sample",
@@ -1435,10 +1357,7 @@
         "difficulty_levels": [
             4,
             5,
-            7,
-            0,
-            0,
-            0
+            7
         ],
         "bpm": "165",
         "sample_file_name": "monogatari_sample",
@@ -1504,10 +1423,7 @@
         "difficulty_levels": [
             2,
             4,
-            6,
-            0,
-            0,
-            0
+            6
         ],
         "bpm": "115",
         "sample_file_name": "beautiful_sample",
@@ -1527,10 +1443,7 @@
         "difficulty_levels": [
             2,
             5,
-            8,
-            0,
-            0,
-            0
+            8
         ],
         "bpm": "199",
         "sample_file_name": "linda_sample",
@@ -1550,10 +1463,7 @@
         "difficulty_levels": [
             4,
             7,
-            8,
-            0,
-            0,
-            0
+            8
         ],
         "bpm": "188",
         "sample_file_name": "daimeiwaku_sample",
@@ -1573,10 +1483,7 @@
         "difficulty_levels": [
             2,
             4,
-            6,
-            0,
-            0,
-            0
+            6
         ],
         "bpm": "142",
         "sample_file_name": "alright_sample",
@@ -1596,10 +1503,7 @@
         "difficulty_levels": [
             2,
             4,
-            6,
-            0,
-            0,
-            0
+            6
         ],
         "bpm": "126",
         "sample_file_name": "namonaki_sample",
@@ -1711,10 +1615,7 @@
         "difficulty_levels": [
             1,
             2,
-            3,
-            0,
-            0,
-            0
+            3
         ],
         "bpm": "128",
         "sample_file_name": "",
@@ -1780,10 +1681,7 @@
         "difficulty_levels": [
             2,
             4,
-            6,
-            0,
-            0,
-            0
+            6
         ],
         "bpm": "135",
         "sample_file_name": "yumegiwa_sample",
@@ -1849,10 +1747,7 @@
         "difficulty_levels": [
             3,
             4,
-            7,
-            0,
-            0,
-            0
+            7
         ],
         "bpm": "140",
         "sample_file_name": "mori_sample",
@@ -2079,10 +1974,7 @@
         "difficulty_levels": [
             3,
             4,
-            6,
-            0,
-            0,
-            0
+            6
         ],
         "bpm": "194",
         "sample_file_name": "naisho_sample",
@@ -2125,10 +2017,7 @@
         "difficulty_levels": [
             4,
             7,
-            8,
-            0,
-            0,
-            0
+            8
         ],
         "bpm": "183",
         "sample_file_name": "innocence_sample",
@@ -2148,10 +2037,7 @@
         "difficulty_levels": [
             2,
             4,
-            6,
-            0,
-            0,
-            0
+            6
         ],
         "bpm": "119",
         "sample_file_name": "poker_sample",
@@ -2171,10 +2057,7 @@
         "difficulty_levels": [
             2,
             5,
-            6,
-            0,
-            0,
-            0
+            6
         ],
         "bpm": "119",
         "sample_file_name": "romance_sample",
@@ -2194,10 +2077,7 @@
         "difficulty_levels": [
             3,
             5,
-            7,
-            0,
-            0,
-            0
+            7
         ],
         "bpm": "130",
         "sample_file_name": "party_sample",
@@ -2217,10 +2097,7 @@
         "difficulty_levels": [
             4,
             6,
-            7,
-            0,
-            0,
-            0
+            7
         ],
         "bpm": "136",
         "sample_file_name": "whatyou_sample",
@@ -2263,10 +2140,7 @@
         "difficulty_levels": [
             4,
             5,
-            8,
-            0,
-            0,
-            0
+            8
         ],
         "bpm": "168",
         "sample_file_name": "saraba_sample",
@@ -2286,10 +2160,7 @@
         "difficulty_levels": [
             4,
             7,
-            8,
-            0,
-            0,
-            0
+            8
         ],
         "bpm": "160",
         "sample_file_name": "otome_sample",
@@ -2309,10 +2180,7 @@
         "difficulty_levels": [
             3,
             7,
-            8,
-            0,
-            0,
-            0
+            8
         ],
         "bpm": "174",
         "sample_file_name": "moretu_sample",
@@ -2332,10 +2200,7 @@
         "difficulty_levels": [
             4,
             7,
-            8,
-            0,
-            0,
-            0
+            8
         ],
         "bpm": "131",
         "sample_file_name": "flying_sample",
@@ -2355,10 +2220,7 @@
         "difficulty_levels": [
             3,
             4,
-            6,
-            0,
-            0,
-            0
+            6
         ],
         "bpm": "178",
         "sample_file_name": "heavy_sample",
@@ -2723,10 +2585,7 @@
         "difficulty_levels": [
             2,
             3,
-            5,
-            0,
-            0,
-            0
+            5
         ],
         "bpm": "135",
         "sample_file_name": "reunion_sample",
@@ -2746,10 +2605,7 @@
         "difficulty_levels": [
             2,
             4,
-            6,
-            0,
-            0,
-            0
+            6
         ],
         "bpm": "172",
         "sample_file_name": "fantastic_sample",
@@ -2792,10 +2648,7 @@
         "difficulty_levels": [
             3,
             4,
-            6,
-            0,
-            0,
-            0
+            6
         ],
         "bpm": "130",
         "sample_file_name": "twilight_sample",
@@ -3091,9 +2944,6 @@
         "difficulty_levels": [
             0,
             0,
-            0,
-            0,
-            0,
             0
         ],
         "bpm": "132",
@@ -3206,10 +3056,7 @@
         "difficulty_levels": [
             3,
             5,
-            7,
-            0,
-            0,
-            0
+            7
         ],
         "bpm": "174",
         "sample_file_name": "seelights_sample",
@@ -3275,10 +3122,7 @@
         "difficulty_levels": [
             4,
             7,
-            8,
-            0,
-            0,
-            0
+            8
         ],
         "bpm": "87-176",
         "sample_file_name": "no_sample",
@@ -3917,9 +3761,6 @@
         "author_en": "Remixed by COSIO composed by Kenji Ito",
         "song_length": "(1:56)",
         "difficulty_levels": [
-            0,
-            0,
-            0,
             0,
             0,
             0
@@ -5069,10 +4910,7 @@
         "difficulty_levels": [
             2,
             4,
-            8,
-            0,
-            0,
-            0
+            8
         ],
         "bpm": "138",
         "sample_file_name": "silenterr_sample",
@@ -6035,10 +5873,7 @@
         "difficulty_levels": [
             3,
             5,
-            8,
-            0,
-            0,
-            0
+            8
         ],
         "bpm": "140",
         "sample_file_name": "smash_sample",
@@ -7622,10 +7457,7 @@
         "difficulty_levels": [
             1,
             1,
-            1,
-            0,
-            0,
-            0
+            1
         ],
         "bpm": "127",
         "sample_file_name": "",
@@ -11164,10 +10996,7 @@
         "difficulty_levels": [
             2,
             4,
-            8,
-            0,
-            0,
-            0
+            8
         ],
         "bpm": "120-280",
         "sample_file_name": "kaidancranky_sample",

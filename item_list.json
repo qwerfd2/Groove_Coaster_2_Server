@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "name": "FOLLOW",
+        "effect": "Change up to 10 MISS results to GOOD. *Consumed upon use."
+    },
+    {
+        "id": 2,
+        "name": "UNUSED",
+        "effect": "Unused item. *Consumed upon use."
+    },
+    {
+        "id": 3,
+        "name": "CHANGE",
+        "effect": "Turns Flicks into Tap TARGETS. *Consumed upon use."
+    },
+    {
+        "id": 4,
+        "name": "VISIBLE",
+        "effect": "Displays AD-LIB timing hints. *Consumed upon use."
+    },
+    {
+        "id": 5,
+        "name": "MIRROR",
+        "effect": "The game screen will be flipped horizontally. *Consumed upon use."
+    },
+    {
+        "id": 6,
+        "name": "JUST",
+        "effect": "Everything but GREAT timing will be counted as a MISS. *Consumed upon use."
+    },
+    {
+        "id": 7,
+        "name": "HIDDEN",
+        "effect": "Targets disappear as they get closer to your AVATAR. *Consumed upon use."
+    },
+    {
+        "id": 8,
+        "name": "SUDDEN",
+        "effect": "Targets are not visible until just before they reach your AVATAR. *Consumed upon use."
+    },
+    {
+        "id": 9,
+        "name": "STEALTH",
+        "effect": "TARGETS are completely invisible. *Consumed upon use."
+    },
+    {
+        "id": 10,
+        "name": "NO WAY",
+        "effect": "Your AVATAR's path is invisible. *Consumed upon use."
+    }
+]

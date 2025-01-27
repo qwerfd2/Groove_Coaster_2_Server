@@ -1039,8 +1039,13 @@ def ranking_detail():
         </div>
     """
 
-    button_labels = ["easy", "normal", "hard", "ac-easy", "ac-normal", "ac-hard"]
-    button_modes = [1, 2, 3, 11, 12, 13]
+    button_labels = ["easy", "normal", "hard"]
+    button_modes = [1, 2, 3]
+
+    if (len(difficulty_levels) == 6):
+        button_labels.extend(["ac-easy", "ac-normal", "ac-hard"])
+        button_modes.extend([11, 12, 13])
+
     row_start = '<div class="button-row">'
     row_end = '</div>'
     row_content = []
@@ -1060,7 +1065,7 @@ def ranking_detail():
                 </a>
             """)
 
-        if len(row_content) == 3 or i == len(button_labels[:len(difficulty_levels)]):
+        if len(row_content) == 3:
             html += row_start + ''.join(row_content) + row_end
             row_content = []  # Reset row content
 

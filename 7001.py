@@ -11,6 +11,24 @@ from Crypto.Cipher import AES
 import urllib.parse
 import json
 
+try:
+    with open("song_list.json", 'r', encoding="utf-8") as file:
+        song_list = json.load(file)
+except Exception as e:
+    print(f"An unexpected error occurred when loading song_list.json: {e}")
+
+try:
+    with open("avatar_list.json", 'r', encoding="utf-8") as file:
+        avatar_list = json.load(file)
+except Exception as e:
+    print(f"An unexpected error occurred when loading avatar_list.json: {e}")
+
+try:
+    with open("item_list.json", 'r', encoding="utf-8") as file:
+        item_list = json.load(file)
+except Exception as e:
+    print(f"An unexpected error occurred when loading item_list.json: {e}")
+
 # Found in: aesManager::initialize()
 # Used for: Crypting parameter bytes sent by client
 # Credit: https://github.com/Walter-o/gcm-downloader
@@ -719,10 +737,6 @@ def mission():
 def status():
     return inform_page("This feature is not available in Private Server.", 1)
 
-@app.route('/ranking.php/', methods=['GET'])
-def ranking():
-    return inform_page("This feature is not available in Private Server.", 1)
-
 @app.route('/web_shop.php', methods=['GET'])
 def web_shop():
     global decrypted_fields
@@ -751,7 +765,7 @@ def web_shop():
         coin = result[2] if result[2] else 0
 
         if (cnt_type == "1"):
-            for idx, i in enumerate(range(90, 616)):
+            for idx, i in enumerate(range(100, 616)):
                 if i not in my_stage:
                     if i not in exclude_stage_exp:
                         # Add a button for this stage
@@ -816,45 +830,68 @@ def web_shop_detail():
         cursor.close()
 
     coin = result[0] if result and result[0] else 0
-    your_html = ""
+    html = ""
 
     if (cnt_type == "1"):
-        your_html = f"""
+        song = song_list[cnt_id]
+        difficulty_levels = "/".join(map(str, song.get("difficulty_levels", [])))
+        html = f"""
         <div class="image-container">
             <img src="/files/image/icon/shop/{cnt_id}.jpg" alt="Item Image" style="width: 180px; height: 180px;" />
         </div>
-        <p>Would you like to purchase this song?{cnt_id}</p>
+        <p>Would you like to purchase this song?</p>
+        <div>
+            <p>{song.get("name_en")} - {song.get("author_en")}</p>
+            <p>Difficulty Levels: {difficulty_levels}</p>
+        </div>
         <div>
             <img src="/files/web/coin_icon.png" class="coin-icon" style="width: 40px; height: 40px;" alt="Coin Icon" />
             <span style="color: #FFFFFF; font-size: 44px; font-family: Hiragino Kaku Gothic ProN, sans-serif;">{stage_price}</span>
         </div>
         """
-        
-    elif (cnt_type == "2"):
-        your_html = f"""
-        <div class="image-container">
-            <img src="/files/image/icon/avatar/{cnt_id}.png" alt="Item Image" style="width: 180px; height: 180px; background-color: black; object-fit: contain; " />
-        </div>
-        <p>Would you like to purchase this avatar?</p>
-        <div>
-            <img src="/files/web/coin_icon.png" class="coin-icon" alt="Coin Icon" />
-            <span>{avatar_price}</span>
-        </div>
-        """
-        
-    elif (cnt_type == "3"):
-        your_html = f"""
-        <div class="image-container">
-            <img src="/files/image/icon/item/{cnt_id}.png" alt="Item Image" style="width: 180px; height: 180px;" />
-        </div>
-        <p>Would you like to purchase this item?</p>
-        <div>
-            <img src="/files/web/coin_icon.png" class="coin-icon" alt="Coin Icon" />
-            <span>{item_price}</span>
-        </div>
-        """
 
-    your_html += f"""
+    elif (cnt_type == "2"):
+        avatar = next((item for item in avatar_list if item.get("id") == cnt_id), None)
+        if avatar:
+            html = f"""
+            <div class="image-container">
+                <img src="/files/image/icon/avatar/{cnt_id}.png" alt="Item Image" style="width: 180px; height: 180px; background-color: black; object-fit: contain;" />
+            </div>
+            <p>Would you like to purchase this avatar?</p>
+            <div>
+                <p>{avatar.get("name")}</p>
+                <p>Effect: {avatar.get("effect")}</p>
+            </div>
+            <div>
+                <img src="/files/web/coin_icon.png" class="coin-icon" alt="Coin Icon" />
+                <span>{avatar_price}</span>
+            </div>
+            """
+        else:
+            html = "<p>Avatar not found.</p>"
+
+    elif (cnt_type == "3"):
+        item = next((item for item in item_list if item.get("id") == cnt_id), None)
+        if item:
+            html = f"""
+            <div class="image-container">
+                <img src="/files/image/icon/item/{cnt_id}.png" alt="Item Image" style="width: 180px; height: 180px;" />
+            </div>
+            <p>Would you like to purchase this item?</p>
+            <div>
+                <p>{item.get("name")}</p>
+                <p>Effect: {item.get("effect")}</p>
+            </div>
+            <div>
+                <img src="/files/web/coin_icon.png" class="coin-icon" alt="Coin Icon" />
+                <span>{item_price}</span>
+            </div>
+            """
+        else:
+            html = "<p>Item not found.</p>"
+
+
+    html += f"""
         <br>
         <div class="buttons" style="margin-top: 20px;">
             <a href="wwic://web_purchase_coin?cnt_type={cnt_type}&cnt_id={cnt_id}&num=1" class="bt_bg01" >Buy</a><br>
@@ -863,7 +900,7 @@ def web_shop_detail():
     """
     html_path = f"files/web_shop_detail.html"
     with open(html_path, "r", encoding="utf-8") as file:
-        html_content = file.read().format(text=your_html, coin=coin)
+        html_content = file.read().format(text=html, coin=coin)
         return html_content
 
 @app.route('/buy_by_coin.php', methods=['GET'])
@@ -927,7 +964,6 @@ def buy_by_coin():
         else:
             return fail_url
 
-        # Update the database with the new values
         update_query = """
             UPDATE daily_reward
             SET my_stage = ?, my_avatar = ?, coin = ?, item = ?
@@ -955,11 +991,167 @@ def buy_by_coin():
     
 @app.route('/web_shop_result.php', methods=['GET'])
 def web_shop_result():
-    return inform_page("SUCCESS:<br>Purchase successful.<br>Please close this page and the reward will arrive shortly.<br>If it took too long, try restarting the game.", 2)
+    global decrypted_fields
+    cnt_type = decrypted_fields[b'cnt_type'][0].decode()
+    return inform_page(f"""SUCCESS:<br>Purchase successful.<br>Please close this page and the reward will arrive shortly.<br>If it took too long, try restarting the game.<br><a href='wwic://web_shop?cnt_type={cnt_type}' class='bt_bg01' >Go Back</a>""", 2)
 
 @app.route('/coin_error.php', methods=['GET'])
 def coin_error():
-    return inform_page("FAILED:<br>Either you don't have enough coin,<br>or there were a duplicate order, and the reward will arrive shortly.", 2)
+    global decrypted_fields
+    cnt_type = decrypted_fields[b'cnt_type'][0].decode()
+    return inform_page(f"""FAILED:<br>Either you don't have enough coin,<br>or there were a duplicate order, and the reward will arrive shortly.<br><a href='wwic://web_shop?cnt_type={cnt_type}' class='bt_bg01' >Go Back</a>""", 2)
+
+@app.route('/ranking.php/', methods=['GET'])
+def ranking():
+    global decrypted_fields
+    device_id = decrypted_fields[b'vid'][0].decode()
+
+    html = "<ul class='song-list'>"
+    for index, song in enumerate(song_list):
+        encrypted_mass = encryptAES(("vid=" + device_id + "&song_id=" + str(index) + "&mode=3&dummy=").encode("utf-8"))
+        song_name = song.get("name_en", "Unknown")
+        href = f"/ranking_detail.php?{encrypted_mass}"
+        html += f'''
+            <li class="song-item">
+                <a href="{href}" class="song-button">{song_name}</a>
+            </li>
+        '''
+    html += "</ul>"
+
+    html_path = f"files/ranking.html"
+    with open(html_path, "r", encoding="utf-8") as file:
+        html_content = file.read().format(text=html)
+        return html_content
+
+@app.route('/ranking_detail.php/', methods=['GET'])
+def ranking_detail():
+    global decrypted_fields
+    device_id = decrypted_fields[b'vid'][0].decode()
+    song_id = int(decrypted_fields[b'song_id'][0].decode())
+    mode = int(decrypted_fields[b'mode'][0].decode())
+
+    song_name = song_list[song_id]["name_en"]
+    difficulty_levels = song_list[song_id]["difficulty_levels"]
+
+    html = f"""
+        <div style="text-align: center; font-size: 36px; margin-bottom: 20px;">
+            {song_name}
+        </div>
+    """
+
+    button_labels = ["easy", "normal", "hard", "ac-easy", "ac-normal", "ac-hard"]
+    button_modes = [1, 2, 3, 11, 12, 13]
+    row_start = '<div class="button-row">'
+    row_end = '</div>'
+    row_content = []
+
+    for i, (label, mode_value) in enumerate(zip(button_labels, button_modes)):
+        if mode_value == mode:
+            row_content.append(f"""
+                <div class="bt_bg01_ac">
+                    {label.capitalize()}
+                </div>
+            """)
+        else:
+            encrypted_mass = encryptAES(("vid=" + device_id + "&song_id=" + str(song_id) + "&mode=" + str(mode_value) + "&dummy=").encode("utf-8"))
+            row_content.append(f"""
+                <a href="/ranking_detail.php?{encrypted_mass}" class="bt_bg01">
+                    {label.capitalize()}
+                </a>
+            """)
+
+        if len(row_content) == 3 or i == len(button_labels[:len(difficulty_levels)]):
+            html += row_start + ''.join(row_content) + row_end
+            row_content = []  # Reset row content
+
+    play_results = None
+    user_result = None
+    with sqlite3.connect(DATABASE) as connection:
+        cursor = connection.cursor()
+        query = "SELECT * FROM result WHERE id = ? AND mode = ? ORDER BY CAST(score AS INTEGER) DESC"
+        cursor.execute(query, (song_id, mode))
+        play_results = cursor.fetchall()
+
+        # Query user data
+        query = "SELECT * FROM user WHERE device_id = ?"
+        cursor.execute(query, (device_id,))
+        user_result = cursor.fetchone()
+
+    user_id = user_result[0] if user_result else None
+    username = user_result[1] if user_result else f"Guest({device_id[-6:]})"
+    play_record = None
+
+    # Check if the user's device ID is in play_results
+    if user_id:
+        play_record = next((record for record in play_results if int(record[3]) == user_id), None)
+
+    if not play_record:
+        play_record = next((record for record in play_results if record[1] == device_id and record[3] is None), None)
+
+    player_rank = None
+    avatar_index = str(play_record[7]) if play_record else "1"
+    user_score = play_record[8] if play_record else 0
+    for rank, result in enumerate(play_results, start=1):
+        if user_result and int(result[3]) == user_id:
+            player_rank = rank
+            break
+        elif result[1] == device_id and result[3] is None:
+            player_rank = rank
+            break
+    # Generate player element
+    html += f"""
+    <div class="player-element">
+        <span class="rank">You<br>{"#" + str(player_rank) if player_rank else "N/A"}</span>
+        <img src="/files/image/icon/avatar/{avatar_index}.png" class="avatar" alt="Player Avatar">
+        <div class="player-info">
+            <div class="name">{username}</div>
+            <img src="/files/web/title_placeholder.png" class="title" alt="Player Title">
+        </div>
+        <div class="player-score">{user_score}</div>
+    </div>
+    """
+    # main leaderboard
+    html += """
+    <div class="leaderboard-container">
+    """
+
+    for rank, record in enumerate(play_results, start=1):
+        username = f"Guest({record[1][-6:]})"
+        if record[3]:
+            cursor.execute("SELECT username FROM user WHERE id = ?", (record[3],))
+            user_data = cursor.fetchone()
+            if user_data:
+                username = user_data[0]
+
+        avatar_id = record[7] if record[7] else 1
+        avatar_url = f"/files/image/icon/avatar/{avatar_id}.png"
+
+        score = record[8]
+
+        html += f"""
+        <div class="leaderboard-player">
+            <div class="rank">#{rank}</div>
+            <img class="avatar" src="{avatar_url}" alt="Avatar">
+            <div class="leaderboard-info">
+                <div class="name">{username}</div>
+                <div class="title"><img src="/files/web/title_placeholder.png" alt="Title"></div>
+            </div>
+            <div class="leaderboard-score">{score}</div>
+        </div>
+        """
+
+    html += "</div>"
+    encrypted_mass = encryptAES(("vid=" + device_id + "&dummy=").encode("utf-8"))
+    html += f"""
+    <a href="/ranking.php?{encrypted_mass}" class="bt_bg01_ifedup" style="margin: 20px auto; display: block; text-align: center;">
+        Go Back
+    </a>
+    """
+
+    html_path = f"files/ranking.html"
+    with open(html_path, "r", encoding="utf-8") as file:
+        html_content = file.read().format(text=html)
+        return html_content
 
 @app.route('/name_reset/', methods=['POST'])
 def name_reset():
@@ -1123,6 +1315,7 @@ def save():
         
 @app.route('/delete_account.php', methods=['GET'])
 def delete_account():
+    # this only tricks the client to clear its local data for now
     return """<?xml version="1.0" encoding="UTF-8"?><response><code>0</code><taito_id></taito_id></response>"""
 
 @app.route('/<path:path>', methods=['GET'])

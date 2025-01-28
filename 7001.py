@@ -63,6 +63,21 @@ exclude_stage_exp = [121,134,166,167,168,169,170,215,225] # 134 and 170 unoccupi
 # Rest are exp unlocked songs.
 exclude_avatar_exp = [28,29]
 
+special_titles = [1, 2, 4431, 4432, 4601, 4602, 4611, 4612, 4621, 4622, 4631, 4632, 5111, 5112, 5121, 5122, 5131, 5132, 10001, 10002, 20001, 20002, 20003, 20004, 20005, 20006, 30001, 30002, 40001, 40002, 50001, 50002, 60001, 60002, 70001, 70002, 80001, 80002, 90001, 90002, 100001, 100002, 110001, 110002, 120001, 120002, 130001, 130002, 140001, 140002, 140003, 140004, 150001, 150002, 150003, 150004, 160001, 160002, 160003, 160004, 170001, 170002, 170003, 170004, 180001, 180002, 180003, 180004, 190001, 190002, 190003, 190004, 200001, 200002, 200003, 200004, 210001, 210002, 210003, 210004, 210005, 210006, 210007, 210008, 210009, 210010, 210011, 210012, 210013, 210014, 240001, 240002, 240003, 240004, 240005, 240006, 240007, 240008, 240009, 240010, 240011, 240012]
+
+god_titles = [220001, 220002, 220003, 220004, 220005, 220006, 220007, 220008, 220009, 220010, 220011, 220012, 220013, 220014, 220015, 220016, 220017, 220018, 220019, 220020, 220021, 220022, 220023, 220024, 220025, 220026, 220027, 220028, 220029, 220030, 220031, 220032, 220033, 220034, 220035, 220036, 220037, 220038, 220039, 220040, 220041, 220042, 220043, 220044, 220045, 220046, 220047, 220048, 220049, 220050, 220051, 220052, 220053, 220054, 220055, 220056, 220057, 220058, 220059, 220060, 220061, 220062, 220063, 220064, 220065, 220066, 220067, 220068, 220069, 220070, 220071, 220072, 220073, 220074, 220075, 220076, 220077, 220078, 220079, 220080, 220081, 220082, 220083, 220084, 220085, 220086, 220087, 220088, 220089, 220090, 220091, 220092, 220093, 220094, 220095, 220096, 220097, 220098, 220099, 220100, 220101, 220102]
+
+master_titles = [12, 22, 32, 42, 52, 62, 72, 82, 92, 102, 112, 122, 132, 142, 152, 162, 172, 182, 192, 202, 212, 222, 232, 242, 252, 262, 272, 282, 292, 302, 312, 322, 332, 342, 352, 362, 372, 382, 392, 402, 412, 422, 432, 442, 452, 462, 472, 482, 492, 502, 512, 522, 532, 542, 552, 562, 572, 582, 592, 602, 612, 622, 632, 642, 652, 662, 672, 682, 692, 702, 712, 722, 732, 742, 752, 762, 772, 782, 792, 802, 812, 822, 832, 842, 852, 862, 872, 882, 892, 902, 912, 922, 972, 982, 992, 1002, 1012, 1022, 1032, 1042, 1052, 1062, 1072, 1082, 1092, 1102, 1112, 1122, 1132, 1142, 1152, 1162, 1172, 1182, 1192, 1202, 1222, 1232, 1242, 1252, 1262, 1272, 1282, 1292, 1302, 1312, 1322, 1332, 1342, 1352, 1362, 1372, 1382, 1392, 1402, 1412, 1422, 1432, 1442, 1452, 1462, 1472, 1482, 1492, 1502, 1512, 1522, 1532, 1542, 1552, 1562, 1572, 1582, 1592, 1602, 1612, 1622, 1632, 1642, 1652, 1662, 1672, 1682, 1692, 1702, 1712, 1722, 1732, 1742, 1752, 1762, 1772, 1782, 1792, 1802, 1812, 1822, 1832, 1842, 1852, 1862, 1872, 1882, 1892, 1902, 1912, 1922, 1932, 1942, 1952, 1962, 1972, 1982, 1992, 2002, 2012, 2022, 2032, 2042, 2052, 2062, 2072, 2082, 2092, 2102, 2112, 2122, 2132, 2152, 2162, 2172, 2182, 2192, 2202, 2212, 2222, 2232, 2242, 2252, 2262, 2272, 2282, 2292, 2302, 2312, 2322, 2332, 2342, 2352, 2362, 2372, 2382, 2392, 2402, 2412, 2422, 2432, 2442, 2452, 2462, 2472, 2482, 2492, 2502, 2512, 2522, 2532, 2542, 2552, 2562, 2572, 2582, 2592, 2602, 2612, 2622, 2632, 2642, 2652, 2662, 2672, 2682, 2692, 2702, 2712, 2722, 2732, 2742, 2752, 2762, 2782, 2792, 2802, 2812, 2822, 2832, 2842, 2852, 2862, 2872, 2882, 2892, 2902, 2912, 2922, 2932, 2942, 2952, 2962, 2972, 2982, 2992, 3002, 3012, 3022, 3032, 3042, 3052, 3062, 3072, 3082, 3092, 3102, 3112, 3122, 3132, 3142, 3152, 3162, 3172, 3182, 3192, 3202, 3212, 3222, 3232, 3242, 3252, 3262, 3272, 3282, 3292, 3302, 3312, 3322, 3332, 3342, 3352, 3362, 3372, 3382, 3392, 3402, 3412, 3422, 3432, 3442, 3452, 3462, 3472, 3482, 3492, 3502, 3512, 3522, 3532, 3542, 3552, 3562, 3572, 3582, 3592, 3602, 3612, 3622, 3632, 3642, 3652, 3662, 3672, 3682, 3692, 3702, 3712, 3722, 3732, 3742, 3752, 3762, 3772, 3782, 3792, 3802, 3812, 3822, 3832, 3842, 3852, 3862, 3872, 3882, 3892, 3902, 3912, 3922, 3932, 3942, 3952, 3962, 3982, 3992, 4002, 4012, 4022, 4032, 4042, 4052, 4062, 4072, 4082, 4092, 4102, 4112, 4122, 4132, 4142, 4152, 4162, 4172, 4182, 4192, 4202, 4212, 4222, 4232, 4242, 4252, 4262, 4272, 4282, 4292, 4302, 4312, 4322, 4332, 4342, 4352, 4362, 4372, 4382, 4392, 4402, 4412, 4422, 4442, 4452, 4462, 4472, 4482, 4492, 4502, 4512, 4522, 4532, 4542, 4552, 4562, 4572, 4582, 4592, 4642, 4652, 4662, 4672, 4682, 4692, 4702, 4712, 4722, 4732, 4742, 4752, 4762, 4772, 4782, 4792, 4802, 4812, 4822, 4832, 4842, 4862, 4872, 4882, 4892, 4902, 4912, 4922, 4932, 4942, 4952, 4962, 4972, 4982, 4992, 5002, 5012, 5022, 5032, 5042, 5052, 5062, 5072, 5082, 5092, 5102, 5142, 5152, 5162, 5172, 5182, 5192, 5202, 5212, 5222, 5232, 5242, 5252, 5262, 5272, 5282, 5292, 5302, 5312, 5322, 5332, 5342, 5352, 5362, 5372, 5382, 5392, 5402, 5412, 5422, 5432, 5442, 5452, 5462, 5472, 5482, 5492, 5502, 5512, 5522, 5532, 5542, 5552, 5562, 5572, 5582, 5592, 5602, 5612, 5622, 5632, 5642, 5652, 5662, 5672, 5682, 5692, 5702, 5712, 5722, 5732, 5742, 5752, 5762, 5772, 5782, 5792, 5802, 5812, 5822, 5832, 5842, 5852, 5862, 5872, 5882, 5892, 5902, 5912, 5922, 5932, 5942, 5952, 5962, 5972, 5982, 5992, 6002, 6012, 6022, 6032, 6042, 6052, 6062, 6072, 6082, 6092, 6102, 6112, 6122, 6132, 6142, 6152]
+
+normal_titles = [11, 21, 31, 41, 51, 61, 71, 81, 91, 101, 111, 121, 131, 141, 151, 161, 171, 181, 191, 201, 211, 221, 231, 241, 251, 261, 271, 281, 291, 301, 311, 321, 331, 341, 351, 361, 371, 381, 391, 401, 411, 421, 431, 441, 451, 461, 471, 481, 491, 501, 511, 521, 531, 541, 551, 561, 571, 581, 591, 601, 611, 621, 631, 641, 651, 661, 671, 681, 691, 701, 711, 721, 731, 741, 751, 761, 771, 781, 791, 801, 811, 821, 831, 841, 851, 861, 871, 881, 891, 901, 911, 921, 971, 981, 991, 1001, 1011, 1021, 1031, 1041, 1051, 1061, 1071, 1081, 1091, 1101, 1111, 1121, 1131, 1141, 1151, 1161, 1171, 1181, 1191, 1201, 1221, 1231, 1241, 1251, 1261, 1271, 1281, 1291, 1301, 1311, 1321, 1331, 1341, 1351, 1361, 1371, 1381, 1391, 1401, 1411, 1421, 1431, 1441, 1451, 1461, 1471, 1481, 1491, 1501, 1511, 1521, 1531, 1541, 1551, 1561, 1571, 1581, 1591, 1601, 1611, 1621, 1631, 1641, 1651, 1661, 1671, 1681, 1691, 1701, 1711, 1721, 1731, 1741, 1751, 1761, 1771, 1781, 1791, 1801, 1811, 1821, 1831, 1841, 1851, 1861, 1871, 1881, 1891, 1901, 1911, 1921, 1931, 1941, 1951, 1961, 1971, 1981, 1991, 2001, 2011, 2021, 2031, 2041, 2051, 2061, 2071, 2081, 2091, 2101, 2111, 2121, 2131, 2151, 2161, 2171, 2181, 2191, 2201, 2211, 2221, 2231, 2241, 2251, 2261, 2271, 2281, 2291, 2301, 2311, 2321, 2331, 2341, 2351, 2361, 2371, 2381, 2391, 2401, 2411, 2421, 2431, 2441, 2451, 2461, 2471, 2481, 2491, 2501, 2511, 2521, 2531, 2541, 2551, 2561, 2571, 2581, 2591, 2601, 2611, 2621, 2631, 2641, 2651, 2661, 2671, 2681, 2691, 2701, 2711, 2721, 2731, 2741, 2751, 2761, 2781, 2791, 2801, 2811, 2821, 2831, 2841, 2851, 2861, 2871, 2881, 2891, 2901, 2911, 2921, 2931, 2941, 2951, 2961, 2971, 2981, 2991, 3001, 3011, 3021, 3031, 3041, 3051, 3061, 3071, 3081, 3091, 3101, 3111, 3121, 3131, 3141, 3151, 3161, 3171, 3181, 3191, 3201, 3211, 3221, 3231, 3241, 3251, 3261, 3271, 3281, 3291, 3301, 3311, 3321, 3331, 3341, 3351, 3361, 3371, 3381, 3391, 3401, 3411, 3421, 3431, 3441, 3451, 3461, 3471, 3481, 3491, 3501, 3511, 3521, 3531, 3541, 3551, 3561, 3571, 3581, 3591, 3601, 3611, 3621, 3631, 3641, 3651, 3661, 3671, 3681, 3691, 3701, 3711, 3721, 3731, 3741, 3751, 3761, 3771, 3781, 3791, 3801, 3811, 3821, 3831, 3841, 3851, 3861, 3871, 3881, 3891, 3901, 3911, 3921, 3931, 3941, 3951, 3961, 3981, 3991, 4001, 4011, 4021, 4031, 4041, 4051, 4061, 4071, 4081, 4091, 4101, 4111, 4121, 4131, 4141, 4151, 4161, 4171, 4181, 4191, 4201, 4211, 4221, 4231, 4241, 4251, 4261, 4271, 4281, 4291, 4301, 4311, 4321, 4331, 4341, 4351, 4361, 4371, 4381, 4391, 4401, 4411, 4421, 4441, 4451, 4461, 4471, 4481, 4491, 4501, 4511, 4521, 4531, 4541, 4551, 4561, 4571, 4581, 4591, 4641, 4651, 4661, 4671, 4681, 4691, 4701, 4711, 4721, 4731, 4741, 4751, 4761, 4771, 4781, 4791, 4801, 4811, 4821, 4831, 4841, 4861, 4871, 4881, 4891, 4901, 4911, 4921, 4931, 4941, 4951, 4961, 4971, 4981, 4991, 5001, 5011, 5021, 5031, 5041, 5051, 5061, 5071, 5081, 5091, 5101, 5141, 5151, 5161, 5171, 5181, 5191, 5201, 5211, 5221, 5231, 5241, 5251, 5261, 5271, 5281, 5291, 5301, 5311, 5321, 5331, 5341, 5351, 5361, 5371, 5381, 5391, 5401, 5411, 5421, 5431, 5441, 5451, 5461, 5471, 5481, 5491, 5501, 5511, 5521, 5531, 5541, 5551, 5561, 5571, 5581, 5591, 5601, 5611, 5621, 5631, 5641, 5651, 5661, 5671, 5681, 5691, 5701, 5711, 5721, 5731, 5741, 5751, 5761, 5771, 5781, 5791, 5801, 5811, 5821, 5831, 5841, 5851, 5861, 5871, 5881, 5891, 5901, 5911, 5921, 5931, 5941, 5951, 5961, 5971, 5981, 5991, 6001, 6011, 6021, 6031, 6041, 6051, 6061, 6071, 6081, 6091, 6101, 6111, 6121, 6131, 6141, 6151]
+
+title_lists = {
+    0: special_titles,
+    1: normal_titles,
+    2: master_titles,
+    3: god_titles,
+}
+
 stage_price = 1
 avatar_price = 1
 item_price = 2
@@ -256,6 +271,8 @@ def inform_page(text, mode):
         mode = "/files/web/ttl_information.png"
     elif mode == 2:
         mode = "/files/web/ttl_buy.png"
+    elif mode == 3:
+        mode = "/files/web/ttl_title.png"
     with open("files/inform.html", "r") as file:
         return file.read().format(text=text, img=mode)
 
@@ -694,7 +711,18 @@ def result():
             cursor.execute(update_command, (stts, avatar, score, high_score, play_rslt, item, device_os, os_ver, sid, ver, mike, vid, id, mode))
             cursor.close()
             connection.commit()
-            
+
+    # Update player profile regardless
+    with sqlite3.connect(DATABASE) as connection:
+        cursor = connection.cursor()
+        update_command = """
+        UPDATE daily_reward SET lvl = ?, avatar = ? WHERE device_id = ?;
+        """
+        cursor.execute(update_command, (int(stts.split(",")[0]), int(avatar), device_id))
+        cursor.close()
+        connection.commit()
+
+
     with sqlite3.connect(DATABASE) as connection:
         cursor = connection.cursor()
         select_command = """
@@ -727,15 +755,6 @@ def ttag():
         with open("files/register.html", "r") as file:
             html_content = file.read().format(pid=original_field)
     return html_content, 200
-
-
-@app.route('/mission.php/', methods=['GET'])
-def mission():
-    return inform_page("This feature is not available in Private Server.", 1)
-
-@app.route('/status.php/', methods=['GET'])
-def status():
-    return inform_page("This feature is not available in Private Server.", 1)
 
 @app.route('/web_shop.php', methods=['GET'])
 def web_shop():
@@ -1071,16 +1090,20 @@ def ranking_detail():
 
     play_results = None
     user_result = None
+    device_result = None
     with sqlite3.connect(DATABASE) as connection:
         cursor = connection.cursor()
         query = "SELECT * FROM result WHERE id = ? AND mode = ? ORDER BY CAST(score AS INTEGER) DESC"
         cursor.execute(query, (song_id, mode))
         play_results = cursor.fetchall()
 
-        # Query user data
         query = "SELECT * FROM user WHERE device_id = ?"
         cursor.execute(query, (device_id,))
         user_result = cursor.fetchone()
+
+        query = "SELECT * FROM daily_reward WHERE device_id = ?"
+        cursor.execute(query, (device_id,))
+        device_result = cursor.fetchone()
 
     user_id = user_result[0] if user_result else None
     username = user_result[1] if user_result else f"Guest({device_id[-6:]})"
@@ -1110,7 +1133,7 @@ def ranking_detail():
         <img src="/files/image/icon/avatar/{avatar_index}.png" class="avatar" alt="Player Avatar">
         <div class="player-info">
             <div class="name">{username}</div>
-            <img src="/files/web/title_placeholder.png" class="title" alt="Player Title">
+            <img src="/files/image/title/{device_result[9]}.png" class="title" alt="Player Title">
         </div>
         <div class="player-score">{user_score}</div>
     </div>
@@ -1122,11 +1145,16 @@ def ranking_detail():
 
     for rank, record in enumerate(play_results, start=1):
         username = f"Guest({record[1][-6:]})"
+        device_info = None
         if record[3]:
             cursor.execute("SELECT username FROM user WHERE id = ?", (record[3],))
             user_data = cursor.fetchone()
             if user_data:
                 username = user_data[0]
+            cursor.execute("SELECT title FROM daily_reward WHERE device_id = ?", (record[1],))
+            device_title = cursor.fetchone()
+            if device_title:
+                device_info = device_title[0]
 
         avatar_id = record[7] if record[7] else 1
         avatar_url = f"/files/image/icon/avatar/{avatar_id}.png"
@@ -1139,7 +1167,7 @@ def ranking_detail():
             <img class="avatar" src="{avatar_url}" alt="Avatar">
             <div class="leaderboard-info">
                 <div class="name">{username}</div>
-                <div class="title"><img src="/files/web/title_placeholder.png" alt="Title"></div>
+                <div class="title"><img src="/files/image/title/{device_info}.png" alt="Title"></div>
             </div>
             <div class="leaderboard-score">{score}</div>
         </div>
@@ -1158,19 +1186,163 @@ def ranking_detail():
         html_content = file.read().format(text=html)
         return html_content
 
+@app.route('/status.php/', methods=['GET'])
+def status():
+    global decrypted_fields
+    device_id = decrypted_fields[b'vid'][0].decode()
+    set_title = int(decrypted_fields[b'set_title'][0].decode()) if b'set_title' in decrypted_fields else None
+    page_id = int(decrypted_fields[b'page_id'][0].decode()) if b'page_id' in decrypted_fields else 0
+
+    if (set_title):
+        with sqlite3.connect(DATABASE) as connection:
+            cursor = connection.cursor()
+            update_query = """
+                UPDATE daily_reward SET title = ? WHERE device_id = ?
+            """
+            cursor.execute(update_query, (str(set_title), device_id))
+            connection.commit()
+
+    html = ""
+
+    with sqlite3.connect(DATABASE) as connection:
+        cursor = connection.cursor()
+
+        query = "SELECT * FROM daily_reward WHERE device_id = ?"
+        cursor.execute(query, (device_id,))
+        user_data = cursor.fetchone()
+        user_name = user_data[1]
+
+        query = "SELECT * FROM user WHERE device_id = ?"
+        cursor.execute(query, (user_data[1],))
+        user_result = cursor.fetchone()
+        if user_result:
+            user_name = user_result[1]
+        
+        if user_data:
+            player_element = f"""
+                <div class="player-element">
+                    <img src="/files/image/icon/avatar/{user_data[10]}.png" class="avatar" alt="Player Avatar">
+                    <div class="player-info">
+                        <div class="name">{user_name}</div>
+                        <img src="/files/image/title/{user_data[9]}.png" class="title" alt="Player Title">
+                    </div>
+                    <div class="player-score">Level {user_data[8]}</div>
+                </div>
+            """
+            html += player_element
+
+    page_name = ["Special", "Normal", "Master", "God"]
+
+    buttons_html = '<div class="button-row">'
+
+    for i in range(0, 4):
+        if i == page_id:
+            # Current button
+            buttons_html += f"""
+                <div class="bt_bg01_ac" >
+                    {page_name[i]}
+                </div>
+            """
+        else:
+            encrypted_mass = encryptAES(f"vid={device_id}&page_id={i}&dummy=".encode("utf-8"))
+            buttons_html += f"""
+                <a href="/status.php?{encrypted_mass}" class="bt_bg01" >
+                    {page_name[i]}
+                </a>
+            """
+    buttons_html += '</div>'
+    html += f"<div style='text-align: center; margin-top: 20px;'>{buttons_html}</div>"
+
+    selected_titles = title_lists.get(page_id, [])
+
+    titles_html = '<div class="title-list">'
+
+    for index, num in enumerate(selected_titles):
+        if index % 2 == 0:
+            if index != 0:
+                titles_html += '</div>'
+            titles_html += '<div class="title-row">'
+
+        if num == int(user_data[9]):
+            titles_html += f"""
+                <img src="/files/image/title/{num}.png" alt="Title {num}" class="title-image-selected">
+            """
+        else:
+            encrypted_mass = encryptAES(f"vid={device_id}&title_id={num}&page_id={page_id}&dummy=".encode("utf-8"))
+            titles_html += f"""
+                <a href="/set_title.php?{encrypted_mass}" class="title-link">
+                    <img src="/files/image/title/{num}.png" alt="Title {num}" class="title-image">
+                </a>
+            """
+
+    titles_html += '</div></div>'
+
+    html += titles_html
+
+    html_path = f"files/status.html"
+    with open(html_path, "r", encoding="utf-8") as file:
+        html_content = file.read().format(text=html)
+        return html_content
+
+@app.route('/set_title.php/', methods=['GET'])
+def set_title():
+    global decrypted_fields
+    device_id = decrypted_fields[b'vid'][0].decode()
+    page_id = decrypted_fields[b'page_id'][0].decode()
+    title_id = decrypted_fields[b'title_id'][0].decode()
+    current_title = 1
+
+    html = ""
+
+    with sqlite3.connect(DATABASE) as connection:
+        cursor = connection.cursor()
+        query = "SELECT title FROM daily_reward WHERE device_id = ?"
+        cursor.execute(query, (device_id,))
+        user_data = cursor.fetchone()
+        if user_data:
+            current_title = user_data[0]
+
+    confirm_url = encryptAES(
+        f"vid={device_id}&page_id={page_id}&set_title={title_id}&dummy=".encode("utf-8")
+    )
+    go_back_url = encryptAES(
+        f"vid={device_id}&page_id={page_id}&dummy=".encode("utf-8")
+    )
+
+    html += f"""
+        <p>Would you like to change your title?<br>Current Title:</p>
+        <img src="/files/image/title/{current_title}.png" alt="Current Title" class="title-image">
+        <p>New Title:</p>
+        <img src="/files/image/title/{title_id}.png" alt="New Title" class="title-image">
+        <div class="button-container">
+            <a href="/status.php?{confirm_url}" class="bt_bg01">Confirm</a>
+            <a href="/status.php?{go_back_url}" class="bt_bg01">Go back</a>
+        </div>
+    """
+
+    return inform_page(html, 1)
+
+@app.route('/mission.php/', methods=['GET'])
+def mission():
+    return inform_page("This feature is not available in Private Server.", 1)
+
+@app.route('/mission_reward.php/', methods=['GET'])
+def mission_reward():
+    return inform_page("This feature is not available in Private Server.", 1)
+
 @app.route('/name_reset/', methods=['POST'])
 def name_reset():
     global decrypted_fields
     username = request.form['username']
     password = request.form['password']
     if len(username) < 6 or len(username) > 21:
-        return inform_page("FAILED:<br>Username must be between 6 and 20<br>characters long.", 0)
+        return inform_page("FAILED:<br>Username must be between 6 and 20 characters long.", 0)
     if is_alphanumeric(username) == False:
-        return inform_page("FAILED:<br>Username must consist entirely of<br>alphanumeric character.", 0)
+        return inform_page("FAILED:<br>Username must consist entirely of alphanumeric character.", 0)
     if username == password:
         return inform_page("FAILED:<br>Username cannot be the same as password.", 0)
     if check_blacklist(decrypted_fields) == False:
-        return inform_page("FAILED:<br>Your account is banned and you are<br>not allowed to perform this action.", 0)
+        return inform_page("FAILED:<br>Your account is banned and you are not allowed to perform this action.", 0)
     user = get_user_data(decrypted_fields, "username")
     if user:
         user = user[0]

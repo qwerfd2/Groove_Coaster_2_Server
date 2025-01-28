@@ -113,8 +113,12 @@ def create_table():
             timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             my_stage TEXT,
             my_avatar TEXT,
-            items TEXT,
-            day INT
+            item TEXT,
+            day INT,
+            coin INT,
+            lvl INT,
+            title INT,
+            avatar INT       
         );""")
 
         cursor.execute( """
@@ -550,7 +554,7 @@ def bonus():
         time = datetime.now()
         formatted_time = time.strftime("%Y-%m-%d %H:%M:%S")
 
-        if row:
+        if row is not None:
             current_day, last_timestamp = row
             last_date = datetime.strptime(last_timestamp, "%Y-%m-%d %H:%M:%S")
 
@@ -573,10 +577,11 @@ def bonus():
                 # return 1 obj
         else:
             # No row exists; create a new one
+            print("bonus-add profile")
             cursor.execute("""
-                INSERT INTO daily_reward (device_id, day, timestamp, my_avatar, my_stage, coin, item)
-                VALUES (?, ?, ?, ?, ?, ?)
-            """, (device_id, 1, formatted_time, json.dumps(start_avatars), json.dumps(start_stages), 10, "[]"))
+                INSERT INTO daily_reward (device_id, day, timestamp, my_avatar, my_stage, coin, item, lvl, title, avatar)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (device_id, 1, formatted_time, json.dumps(start_avatars), json.dumps(start_stages), 10, "[]", 1, 1, 1))
             xml_response = "<response><code>0</code></response>"
             # return 0 obj
 

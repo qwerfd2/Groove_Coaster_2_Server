@@ -1,6 +1,18 @@
 ## Introduction 简介
 
-A small local server for ```Groove Coaster 2: Original Style```, implemented with ```Python``` and ```Flask```. Supports asset delivery (paks and song/stage files) and basic shop, which unlocks content via Groove Coin (a removed feature in-game). Support score upload and leaderboard. Support save file backup using a recreation of the TAlT0 ID system. Supports account whitelisting and banning. Does not support mission, status, and friend as of now. Tested on Android/ios 1.0.18 client.
+A small local server for ```Groove Coaster 2: Original Style```, implemented with ```Python``` and ```Flask```. 
+
+| Features            | Degree of support                                                                                                      |
+|---------------------|------------------------------------------------------------------------------------------------------------------------|
+| Asset delivery      | .pak, stage and music zip files                                                                                        |
+| Shop                | Purchase individual songs, avatars, and items using GCoin. GCoins are earned by playing the game. Does not support music preview. Does not support song pack. |
+| Ranking             | Individual song-difficulty ranking. Does not support ALL/Regional ranking. Does not support viewing player profile.    |
+| Save backup         | Support save/load via an Account system. Support password and username changes. Support logging out.                   |
+| Titles              | Static full-unlock and setting titles via "Status".                                                                    |
+| Mission             | TBA                                                                                                                    |
+| Friend              | Not supported.                                                                                                         |
+| Progress Grid       | Not supported.                                                                                                         |
+| Additional features | Account/device whitelisting and banning.                                                                               |
 
 This project is for game preservation purposes only. It is provided as-is, per the MIT license.
 
@@ -12,7 +24,19 @@ Special thanks: [Walter-o/gcm-downloader]https://github.com/Walter-o/gcm-downloa
 
 Warning: Do not put personal files under the folders in the private server directory - all files within these sub-folders will be accessible by anyone with your server address!
 
-一个基于```Python```和```Flask```的微型```Groove Coaster 2: Original Style```本地服务器。支持文件下载 (pak和谱面，歌曲文件)，基础的商店（使用GCoin解锁内容），分数上传和排行榜，和重做的TAlT0 ID系统支持的存档备份功能。支持账号白名单和封禁。不支持任务，状态，和好友功能。通过安卓/ios1.0.18客户端测试。
+一个基于```Python```和```Flask```的微型```Groove Coaster 2: Original Style```本地服务器。
+
+| 功能                | 支持程度                                                                                                    |
+|---------------------|------------------------------------------------------------------------------------------------------------------------|
+| 文件下载      | .pak, 谱面及音频zip文件                                                                                        |
+| 商店                | 用GCoin购买单独的歌曲，头像，和道具。 GCoins可通过玩游戏来获得。不支持音频预览。不支持曲包。                   |
+| 排行榜             | 每首歌曲/难度的单独排行榜。不支持全部/地区排行榜。不支持查看其他玩家的详细信息。   |
+| 存档备份        | 支持通过账号系统的保存/加载。支持修改密码和用户名。支持登出。                   |
+| Titles              | 通过Status观看并使用全解锁的Titles。                                                                    |
+| 任务             | TBA                                                                                                                    |
+| 好友              | 不支持。                                                                                                        |
+| 进度表       | 不支持。                                                                                                         |
+| 其他功能 | 账号/设备白名单和封禁。                                                                              |
 
 此项目的目标是保持游戏的长远可用性 (game preservation)。此项目在MIT许可证的“按现状” (as-is) 条件下提供。
 

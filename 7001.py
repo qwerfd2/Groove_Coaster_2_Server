@@ -896,7 +896,7 @@ def web_shop_detail():
                 <p>Effect: {avatar.get("effect")}</p>
             </div>
             <div>
-                <img src="/files/web/coin_icon.png" class="coin-icon" alt="Coin Icon" />
+                <img src="/files/web/coin_icon.png" class="coin-icon" style="width: 40px; height: 40px;" alt="Coin Icon" />
                 <span>{avatar_price}</span>
             </div>
             """
@@ -916,7 +916,7 @@ def web_shop_detail():
                 <p>Effect: {item.get("effect")}</p>
             </div>
             <div>
-                <img src="/files/web/coin_icon.png" class="coin-icon" alt="Coin Icon" />
+                <img src="/files/web/coin_icon.png" class="coin-icon" style="width: 40px; height: 40px;" alt="Coin Icon" />
                 <span>{item_price}</span>
             </div>
             """

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta content="user-scalable=0" name="viewport" />
+        <style type="text/css">
+          body{{
+            background-color: #000000;
+            -webkit-text-size-adjust: none;
+            padding: 0px;
+            margin: 0 auto;
+            text-align:center;
+            color: #FFFFFF;
+            -webkit-text-size-adjust: auto;
+            -webkit-touch-callout:none;
+            -webkit-tap-highlight-color:rgba(255,255,0,0.4);
+            height: 100%;
+            font-family: Hiragino Kaku Gothic ProN,Hiragino Kaku Gothic Pro,Meiryo,Helvetica,Arial,sans-serif;
+            font-size: 34pt;
+            line-height: 36pt;
+          }}
+            .a_left{{text-align:left;}}
+            .a_center{{text-align:center;}}
+            .w100{{width:100%;}}
+            .d_ib{{display:inline-block;}}
+            .mb10p{{margin-bottom:10%;}}
+            .f90{{font-size:90%;}}
+            .pt50{{padding-top:50px;}}
+            #header {{
+                text-align: center;
+                background-color: #000000;
+                border-bottom: 2px solid #ffffff;
+                top: 0px;
+                width: 100%;
+                padding: 0px;
+                display: block;
+                z-index: 4;
+                position: fixed;
+            }}
+            div#wrapper{{
+            	width: 100%;
+              position: relative;
+              z-index: 1;
+            }}
+            .wrapper_box{{
+              text-align:center;
+              margin-top:5%;
+              margin-bottom:-10%;
+              display: inline-block;
+              position: relative;
+              width: 100%;
+            }}
+            .ttl_height{{
+              height:40px;
+              margin:20px 0px;
+            }}
+            .bt_bg01 {{
+                background: url("/files/web/bt_bg01_640.gif");
+                background-color: transparent;
+                background-repeat: no-repeat;
+                background-size:cover;
+                padding: 10px;
+                display: block;
+                text-align:center;
+                font-size:70%;
+                width:380px;
+                height: 61px;
+                color: #DDDDDD;
+                margin: 20px auto;
+            }}
+            .mission-list {{
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                margin: 20px 0;
+                font-family: Arial, sans-serif;
+            }}
+
+            .mission-row {{
+                display: flex;
+                justify-content: space-between;
+                padding: 10px;
+                border-bottom: 1px solid #ddd;
+            }}
+
+            .mission-level {{
+                font-weight: bold;
+                color: #DDD;
+            }}
+
+            .mission-song {{
+                color: #EEE;
+            }}
+        </style>
+    </head>
+    <body>
+        <div id="header">
+            <img class="ttl_height" src="/files/web/ttl_mission.png" alt="MISSION" />
+        </div>
+        <div id="wrapper">
+            <div class="wrapper_box">
+                <div class="a_left w100 d_ib mb10p">
+                    <br>{text}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

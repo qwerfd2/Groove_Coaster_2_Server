@@ -52,16 +52,21 @@ def encryptAES(data, key=AES_CBC_KEY, iv=AES_CBC_IV):
     encryptedData = AES.new(key, AES.MODE_CBC, iv).encrypt(data)
     return encryptedData.hex()
 
-start_stages = [3,4,5,7,9,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,214]
+start_stages = [7,23,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,88,89,90,91,92,93,94,95,96,97,98,99,214]
 # 214 is tutorial song.
 
 start_avatars = []
 
-exclude_stage_exp_pre_100 = [0,1,2,6,8,10,11,12,13,14,15,16,17,18,19,20,21,53,74,75] # not used for now, just archiving
-exclude_stage_exp = [121,134,166,167,168,169,170,215,225] # 134 and 170 unoccupied dummy tracks (filled with Departure -Remix-),
+exclude_stage_exp = [121,134,166,167,168,169,170,213,214,215,225] # 134 and 170 unoccupied dummy tracks (filled with Departure -Remix-),
 #121 (and 93-96 lady gaga songs) removed (can be enabled by patching stageParam:isAvailable, or change the last byte before next song's name - 1 from 01 to 03 in stage_param.dat. 
 # Rest are exp unlocked songs.
 exclude_avatar_exp = [28,29]
+
+try:
+    with open("exp_unlocked_songs.json", 'r', encoding="utf-8") as file:
+        exp_unlocked_songs = json.load(file)
+except Exception as e:
+    print(f"An unexpected error occurred when loading exp_unlocked_songs.json: {e}")
 
 special_titles = [1, 2, 4431, 4432, 4601, 4602, 4611, 4612, 4621, 4622, 4631, 4632, 5111, 5112, 5121, 5122, 5131, 5132, 10001, 10002, 20001, 20002, 20003, 20004, 20005, 20006, 30001, 30002, 40001, 40002, 50001, 50002, 60001, 60002, 70001, 70002, 80001, 80002, 90001, 90002, 100001, 100002, 110001, 110002, 120001, 120002, 130001, 130002, 140001, 140002, 140003, 140004, 150001, 150002, 150003, 150004, 160001, 160002, 160003, 160004, 170001, 170002, 170003, 170004, 180001, 180002, 180003, 180004, 190001, 190002, 190003, 190004, 200001, 200002, 200003, 200004, 210001, 210002, 210003, 210004, 210005, 210006, 210007, 210008, 210009, 210010, 210011, 210012, 210013, 210014, 240001, 240002, 240003, 240004, 240005, 240006, 240007, 240008, 240009, 240010, 240011, 240012]
 
@@ -480,13 +485,11 @@ def sync():
                     cursor.execute("""UPDATE daily_reward SET item = ? WHERE device_id = ?""", ("[]", device_id))
                     cursor.close()
 
-            # Add `my_avatar` elements to XML
             for avatar_id in my_avatar:
                 avatar_elem = ET.Element("my_avatar")
                 avatar_elem.text = str(avatar_id)
                 root.append(avatar_elem)
 
-            # Add `my_stage` elements to XML
             for stage_id in my_stage:
                 stage_elem = ET.Element("my_stage")
                 stage_id_elem = ET.Element("stage_id")
@@ -600,7 +603,6 @@ def result():
 
         if row:
             current_coin = row[0] if row[0] else 10
-            # Increment the coin value by 1
             updated_coin = current_coin + coin_reward
             cursor.execute("UPDATE daily_reward SET coin = ? WHERE device_id = ?", (updated_coin, device_id))
 
@@ -651,12 +653,10 @@ def result():
             records = cursor.fetchall()
             cursor.close()
             if len(records) > 0:
-                # check to see if update is needed
                 last_row_id = records[0][0]
                 if (score > records[0][1]):
                     do_update_sid = True
             else:
-                # create the record
                 do_insert = True
     else:
         with sqlite3.connect(DATABASE) as connection:
@@ -668,12 +668,10 @@ def result():
             records = cursor.fetchall()
             cursor.close()
             if len(records) > 0:
-                # check to see if update is needed
                 last_row_id = records[0][0]
                 if (score > records[0][1]):
                     do_update_vid = True
             else:
-                # create the record
                 do_insert = True 
 
     
@@ -712,16 +710,29 @@ def result():
             cursor.close()
             connection.commit()
 
-    # Update player profile regardless
+    # Update player profile regardless. Check for exp unlocked songs too
     with sqlite3.connect(DATABASE) as connection:
         cursor = connection.cursor()
+
+        query_command = "SELECT my_stage FROM daily_reward WHERE device_id = ?"
+        cursor.execute(query_command, (device_id,))
+        result = cursor.fetchone()
+
+        my_stage = set(json.loads(result[0])) if result and result[0] else set(start_stages)
+
+        current_exp = int(stts.split(",")[0])
+        for song in exp_unlocked_songs:
+            if song["lvl"] <= current_exp:
+                my_stage.add(song["id"])
+
+        my_stage = sorted(my_stage)
+
         update_command = """
-        UPDATE daily_reward SET lvl = ?, avatar = ? WHERE device_id = ?;
+        UPDATE daily_reward SET lvl = ?, avatar = ?, my_stage = ? WHERE device_id = ?;
         """
-        cursor.execute(update_command, (int(stts.split(",")[0]), int(avatar), device_id))
+        cursor.execute(update_command, (current_exp, int(avatar), json.dumps(my_stage), device_id))
         cursor.close()
         connection.commit()
-
 
     with sqlite3.connect(DATABASE) as connection:
         cursor = connection.cursor()
@@ -854,6 +865,9 @@ def web_shop_detail():
     if (cnt_type == "1"):
         song = song_list[cnt_id]
         difficulty_levels = "/".join(map(str, song.get("difficulty_levels", [])))
+        song_stage_price = stage_price
+        if (len(song["difficulty_levels"]) == 6):
+            song_stage_price = stage_price * 2
         html = f"""
         <div class="image-container">
             <img src="/files/image/icon/shop/{cnt_id}.jpg" alt="Item Image" style="width: 180px; height: 180px;" />
@@ -865,7 +879,7 @@ def web_shop_detail():
         </div>
         <div>
             <img src="/files/web/coin_icon.png" class="coin-icon" style="width: 40px; height: 40px;" alt="Coin Icon" />
-            <span style="color: #FFFFFF; font-size: 44px; font-family: Hiragino Kaku Gothic ProN, sans-serif;">{stage_price}</span>
+            <span style="color: #FFFFFF; font-size: 44px; font-family: Hiragino Kaku Gothic ProN, sans-serif;">{song_stage_price}</span>
         </div>
         """
 
@@ -917,8 +931,8 @@ def web_shop_detail():
             <a href="wwic://web_shop?cnt_type={cnt_type}" class="bt_bg01" >Go Back</a>
         </div>
     """
-    html_path = f"files/web_shop_detail.html"
-    with open(html_path, "r", encoding="utf-8") as file:
+
+    with open(f"files/web_shop_detail.html", "r", encoding="utf-8") as file:
         html_content = file.read().format(text=html, coin=coin)
         return html_content
 
@@ -947,12 +961,16 @@ def buy_by_coin():
 
         # Process based on cnt_type
         if cnt_type == "1":
-            if coin < stage_price:
+            song_stage_price = stage_price
+            if (len(song_list[cnt_id]["difficulty_levels"]) == 6):
+                song_stage_price = song_stage_price * 2
+
+            if coin < song_stage_price:
                 return fail_url
             
             stages = set(json.loads(my_stage)) if my_stage else set()
             if cnt_id not in stages:
-                coin -= stage_price
+                coin -= song_stage_price
                 stages.add(cnt_id)
             else:
                 return fail_url
@@ -1037,8 +1055,7 @@ def ranking():
         '''
     html += "</ul>"
 
-    html_path = f"files/ranking.html"
-    with open(html_path, "r", encoding="utf-8") as file:
+    with open(f"files/ranking.html", "r", encoding="utf-8") as file:
         html_content = file.read().format(text=html)
         return html_content
 
@@ -1181,8 +1198,7 @@ def ranking_detail():
     </a>
     """
 
-    html_path = f"files/ranking.html"
-    with open(html_path, "r", encoding="utf-8") as file:
+    with open(f"files/ranking.html", "r", encoding="utf-8") as file:
         html_content = file.read().format(text=html)
         return html_content
 
@@ -1279,8 +1295,7 @@ def status():
 
     html += titles_html
 
-    html_path = f"files/status.html"
-    with open(html_path, "r", encoding="utf-8") as file:
+    with open(f"files/status.html", "r", encoding="utf-8") as file:
         html_content = file.read().format(text=html)
         return html_content
 
@@ -1324,11 +1339,28 @@ def set_title():
 
 @app.route('/mission.php/', methods=['GET'])
 def mission():
-    return inform_page("This feature is not available in Private Server.", 1)
+    global exp_unlocked_songs, song_list
 
-@app.route('/mission_reward.php/', methods=['GET'])
-def mission_reward():
-    return inform_page("This feature is not available in Private Server.", 1)
+    html = f"""<div class="f90 a_center pt50" >Play Music to level up and unlock free songs!<br>Songs can only be unlocked when you play online.</div><div class='mission-list'>"""
+
+    # Render the mission list
+    for song in exp_unlocked_songs:
+        song_id = song["id"]
+        level_required = song["lvl"]
+        song_name = song_list[song_id]["name_en"] if song_id < len(song_list) else "Unknown Song"
+        
+        html += f"""
+            <div class="mission-row">
+                <div class="mission-level">Level {level_required}</div>
+                <div class="mission-song">{song_name}</div>
+            </div>
+        """
+
+    html += "</div>"
+
+    with open(f"files/mission.html", "r", encoding="utf-8") as file:
+        html_content = file.read().format(text=html)
+        return html_content
 
 @app.route('/name_reset/', methods=['POST'])
 def name_reset():

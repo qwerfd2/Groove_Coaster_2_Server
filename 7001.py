@@ -850,7 +850,7 @@ def web_shop():
     else:
         return jsonify({"error": "Access denied"}), 403
 
-@app.route('/web_shop_detail.php', methods=['GET'])
+@app.route('/web_shop_detail.php', methods=['GET', 'POST'])
 def web_shop_detail():
     global decrypted_fields
     cnt_type = decrypted_fields[b'cnt_type'][0].decode()

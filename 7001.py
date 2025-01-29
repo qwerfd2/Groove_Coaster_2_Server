@@ -57,7 +57,7 @@ start_stages = [7,23,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,55,56,57
 
 start_avatars = []
 
-exclude_stage_exp = [121,134,166,167,168,169,170,213,214,215,225] # 134 and 170 unoccupied dummy tracks (filled with Departure -Remix-),
+exclude_stage_exp = [121,134,166,167,168,169,170,213,214,215,225,277] # 134 and 170 unoccupied dummy tracks (filled with Departure -Remix-),
 #121 (and 93-96 lady gaga songs) removed (can be enabled by patching stageParam:isAvailable, or change the last byte before next song's name - 1 from 01 to 03 in stage_param.dat. 
 # Rest are exp unlocked songs.
 exclude_avatar_exp = [28,29]
@@ -772,7 +772,7 @@ def ttag():
             html_content = file.read().format(pid=original_field)
     return html_content, 200
 
-@app.route('/web_shop.php', methods=['GET'])
+@app.route('/web_shop.php', methods=['GET', 'POST'])
 def web_shop():
     global decrypted_fields
     should_serve = True

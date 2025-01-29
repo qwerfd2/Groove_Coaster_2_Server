@@ -14,7 +14,7 @@ A small local server for ```Groove Coaster 2: Original Style```, implemented wit
 | Progress Grid       | Not supported.                                                                                                         |
 | Additional features | Account/device whitelisting and banning.                                                                               |
 
-This project is for game preservation purposes only. It is provided as-is, per the MIT license.
+This project is for game preservation purposes only. Creative liberty and conveniences have been taken when it comes to specific implementation. The goal is not to ensure 1:1 behavior, but to guarrantee the minimum viability of playing this game. It is provided as-is, per the MIT license.
 
 You are not allowed to use it for commercial purposes. You shall bare all the responsibility for any potential consequences as a result of running this server. If you do not agree to these requirements, you are not allowed to replicate or run this program.
 
@@ -38,7 +38,7 @@ Warning: Do not put personal files under the folders in the private server direc
 | 进度表       | 不支持。                                                                                     |
 | 其他功能     | 账号/设备白名单和封禁。                                                                       |
 
-此项目的目标是保持游戏的长远可用性 (game preservation)。此项目在MIT许可证的“按现状” (as-is) 条件下提供。
+此项目的目标是保持游戏的长远可用性 (game preservation)。在具体实施上，我采取了一些便利及创意性的措施（偷懒）。此项目的目标不是确保 1:1 还原官服，而是保证游戏长久可玩。此项目在MIT许可证的“按现状” (as-is) 条件下提供。
 
 你不得将此项目用于商业行为。你应对因运行本服务器而产生的任何潜在后果承担全部责任。如果您不同意这些要求，则不允许您复制或运行该程序。
 

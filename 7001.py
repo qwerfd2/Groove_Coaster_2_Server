@@ -1041,7 +1041,7 @@ def web_shop_result():
 def coin_error():
     global decrypted_fields
     cnt_type = decrypted_fields[b'cnt_type'][0].decode()
-    return inform_page(f"""FAILED:<br>Either you don't have enough coin,<br>or there were a duplicate order, and the reward will arrive shortly.<br><a href='wwic://web_shop?cnt_type={cnt_type}' class='bt_bg01' >Go Back</a>""", 2)
+    return inform_page(f"""FAILED:<br>Either you don't have enough coin,<br>or there were a duplicate order, and the reward will arrive shortly.""", 2)
 
 @app.route('/ranking.php/', methods=['GET'])
 def ranking():

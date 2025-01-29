@@ -22,7 +22,7 @@ Inspiration: [Lost-MSth/Arcaea-server](https://github.com/Lost-MSth/Arcaea-serve
 
 Special thanks: [Walter-o/gcm-downloader]https://github.com/Walter-o/gcm-downloader
 
-Warning: Do not put personal files under the folders in the private server directory - all files within these sub-folders will be accessible by anyone with your server address!
+Warning: Do not put personal files under the folders in the private server directory - all files within these sub-folders will be accessible by anyone with your server address! Security and performance are not guaranteed, and it is not recommended to host this server on the internet. You have been warned.
 
 一个基于```Python```和```Flask```的微型```Groove Coaster 2: Original Style```本地服务器。
 
@@ -46,7 +46,7 @@ Warning: Do not put personal files under the folders in the private server direc
 
 鸣谢: [Walter-o/gcm-downloader](https://github.com/Walter-o/gcm-downloader)
 
-警告：不要将私人文件放至私服内的文件夹里。自带的文件夹内所有文件都可被私服抓取！
+警告：不要将私人文件放至私服内的文件夹里。自带的文件夹内所有文件都可被私服抓取！安全性和效率无法保证，不建议在公网上搭建。这不是强制要求，不过别怪我没提醒过你。
 
 ## Download 下载
 

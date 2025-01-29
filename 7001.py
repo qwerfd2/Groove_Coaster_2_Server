@@ -1447,7 +1447,7 @@ def register():
             return inform_page("FAILED:<br>Another user already has this name.", 0)
         cursor = connection.cursor()
         cursor.execute('''INSERT INTO user (username, password_hash, device_id, data, crc, timestamp) 
-                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)''', (username, hash_password(password), decrypted_fields[b'vid'][0].decode(), "", 0, ""))
+                            VALUES (?, ?, ?, ?, ?, ?)''', (username, hash_password(password), decrypted_fields[b'vid'][0].decode(), "", 0, ""))
         connection.commit()
         cursor.close()
         return inform_page("SUCCESS:<br>Account is registered.<br>You can now backup/restore your save file.<br>You can only log into one device at a time.", 0)

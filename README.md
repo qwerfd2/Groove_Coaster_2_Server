@@ -6,7 +6,7 @@ A small local server for ```Groove Coaster 2: Original Style```, implemented wit
 |---------------------|------------------------------------------------------------------------------------------------------------------------|
 | Asset delivery      | .pak, stage and music zip files                                                                                        |
 | Shop                | Purchase individual songs, avatars, and items using GCoin. GCoins are earned by playing the game. Does not support music preview. Does not support song pack. |
-| Ranking             | Individual song-difficulty ranking. Does not support ALL/Regional ranking. Does not support viewing player profile.    |
+| Ranking             | Individual song-difficulty ranking. Does not support Regional ranking. Does not support viewing player profile.        |
 | Save backup         | Support save/load via an Account system. Support password and username changes. Support logging out.                   |
 | Titles              | Static full-unlock and setting titles via "Status".                                                                    |
 | Mission             | Basic automatic song unlock after reaching in-game levels. Everything else is not supported.                           |
@@ -30,7 +30,7 @@ Warning: Do not put personal files under the folders in the private server direc
 |--------------|---------------------------------------------------------------------------------------------|
 | 文件下载      | .pak, 谱面及音频zip文件                                                                      |
 | 商店         | 用GCoin购买单独的歌曲，头像，和道具。 GCoins可通过玩游戏来获得。不支持音频预览。不支持曲包。       |
-| 排行榜       | 每首歌曲/难度的单独排行榜。不支持全部/地区排行榜。不支持查看其他玩家的详细信息。                    |
+| 排行榜       | 每首歌曲/难度的单独排行榜。不支持地区排行榜。不支持查看其他玩家的详细信息。                        |
 | 存档备份     | 支持通过账号系统的保存/加载。支持修改密码和用户名。支持登出。                                     |
 | Titles      | 通过Status观看并使用全解锁的Titles。                                                           |
 | 任务         | 支持达到游戏内经验等级后歌曲自动解锁。其他功能均不支持。                                         |
@@ -71,7 +71,6 @@ If you don't mind tweaking some files (and be able to connect directly to the se
 如果你就想用官方客户端，则需要一些代理软件来将流量重定向到服务器，操作会相对复杂。请使用“原版安装包的使用说明”。
 
 如果你不介意修改客户端，你可以直接连接，请使用“改版安装包的使用说明”。
-
 
 <details>
 <summary>File Structure 文件结构</summary>
@@ -180,7 +179,7 @@ By modifying the apk's obb verification function and `obb`'s `settings.cfg`, you
 
 After this, open the game's `obb` with password `eiprblFFv69R83J5`, extract everything, open `settings.cfg`, and edit the `serverUrl` to the `http://ip:port/` of your server. Compress every file with `WinRAR` to zip, using the password to encrypt it. Use `ZIP legacy encryption`. Override the `obb` in `Android/obb/jp.co.groovecoasterzero` and you should be able to connect directly. Just start the game and observe the server.
 
-With iOS, none of the above is necessary as the installation package is a single .ipa. Just edit `settings.cfg` and sideload the ipa.
+With iOS, none of the above is necessary as the installation package is a single ```.ipa```. Just edit `settings.cfg` and sideload the ipa.
 </details>
 
 <details>
@@ -191,7 +190,7 @@ With iOS, none of the above is necessary as the installation package is a single
 
 然后打开游戏的`obb`，密码是`eiprblFFv69R83J5`。提取全部文件，打开`settings.cfg`，将`serverUrl`改成私服的`http://ip:端口/`。用`WinRAR`压缩全部文件至zip，用密码加密。用`ZIP legacy encryption`。覆盖`Android/obb/jp.co.groovecoasterzero`里的`obb`，应该就可以直连了。打开游戏，观察私服的输出。
 
-iOS简单得多，只要修改ipa中的`settings.cfg`并侧载即可。
+iOS简单得多，只要修改```ipa```中的`settings.cfg`并侧载即可。
 </details>
 
 
@@ -201,29 +200,19 @@ Database can be opened with DB Browser.
 
 If you want to make your service only available to whitelisted devices, turn on ```AUTHORIZATION_NEEDED``` in ```config.py``` and add the device id after the .php request to the ```whitelist table```. If you want to ban a device/taito ID, add the device ID or the username of the taito ID to the blacklist table. The ```reason``` column is for your own reference. If a device is logged in to that Taito ID, they cannot download asset, cannot log out, and cannot change name. If a device is not in the whitelist (if enabled) or is banned by device ID, they will not be able to download anything.
 
+```getCrypt.py``` is a standalone script used to decrypt the mass inside the ```GET``` requests.
+
 数据库可以用DB Browser打开。
 
 如果你想只对在白名单里的设备提供服务，开启```config.py```里的```AUTHORIZATION_NEEDED```，并将.php请求后面的设备ID加入```whitelist```列表。如果你想封禁设备或者Taito ID，将设备ID或者用户名加入```blacklist```列表。```reason```列可供你记录封禁原因。如果设备登陆该Taito ID，它将无法下载数据，不能登出，而且不能改名。如果设备在白名单开启后不在白名单里，或者设备被封禁，它将无法下载任何东西。
+
+```getCrypt.py``` 是一个用来单独解密```GET```请求后缀的脚本.
 
 ## About Account Implementation 关于账号设置
 
 Account is only used for save file saving/loading (song ownership and coins are tied to devices. However, songs unlocked in the save file will remain unlocked on a new device). Unlike the official version, you can rename and log out of your account. However, only one device may be connected to an account at a time. The old device will be logged off if a new device logs in.
 
 账号仅用于保存/同步存档。Gcoin和歌曲所有权和设备绑定。不过，存档中已经解锁的曲目将在新的设备上可用。官方版不允许重命名及登出账号。私服则可以进行这些操作。不过，一个账号只能同时登陆一台设备，如果登录第二台设备，第一台设备将被挤掉。
-
-## Logical next step 接下来。。。
-
-### SAVE NETWORK PACKETS!!!
-
-Implement leaderboard, personalization (title), maybe mission. 1:1 representation of the offical server is nigh impossible for my skill level. Those features are glorified web pages.
-
-Porting charts from PC and 4MAX to mobile. Once figuring out stage_param.dat, this should be quite easy...
-
-### 赶 紧 抓 包 ！ ！ ！
-
-实装排行榜，title个性化，甚至任务。官服1：1还原对我来说太难了。毕竟这些功能实际上不是游戏，而是网页。
-
-将pc版和4max歌曲加入2OS. 琢磨透stage_param.dat之后，应该就是轻而易举的了。
 
 ![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/stage_back10_big.png)
 ![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/test2.JPG)

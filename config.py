@@ -13,10 +13,18 @@ class Config:
     Datecode of the 3 pak files.
     三个pak文件的时间戳。
     '''
-    MODEL = '202404221226'
-    TUNEFILE = '202404221247'
-    SKIN = '202404191148'
-    
+    MODEL = '202404221228'
+    TUNEFILE = '202404221250'
+    SKIN = '202404191147'
+    '''
+    Groove Coin-related settings.
+    GCoin相关设定。
+    '''  
+    STAGE_PRICE = 1
+    AVATAR_PRICE = 1
+    ITEM_PRICE = 2
+    COIN_REWARD = 1
+    START_COIN = 10
     '''
     Only the whitelisted playerID can use the service. Blacklist has priority over whitelist.
     只有白名单的玩家ID才能使用服务。黑名单优先于白名单。

@@ -83,14 +83,14 @@ title_lists = {
     3: god_titles,
 }
 
-stage_price = 1
-avatar_price = 1
-item_price = 2
-coin_reward = 1
-start_coin = 10
-
 app = Flask(__name__)
 app.config.from_object(Config)
+
+stage_price = app.config['STAGE_PRICE']
+avatar_price = app.config['AVATAR_PRICE']
+item_price = app.config['ITEM_PRICE']
+coin_reward = app.config['COIN_REWARD']
+start_coin = app.config['START_COIN']
 
 DATABASE = 'player.db'
 def create_table():
@@ -365,7 +365,6 @@ def start():
                 else:
                     now_count = current_day
 
-            # Add or update <now_count> in <daily_reward>
             now_count_elem = daily_reward_elem.find("now_count")
             if now_count_elem is None:
                 now_count_elem = ET.Element("now_count")
@@ -390,13 +389,11 @@ def start():
                 coin_elem.text = str(coin)
                 root.append(coin_elem)
 
-                # Add `my_avatar` elements to XML
                 for avatar_id in my_avatar:
                     avatar_elem = ET.Element("my_avatar")
                     avatar_elem.text = str(avatar_id)
                     root.append(avatar_elem)
 
-                # Add `my_stage` elements to XML
                 for stage_id in my_stage:
                     stage_elem = ET.Element("my_stage")
                     stage_id_elem = ET.Element("stage_id")
@@ -423,7 +420,6 @@ def start():
             except Exception as e:
                 return jsonify({"error": "Failed to retrieve stage zero", "details": str(e)}), 500
 
-        # Serialize XML to string and return
         xml_response = ET.tostring(root, encoding='unicode')
         return xml_response
     else:
@@ -438,10 +434,8 @@ def sync():
     root = tree.getroot()
     user = get_user_data(decrypted_fields, "username")
     should_serve = True
-    if app.config['AUTHORIZATION_NEEDED']:
-        should_serve = check_whitelist(decrypted_fields)
-    if should_serve:
-        should_serve = check_blacklist(decrypted_fields)
+    if app.config.get('AUTHORIZATION_NEEDED', False):
+        should_serve = check_whitelist(decrypted_fields) and check_blacklist(decrypted_fields)
     if should_serve:
         host_string = "http://" + app.config['HOST'] + ":" + str(app.config['PORT']) + "/"
         model_pak = get_model_pak(host_string)
@@ -595,170 +589,177 @@ def reg():
 
 @app.route('/result.php', methods=['GET'])
 def result():
+    should_serve = True
     global decrypted_fields
-    device_id = decrypted_fields[b'vid'][0].decode()
-    file_path = os.path.join(root_folder, "files/result.xml")
-    tree = ET.parse(file_path)
-    root = tree.getroot()
+    if app.config.get('AUTHORIZATION_NEEDED', False):
+        should_serve = check_whitelist(decrypted_fields) and check_blacklist(decrypted_fields)
 
-    # Increment coin for user
-    with sqlite3.connect(DATABASE) as connection:
-        cursor = connection.cursor()
-        cursor.execute("SELECT coin FROM daily_reward WHERE device_id = ?", (device_id,))
-        row = cursor.fetchone()
+    if should_serve:
+        device_id = decrypted_fields[b'vid'][0].decode()
+        file_path = os.path.join(root_folder, "files/result.xml")
+        tree = ET.parse(file_path)
+        root = tree.getroot()
 
-        if row:
-            current_coin = row[0] if row[0] else start_coin
-            updated_coin = current_coin + coin_reward
-            cursor.execute("UPDATE daily_reward SET coin = ? WHERE device_id = ?", (updated_coin, device_id))
-
-    # Save the record
-    vid = decrypted_fields[b'vid'][0].decode()
-    stts = decrypted_fields[b'stts'][0].decode()
-    id = decrypted_fields[b'id'][0].decode()
-    mode = decrypted_fields[b'mode'][0].decode()
-    avatar = decrypted_fields[b'avatar'][0].decode()
-    score = decrypted_fields[b'score'][0].decode()
-    high_score = decrypted_fields[b'high_score'][0].decode()
-    play_rslt = decrypted_fields[b'play_rslt'][0].decode()
-    item = decrypted_fields[b'item'][0].decode()
-
-    device_os = decrypted_fields[b'os'][0].decode()
-    os_ver = decrypted_fields[b'os_ver'][0].decode()
-    tid = decrypted_fields[b'tid'][0].decode()
-    ver = decrypted_fields[b'ver'][0].decode()
-    mike = decrypted_fields[b'mike'][0].decode()
-
-    do_insert = False
-    do_update_sid = False
-    do_update_vid = False
-    last_row_id = 0
-
-    #parse whether or not the device is logged in to taito ID
-
-    sid = ""
-    with sqlite3.connect(DATABASE) as connection:
-        cursor = connection.cursor()
-        select_command = """SELECT id FROM user WHERE device_id = ?;"""
-        cursor.execute(select_command, (vid,))
-        result = cursor.fetchone()  # Fetch one row from the result
-        cursor.close()
-
-        # Check if a row was found
-        if result:
-            sid = result[0]
-
-
-    if sid != "":
+        # Increment coin for user
         with sqlite3.connect(DATABASE) as connection:
             cursor = connection.cursor()
-            check_command = """
-            SELECT rid, score FROM result WHERE id = ? and mode = ? and sid = ? ORDER BY CAST(score AS INTEGER) DESC;
+            cursor.execute("SELECT coin FROM daily_reward WHERE device_id = ?", (device_id,))
+            row = cursor.fetchone()
+
+            if row:
+                current_coin = row[0] if row[0] else start_coin
+                updated_coin = current_coin + coin_reward
+                cursor.execute("UPDATE daily_reward SET coin = ? WHERE device_id = ?", (updated_coin, device_id))
+
+        # Save the record
+        vid = decrypted_fields[b'vid'][0].decode()
+        stts = decrypted_fields[b'stts'][0].decode()
+        id = decrypted_fields[b'id'][0].decode()
+        mode = decrypted_fields[b'mode'][0].decode()
+        avatar = decrypted_fields[b'avatar'][0].decode()
+        score = decrypted_fields[b'score'][0].decode()
+        high_score = decrypted_fields[b'high_score'][0].decode()
+        play_rslt = decrypted_fields[b'play_rslt'][0].decode()
+        item = decrypted_fields[b'item'][0].decode()
+
+        device_os = decrypted_fields[b'os'][0].decode()
+        os_ver = decrypted_fields[b'os_ver'][0].decode()
+        tid = decrypted_fields[b'tid'][0].decode()
+        ver = decrypted_fields[b'ver'][0].decode()
+        mike = decrypted_fields[b'mike'][0].decode()
+
+        do_insert = False
+        do_update_sid = False
+        do_update_vid = False
+        last_row_id = 0
+
+        #parse whether or not the device is logged in to taito ID
+
+        sid = ""
+        with sqlite3.connect(DATABASE) as connection:
+            cursor = connection.cursor()
+            select_command = """SELECT id FROM user WHERE device_id = ?;"""
+            cursor.execute(select_command, (vid,))
+            result = cursor.fetchone()  # Fetch one row from the result
+            cursor.close()
+
+            # Check if a row was found
+            if result:
+                sid = result[0]
+
+
+        if sid != "":
+            with sqlite3.connect(DATABASE) as connection:
+                cursor = connection.cursor()
+                check_command = """
+                SELECT rid, score FROM result WHERE id = ? and mode = ? and sid = ? ORDER BY CAST(score AS INTEGER) DESC;
+                """
+                cursor.execute(check_command, (id, mode, sid))
+                records = cursor.fetchall()
+                cursor.close()
+                if len(records) > 0:
+                    last_row_id = records[0][0]
+                    if (score > records[0][1]):
+                        do_update_sid = True
+                else:
+                    do_insert = True
+        else:
+            with sqlite3.connect(DATABASE) as connection:
+                cursor = connection.cursor()
+                check_command = """
+                SELECT rid, score FROM result WHERE id = ? and mode = ? and sid = ? and vid = ? ORDER BY CAST(score AS INTEGER) DESC;
+                """
+                cursor.execute(check_command, (id, mode, "", vid))
+                records = cursor.fetchall()
+                cursor.close()
+                if len(records) > 0:
+                    last_row_id = records[0][0]
+                    if (score > records[0][1]):
+                        do_update_vid = True
+                else:
+                    do_insert = True 
+
+        
+        if do_insert:
+            print("result - inserting")
+            insert_command = """
+            INSERT INTO result (vid, stts, id, mode, avatar, score, high_score, play_rslt, item, os, os_ver, tid, sid, ver, mike)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
             """
-            cursor.execute(check_command, (id, mode, sid))
+            with sqlite3.connect(DATABASE) as connection:
+                cursor = connection.cursor()
+                cursor.execute(insert_command, (vid, stts, id, mode, avatar, score, high_score, play_rslt, item, device_os, os_ver, tid, sid, ver, mike))
+                last_row_id = cursor.lastrowid
+                cursor.close()
+                connection.commit()
+        elif do_update_sid:
+            print("result - update based off taito id")
+            update_command = """UPDATE result
+            SET stts = ?, avatar = ?, score = ?, high_score = ?, play_rslt = ?, item = ?, os = ?, os_ver = ?, tid = ?, ver = ?, mike = ?, vid = ?
+            WHERE sid = ? AND id = ? AND mode = ?;
+            """
+            with sqlite3.connect(DATABASE) as connection:
+                cursor = connection.cursor()
+                cursor.execute(update_command, (stts, avatar, score, high_score, play_rslt, item, device_os, os_ver, tid, ver, mike, vid, sid, id, mode))
+                cursor.close()
+                connection.commit()
+        elif do_update_vid:
+            print("result - updatin based off device id")
+            update_command = """UPDATE result
+            SET stts = ?, avatar = ?, score = ?, high_score = ?, play_rslt = ?, item = ?, os = ?, os_ver = ?, sid = ?, ver = ?, mike = ?
+            WHERE vid = ? AND id = ? AND mode = ?;
+            """
+            with sqlite3.connect(DATABASE) as connection:
+                cursor = connection.cursor()
+                cursor.execute(update_command, (stts, avatar, score, high_score, play_rslt, item, device_os, os_ver, sid, ver, mike, vid, id, mode))
+                cursor.close()
+                connection.commit()
+
+        # Update player profile regardless. Check for exp unlocked songs too
+        with sqlite3.connect(DATABASE) as connection:
+            cursor = connection.cursor()
+
+            query_command = "SELECT my_stage FROM daily_reward WHERE device_id = ?"
+            cursor.execute(query_command, (device_id,))
+            result = cursor.fetchone()
+
+            my_stage = set(json.loads(result[0])) if result and result[0] else set(start_stages)
+
+            current_exp = int(stts.split(",")[0])
+            for song in exp_unlocked_songs:
+                if song["lvl"] <= current_exp:
+                    my_stage.add(song["id"])
+
+            my_stage = sorted(my_stage)
+
+            update_command = """
+            UPDATE daily_reward SET lvl = ?, avatar = ?, my_stage = ? WHERE device_id = ?;
+            """
+            cursor.execute(update_command, (current_exp, int(avatar), json.dumps(my_stage), device_id))
+            cursor.close()
+            connection.commit()
+
+        with sqlite3.connect(DATABASE) as connection:
+            cursor = connection.cursor()
+            select_command = """
+            SELECT rid, score FROM result WHERE id = ? and mode = ? ORDER BY CAST(score AS INTEGER) DESC;
+            """
+            cursor.execute(select_command, (id, mode))
             records = cursor.fetchall()
             cursor.close()
-            if len(records) > 0:
-                last_row_id = records[0][0]
-                if (score > records[0][1]):
-                    do_update_sid = True
-            else:
-                do_insert = True
+
+            rank = None
+            for idx, record in enumerate(records, start=1):
+                if record[0] == last_row_id:
+                    rank = idx
+                    break
+        
+            after_element = root.find('.//after')
+            after_element.text = str(rank)
+            xml = ET.tostring(tree.getroot(), encoding='unicode')
+            return xml
     else:
-        with sqlite3.connect(DATABASE) as connection:
-            cursor = connection.cursor()
-            check_command = """
-            SELECT rid, score FROM result WHERE id = ? and mode = ? and sid = ? and vid = ? ORDER BY CAST(score AS INTEGER) DESC;
-            """
-            cursor.execute(check_command, (id, mode, "", vid))
-            records = cursor.fetchall()
-            cursor.close()
-            if len(records) > 0:
-                last_row_id = records[0][0]
-                if (score > records[0][1]):
-                    do_update_vid = True
-            else:
-                do_insert = True 
-
-    
-    if do_insert:
-        print("result - inserting")
-        insert_command = """
-        INSERT INTO result (vid, stts, id, mode, avatar, score, high_score, play_rslt, item, os, os_ver, tid, sid, ver, mike)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-        """
-        with sqlite3.connect(DATABASE) as connection:
-            cursor = connection.cursor()
-            cursor.execute(insert_command, (vid, stts, id, mode, avatar, score, high_score, play_rslt, item, device_os, os_ver, tid, sid, ver, mike))
-            last_row_id = cursor.lastrowid
-            cursor.close()
-            connection.commit()
-    elif do_update_sid:
-        print("result - update based off taito id")
-        update_command = """UPDATE result
-        SET stts = ?, avatar = ?, score = ?, high_score = ?, play_rslt = ?, item = ?, os = ?, os_ver = ?, tid = ?, ver = ?, mike = ?, vid = ?
-        WHERE sid = ? AND id = ? AND mode = ?;
-        """
-        with sqlite3.connect(DATABASE) as connection:
-            cursor = connection.cursor()
-            cursor.execute(update_command, (stts, avatar, score, high_score, play_rslt, item, device_os, os_ver, tid, ver, mike, vid, sid, id, mode))
-            cursor.close()
-            connection.commit()
-    elif do_update_vid:
-        print("result - updatin based off device id")
-        update_command = """UPDATE result
-        SET stts = ?, avatar = ?, score = ?, high_score = ?, play_rslt = ?, item = ?, os = ?, os_ver = ?, sid = ?, ver = ?, mike = ?
-        WHERE vid = ? AND id = ? AND mode = ?;
-        """
-        with sqlite3.connect(DATABASE) as connection:
-            cursor = connection.cursor()
-            cursor.execute(update_command, (stts, avatar, score, high_score, play_rslt, item, device_os, os_ver, sid, ver, mike, vid, id, mode))
-            cursor.close()
-            connection.commit()
-
-    # Update player profile regardless. Check for exp unlocked songs too
-    with sqlite3.connect(DATABASE) as connection:
-        cursor = connection.cursor()
-
-        query_command = "SELECT my_stage FROM daily_reward WHERE device_id = ?"
-        cursor.execute(query_command, (device_id,))
-        result = cursor.fetchone()
-
-        my_stage = set(json.loads(result[0])) if result and result[0] else set(start_stages)
-
-        current_exp = int(stts.split(",")[0])
-        for song in exp_unlocked_songs:
-            if song["lvl"] <= current_exp:
-                my_stage.add(song["id"])
-
-        my_stage = sorted(my_stage)
-
-        update_command = """
-        UPDATE daily_reward SET lvl = ?, avatar = ?, my_stage = ? WHERE device_id = ?;
-        """
-        cursor.execute(update_command, (current_exp, int(avatar), json.dumps(my_stage), device_id))
-        cursor.close()
-        connection.commit()
-
-    with sqlite3.connect(DATABASE) as connection:
-        cursor = connection.cursor()
-        select_command = """
-        SELECT rid, score FROM result WHERE id = ? and mode = ? ORDER BY CAST(score AS INTEGER) DESC;
-        """
-        cursor.execute(select_command, (id, mode))
-        records = cursor.fetchall()
-        cursor.close()
-
-        rank = None
-        for idx, record in enumerate(records, start=1):
-            if record[0] == last_row_id:
-                rank = idx
-                break
-    
-        after_element = root.find('.//after')
-        after_element.text = str(rank)
-        xml = ET.tostring(tree.getroot(), encoding='unicode')
-        return xml
+        return jsonify({"error": "Access denied"}), 403
 
 @app.route('/ttag.php', methods=['GET'])
 def ttag():
@@ -775,12 +776,10 @@ def ttag():
 
 @app.route('/web_shop.php', methods=['GET', 'POST'])
 def web_shop():
-    global decrypted_fields
     should_serve = True
-    if app.config['AUTHORIZATION_NEEDED']:
-        should_serve = check_whitelist(decrypted_fields)
-    if should_serve:
-        should_serve = check_blacklist(decrypted_fields)
+    global decrypted_fields
+    if app.config.get('AUTHORIZATION_NEEDED', False):
+        should_serve = check_whitelist(decrypted_fields) and check_blacklist(decrypted_fields)
     if should_serve:
         cnt_type = decrypted_fields[b'cnt_type'][0].decode()
         device_id = decrypted_fields[b'vid'][0].decode()
@@ -853,184 +852,196 @@ def web_shop():
 
 @app.route('/web_shop_detail.php', methods=['GET', 'POST'])
 def web_shop_detail():
+    should_serve = True
     global decrypted_fields
-    cnt_type = decrypted_fields[b'cnt_type'][0].decode()
-    cnt_id = int(decrypted_fields[b'cnt_id'][0].decode())
-    device_id = decrypted_fields[b'vid'][0].decode()
+    if app.config.get('AUTHORIZATION_NEEDED', False):
+        should_serve = check_whitelist(decrypted_fields) and check_blacklist(decrypted_fields)
+    if should_serve:
+        cnt_type = decrypted_fields[b'cnt_type'][0].decode()
+        cnt_id = int(decrypted_fields[b'cnt_id'][0].decode())
+        device_id = decrypted_fields[b'vid'][0].decode()
 
-    with sqlite3.connect(DATABASE) as connection:
-        cursor = connection.cursor()
-        query = "SELECT coin FROM daily_reward WHERE device_id = ?"
-        cursor.execute(query, (device_id,))
-        result = cursor.fetchone()
-        cursor.close()
+        with sqlite3.connect(DATABASE) as connection:
+            cursor = connection.cursor()
+            query = "SELECT coin FROM daily_reward WHERE device_id = ?"
+            cursor.execute(query, (device_id,))
+            result = cursor.fetchone()
+            cursor.close()
 
-    coin = result[0] if result and result[0] else 0
-    html = ""
+        coin = result[0] if result and result[0] else 0
+        html = ""
 
-    if (cnt_type == "1"):
-        song = song_list[cnt_id]
-        difficulty_levels = "/".join(map(str, song.get("difficulty_levels", [])))
-        song_stage_price = stage_price
-        if (len(song["difficulty_levels"]) == 6):
-            song_stage_price = stage_price * 2
-        html = f"""
-        <div class="image-container">
-            <img src="/files/image/icon/shop/{cnt_id}.jpg" alt="Item Image" style="width: 180px; height: 180px;" />
-        </div>
-        <p>Would you like to purchase this song?</p>
-        <div>
-            <p>{song.get("name_en")} - {song.get("author_en")}</p>
-            <p>Difficulty Levels: {difficulty_levels}</p>
-        </div>
-        <div>
-            <img src="/files/web/coin_icon.png" class="coin-icon" style="width: 40px; height: 40px;" alt="Coin Icon" />
-            <span style="color: #FFFFFF; font-size: 44px; font-family: Hiragino Kaku Gothic ProN, sans-serif;">{song_stage_price}</span>
-        </div>
+        if (cnt_type == "1"):
+            song = song_list[cnt_id]
+            difficulty_levels = "/".join(map(str, song.get("difficulty_levels", [])))
+            song_stage_price = stage_price
+            if (len(song["difficulty_levels"]) == 6):
+                song_stage_price = stage_price * 2
+            html = f"""
+            <div class="image-container">
+                <img src="/files/image/icon/shop/{cnt_id}.jpg" alt="Item Image" style="width: 180px; height: 180px;" />
+            </div>
+            <p>Would you like to purchase this song?</p>
+            <div>
+                <p>{song.get("name_en")} - {song.get("author_en")}</p>
+                <p>Difficulty Levels: {difficulty_levels}</p>
+            </div>
+            <div>
+                <img src="/files/web/coin_icon.png" class="coin-icon" style="width: 40px; height: 40px;" alt="Coin Icon" />
+                <span style="color: #FFFFFF; font-size: 44px; font-family: Hiragino Kaku Gothic ProN, sans-serif;">{song_stage_price}</span>
+            </div>
+            """
+
+        elif (cnt_type == "2"):
+            avatar = next((item for item in avatar_list if item.get("id") == cnt_id), None)
+            if avatar:
+                html = f"""
+                <div class="image-container">
+                    <img src="/files/image/icon/avatar/{cnt_id}.png" alt="Item Image" style="width: 180px; height: 180px; background-color: black; object-fit: contain;" />
+                </div>
+                <p>Would you like to purchase this avatar?</p>
+                <div>
+                    <p>{avatar.get("name")}</p>
+                    <p>Effect: {avatar.get("effect")}</p>
+                </div>
+                <div>
+                    <img src="/files/web/coin_icon.png" class="coin-icon" style="width: 40px; height: 40px;" alt="Coin Icon" />
+                    <span>{avatar_price}</span>
+                </div>
+                """
+            else:
+                html = "<p>Avatar not found.</p>"
+
+        elif (cnt_type == "3"):
+            item = next((item for item in item_list if item.get("id") == cnt_id), None)
+            if item:
+                html = f"""
+                <div class="image-container">
+                    <img src="/files/image/icon/item/{cnt_id}.png" alt="Item Image" style="width: 180px; height: 180px;" />
+                </div>
+                <p>Would you like to purchase this item?</p>
+                <div>
+                    <p>{item.get("name")}</p>
+                    <p>Effect: {item.get("effect")}</p>
+                </div>
+                <div>
+                    <img src="/files/web/coin_icon.png" class="coin-icon" style="width: 40px; height: 40px;" alt="Coin Icon" />
+                    <span>{item_price}</span>
+                </div>
+                """
+            else:
+                html = "<p>Item not found.</p>"
+
+
+        html += f"""
+            <br>
+            <div class="buttons" style="margin-top: 20px;">
+                <a href="wwic://web_purchase_coin?cnt_type={cnt_type}&cnt_id={cnt_id}&num=1" class="bt_bg01" >Buy</a><br>
+                <a href="wwic://web_shop?cnt_type={cnt_type}" class="bt_bg01" >Go Back</a>
+            </div>
         """
 
-    elif (cnt_type == "2"):
-        avatar = next((item for item in avatar_list if item.get("id") == cnt_id), None)
-        if avatar:
-            html = f"""
-            <div class="image-container">
-                <img src="/files/image/icon/avatar/{cnt_id}.png" alt="Item Image" style="width: 180px; height: 180px; background-color: black; object-fit: contain;" />
-            </div>
-            <p>Would you like to purchase this avatar?</p>
-            <div>
-                <p>{avatar.get("name")}</p>
-                <p>Effect: {avatar.get("effect")}</p>
-            </div>
-            <div>
-                <img src="/files/web/coin_icon.png" class="coin-icon" style="width: 40px; height: 40px;" alt="Coin Icon" />
-                <span>{avatar_price}</span>
-            </div>
-            """
-        else:
-            html = "<p>Avatar not found.</p>"
-
-    elif (cnt_type == "3"):
-        item = next((item for item in item_list if item.get("id") == cnt_id), None)
-        if item:
-            html = f"""
-            <div class="image-container">
-                <img src="/files/image/icon/item/{cnt_id}.png" alt="Item Image" style="width: 180px; height: 180px;" />
-            </div>
-            <p>Would you like to purchase this item?</p>
-            <div>
-                <p>{item.get("name")}</p>
-                <p>Effect: {item.get("effect")}</p>
-            </div>
-            <div>
-                <img src="/files/web/coin_icon.png" class="coin-icon" style="width: 40px; height: 40px;" alt="Coin Icon" />
-                <span>{item_price}</span>
-            </div>
-            """
-        else:
-            html = "<p>Item not found.</p>"
-
-
-    html += f"""
-        <br>
-        <div class="buttons" style="margin-top: 20px;">
-            <a href="wwic://web_purchase_coin?cnt_type={cnt_type}&cnt_id={cnt_id}&num=1" class="bt_bg01" >Buy</a><br>
-            <a href="wwic://web_shop?cnt_type={cnt_type}" class="bt_bg01" >Go Back</a>
-        </div>
-    """
-
-    with open(f"files/web_shop_detail.html", "r", encoding="utf-8") as file:
-        html_content = file.read().format(text=html, coin=coin)
-        return html_content
+        with open(f"files/web_shop_detail.html", "r", encoding="utf-8") as file:
+            html_content = file.read().format(text=html, coin=coin)
+            return html_content
+    else:
+        return jsonify({"error": "Access denied"}), 403
 
 @app.route('/buy_by_coin.php', methods=['GET'])
 def buy_by_coin():
+    should_serve = True
     global decrypted_fields
-    cnt_type = decrypted_fields[b'cnt_type'][0].decode()
-    cnt_id = int(decrypted_fields[b'cnt_id'][0].decode())
-    num = int(decrypted_fields[b'num'][0].decode())
-    device_id = decrypted_fields[b'vid'][0].decode()
-    fail_url = """<?xml version="1.0" encoding="UTF-8"?><response><code>1</code><result_url>coin_error.php</result_url></response>"""
+    if app.config.get('AUTHORIZATION_NEEDED', False):
+        should_serve = check_whitelist(decrypted_fields) and check_blacklist(decrypted_fields)
+    if should_serve:
+        cnt_type = decrypted_fields[b'cnt_type'][0].decode()
+        cnt_id = int(decrypted_fields[b'cnt_id'][0].decode())
+        num = int(decrypted_fields[b'num'][0].decode())
+        device_id = decrypted_fields[b'vid'][0].decode()
+        fail_url = """<?xml version="1.0" encoding="UTF-8"?><response><code>1</code><result_url>coin_error.php</result_url></response>"""
 
-    with sqlite3.connect(DATABASE) as connection:
-        cursor = connection.cursor()
+        with sqlite3.connect(DATABASE) as connection:
+            cursor = connection.cursor()
 
-        # Fetch user data
-        query = "SELECT my_stage, my_avatar, coin, item FROM daily_reward WHERE device_id = ?"
-        cursor.execute(query, (device_id,))
-        result = cursor.fetchone()
+            # Fetch user data
+            query = "SELECT my_stage, my_avatar, coin, item FROM daily_reward WHERE device_id = ?"
+            cursor.execute(query, (device_id,))
+            result = cursor.fetchone()
 
-        if not result:
-            return fail_url
-
-        my_stage, my_avatar, coin, item = result
-        coin = int(coin) if coin else 0
-
-        # Process based on cnt_type
-        if cnt_type == "1":
-            song_stage_price = stage_price
-            if (len(song_list[cnt_id]["difficulty_levels"]) == 6):
-                song_stage_price = song_stage_price * 2
-
-            if coin < song_stage_price:
+            if not result:
                 return fail_url
-            
-            stages = set(json.loads(my_stage)) if my_stage else set()
-            if cnt_id not in stages:
-                coin -= song_stage_price
-                stages.add(cnt_id)
+
+            my_stage, my_avatar, coin, item = result
+            coin = int(coin) if coin else 0
+
+            # Process based on cnt_type
+            if cnt_type == "1":
+                song_stage_price = stage_price
+                if (len(song_list[cnt_id]["difficulty_levels"]) == 6):
+                    song_stage_price = song_stage_price * 2
+
+                if coin < song_stage_price:
+                    return fail_url
+                
+                stages = set(json.loads(my_stage)) if my_stage else set()
+                if cnt_id not in stages:
+                    coin -= song_stage_price
+                    stages.add(cnt_id)
+                else:
+                    return fail_url
+                my_stage = json.dumps(list(stages))
+
+            elif cnt_type == "2":
+                if coin < avatar_price:
+                    return fail_url
+
+                avatars = set(json.loads(my_avatar)) if my_avatar else set()
+                if cnt_id not in avatars:
+                    coin -= avatar_price
+                    avatars.add(cnt_id)
+                else:
+                    return fail_url
+                my_avatar = json.dumps(list(avatars))
+
+            elif cnt_type == "3":
+                if coin < item_price:
+                    return fail_url
+
+                # Deduct coin and append to item (no duplicate check)
+                coin -= item_price
+                items = json.loads(item) if item else []
+                items.append(cnt_id)
+                item = json.dumps(items)
+
             else:
                 return fail_url
-            my_stage = json.dumps(list(stages))
 
-        elif cnt_type == "2":
-            if coin < avatar_price:
-                return fail_url
+            update_query = """
+                UPDATE daily_reward
+                SET my_stage = ?, my_avatar = ?, coin = ?, item = ?
+                WHERE device_id = ?
+            """
+            cursor.execute(update_query, (my_stage, my_avatar, coin, item, device_id))
+            connection.commit()
 
-            avatars = set(json.loads(my_avatar)) if my_avatar else set()
-            if cnt_id not in avatars:
-                coin -= avatar_price
-                avatars.add(cnt_id)
-            else:
-                return fail_url
-            my_avatar = json.dumps(list(avatars))
+            response = ET.Element("response")
 
-        elif cnt_type == "3":
-            if coin < item_price:
-                return fail_url
+            # Add the main elements
+            ET.SubElement(response, "code").text = "0"
+            ET.SubElement(response, "result_url").text = "web_shop_result.php"
+            ET.SubElement(response, "cnt_type").text = cnt_type
+            ET.SubElement(response, "cnt_id").text = str(cnt_id)
+            ET.SubElement(response, "num").text = str(num)
 
-            # Deduct coin and append to item (no duplicate check)
-            coin -= item_price
-            items = json.loads(item) if item else []
-            items.append(cnt_id)
-            item = json.dumps(items)
+            # Conditionally add the stage_id
+            if cnt_type == "1":
+                ET.SubElement(response, "stage_id").text = str(cnt_id)
 
-        else:
-            return fail_url
-
-        update_query = """
-            UPDATE daily_reward
-            SET my_stage = ?, my_avatar = ?, coin = ?, item = ?
-            WHERE device_id = ?
-        """
-        cursor.execute(update_query, (my_stage, my_avatar, coin, item, device_id))
-        connection.commit()
-
-        response = ET.Element("response")
-
-        # Add the main elements
-        ET.SubElement(response, "code").text = "0"
-        ET.SubElement(response, "result_url").text = "web_shop_result.php"
-        ET.SubElement(response, "cnt_type").text = cnt_type
-        ET.SubElement(response, "cnt_id").text = str(cnt_id)
-        ET.SubElement(response, "num").text = str(num)
-
-        # Conditionally add the stage_id
-        if cnt_type == "1":
-            ET.SubElement(response, "stage_id").text = str(cnt_id)
-
-        # Convert the XML tree to a string
-        response_string = ET.tostring(response, encoding="utf-8", method="xml").decode("utf-8")
-        return response_string
+            # Convert the XML tree to a string
+            response_string = ET.tostring(response, encoding="utf-8", method="xml").decode("utf-8")
+            return response_string
+    else:
+        return jsonify({"error": "Access denied"}), 403
     
 @app.route('/web_shop_result.php', methods=['GET'])
 def web_shop_result():
@@ -1044,327 +1055,466 @@ def coin_error():
 
 @app.route('/ranking.php/', methods=['GET'])
 def ranking():
+    should_serve = True
     global decrypted_fields
-    device_id = decrypted_fields[b'vid'][0].decode()
+    if app.config.get('AUTHORIZATION_NEEDED', False):
+        should_serve = check_whitelist(decrypted_fields) and check_blacklist(decrypted_fields)
+    if should_serve:
+        device_id = decrypted_fields[b'vid'][0].decode()
 
-    html = "<ul class='song-list'>"
-    for index, song in enumerate(song_list):
-        encrypted_mass = encryptAES(("vid=" + device_id + "&song_id=" + str(index) + "&mode=3&dummy=").encode("utf-8"))
-        song_name = song.get("name_en", "Unknown")
+        html = "<ul class='song-list'>"
+        encrypted_mass = encryptAES(("vid=" + device_id + "&song_id=-1&mode=1&dummy=").encode("utf-8"))
         href = f"/ranking_detail.php?{encrypted_mass}"
         html += f'''
             <li class="song-item">
-                <a href="{href}" class="song-button">{song_name}</a>
+                <a href="{href}" class="song-button">Total Score</a>
             </li>
         '''
-    html += "</ul>"
+        for index, song in enumerate(song_list):
+            encrypted_mass = encryptAES(("vid=" + device_id + "&song_id=" + str(index) + "&mode=3&dummy=").encode("utf-8"))
+            song_name = song.get("name_en", "Unknown")
+            href = f"/ranking_detail.php?{encrypted_mass}"
+            html += f'''
+                <li class="song-item">
+                    <a href="{href}" class="song-button">{song_name}</a>
+                </li>
+            '''
+        html += "</ul>"
 
-    with open(f"files/ranking.html", "r", encoding="utf-8") as file:
-        html_content = file.read().format(text=html)
-        return html_content
+        with open(f"files/ranking.html", "r", encoding="utf-8") as file:
+            html_content = file.read().format(text=html)
+            return html_content
+    else:
+        return jsonify({"error": "Access denied"}), 403
 
 @app.route('/ranking_detail.php/', methods=['GET'])
 def ranking_detail():
+    should_serve = True
     global decrypted_fields
-    device_id = decrypted_fields[b'vid'][0].decode()
-    song_id = int(decrypted_fields[b'song_id'][0].decode())
-    mode = int(decrypted_fields[b'mode'][0].decode())
-
-    song_name = song_list[song_id]["name_en"]
-    difficulty_levels = song_list[song_id]["difficulty_levels"]
-
-    html = f"""
-        <div style="text-align: center; font-size: 36px; margin-bottom: 20px;">
-            {song_name}
-        </div>
-    """
-
-    button_labels = ["easy", "normal", "hard"]
-    button_modes = [1, 2, 3]
-
-    if (len(difficulty_levels) == 6):
-        button_labels.extend(["ac-easy", "ac-normal", "ac-hard"])
-        button_modes.extend([11, 12, 13])
-
-    row_start = '<div class="button-row">'
-    row_end = '</div>'
-    row_content = []
-
-    for i, (label, mode_value) in enumerate(zip(button_labels, button_modes)):
-        if mode_value == mode:
-            row_content.append(f"""
-                <div class="bt_bg01_ac">
-                    {label.capitalize()}
-                </div>
-            """)
+    if app.config.get('AUTHORIZATION_NEEDED', False):
+        should_serve = check_whitelist(decrypted_fields) and check_blacklist(decrypted_fields)
+    if should_serve:
+        device_id = decrypted_fields[b'vid'][0].decode()
+        song_id = int(decrypted_fields[b'song_id'][0].decode())
+        mode = int(decrypted_fields[b'mode'][0].decode())
+        button_labels = []
+        difficulty_levels = []
+        song_name = ""
+        if (song_id == -1):
+            song_name = "Total Score"
+            difficulty_levels = []
+            button_labels = ["All", "Mobile", "Arcade"]
         else:
-            encrypted_mass = encryptAES(("vid=" + device_id + "&song_id=" + str(song_id) + "&mode=" + str(mode_value) + "&dummy=").encode("utf-8"))
-            row_content.append(f"""
-                <a href="/ranking_detail.php?{encrypted_mass}" class="bt_bg01">
-                    {label.capitalize()}
-                </a>
-            """)
+            song_name = song_list[song_id]["name_en"]
+            difficulty_levels = song_list[song_id]["difficulty_levels"]
+            button_labels = ["Easy", "Normal", "Hard"]
 
-        if len(row_content) == 3:
-            html += row_start + ''.join(row_content) + row_end
-            row_content = []  # Reset row content
+        html = f"""<div style="text-align: center; font-size: 36px; margin-bottom: 20px;">{song_name}</div>"""
 
-    play_results = None
-    user_result = None
-    device_result = None
-    with sqlite3.connect(DATABASE) as connection:
-        cursor = connection.cursor()
-        query = "SELECT * FROM result WHERE id = ? AND mode = ? ORDER BY CAST(score AS INTEGER) DESC"
-        cursor.execute(query, (song_id, mode))
-        play_results = cursor.fetchall()
+        button_modes = [1, 2, 3]
 
-        query = "SELECT * FROM user WHERE device_id = ?"
-        cursor.execute(query, (device_id,))
-        user_result = cursor.fetchone()
+        if (len(difficulty_levels) == 6):
+            button_labels.extend(["AC-Easy", "AC-Normal", "AC-Hard"])
+            button_modes.extend([11, 12, 13])
 
-        query = "SELECT * FROM daily_reward WHERE device_id = ?"
-        cursor.execute(query, (device_id,))
-        device_result = cursor.fetchone()
+        row_start = '<div class="button-row">'
+        row_end = '</div>'
+        row_content = []
 
-    user_id = user_result[0] if user_result else None
-    username = user_result[1] if user_result else f"Guest({device_id[-6:]})"
-    play_record = None
+        for i, (label, mode_value) in enumerate(zip(button_labels, button_modes)):
+            if mode_value == mode:
+                row_content.append(f"""<div class="bt_bg01_ac">{label}</div>""")
+            else:
+                encrypted_mass = encryptAES(("vid=" + device_id + "&song_id=" + str(song_id) + "&mode=" + str(mode_value) + "&dummy=").encode("utf-8"))
+                row_content.append(f"""<a href="/ranking_detail.php?{encrypted_mass}" class="bt_bg01">{label}</a>""")
 
-    # Check if the user's device ID is in play_results
-    if user_id:
-        play_record = next((record for record in play_results if int(record[3]) == user_id), None)
+            if len(row_content) == 3:
+                html += row_start + ''.join(row_content) + row_end
+                row_content = []  # Reset row content
 
-    if not play_record:
-        play_record = next((record for record in play_results if record[1] == device_id and record[3] is None), None)
+        play_results = None
+        user_result = None
+        device_result = None
 
-    player_rank = None
-    avatar_index = str(play_record[7]) if play_record else "1"
-    user_score = play_record[8] if play_record else 0
-    for rank, result in enumerate(play_results, start=1):
-        if user_result and int(result[3]) == user_id:
-            player_rank = rank
-            break
-        elif result[1] == device_id and result[3] is None:
-            player_rank = rank
-            break
-    # Generate player element
-    html += f"""
-    <div class="player-element">
-        <span class="rank">You<br>{"#" + str(player_rank) if player_rank else "N/A"}</span>
-        <img src="/files/image/icon/avatar/{avatar_index}.png" class="avatar" alt="Player Avatar">
-        <div class="player-info">
-            <div class="name">{username}</div>
-            <img src="/files/image/title/{device_result[9]}.png" class="title" alt="Player Title">
-        </div>
-        <div class="player-score">{user_score}</div>
-    </div>
-    """
-    # main leaderboard
-    html += """
-    <div class="leaderboard-container">
-    """
+        if (song_id == -1):
+            # Filter out the mobile/AC modes
+            if (mode == 1):
+                exclude = []
+            elif mode == 2:
+                exclude = [11, 12, 13]
+            else:
+                exclude = [1, 2, 3]
 
-    for rank, record in enumerate(play_results, start=1):
-        username = f"Guest({record[1][-6:]})"
-        device_info = None
-        if record[3]:
-            cursor.execute("SELECT username FROM user WHERE id = ?", (record[3],))
-            user_data = cursor.fetchone()
-            if user_data:
-                username = user_data[0]
-            cursor.execute("SELECT title FROM daily_reward WHERE device_id = ?", (record[1],))
-            device_title = cursor.fetchone()
-            if device_title:
-                device_info = device_title[0]
+            with sqlite3.connect(DATABASE) as connection:
+                cursor = connection.cursor()
 
-        avatar_id = record[7] if record[7] else 1
-        avatar_url = f"/files/image/icon/avatar/{avatar_id}.png"
+                cursor.execute("SELECT vid, sid, mode, avatar, score FROM result")
+                play_results = cursor.fetchall()
 
-        score = record[8]
+                cursor.execute("SELECT device_id, title, avatar FROM daily_reward")
+                device_results = {row[0]: {"title": row[1], "avatar": row[2]} for row in cursor.fetchall()}
 
-        html += f"""
-        <div class="leaderboard-player">
-            <div class="rank">#{rank}</div>
-            <img class="avatar" src="{avatar_url}" alt="Avatar">
-            <div class="leaderboard-info">
-                <div class="name">{username}</div>
-                <div class="title"><img src="/files/image/title/{device_info}.png" alt="Title"></div>
+                cursor.execute("SELECT id, username, device_id FROM user")
+                user_results = {row[0]: {"username": row[1], "device_id": row[2]} for row in cursor.fetchall()}
+
+                cursor.execute("SELECT * FROM user WHERE device_id = ?", (device_id,))
+                cur_user = cursor.fetchone()
+
+            player_scores = {}
+
+            filtered_play_results = [play for play in play_results if int(play[2]) not in exclude]
+
+            for play in filtered_play_results:
+                device_id, sid, _, avatar, score = play
+                username, title = None, None
+
+                if sid:  # Registered user
+                    sid = int(sid)
+                    if sid in user_results:
+                        username = user_results[sid]["username"]
+                        device_id = user_results[sid]["device_id"]
+                else:  # Guest
+                    username = f"Guest({device_id[-6:]})"
+
+                # title is device-specific
+                title = device_results.get(device_id, {}).get("title", "default_title")
+
+                if username in player_scores:
+                    player_scores[username]["score"] += int(score)
+                    player_scores[username]["avatar"] = avatar  # But avatar is based on latest play submission
+                    player_scores[username]["title"] = title
+                else:
+                    player_scores[username] = {"score": int(score), "avatar": avatar, "title": title}
+
+            sorted_players = sorted(player_scores.items(), key=lambda x: x[1]["score"], reverse=True)
+
+            username = cur_user[1] if cur_user else f"Guest({device_id[-6:]})"
+
+            player_rank = None
+            user_score = 0
+            avatar = "1"
+            title = "1"
+
+            for rank, (player_name, data) in enumerate(sorted_players, start=1):
+                if player_name == username:
+                    player_rank = rank
+                    user_score = data["score"]
+                    avatar = data["avatar"]
+                    title = data["title"]
+                    break
+
+            if player_rank is None:
+                device_data = next((device for device in device_results if device["device_id"] == device_id), None)
+                if device_data:
+                    avatar = device_data["avatar"]
+                    title = device_data["title"]
+            # Generate player element
+            html += f"""
+            <div class="player-element">
+                <span class="rank">You<br>{"#" + str(player_rank) if player_rank else "N/A"}</span>
+                <img src="/files/image/icon/avatar/{avatar}.png" class="avatar" alt="Player Avatar">
+                <div class="player-info">
+                    <div class="name">{username}</div>
+                    <img src="/files/image/title/{title}.png" class="title" alt="Player Title">
+                </div>
+                <div class="player-score">{user_score}</div>
             </div>
-            <div class="leaderboard-score">{score}</div>
-        </div>
+            """
+
+            html += """
+            <div class="leaderboard-container">
+            """
+            # Loop leaderboard
+            for rank, (username, data) in enumerate(sorted_players, start=1):
+                html += f"""
+                <div class="leaderboard-player">
+                    <div class="rank">#{rank}</div>
+                    <img class="avatar" src="/files/image/icon/avatar/{data['avatar']}.png" alt="Avatar">
+                    <div class="leaderboard-info">
+                        <div class="name">{username}</div>
+                        <div class="title"><img src="/files/image/title/{data['title']}.png" alt="Title"></div>
+                    </div>
+                    <div class="leaderboard-score">{data['score']}</div>
+                </div>
+                """
+
+        else:
+            with sqlite3.connect(DATABASE) as connection:
+                cursor = connection.cursor()
+                query = "SELECT * FROM result WHERE id = ? AND mode = ? ORDER BY CAST(score AS INTEGER) DESC"
+                cursor.execute(query, (song_id, mode))
+                play_results = cursor.fetchall()
+
+                query = "SELECT * FROM user WHERE device_id = ?"
+                cursor.execute(query, (device_id,))
+                user_result = cursor.fetchone()
+
+                query = "SELECT * FROM daily_reward WHERE device_id = ?"
+                cursor.execute(query, (device_id,))
+                device_result = cursor.fetchone()
+
+            user_id = user_result[0] if user_result else None
+            username = user_result[1] if user_result else f"Guest({device_id[-6:]})"
+            play_record = None
+
+            # Check if the user's device ID is in play_results
+            if user_id:
+                play_record = next((record for record in play_results if int(record[3]) == user_id), None)
+
+            if not play_record:
+                play_record = next((record for record in play_results if record[1] == device_id and record[3] is None), None)
+
+            player_rank = None
+            avatar_index = str(play_record[7]) if play_record else "1"
+            user_score = play_record[8] if play_record else 0
+            for rank, result in enumerate(play_results, start=1):
+                if user_result and int(result[3]) == user_id:
+                    player_rank = rank
+                    break
+                elif result[1] == device_id and result[3] is None:
+                    player_rank = rank
+                    break
+
+            # Generate player element
+            html += f"""
+            <div class="player-element">
+                <span class="rank">You<br>{"#" + str(player_rank) if player_rank else "N/A"}</span>
+                <img src="/files/image/icon/avatar/{avatar_index}.png" class="avatar" alt="Player Avatar">
+                <div class="player-info">
+                    <div class="name">{username}</div>
+                    <img src="/files/image/title/{device_result[9]}.png" class="title" alt="Player Title">
+                </div>
+                <div class="player-score">{user_score}</div>
+            </div>
+            """
+            # main leaderboard
+            html += """
+            <div class="leaderboard-container">
+            """
+
+            for rank, record in enumerate(play_results, start=1):
+                username = f"Guest({record[1][-6:]})"
+                device_info = None
+                if record[3]:
+                    cursor.execute("SELECT username FROM user WHERE id = ?", (record[3],))
+                    user_data = cursor.fetchone()
+                    if user_data:
+                        username = user_data[0]
+                    cursor.execute("SELECT title FROM daily_reward WHERE device_id = ?", (record[1],))
+                    device_title = cursor.fetchone()
+                    if device_title:
+                        device_info = device_title[0]
+
+                avatar_id = record[7] if record[7] else 1
+                avatar_url = f"/files/image/icon/avatar/{avatar_id}.png"
+
+                score = record[8]
+
+                html += f"""
+                <div class="leaderboard-player">
+                    <div class="rank">#{rank}</div>
+                    <img class="avatar" src="{avatar_url}" alt="Avatar">
+                    <div class="leaderboard-info">
+                        <div class="name">{username}</div>
+                        <div class="title"><img src="/files/image/title/{device_info}.png" alt="Title"></div>
+                    </div>
+                    <div class="leaderboard-score">{score}</div>
+                </div>
+                """
+
+        html += "</div>"
+
+        encrypted_mass = encryptAES(("vid=" + device_id + "&dummy=").encode("utf-8"))
+        html += f"""
+        <a href="/ranking.php?{encrypted_mass}" class="bt_bg01_ifedup" style="margin: 20px auto; display: block; text-align: center;">
+            Go Back
+        </a>
         """
 
-    html += "</div>"
-    encrypted_mass = encryptAES(("vid=" + device_id + "&dummy=").encode("utf-8"))
-    html += f"""
-    <a href="/ranking.php?{encrypted_mass}" class="bt_bg01_ifedup" style="margin: 20px auto; display: block; text-align: center;">
-        Go Back
-    </a>
-    """
-
-    with open(f"files/ranking.html", "r", encoding="utf-8") as file:
-        html_content = file.read().format(text=html)
-        return html_content
+        with open(f"files/ranking.html", "r", encoding="utf-8") as file:
+            html_content = file.read().format(text=html)
+            return html_content
+    else:
+        return jsonify({"error": "Access denied"}), 403
 
 @app.route('/status.php/', methods=['GET'])
 def status():
+    should_serve = True
     global decrypted_fields
-    device_id = decrypted_fields[b'vid'][0].decode()
-    set_title = int(decrypted_fields[b'set_title'][0].decode()) if b'set_title' in decrypted_fields else None
-    page_id = int(decrypted_fields[b'page_id'][0].decode()) if b'page_id' in decrypted_fields else 0
+    if app.config.get('AUTHORIZATION_NEEDED', False):
+        should_serve = check_whitelist(decrypted_fields) and check_blacklist(decrypted_fields)
+    if should_serve:
+        device_id = decrypted_fields[b'vid'][0].decode()
+        set_title = int(decrypted_fields[b'set_title'][0].decode()) if b'set_title' in decrypted_fields else None
+        page_id = int(decrypted_fields[b'page_id'][0].decode()) if b'page_id' in decrypted_fields else 0
 
-    if (set_title):
+        if (set_title):
+            with sqlite3.connect(DATABASE) as connection:
+                cursor = connection.cursor()
+                update_query = """
+                    UPDATE daily_reward SET title = ? WHERE device_id = ?
+                """
+                cursor.execute(update_query, (str(set_title), device_id))
+                connection.commit()
+
+        html = ""
+
         with sqlite3.connect(DATABASE) as connection:
             cursor = connection.cursor()
-            update_query = """
-                UPDATE daily_reward SET title = ? WHERE device_id = ?
-            """
-            cursor.execute(update_query, (str(set_title), device_id))
-            connection.commit()
 
-    html = ""
+            query = "SELECT * FROM daily_reward WHERE device_id = ?"
+            cursor.execute(query, (device_id,))
+            user_data = cursor.fetchone()
+            user_name = user_data[1]
 
-    with sqlite3.connect(DATABASE) as connection:
-        cursor = connection.cursor()
-
-        query = "SELECT * FROM daily_reward WHERE device_id = ?"
-        cursor.execute(query, (device_id,))
-        user_data = cursor.fetchone()
-        user_name = user_data[1]
-
-        query = "SELECT * FROM user WHERE device_id = ?"
-        cursor.execute(query, (user_data[1],))
-        user_result = cursor.fetchone()
-        if user_result:
-            user_name = user_result[1]
-        
-        if user_data:
-            player_element = f"""
-                <div class="player-element">
-                    <img src="/files/image/icon/avatar/{user_data[10]}.png" class="avatar" alt="Player Avatar">
-                    <div class="player-info">
-                        <div class="name">{user_name}</div>
-                        <img src="/files/image/title/{user_data[9]}.png" class="title" alt="Player Title">
+            query = "SELECT username FROM user WHERE device_id = ?"
+            cursor.execute(query, (user_data[1],))
+            user_result = cursor.fetchone()
+            if user_result:
+                user_name = user_result[0]
+            
+            if user_data:
+                player_element = f"""
+                    <div class="player-element">
+                        <img src="/files/image/icon/avatar/{user_data[10]}.png" class="avatar" alt="Player Avatar">
+                        <div class="player-info">
+                            <div class="name">{user_name}</div>
+                            <img src="/files/image/title/{user_data[9]}.png" class="title" alt="Player Title">
+                        </div>
+                        <div class="player-score">Level {user_data[8]}</div>
                     </div>
-                    <div class="player-score">Level {user_data[8]}</div>
-                </div>
-            """
-            html += player_element
+                """
+                html += player_element
 
-    page_name = ["Special", "Normal", "Master", "God"]
+        page_name = ["Special", "Normal", "Master", "God"]
 
-    buttons_html = '<div class="button-row">'
+        buttons_html = '<div class="button-row">'
 
-    for i in range(0, 4):
-        if i == page_id:
-            # Current button
-            buttons_html += f"""
-                <div class="bt_bg01_ac" >
-                    {page_name[i]}
-                </div>
-            """
-        else:
-            encrypted_mass = encryptAES(f"vid={device_id}&page_id={i}&dummy=".encode("utf-8"))
-            buttons_html += f"""
-                <a href="/status.php?{encrypted_mass}" class="bt_bg01" >
-                    {page_name[i]}
-                </a>
-            """
-    buttons_html += '</div>'
-    html += f"<div style='text-align: center; margin-top: 20px;'>{buttons_html}</div>"
+        for i in range(0, 4):
+            if i == page_id:
+                # Current button
+                buttons_html += f"""
+                    <div class="bt_bg01_ac" >
+                        {page_name[i]}
+                    </div>
+                """
+            else:
+                encrypted_mass = encryptAES(f"vid={device_id}&page_id={i}&dummy=".encode("utf-8"))
+                buttons_html += f"""
+                    <a href="/status.php?{encrypted_mass}" class="bt_bg01" >
+                        {page_name[i]}
+                    </a>
+                """
+        buttons_html += '</div>'
+        html += f"<div style='text-align: center; margin-top: 20px;'>{buttons_html}</div>"
 
-    selected_titles = title_lists.get(page_id, [])
+        selected_titles = title_lists.get(page_id, [])
 
-    titles_html = '<div class="title-list">'
+        titles_html = '<div class="title-list">'
 
-    for index, num in enumerate(selected_titles):
-        if index % 2 == 0:
-            if index != 0:
-                titles_html += '</div>'
-            titles_html += '<div class="title-row">'
+        for index, num in enumerate(selected_titles):
+            if index % 2 == 0:
+                if index != 0:
+                    titles_html += '</div>'
+                titles_html += '<div class="title-row">'
 
-        if num == int(user_data[9]):
-            titles_html += f"""
-                <img src="/files/image/title/{num}.png" alt="Title {num}" class="title-image-selected">
-            """
-        else:
-            encrypted_mass = encryptAES(f"vid={device_id}&title_id={num}&page_id={page_id}&dummy=".encode("utf-8"))
-            titles_html += f"""
-                <a href="/set_title.php?{encrypted_mass}" class="title-link">
-                    <img src="/files/image/title/{num}.png" alt="Title {num}" class="title-image">
-                </a>
-            """
+            if num == int(user_data[9]):
+                titles_html += f"""
+                    <img src="/files/image/title/{num}.png" alt="Title {num}" class="title-image-selected">
+                """
+            else:
+                encrypted_mass = encryptAES(f"vid={device_id}&title_id={num}&page_id={page_id}&dummy=".encode("utf-8"))
+                titles_html += f"""
+                    <a href="/set_title.php?{encrypted_mass}" class="title-link">
+                        <img src="/files/image/title/{num}.png" alt="Title {num}" class="title-image">
+                    </a>
+                """
 
-    titles_html += '</div></div>'
+        titles_html += '</div></div>'
 
-    html += titles_html
+        html += titles_html
 
-    with open(f"files/status.html", "r", encoding="utf-8") as file:
-        html_content = file.read().format(text=html)
-        return html_content
+        with open(f"files/status.html", "r", encoding="utf-8") as file:
+            html_content = file.read().format(text=html)
+            return html_content
+    else:
+        return jsonify({"error": "Access denied"}), 403
 
 @app.route('/set_title.php/', methods=['GET'])
 def set_title():
+    should_serve = True
     global decrypted_fields
-    device_id = decrypted_fields[b'vid'][0].decode()
-    page_id = decrypted_fields[b'page_id'][0].decode()
-    title_id = decrypted_fields[b'title_id'][0].decode()
-    current_title = 1
+    if app.config.get('AUTHORIZATION_NEEDED', False):
+        should_serve = check_whitelist(decrypted_fields) and check_blacklist(decrypted_fields)
+    if should_serve:
+        device_id = decrypted_fields[b'vid'][0].decode()
+        page_id = decrypted_fields[b'page_id'][0].decode()
+        title_id = decrypted_fields[b'title_id'][0].decode()
+        current_title = 1
 
-    html = ""
+        html = ""
 
-    with sqlite3.connect(DATABASE) as connection:
-        cursor = connection.cursor()
-        query = "SELECT title FROM daily_reward WHERE device_id = ?"
-        cursor.execute(query, (device_id,))
-        user_data = cursor.fetchone()
-        if user_data:
-            current_title = user_data[0]
+        with sqlite3.connect(DATABASE) as connection:
+            cursor = connection.cursor()
+            query = "SELECT title FROM daily_reward WHERE device_id = ?"
+            cursor.execute(query, (device_id,))
+            user_data = cursor.fetchone()
+            if user_data:
+                current_title = user_data[0]
 
-    confirm_url = encryptAES(
-        f"vid={device_id}&page_id={page_id}&set_title={title_id}&dummy=".encode("utf-8")
-    )
-    go_back_url = encryptAES(
-        f"vid={device_id}&page_id={page_id}&dummy=".encode("utf-8")
-    )
+        confirm_url = encryptAES(
+            f"vid={device_id}&page_id={page_id}&set_title={title_id}&dummy=".encode("utf-8")
+        )
+        go_back_url = encryptAES(
+            f"vid={device_id}&page_id={page_id}&dummy=".encode("utf-8")
+        )
 
-    html += f"""
-        <p>Would you like to change your title?<br>Current Title:</p>
-        <img src="/files/image/title/{current_title}.png" alt="Current Title" class="title-image">
-        <p>New Title:</p>
-        <img src="/files/image/title/{title_id}.png" alt="New Title" class="title-image">
-        <div class="button-container">
-            <a href="/status.php?{confirm_url}" class="bt_bg01">Confirm</a>
-            <a href="/status.php?{go_back_url}" class="bt_bg01">Go back</a>
-        </div>
-    """
-
-    return inform_page(html, 1)
-
-@app.route('/mission.php/', methods=['GET'])
-def mission():
-    global exp_unlocked_songs, song_list
-
-    html = f"""<div class="f90 a_center pt50" >Play Music to level up and unlock free songs!<br>Songs can only be unlocked when you play online.</div><div class='mission-list'>"""
-
-    # Render the mission list
-    for song in exp_unlocked_songs:
-        song_id = song["id"]
-        level_required = song["lvl"]
-        song_name = song_list[song_id]["name_en"] if song_id < len(song_list) else "Unknown Song"
-        
         html += f"""
-            <div class="mission-row">
-                <div class="mission-level">Level {level_required}</div>
-                <div class="mission-song">{song_name}</div>
+            <p>Would you like to change your title?<br>Current Title:</p>
+            <img src="/files/image/title/{current_title}.png" alt="Current Title" class="title-image">
+            <p>New Title:</p>
+            <img src="/files/image/title/{title_id}.png" alt="New Title" class="title-image">
+            <div class="button-container">
+                <a href="/status.php?{confirm_url}" class="bt_bg01">Confirm</a>
+                <a href="/status.php?{go_back_url}" class="bt_bg01">Go back</a>
             </div>
         """
 
-    html += "</div>"
+        return inform_page(html, 1)
+    else:
+        return jsonify({"error": "Access denied"}), 403
 
-    with open(f"files/mission.html", "r", encoding="utf-8") as file:
-        html_content = file.read().format(text=html)
-        return html_content
+@app.route('/mission.php/', methods=['GET'])
+def mission():
+    should_serve = True
+    global decrypted_fields
+    if app.config.get('AUTHORIZATION_NEEDED', False):
+        should_serve = check_whitelist(decrypted_fields) and check_blacklist(decrypted_fields)
+    if should_serve:
+        global exp_unlocked_songs, song_list
+
+        html = f"""<div class="f90 a_center pt50" >Play Music to level up and unlock free songs!<br>Songs can only be unlocked when you play online.</div><div class='mission-list'>"""
+
+        # Render the mission list
+        for song in exp_unlocked_songs:
+            song_id = song["id"]
+            level_required = song["lvl"]
+            song_name = song_list[song_id]["name_en"] if song_id < len(song_list) else "Unknown Song"
+            
+            html += f"""
+                <div class="mission-row">
+                    <div class="mission-level">Level {level_required}</div>
+                    <div class="mission-song">{song_name}</div>
+                </div>
+            """
+
+        html += "</div>"
+
+        with open(f"files/mission.html", "r", encoding="utf-8") as file:
+            html_content = file.read().format(text=html)
+            return html_content
+    else:
+        return jsonify({"error": "Access denied"}), 403
 
 @app.route('/name_reset/', methods=['POST'])
 def name_reset():

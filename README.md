@@ -52,17 +52,26 @@ Warning: Do not put personal files under the folders in the private server direc
 
 Server download: Simply download the project as zip.
 
-Asset download: Will be made available after IAP sales end (1/31/2025)
+Asset download: [MEGA](https://mega.nz/folder/frxWHRrQ#v6tth7Zo5rrj9foDhGYCBA)
 
-You need to get the CDN files from the game Server. I will not include this within this project as it is copyrighted material, and because it is quite sizable (3.7GB+ for Android only, double if including iOS). I will also not provide the script I used to scrape the website, as I don't want the developer to face a massive bill. If the game's server shuts down in the future, this might change. I will only provide the directory hierarchy to show you what is needed.
+Download common.zip and a platform of your choosing. Unzip them to the private server directory.
 
-If you want to use the official client, you would need some proxying software to redirect the traffic to your server. If you are okay with modifying the client, you can connect directly and please read the next tutorial。
+The included installation package has been modified to facilitate easier connection. If you'd prefer the official installation package, please use the "Instruction for Use (for official client)". Note that it requires more setup.
+
+If you don't mind tweaking some files (and be able to connect directly to the server), grab the included installation files and follow "Instruction for Use (For modified client)".
+
+
 
 服务器下载：将此repo以zip形式下载。
 
-资源下载：将在应用内购买关闭后（2025年1月31日）放出。
+资源下载：[MEGA](https://mega.nz/folder/frxWHRrQ#v6tth7Zo5rrj9foDhGYCBA)
 
-你需要从游戏服务器获取 CDN 文件。我不会将其包含在该项目中，因为它受版权保护，而且很大（安卓3.7GB+，ios加倍）。不会提供用来抓取网站的脚本，因为我不希望开发者收到巨额账单。如果游戏的服务器将来关闭，情况可能会改变。我只会提供目录层次结构来向您展示需要哪些文件。
+下载 common.zip 和您设备的平台。将所有文件解压到服务器根目录。
+
+如果你就想用官方客户端，则需要一些代理软件来将流量重定向到服务器，操作会相对复杂。请使用“原版安装包的使用说明”。
+
+如果你不介意修改客户端，你可以直接连接，请使用“改版安装包的使用说明”。
+
 
 <details>
 <summary>File Structure 文件结构</summary>
@@ -99,10 +108,6 @@ server/
 ├─ config.py
 
 </details>
-
-如果你想用官方的客户端和数据包，就需要用代理软件。如果你可以对安装包和数据包进行更改，就可以和私服直连，请看下一个教程。
-
-
 
 ## Instruction for Use (for official client) 原版安装包的使用说明
 

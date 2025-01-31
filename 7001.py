@@ -87,6 +87,7 @@ stage_price = 1
 avatar_price = 1
 item_price = 2
 coin_reward = 1
+start_coin = 10
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -379,11 +380,11 @@ def start():
                 if (result):
                     my_avatar = set(json.loads(result[0])) if result[0] else start_avatars
                     my_stage = set(json.loads(result[1])) if result[1] else start_stages
-                    coin = result[2] if result[2] is not None else 10
+                    coin = result[2] if result[2] is not None else start_coin
                 else:
                     my_avatar = start_avatars
                     my_stage = start_stages
-                    coin = 10
+                    coin = start_coin
 
                 coin_elem = ET.Element("my_coin")
                 coin_elem.text = str(coin)
@@ -462,12 +463,12 @@ def sync():
             if (result):
                 my_avatar = set(json.loads(result[0])) if result[0] else start_avatars
                 my_stage = set(json.loads(result[1])) if result[1] else start_stages
-                coin = result[2] if result[2] is not None else 10
+                coin = result[2] if result[2] is not None else start_coin
                 items = json.loads(result[3]) if result[3] else []
             else:
                 my_avatar = start_avatars
                 my_stage = start_stages
-                coin = 10
+                coin = start_coin
                 items = []
             coin_elem = ET.Element("my_coin")
             coin_elem.text = str(coin)
@@ -581,7 +582,7 @@ def bonus():
             cursor.execute("""
                 INSERT INTO daily_reward (device_id, day, timestamp, my_avatar, my_stage, coin, item, lvl, title, avatar)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            """, (device_id, 1, formatted_time, json.dumps(start_avatars), json.dumps(start_stages), 10, "[]", 1, 1, 1))
+            """, (device_id, 1, formatted_time, json.dumps(start_avatars), json.dumps(start_stages), start_coin, "[]", 1, 1, 1))
             xml_response = "<response><code>0</code></response>"
             # return 0 obj
 
@@ -607,7 +608,7 @@ def result():
         row = cursor.fetchone()
 
         if row:
-            current_coin = row[0] if row[0] else 10
+            current_coin = row[0] if row[0] else start_coin
             updated_coin = current_coin + coin_reward
             cursor.execute("UPDATE daily_reward SET coin = ? WHERE device_id = ?", (updated_coin, device_id))
 

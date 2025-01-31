@@ -15,7 +15,7 @@ class Config:
     '''
     MODEL = '202404221226'
     TUNEFILE = '202404221247'
-    SKIN = '202404191147'
+    SKIN = '202404191148'
     
     '''
     Only the whitelisted playerID can use the service. Blacklist has priority over whitelist.

@@ -1,0 +1,8 @@
+Start 2 byte header: amount of levels (299)
+	v10[7] = RomReadIntBig(); // Amount of xp required
+        v10[8] = (unsigned __int8)RomReadUByte(); // Award type: 01: Avatar 03: Skin 0A: Item
+        v10[9] = (unsigned __int8)RomReadUByte(); // Award ID.
+        v10[10] = RomReadIntBig(); // Most times 0, sometimes 2, 3, but no effect
+        v10[11] = (unsigned __int8)RomReadUByte(); // Always 0
+        v10[12] = (unsigned __int8)RomReadUByte(); // Always 0
+        v10[13] = RomReadIntBig(); // Always 0

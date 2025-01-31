@@ -1,0 +1,13 @@
+Header 2 byte, amount of objects.
+
+*(_QWORD *)(v11 - 8) = RomReadString(); //Name
+*(_DWORD *)v11 = (unsigned __int8)RomReadUByte(); //Image grid ID
+*(_DWORD *)(v11 + 4) = RomReadIntBig(); // Autoincrementing, but has gaps
+*(_QWORD *)(v11 + 8) = RomReadString(); // skin folder in skin.pak
+*(_DWORD *)(v11 + 16) = (unsigned __int8)RomReadUByte();
+*(_DWORD *)(v11 + 20) = RomReadIntBig();
+*(_DWORD *)(v11 - 32) = (unsigned __int8)RomReadUByte();
+*(_DWORD *)(v11 - 28) = RomReadIntBig();
+*(_DWORD *)(v11 - 24) = (unsigned __int8)RomReadUByte();
+*(_DWORD *)(v11 - 20) = RomReadIntBig();
+*(_DWORD *)(v11 - 16) = (unsigned __int8)RomReadUByte(); //Always 00

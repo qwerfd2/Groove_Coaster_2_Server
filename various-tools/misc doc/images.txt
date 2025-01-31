@@ -1,0 +1,28 @@
+0 BootData related - OBB
+1 BootData related - OBB
+2 thumbs_1 - tuneFile
+3 Avatar_1 - tuneFile
+4 items - OBB
+5 Skin - tuneFile
+6 Tutorial - OBB
+7 Tutorial - OBB
+8 Result-related - OBB
+9 Splash screen - OBB
+10 Splash screen - OBB
+11 PlayScene popups - OBB
+12 Touch anim - OBB
+13 EMPTY?
+14 Logo - OBB
+15 Splash screen - OBB
+16 special event - tuneFile
+17 thumbs_2 - tuneFile
+18 Tutorial - OBB
+19 NexTone - OBB
+20 Avatar_2 - tuneFile
+21 Splash screen - OBB
+22 thumbs_3 - tuneFile
+23 thumbs_4 - tuneFile (not there yet, but addable)
+
+//More avatar support?
+
+Blank image will default to red

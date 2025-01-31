@@ -1,0 +1,8 @@
+This file is not really used? As achievement/mission is server-sided.
+
+Start 2 byte is amount of achievements.
+        *(_QWORD *)v10 = RomReadString(); Name_en
+        *(_QWORD *)(v10 + 8) = RomReadString(); Name_ja
+        *(_DWORD *)(v10 + 16) = (unsigned __int8)RomReadUByte(); enabled
+        *(_DWORD *)(v10 + 20) = RomReadIntBig(); Amount_needed
+        *(_QWORD *)(v10 + 24) = RomReadString(); ID

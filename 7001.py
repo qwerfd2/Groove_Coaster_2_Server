@@ -1165,19 +1165,19 @@ def ranking_detail():
             filtered_play_results = [play for play in play_results if int(play[2]) not in exclude]
 
             for play in filtered_play_results:
-                device_id, sid, _, avatar, score = play
+                did, sid, _, avatar, score = play
                 username, title = None, None
 
                 if sid:  # Registered user
                     sid = int(sid)
                     if sid in user_results:
                         username = user_results[sid]["username"]
-                        device_id = user_results[sid]["device_id"]
+                        did = user_results[sid]["device_id"]
                 else:  # Guest
-                    username = f"Guest({device_id[-6:]})"
+                    username = f"Guest({did[-6:]})"
 
                 # title is device-specific
-                title = device_results.get(device_id, {}).get("title", "default_title")
+                title = device_results.get(did, {}).get("title", "1")
 
                 if username in player_scores:
                     player_scores[username]["score"] += int(score)
@@ -1204,7 +1204,7 @@ def ranking_detail():
                     break
 
             if player_rank is None:
-                device_data = next((device for device in device_results if device["device_id"] == device_id), None)
+                device_data = next((device for device in device_results if device[1] == device_id), None)
                 if device_data:
                     avatar = device_data["avatar"]
                     title = device_data["title"]
@@ -1304,6 +1304,8 @@ def ranking_detail():
                     device_title = cursor.fetchone()
                     if device_title:
                         device_info = device_title[0]
+                    else:
+                        device_info = "1"
 
                 avatar_id = record[7] if record[7] else 1
                 avatar_url = f"/files/image/icon/avatar/{avatar_id}.png"

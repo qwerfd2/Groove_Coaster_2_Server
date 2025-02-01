@@ -1,0 +1,1 @@
+This converts all dds under its directory to "output/...png".

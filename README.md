@@ -52,7 +52,7 @@ Warning: Do not put personal files under the folders in the private server direc
 
 Server download: Simply download the project as zip.
 
-Asset download: [MEGA](https://mega.nz/folder/frxWHRrQ#v6tth7Zo5rrj9foDhGYCBA)
+Asset download: [MEGA](https://mega.nz/folder/frxWHRrQ#v6tth7Zo5rrj9foDhGYCBA) [Baidu(code: aaaa)](https://pan.baidu.com/s/1YVFfKBq1ULOgCkdrVQhFFg)
 
 If you'd like to upload it somewhere else and contribute the link, please contact #AnTcfgss or QQ 3421587952， thanks!
 
@@ -66,7 +66,7 @@ If you don't mind tweaking some files (and be able to connect directly to the se
 
 服务器下载：将此repo以zip形式下载。
 
-资源下载：[MEGA](https://mega.nz/folder/frxWHRrQ#v6tth7Zo5rrj9foDhGYCBA)
+资源下载：[MEGA](https://mega.nz/folder/frxWHRrQ#v6tth7Zo5rrj9foDhGYCBA) [Baidu(code: aaaa)](https://pan.baidu.com/s/1YVFfKBq1ULOgCkdrVQhFFg)
 
 如果你想将资源备份到别的网盘并贡献链接，请联系#AnTcfgss or QQ 3421587952，感谢！
 

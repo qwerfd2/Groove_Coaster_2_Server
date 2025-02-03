@@ -600,17 +600,6 @@ def result():
         tree = ET.parse(file_path)
         root = tree.getroot()
 
-        # Increment coin for user
-        with sqlite3.connect(DATABASE) as connection:
-            cursor = connection.cursor()
-            cursor.execute("SELECT coin FROM daily_reward WHERE device_id = ?", (device_id,))
-            row = cursor.fetchone()
-
-            if row:
-                current_coin = row[0] if row[0] else start_coin
-                updated_coin = current_coin + coin_reward
-                cursor.execute("UPDATE daily_reward SET coin = ? WHERE device_id = ?", (updated_coin, device_id))
-
         # Save the record
         vid = decrypted_fields[b'vid'][0].decode()
         stts = decrypted_fields[b'stts'][0].decode()
@@ -633,51 +622,64 @@ def result():
         do_update_vid = False
         last_row_id = 0
 
-        #parse whether or not the device is logged in to taito ID
-
-        sid = ""
-        with sqlite3.connect(DATABASE) as connection:
-            cursor = connection.cursor()
-            select_command = """SELECT id FROM user WHERE device_id = ?;"""
-            cursor.execute(select_command, (vid,))
-            result = cursor.fetchone()  # Fetch one row from the result
-            cursor.close()
-
-            # Check if a row was found
-            if result:
-                sid = result[0]
-
-
-        if sid != "":
+        if (int(id) not in range(616, 1000) or int(mode) not in range(10, 14)):
+            # Increment coin for user, if track is not 4max dlx pack mobile difficulty.
             with sqlite3.connect(DATABASE) as connection:
                 cursor = connection.cursor()
-                check_command = """
-                SELECT rid, score FROM result WHERE id = ? and mode = ? and sid = ? ORDER BY CAST(score AS INTEGER) DESC;
-                """
-                cursor.execute(check_command, (id, mode, sid))
-                records = cursor.fetchall()
-                cursor.close()
-                if len(records) > 0:
-                    last_row_id = records[0][0]
-                    if (score > records[0][1]):
-                        do_update_sid = True
-                else:
-                    do_insert = True
-        else:
+                cursor.execute("SELECT coin FROM daily_reward WHERE device_id = ?", (device_id,))
+                row = cursor.fetchone()
+
+                if row:
+                    current_coin = row[0] if row[0] else start_coin
+                    updated_coin = current_coin + coin_reward
+                    cursor.execute("UPDATE daily_reward SET coin = ? WHERE device_id = ?", (updated_coin, device_id))
+        
+            #Try to add play record to result table (don't add if playing placeholder songs)
+            #parse whether or not the device is logged in to taito ID
+
+            sid = ""
             with sqlite3.connect(DATABASE) as connection:
                 cursor = connection.cursor()
-                check_command = """
-                SELECT rid, score FROM result WHERE id = ? and mode = ? and sid = ? and vid = ? ORDER BY CAST(score AS INTEGER) DESC;
-                """
-                cursor.execute(check_command, (id, mode, "", vid))
-                records = cursor.fetchall()
+                select_command = """SELECT id FROM user WHERE device_id = ?;"""
+                cursor.execute(select_command, (vid,))
+                result = cursor.fetchone()  # Fetch one row from the result
                 cursor.close()
-                if len(records) > 0:
-                    last_row_id = records[0][0]
-                    if (score > records[0][1]):
-                        do_update_vid = True
-                else:
-                    do_insert = True 
+
+                # Check if a row was found
+                if result:
+                    sid = result[0]
+
+
+            if sid != "":
+                with sqlite3.connect(DATABASE) as connection:
+                    cursor = connection.cursor()
+                    check_command = """
+                    SELECT rid, score FROM result WHERE id = ? and mode = ? and sid = ? ORDER BY CAST(score AS INTEGER) DESC;
+                    """
+                    cursor.execute(check_command, (id, mode, sid))
+                    records = cursor.fetchall()
+                    cursor.close()
+                    if len(records) > 0:
+                        last_row_id = records[0][0]
+                        if (score > records[0][1]):
+                            do_update_sid = True
+                    else:
+                        do_insert = True
+            else:
+                with sqlite3.connect(DATABASE) as connection:
+                    cursor = connection.cursor()
+                    check_command = """
+                    SELECT rid, score FROM result WHERE id = ? and mode = ? and sid = ? and vid = ? ORDER BY CAST(score AS INTEGER) DESC;
+                    """
+                    cursor.execute(check_command, (id, mode, "", vid))
+                    records = cursor.fetchall()
+                    cursor.close()
+                    if len(records) > 0:
+                        last_row_id = records[0][0]
+                        if (score > records[0][1]):
+                            do_update_vid = True
+                    else:
+                        do_insert = True 
 
         
         if do_insert:
@@ -800,6 +802,13 @@ def web_shop():
         coin = result[2] if result[2] else 0
 
         if (cnt_type == "1"):
+            if (700 not in my_stage and os.path.isfile('./files/dlc_4max.html')):
+                buttons_html += """
+                    <a href="wwic://web_shop_detail?&cnt_type=1&cnt_id=-1">
+                        <img src="/files/web/dlc_4max.jpg" style="width: 84%; margin-bottom: 20px; margin-top: -100px;" />
+                    </a><br>
+                """
+            
             for idx, i in enumerate(range(100, 616)):
                 if i not in my_stage:
                     if i not in exclude_stage_exp:
@@ -872,25 +881,26 @@ def web_shop_detail():
         html = ""
 
         if (cnt_type == "1"):
-            song = song_list[cnt_id]
-            difficulty_levels = "/".join(map(str, song.get("difficulty_levels", [])))
-            song_stage_price = stage_price
-            if (len(song["difficulty_levels"]) == 6):
-                song_stage_price = stage_price * 2
-            html = f"""
-            <div class="image-container">
-                <img src="/files/image/icon/shop/{cnt_id}.jpg" alt="Item Image" style="width: 180px; height: 180px;" />
-            </div>
-            <p>Would you like to purchase this song?</p>
-            <div>
-                <p>{song.get("name_en")} - {song.get("author_en")}</p>
-                <p>Difficulty Levels: {difficulty_levels}</p>
-            </div>
-            <div>
-                <img src="/files/web/coin_icon.png" class="coin-icon" style="width: 40px; height: 40px;" alt="Coin Icon" />
-                <span style="color: #FFFFFF; font-size: 44px; font-family: Hiragino Kaku Gothic ProN, sans-serif;">{song_stage_price}</span>
-            </div>
-            """
+            if (cnt_id != -1):
+                song = song_list[cnt_id]
+                difficulty_levels = "/".join(map(str, song.get("difficulty_levels", [])))
+                song_stage_price = stage_price
+                if (len(song["difficulty_levels"]) == 6):
+                    song_stage_price = stage_price * 2
+                html = f"""
+                <div class="image-container">
+                    <img src="/files/image/icon/shop/{cnt_id}.jpg" alt="Item Image" style="width: 180px; height: 180px;" />
+                </div>
+                <p>Would you like to purchase this song?</p>
+                <div>
+                    <p>{song.get("name_en")} - {song.get("author_en")}</p>
+                    <p>Difficulty Levels: {difficulty_levels}</p>
+                </div>
+                <div>
+                    <img src="/files/web/coin_icon.png" class="coin-icon" style="width: 40px; height: 40px;" alt="Coin Icon" />
+                    <span style="color: #FFFFFF; font-size: 44px; font-family: Hiragino Kaku Gothic ProN, sans-serif;">{song_stage_price}</span>
+                </div>
+                """
 
         elif (cnt_type == "2"):
             avatar = next((item for item in avatar_list if item.get("id") == cnt_id), None)
@@ -932,16 +942,19 @@ def web_shop_detail():
             else:
                 html = "<p>Item not found.</p>"
 
+        if (cnt_type == "1" and cnt_id == -1):
+            source_html = f"files/dlc_4max.html"
+        else:
+            source_html = f"files/web_shop_detail.html"
+            html += f"""
+                <br>
+                <div class="buttons" style="margin-top: 20px;">
+                    <a href="wwic://web_purchase_coin?cnt_type={cnt_type}&cnt_id={cnt_id}&num=1" class="bt_bg01" >Buy</a><br>
+                    <a href="wwic://web_shop?cnt_type={cnt_type}" class="bt_bg01" >Go Back</a>
+                </div>
+            """
 
-        html += f"""
-            <br>
-            <div class="buttons" style="margin-top: 20px;">
-                <a href="wwic://web_purchase_coin?cnt_type={cnt_type}&cnt_id={cnt_id}&num=1" class="bt_bg01" >Buy</a><br>
-                <a href="wwic://web_shop?cnt_type={cnt_type}" class="bt_bg01" >Go Back</a>
-            </div>
-        """
-
-        with open(f"files/web_shop_detail.html", "r", encoding="utf-8") as file:
+        with open(source_html, "r", encoding="utf-8") as file:
             html_content = file.read().format(text=html, coin=coin)
             return html_content
     else:
@@ -976,20 +989,34 @@ def buy_by_coin():
 
             # Process based on cnt_type
             if cnt_type == "1":
-                song_stage_price = stage_price
-                if (len(song_list[cnt_id]["difficulty_levels"]) == 6):
-                    song_stage_price = song_stage_price * 2
+                if cnt_id == -1:
+                    song_stage_price = 300
+                    if coin < song_stage_price:
+                        return fail_url
+                    
+                    stages = set(json.loads(my_stage)) if my_stage else set()
 
-                if coin < song_stage_price:
-                    return fail_url
-                
-                stages = set(json.loads(my_stage)) if my_stage else set()
-                if cnt_id not in stages:
+                    for i in range(617, 950):
+                        if i not in stages:
+                            stages.add(i)
                     coin -= song_stage_price
-                    stages.add(cnt_id)
+                    my_stage = json.dumps(list(stages))
+
                 else:
-                    return fail_url
-                my_stage = json.dumps(list(stages))
+                    song_stage_price = stage_price
+                    if (len(song_list[cnt_id]["difficulty_levels"]) == 6):
+                        song_stage_price = song_stage_price * 2
+
+                    if coin < song_stage_price:
+                        return fail_url
+                    
+                    stages = set(json.loads(my_stage)) if my_stage else set()
+                    if cnt_id not in stages:
+                        coin -= song_stage_price
+                        stages.add(cnt_id)
+                    else:
+                        return fail_url
+                    my_stage = json.dumps(list(stages))
 
             elif cnt_type == "2":
                 if coin < avatar_price:

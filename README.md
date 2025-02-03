@@ -54,6 +54,8 @@ Server download: Simply download the project as zip.
 
 Asset download: [MEGA](https://mega.nz/folder/frxWHRrQ#v6tth7Zo5rrj9foDhGYCBA)
 
+If you'd like to upload it somewhere else and contribute the link, please contact #AnTcfgss or QQ 3421587952， thanks!
+
 Download common.zip and a platform of your choosing. Unzip them to the private server directory.
 
 The included installation package has been modified to facilitate easier connection. If you'd prefer the official installation package, please use the "Instruction for Use (for official client)". Note that it requires more setup.
@@ -65,6 +67,8 @@ If you don't mind tweaking some files (and be able to connect directly to the se
 服务器下载：将此repo以zip形式下载。
 
 资源下载：[MEGA](https://mega.nz/folder/frxWHRrQ#v6tth7Zo5rrj9foDhGYCBA)
+
+如果你想将资源备份到别的网盘并贡献链接，请联系#AnTcfgss or QQ 3421587952，感谢！
 
 下载 common.zip 和您设备的平台。将所有文件解压到服务器根目录。
 

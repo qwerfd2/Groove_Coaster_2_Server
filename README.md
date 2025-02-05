@@ -1,6 +1,14 @@
-## Introduction 简介
+# Groove-Coaster-2OS-Server
 
 A small local server for ```Groove Coaster 2: Original Style```, implemented with ```Python``` and ```Flask```. 
+
+一个基于```Python```和```Flask```的微型```Groove Coaster 2: Original Style```本地服务器。
+
+<details>
+<summary>English</summary>
+<br>
+
+## Introduction
 
 This project is for game preservation purposes only. Creative liberty and conveniences have been taken when it comes to specific implementation. The goal is not to ensure 1:1 behavior, but to guarrantee the minimum viability of playing this game. It is provided as-is, per the MIT license.
 
@@ -12,23 +20,7 @@ Special thanks: [Walter-o/gcm-downloader]https://github.com/Walter-o/gcm-downloa
 
 Warning: Do not put personal files under the folders in the private server directory - all files within these sub-folders will be accessible by anyone with your server address! Security and performance are not guaranteed, and it is not recommended to host this server on the internet. You have been warned.
 
-一个基于```Python```和```Flask```的微型```Groove Coaster 2: Original Style```本地服务器。
-
-此项目的目标是保持游戏的长远可用性 (game preservation)。在具体实施上，我采取了一些便利及创意性的措施（偷懒）。此项目的目标不是确保 1:1 还原官服，而是保证游戏长久可玩。此项目在MIT许可证的“按现状” (as-is) 条件下提供。
-
-你不得将此项目用于商业行为。你应对因运行本服务器而产生的任何潜在后果承担全部责任。如果您不同意这些要求，则不允许您复制或运行该程序。
-
-灵感: [Lost-MSth/Arcaea-server](https://github.com/Lost-MSth/Arcaea-server)
-
-鸣谢: [Walter-o/gcm-downloader](https://github.com/Walter-o/gcm-downloader)
-
-警告：不要将私人文件放至私服内的文件夹里。自带的文件夹内所有文件都可被私服抓取！安全性和效率无法保证，不建议在公网上搭建。这不是强制要求，不过别怪我没提醒过你。
-
-### Supported Features 支持的功能
-
-<details>
-<summary>English</summary>
-<br>
+### Supported Features
 
 | Features            | Degree of support                                                                                                      |
 |---------------------|------------------------------------------------------------------------------------------------------------------------|
@@ -42,31 +34,7 @@ Warning: Do not put personal files under the folders in the private server direc
 | Progress Grid       | Not supported.                                                                                                         |
 | Additional features | Account/device whitelisting and banning.                                                                               |
 
-</details>
-
-<details>
-<summary>中文</summary>
-<br>
-
-| 功能         | 支持程度                                                                                     |
-|--------------|---------------------------------------------------------------------------------------------|
-| 文件下载      | .pak, 谱面及音频zip文件                                                                      |
-| 商店         | 用GCoin购买单独的歌曲，头像，和道具。 GCoins可通过玩游戏来获得。不支持音频预览。不支持曲包。       |
-| 排行榜       | 每首歌曲/难度的单独排行榜。不支持地区排行榜。不支持查看其他玩家的详细信息。                        |
-| 存档备份     | 支持通过账号系统的保存/加载。支持修改密码和用户名。支持登出。                                     |
-| Titles      | 通过Status观看并使用全解锁的Titles。                                                           |
-| 任务         | 支持达到游戏内经验等级后歌曲自动解锁。其他功能均不支持。                                         |
-| 好友         | 不支持。                                                                                     |
-| 进度表       | 不支持。                                                                                     |
-| 其他功能     | 账号/设备白名单和封禁。                                                                       |
-
-</details>
-
-## Download 下载
-
-<details>
-<summary>English</summary>
-<br>
+## Download
 
 Server download: Simply download the project as zip.
 
@@ -76,57 +44,7 @@ If you'd like to upload it somewhere else and contribute the link, please contac
 
 Download common.zip and a platform of your choosing. Unzip them to the private server directory.
 
-</details>
-
-<details>
-<summary>中文</summary>
-<br>
-
-服务器下载：将此repo以zip形式下载。
-
-资源下载：[MEGA](https://mega.nz/folder/frxWHRrQ#v6tth7Zo5rrj9foDhGYCBA) [Baidu(code: aaaa)](https://pan.baidu.com/s/1YVFfKBq1ULOgCkdrVQhFFg)
-
-如果你想将资源备份到别的网盘并贡献链接，请联系#AnTcfgss or QQ 3421587952，感谢！
-
-下载 common.zip 和您设备的平台。将所有文件解压到服务器根目录。
-
-</details>
-
-<details>
-<summary>File Structure 文件结构</summary>
-<br>
-
-server/
-
-├─ files/
-
-│  ├─ gc2/
-
-│  │  ├─ audio/
-
-│  │  │  ├─ ogg and m4a zips
-
-│  │  ├─ stage/
-
-│  │  │  ├─ zip files for stage
-
-│  │  ├─ model.pak
-
-│  │  ├─ skin.pak
-
-│  │  ├─ tunefile.pak
-
-│  ├─ web/
-
-│  │  ├─ webpage assets
-
-├─ 7001.py
-
-├─ config.py
-
-</details>
-
-## Dependencies 环境依赖
+## Dependencies
 
 - Python
 
@@ -134,13 +52,7 @@ server/
 
 - Crypto (pycryptodome)
 
-- urllib3
-
-## At the Start 如何开始
-
-<details>
-<summary>English</summary>
-<br>
+## At the Start
 
 There are 2 ways of setting up the connection. Pick one.
 
@@ -152,29 +64,7 @@ For method 1, use the `Instruction for Use (for official client)` section.
 
 For method 2, use the `Instruction for Use (For modified client)` section.
 
-</details>
-
-<details>
-<summary>中文</summary>
-<br>
-
-两种方式来设置连接。选一个吧。
-
-1. 代理。需要更多配置，不过安装包不需要修改。
-   
-3. 修改文件。配置更加简单，不过。。必须修改文件。
-
-方法1，请使用`原版安装包的使用说明`。
-
-方法2，请使用`改版安装包的使用说明`。
-
-</details>
-
-## Instruction for Use (for official client) 原版安装包的使用说明
-
-<details>
-<summary>English</summary>
-<br>
+## Instruction for Use (for official client) 
 
 ### Server
 
@@ -218,59 +108,7 @@ Make sure the private server is running on your PC. Make sure Charles acknowledg
 
 I did not test this method on iOS. If you know how to proxy stuff there, feel free read the Android guide and try the equivalent on iOS.
 
-</details>
-
-<details>
-<summary>中文</summary>
-<br>
-
-### 服务器
-
-按照`下载`章节来下载解压服务器和资源。
-
-PC/MAC安装 ```python```，安装 ```pip```。
-
-注意 MAC 默认为 ```python3```。往后的示例默认用 windows 的默认，即 ```python```。安装完成后，使用
-```pip install ...```安装所有依赖项。
-
-PC打开 ```cmd``` 输入 ```ipconfig```。MAC 打开 ```terminal``` 输入 ```ifconfig```。记住你的`IPV4`,一串为192或172开头的数字。PC用文本编辑器打开服务器文件夹的 ```config.py```，将`IPV4`填写至`IP`。`PORT`(端口)也可以更改。
-
-服务器文件夹上方的路径清空，输入 ```cmd```。命令行窗口会弹出。输入 ```python 7001.py```来开启服务器。如果出现错误，就解决他们吧。检查依赖项是否安装，网络配置是否正确。
-
-#### 安卓
-
-对于 Android 9+ 设备，您需要绕过 `https 保护`才能对游戏客户端和服务器之间的连接进行中间人攻击。如果您拥有 root 权限，则可以将证书安装到系统级别，从而允许设备信任中间人软件。若您没有root，此方法可能不可用。
-
-这里展示`VProxid`加`Charles`方法。 在您的`Android`设备上安装`VProxid`。 在`Windows PC`上安装`Charles`。 `Charles`有免费试用期，但有多种方法可以免费注册。 请对此主题进行自己的研究。
-
-你的服务器应该已经在运行。
-
-在您的`Android`设备上安装`Charles 根证书`：Charles用户界面`顶栏`：`Help` – `SSL Proxying` – `Install Charles Root Certificate on a mobile device`. 按照其说明进行操作。`Android`设备上安装下载的证书。请按照此[指南]((https://gist.github.com/pwlin/8a0d01e6428b7a96e2eb))将用户级证书移至系统级。 完成后，转到系统设置 - 证书，仔细检查`Charles`证书是否出现在系统证书页面底部。
-
-在`Charles`中，打开顶部栏：`Proxy` – `Proxy Settings`。 在端口`8889`上启用`SOCKS`代理。打开``http proxying over socks``，配置默认端口。然后，在顶部栏中： `Tools` – `Map Remote`，将如下`URL`映射到`服务器IP:端口`（http协议）。URL为：`https://gc2018.gczero.com`。
-
-![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/help1.JPG)
-
-
-![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/test2.JPG)
-
-在您的`Android`设备上，打开`VProxid`。创建一个新的配置文件，服务器为`您计算机的IP`，端口为`8889`，类型为`socks5`，然后使用应用程序选择器选择`GROOVE 2`。 创建后，单击配置文件上的播放按钮将其激活。
-
-![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/help3.jpg)
-
-确保您的`PC`上正在运行私服。 确保`Charles`提示并正在接收来自设备的连接。 确保`VProxid`正在运行。 确保您的设备和电脑在同一网络下。 开始游戏吧。
-
-#### iOS
-
-我不了解iOS系统，如果你了解ios的代理软件，可以阅读安卓部分，然后照葫芦画瓢（
-
-</details>
-
-## Instruction for Use (For modified client) 改版安装包的使用说明
-
-<details>
-<summary>English</summary>
-<br>
+## Instruction for Use (For modified client) 
 
 ### Server
 
@@ -313,11 +151,125 @@ Open `settings.cfg` with a text editor，Edit `serverUrl` to your server's `http
 
 Sideload the `ipa`. Open the game, and observe the server.
 
+## Admin Functionalities
+
+Database can be opened with DB Browser.
+
+If you want to make your service only available to whitelisted devices, turn on ```AUTHORIZATION_NEEDED``` in ```config.py``` and add the device id after the .php request to the ```whitelist table```. If you want to ban a device/taito ID, add the device ID or the username of the taito ID to the blacklist table. The ```reason``` column is for your own reference. If a device is logged in to that Taito ID, they cannot download asset, cannot log out, and cannot change name. If a device is not in the whitelist (if enabled) or is banned by device ID, they will not be able to download anything.
+
+```getCrypt.py``` is a standalone script used to decrypt the mass inside the ```GET``` requests.
+
+## Account System Implementation
+
+Account is only used for save file saving/loading (song ownership and coins are tied to devices. However, songs unlocked in the save file will remain unlocked on a new device). Unlike the official version, you can rename and log out of your account. However, only one device may be connected to an account at a time. The old device will be logged off if a new device logs in.
+
 </details>
 
 <details>
 <summary>中文</summary>
 <br>
+
+## 简介
+
+此项目的目标是保持游戏的长远可用性 (game preservation)。在具体实施上，我采取了一些便利及创意性的措施（偷懒）。此项目的目标不是确保 1:1 还原官服，而是保证游戏长久可玩。此项目在MIT许可证的“按现状” (as-is) 条件下提供。
+
+你不得将此项目用于商业行为。你应对因运行本服务器而产生的任何潜在后果承担全部责任。如果您不同意这些要求，则不允许您复制或运行该程序。
+
+灵感: [Lost-MSth/Arcaea-server](https://github.com/Lost-MSth/Arcaea-server)
+
+鸣谢: [Walter-o/gcm-downloader](https://github.com/Walter-o/gcm-downloader)
+
+警告：不要将私人文件放至私服内的文件夹里。自带的文件夹内所有文件都可被私服抓取！安全性和效率无法保证，不建议在公网上搭建。这不是强制要求，不过别怪我没提醒过你。
+
+### 支持的功能
+
+| 功能         | 支持程度                                                                                     |
+|--------------|---------------------------------------------------------------------------------------------|
+| 文件下载      | .pak, 谱面及音频zip文件                                                                      |
+| 商店         | 用GCoin购买单独的歌曲，头像，和道具。 GCoins可通过玩游戏来获得。不支持音频预览。不支持曲包。       |
+| 排行榜       | 每首歌曲/难度的单独排行榜。不支持地区排行榜。不支持查看其他玩家的详细信息。                        |
+| 存档备份     | 支持通过账号系统的保存/加载。支持修改密码和用户名。支持登出。                                     |
+| Titles      | 通过Status观看并使用全解锁的Titles。                                                           |
+| 任务         | 支持达到游戏内经验等级后歌曲自动解锁。其他功能均不支持。                                         |
+| 好友         | 不支持。                                                                                     |
+| 进度表       | 不支持。                                                                                     |
+| 其他功能     | 账号/设备白名单和封禁。                                                                       |
+
+## 下载
+
+服务器下载：将此repo以zip形式下载。
+
+资源下载：[MEGA](https://mega.nz/folder/frxWHRrQ#v6tth7Zo5rrj9foDhGYCBA) [Baidu(密码aaaa)](https://pan.baidu.com/s/1YVFfKBq1ULOgCkdrVQhFFg)
+
+如果你想将资源备份到别的网盘并贡献链接，请联系#AnTcfgss or QQ 3421587952，感谢！
+
+下载 common.zip 和您设备的平台。将所有文件解压到服务器根目录。
+
+## 环境依赖
+
+- Python
+
+- Flask
+
+- Crypto (pycryptodome)
+
+- urllib3
+
+## 如何开始
+
+两种方式来设置连接。选一个吧。
+
+1. 代理。需要更多配置，不过安装包不需要修改。
+   
+3. 修改文件。配置更加简单，不过。。必须修改文件。
+
+方法1，请使用`原版安装包的使用说明`。
+
+方法2，请使用`改版安装包的使用说明`。
+
+## 原版安装包的使用说明
+
+### 服务器
+
+按照`下载`章节来下载解压服务器和资源。
+
+PC/MAC安装 ```python```，安装 ```pip```。
+
+注意 MAC 默认为 ```python3```。往后的示例默认用 windows 的默认，即 ```python```。安装完成后，使用
+```pip install ...```安装所有依赖项。
+
+PC打开 ```cmd``` 输入 ```ipconfig```。MAC 打开 ```terminal``` 输入 ```ifconfig```。记住你的`IPV4`,一串为192或172开头的数字。PC用文本编辑器打开服务器文件夹的 ```config.py```，将`IPV4`填写至`IP`。`PORT`(端口)也可以更改。
+
+服务器文件夹上方的路径清空，输入 ```cmd```。命令行窗口会弹出。输入 ```python 7001.py```来开启服务器。如果出现错误，就解决他们吧。检查依赖项是否安装，网络配置是否正确。
+
+#### 安卓
+
+对于 Android 9+ 设备，您需要绕过 `https 保护`才能对游戏客户端和服务器之间的连接进行中间人攻击。如果您拥有 root 权限，则可以将证书安装到系统级别，从而允许设备信任中间人软件。若您没有root，此方法可能不可用。
+
+这里展示`VProxid`加`Charles`方法。 在您的`Android`设备上安装`VProxid`。 在`Windows PC`上安装`Charles`。 `Charles`有免费试用期，但有多种方法可以免费注册。 请对此主题进行自己的研究。
+
+你的服务器应该已经在运行。
+
+在您的`Android`设备上安装`Charles 根证书`：Charles用户界面`顶栏`：`Help` – `SSL Proxying` – `Install Charles Root Certificate on a mobile device`. 按照其说明进行操作。`Android`设备上安装下载的证书。请按照此[指南]((https://gist.github.com/pwlin/8a0d01e6428b7a96e2eb))将用户级证书移至系统级。 完成后，转到系统设置 - 证书，仔细检查`Charles`证书是否出现在系统证书页面底部。
+
+在`Charles`中，打开顶部栏：`Proxy` – `Proxy Settings`。 在端口`8889`上启用`SOCKS`代理。打开``http proxying over socks``，配置默认端口。然后，在顶部栏中： `Tools` – `Map Remote`，将如下`URL`映射到`服务器IP:端口`（http协议）。URL为：`https://gc2018.gczero.com`。
+
+![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/help1.JPG)
+
+
+![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/test2.JPG)
+
+在您的`Android`设备上，打开`VProxid`。创建一个新的配置文件，服务器为`您计算机的IP`，端口为`8889`，类型为`socks5`，然后使用应用程序选择器选择`GROOVE 2`。 创建后，单击配置文件上的播放按钮将其激活。
+
+![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/help3.jpg)
+
+确保您的`PC`上正在运行私服。 确保`Charles`提示并正在接收来自设备的连接。 确保`VProxid`正在运行。 确保您的设备和电脑在同一网络下。 开始游戏吧。
+
+#### iOS
+
+我不了解iOS系统，如果你了解ios的代理软件，可以阅读安卓部分，然后照葫芦画瓢（
+
+## 改版安装包的使用说明
 
 ### 服务器
 
@@ -363,15 +315,7 @@ PC打开 ```cmd``` 输入 ```ipconfig```。MAC 打开 ```terminal``` 输入 ```i
 
 侧载`ipa`即可。打开游戏，观察私服的输出。
 
-</details>
-
-## Admin Function 管理员功能
-
-Database can be opened with DB Browser.
-
-If you want to make your service only available to whitelisted devices, turn on ```AUTHORIZATION_NEEDED``` in ```config.py``` and add the device id after the .php request to the ```whitelist table```. If you want to ban a device/taito ID, add the device ID or the username of the taito ID to the blacklist table. The ```reason``` column is for your own reference. If a device is logged in to that Taito ID, they cannot download asset, cannot log out, and cannot change name. If a device is not in the whitelist (if enabled) or is banned by device ID, they will not be able to download anything.
-
-```getCrypt.py``` is a standalone script used to decrypt the mass inside the ```GET``` requests.
+## 管理员功能
 
 数据库可以用DB Browser打开。
 
@@ -379,18 +323,53 @@ If you want to make your service only available to whitelisted devices, turn on 
 
 ```getCrypt.py``` 是一个用来单独解密```GET```请求后缀的脚本.
 
-## About Account Implementation 关于账号设置
-
-Account is only used for save file saving/loading (song ownership and coins are tied to devices. However, songs unlocked in the save file will remain unlocked on a new device). Unlike the official version, you can rename and log out of your account. However, only one device may be connected to an account at a time. The old device will be logged off if a new device logs in.
+## 账号系统实装
 
 账号仅用于保存/同步存档。Gcoin和歌曲所有权和设备绑定。不过，存档中已经解锁的曲目将在新的设备上可用。官方版不允许重命名及登出账号。私服则可以进行这些操作。不过，一个账号只能同时登陆一台设备，如果登录第二台设备，第一台设备将被挤掉。
+
+</details>
+
+<details>
+<summary>File Structure 文件结构</summary>
+<br>
+
+server/
+
+├─ files/
+
+│  ├─ gc2/
+
+│  │  ├─ audio/
+
+│  │  │  ├─ ogg and m4a zips
+
+│  │  ├─ stage/
+
+│  │  │  ├─ zip files for stage
+
+│  │  ├─ model.pak
+
+│  │  ├─ skin.pak
+
+│  │  ├─ tunefile.pak
+
+│  ├─ web/
+
+│  │  ├─ webpage assets
+
+├─ 7001.py
+
+├─ config.py
+
+</details>
+
 
 ![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/stage_back10_big.png)
 ![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/test2.JPG)
 
 ## Journal
 
-Im forcing myself to document the process for personal project. So here goes.
+I've been forcing myself to document the process for personal project. So here goes.
 
 <details>
 <summary>English</summary>

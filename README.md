@@ -50,6 +50,10 @@ Warning: Do not put personal files under the folders in the private server direc
 
 ## Download 下载
 
+<details>
+<summary>English</summary>
+<br>
+
 Server download: Simply download the project as zip.
 
 Asset download: [MEGA](https://mega.nz/folder/frxWHRrQ#v6tth7Zo5rrj9foDhGYCBA) [Baidu(code: aaaa)](https://pan.baidu.com/s/1YVFfKBq1ULOgCkdrVQhFFg)
@@ -58,11 +62,11 @@ If you'd like to upload it somewhere else and contribute the link, please contac
 
 Download common.zip and a platform of your choosing. Unzip them to the private server directory.
 
-The included installation package has been modified to facilitate easier connection. If you'd prefer the official installation package, please use the "Instruction for Use (for official client)". Note that it requires more setup.
+</details>
 
-If you don't mind tweaking some files (and be able to connect directly to the server), grab the included installation files and follow "Instruction for Use (For modified client)".
-
-
+<details>
+<summary>中文</summary>
+<br>
 
 服务器下载：将此repo以zip形式下载。
 
@@ -72,9 +76,7 @@ If you don't mind tweaking some files (and be able to connect directly to the se
 
 下载 common.zip 和您设备的平台。将所有文件解压到服务器根目录。
 
-如果你就想用官方客户端，则需要一些代理软件来将流量重定向到服务器，操作会相对复杂。请使用“原版安装包的使用说明”。
-
-如果你不介意修改客户端，你可以直接连接，请使用“改版安装包的使用说明”。
+</details>
 
 <details>
 <summary>File Structure 文件结构</summary>
@@ -112,64 +114,141 @@ server/
 
 </details>
 
-## Instruction for Use (for official client) 原版安装包的使用说明
+## Dependencies 环境依赖
+
+- Python
+
+- Flask
+
+- Crypto (pycryptodome)
+
+- urllib3
+
+## At the Start 如何开始
 
 <details>
 <summary>English</summary>
 <br>
 
-For android 9+ devices, you need to bypass the https protection in order to MITM the connection between game client and server. If you have root, you can install Certificate Authorities to system level, allowing the device to trust it. If you don't have root, I don't think it is possible and you might have to modify the client slightly using the next section.
+There are 2 ways of setting up the connection. Pick one.
 
-I did not test this method on iOS. If you know how to proxy stuff there, feel free to continue reading and try the equivalent there.
+1. Proxy. Requires more setup, but the install package can remain unmodified.
 
-I will demonstrate the VProxid + Charles method. Install VProxid on your android device. Install Charles on your Windows PC. Charles has a free trial period, but there are ways to register it for free. Please do your own research on that subject.
+2. File modification. Easier setup, but file edit is necessary.
 
-Install python on your server machine. Download all the assets and server files. Run ipconfig in CMD to obtain your local IPV4, modify config.py to match the IP. In VProxid, create a new profile with server as the server IP, port as 8889, type as socks5, and in "click to select applications", select groove coaster 2. Go back and activate the profile.
+For method 1, use the `Instruction for Use (for official client)` section.
 
-Install Charles Certificate Authority on your android device by going to the top bar: Help – SSL Proxying – Install Charles Root Certificate on a mobile device. Follow its instructions. Install the downloaded certificate. If you want to use the first method, follow this (https://gist.github.com/pwlin/8a0d01e6428b7a96e2eb) guide to move the user-level certificate to system level. Once done, go to your system setting – certificates, and double check that Charles certificate appears at the bottom of the system certificates.
+For method 2, use the `Instruction for Use (For modified client)` section.
 
-After you’re done, open command on windows. Type “ipconfig”, and remember your IPV4 address. This assumes that you are connected to a WIFI, and it should start with 192 or 172. Open the config.py of the private server, and change the IP accordingly. Type “cmd” in the file directory on the top of the file explorer, and press enter. A command prompt will be opened for that directory. Type “python 7000.py” to start the server. If an error pops up, resolve it now – install python for your machine, and install flask module.
-
-In Charles, open top bar: Proxy – Proxy Settings. Enable SOCKS proxy on port 8889. Enable http proxying over socks, include default ports. Then, in top bar: Tools – Map Remote, map a URL to your Server IP address:port, under http. The URL is: https://gc2018.gczero.com. 
-
-![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/help1.JPG)
-
-![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/test2.JPG)
-
-On your android device, open VProxid. Create a new profile, with the server being your computer’s IP, port being 8889, type being socks5, and select GROOVE 2 using the app selector. Once created, click the play button on the profile to activate it.
-
-![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/help3.jpg)
-
-Make sure the private server is running on your PC. Make sure Charles acknowledges the connection from the device. Make sure VProxid is running. Make sure your phone and laptop are under the same network. Start the game, and have fun.
 </details>
 
 <details>
 <summary>中文</summary>
 <br>
 
-对于 Android 9+ 设备，您需要绕过 https 保护才能对游戏客户端和服务器之间的连接进行中间人攻击。 这可以通过至少两种方式完成： 如果您拥有 root 权限，则可以将证书安装到系统级别，从而允许设备信任中间人软件。 或者您可以补丁游戏的客户端数据包里的设置文件。
+两种方式来设置连接。选一个吧。
 
-下方是基于安卓的教程。我不了解iOS系统，如果你了解ios的代理软件，可以继续阅读，然后照葫芦画瓢（
+1. 代理。需要更多配置，不过安装包不需要修改。
+2. 修改文件。配置更加简单，不过。。必须修改文件。
 
-这里展示 VProxid 加 Charles 方法。 在您的 Android 设备上安装 VProxid。 在 Windows PC 上安装 Charles。 Charles 有免费试用期，但有多种方法可以免费注册。 请对此主题进行自己的研究。
+方法1，请使用`原版安装包的使用说明`。
+方法2，请使用`改版安装包的使用说明`。
 
-在您的 Android 设备上安装 Charles 根证书：顶栏：帮助 – SSL 代理 – 在移动设备上安装 Charles 根证书。 按照其说明进行操作。 安装下载的证书。 如果您想使用第一种方法，请按照此 (https://gist.github.com/pwlin/8a0d01e6428b7a96e2eb) 指南将用户级证书移至系统级。 完成后，转到系统设置 - 证书，并仔细检查 Charles 证书是否出现在系统证书页面底部。
+</details>
 
-完成后，在 Windows 上打开cmd。 输入“ipconfig”，并记住您的 IPV4 地址。 这里假设你连接到了WIFI，IP应该以192或172开头。打开私服的config.py，并相应地更改IP。 在文件资源管理器顶部的文件目录中输入“cmd”，然后按 Enter。 将打开该目录的命令提示符。 输入“python 7000.py”启动服务器。 如果弹出错误，请立即解决 - 为您的计算机安装 python，安装 Flask 和 sqlite3 模块。
+## Instruction for Use (for official client) 原版安装包的使用说明
 
-在 Charles 中，打开顶部栏：Proxy – Proxy Settings。 在端口8889上启用SOCKS代理。通过socks启用http代理，包括默认端口。然后，在顶部栏中： Tools – Map Remote，将URL映射到您的服务器IP:端口（http 下）。URL为：https://gc2018.gczero.com。
+<details>
+<summary>English</summary>
+<br>
+
+### Server
+
+Download the server and assets, and extract everything according to the `Download` section.
+
+Install ```python``` and ```pip``` on your PC/MAC. 
+
+Note that MAC uses ```python3```. Code examples in this document will use the default of Windows, which is ```python```. After the installation, install dependencies using ```pip install ...```.
+
+Open command on windows. Type “ipconfig”, and remember your IPV4 address. This assumes that you are connected to a WIFI, and it should start with 192 or 172. Open the ```config.py``` of the private server, and change the IP accordingly. Type ```cmd``` in the file directory on the top of the file explorer, and press enter. A command prompt will be opened for that directory. Type ```python 7001.py``` to start the server. If an error pops up, resolve it now – did you install all the dependencies? Is the IP correct?
+
+### Application
+
+#### Android
+
+For android 9+ devices, you need to bypass the `https protection` in order to MITM the connection between game client and server. If you have root, you can install Certificate Authorities to system level, allowing the device to trust it. If you don't have root, I don't think it is possible and you might have to modify the client.
+
+I will demonstrate the `VProxid` + `Charles` method.
+
+Install `VProxid` on your `android` device.
+
+Install `Charles` on your `Windows PC`. `Charles` has a free trial period, but there are ways to register it for free. Please do your own research on that subject.
+
+Your server should already be running. 
+
+Install `Charles Certificate Authority` on your `android` device by going to Charles UI `top bar`: `Help` – `SSL Proxying` – `Install Charles Root Certificate on a mobile device`. Follow its instructions. Install the downloaded certificate on the `android` device. Follow [this](https://gist.github.com/pwlin/8a0d01e6428b7a96e2eb) guide to move the user-level certificate to system level. Once done, go to the `android` device's `system setting` – `certificates`, and double check that `Charles` certificate appears at the bottom of the system certificates.
+
+In `Charles`, open `top bar`: `Proxy` – `Proxy Settings`. Enable `SOCKS` proxy on port `8889`. Enable `http proxying over socks`, include default ports. Then, in `top bar`: `Tools` – `Map Remote`, map a URL to your Server `IP address:port`, under `http`. The URL is: `https://gc2018.gczero.com`. 
+
+![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/help1.JPG)
+
+![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/test2.JPG)
+
+On your `android` device, open `VProxid`. Create a new profile, with the server being `your computer’s IP`, port `8889`, type `socks5`, and select `GROOVE 2` using the app selector. Once created, click the play button on the profile to activate it.
+
+![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/help3.jpg)
+
+Make sure the private server is running on your PC. Make sure Charles acknowledges the connection from the device. Make sure VProxid is running. Make sure your phone and laptop are under the same network. Start the game, and ovserve the server.
+
+#### iOS
+
+I did not test this method on iOS. If you know how to proxy stuff there, feel free read the Android guide and try the equivalent on iOS.
+
+</details>
+
+<details>
+<summary>中文</summary>
+<br>
+
+### 服务器
+
+按照`下载`章节来下载解压服务器和资源。
+
+PC/MAC安装 ```python```，安装 ```pip```。
+
+注意 MAC 默认为 ```python3```。往后的示例默认用 windows 的默认，即 ```python```。安装完成后，使用
+```pip install ...```安装所有依赖项。
+
+PC打开 ```cmd``` 输入 ```ipconfig```。MAC 打开 ```terminal``` 输入 ```ifconfig```。记住你的`IPV4`,一串为192或172开头的数字。PC用文本编辑器打开服务器文件夹的 ```config.py```，将`IPV4`填写至`IP`。`PORT`(端口)也可以更改。
+
+服务器文件夹上方的路径清空，输入 ```cmd```。命令行窗口会弹出。输入 ```python 7001.py```来开启服务器。如果出现错误，就解决他们吧。检查依赖项是否安装，网络配置是否正确。
+
+#### 安卓
+
+对于 Android 9+ 设备，您需要绕过 `https 保护`才能对游戏客户端和服务器之间的连接进行中间人攻击。如果您拥有 root 权限，则可以将证书安装到系统级别，从而允许设备信任中间人软件。若您没有root，此方法可能不可用。
+
+这里展示`VProxid`加`Charles`方法。 在您的`Android`设备上安装`VProxid`。 在`Windows PC`上安装`Charles`。 `Charles`有免费试用期，但有多种方法可以免费注册。 请对此主题进行自己的研究。
+
+你的服务器应该已经在运行。
+
+在您的`Android`设备上安装`Charles 根证书`：Charles用户界面`顶栏`：`Help` – `SSL Proxying` – `Install Charles Root Certificate on a mobile device`. 按照其说明进行操作。`Android`设备上安装下载的证书。请按照此[指南]((https://gist.github.com/pwlin/8a0d01e6428b7a96e2eb))将用户级证书移至系统级。 完成后，转到系统设置 - 证书，仔细检查`Charles`证书是否出现在系统证书页面底部。
+
+在`Charles`中，打开顶部栏：`Proxy` – `Proxy Settings`。 在端口`8889`上启用`SOCKS`代理。打开``http proxying over socks``，配置默认端口。然后，在顶部栏中： `Tools` – `Map Remote`，将如下`URL`映射到`服务器IP:端口`（http协议）。URL为：`https://gc2018.gczero.com`。
 
 ![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/help1.JPG)
 
 
 ![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/test2.JPG)
 
-在您的 Android 设备上，打开 VProxid。 创建一个新的配置文件，服务器为您计算机的 IP，端口为 8889，类型为socks5，然后使用应用程序选择器选择 GC2。 创建后，单击配置文件上的播放按钮将其激活。
+在您的`Android`设备上，打开`VProxid`。创建一个新的配置文件，服务器为`您计算机的IP`，端口为`8889`，类型为`socks5`，然后使用应用程序选择器选择`GROOVE 2`。 创建后，单击配置文件上的播放按钮将其激活。
 
 ![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/help3.jpg)
 
-确保您的 PC 上正在运行私服。 确保 Charles 提示并正在接收来自设备的连接。 确保 VProxid 正在运行。 确保您的设备和电脑在同一网络下。 开始游戏吧。
+确保您的`PC`上正在运行私服。 确保`Charles`提示并正在接收来自设备的连接。 确保`VProxid`正在运行。 确保您的设备和电脑在同一网络下。 开始游戏吧。
 
+#### iOS
+
+我不了解iOS系统，如果你了解ios的代理软件，可以阅读安卓部分，然后照葫芦画瓢（
 
 </details>
 
@@ -179,24 +258,98 @@ Make sure the private server is running on your PC. Make sure Charles acknowledg
 <summary>English</summary>
 <br>
 
+### Server
+
+Download the server and assets, and extract everything according to the `Download` section.
+
+Install ```python``` and ```pip``` on your PC/MAC. 
+
+Note that MAC uses ```python3```. Code examples in this document will use the default of Windows, which is ```python```. After the installation, install dependencies using ```pip install ...```.
+
+Open command on windows. Type “ipconfig”, and remember your IPV4 address. This assumes that you are connected to a WIFI, and it should start with 192 or 172. Open the ```config.py``` of the private server, and change the IP accordingly. Type ```cmd``` in the file directory on the top of the file explorer, and press enter. A command prompt will be opened for that directory. Type ```python 7001.py``` to start the server. If an error pops up, resolve it now – did you install all the dependencies? Is the IP correct?
+
+### Application
+
+#### Android
+
+Download the `apk` file from the link's `install packages` folder. Install it.
+
+This `apk` has been modified. If you'd like to edit it on your own, see the last paragraph.
+
+Open the game's `obb` with password `eiprblFFv69R83J5`, and extract all the files. Or, download the extracted folder from the link's `install packages/main.76.jp.co.taito.groovecoasterzero.obb`.
+
+Open `settings.cfg` with your text editor, and change `serverUrl` to your server's `http://ip:port/`.
+
+Use `WinRAR` or `7-zip` to compress everything within the folder with the original password. Use `ZIP legacy encryption` for `WinRAR`, `ZipCrypto` for `7-zip`。Name the compressed zip to `main.76.jp.co.taito.groovecoasterzero.obb`.
+
+Paste (overwrite) the `obb` already inside `Android/obb/jp.co.groovecoasterzero`. If the folder does not exist yet, you need to create it manually.
+
+Open the game and observe the server output.
+
+(The provided apk has the following modifications. Skip if you are not interested in it)
 By modifying the apk's obb verification function and `obb`'s `settings.cfg`, you can connect to the server without using any proxy software. To do so, decompile `classes.dex` using your favorite `smali` decompiler, and go to `jp.co.groovecoasterzero/BootActivity`. Delete the part in `e()` where the loop is checking for a size, and, if mismatch, override a variable that causes the code to branch into `DownloadActivity`. We want the game to load the obb regardless of its size.
 
-After this, open the game's `obb` with password `eiprblFFv69R83J5`, extract everything, open `settings.cfg`, and edit the `serverUrl` to the `http://ip:port/` of your server. Compress every file with `WinRAR` to zip, using the password to encrypt it. Use `ZIP legacy encryption`. Override the `obb` in `Android/obb/jp.co.groovecoasterzero` and you should be able to connect directly. Just start the game and observe the server.
+#### iOS
 
-With iOS, none of the above is necessary as the installation package is a single ```.ipa```. Just edit `settings.cfg` and sideload the ipa.
+Download the `ipa` package from the link's `install packages` folder.
+
+Open the `ipa` file with your favorite zip viewer。Go into`Payload`,`GROOVE 2`. extract `settings.cfg`.
+
+Open `settings.cfg` with a text editor，Edit `serverUrl` to your server's `http://ip:port/`.Drag`settings.cfg` back into the `ipa`。
+
+Sideload the `ipa`. Open the game, and observe the server.
+
 </details>
 
 <details>
 <summary>中文</summary>
 <br>
 
+### 服务器
+
+按照`下载`章节来下载解压服务器和资源。
+
+PC/MAC安装 ```python```，安装 ```pip```。
+
+注意 MAC 默认为 ```python3```。往后的示例默认用 windows 的默认，即 ```python```。安装完成后，使用
+```pip install ...```安装所有依赖项。
+
+PC打开 ```cmd``` 输入 ```ipconfig```。MAC 打开 ```terminal``` 输入 ```ifconfig```。记住你的`IPV4`,一串为192或172开头的数字。PC用文本编辑器打开服务器文件夹的 ```config.py```，将`IPV4`填写至`IP`。`PORT`(端口)也可以更改。
+
+服务器文件夹上方的路径清空，输入 ```cmd```。命令行窗口会弹出。输入 ```python 7001.py```来开启服务器。如果出现错误，就解决他们吧。检查依赖项是否安装，网络配置是否正确。
+
+### 程序
+
+#### 安卓
+
+下载网盘里`install packages`里的`apk`文件。安装。
+
+此`apk`被修改过。若想自己修改,请看最后一段。
+
+打开游戏的`obb`，密码是`eiprblFFv69R83J5`。提取全部文件。或者，从网盘下载`install packages/main.76.jp.co.taito.groovecoasterzero.obb`.
+
+用文本编辑器打开`settings.cfg`，将`serverUrl`改成私服的`http://ip:端口/`。
+
+用`WinRAR`或者`7-zip`压缩全部文件至zip，用密码加密。用`ZIP legacy encryption`/`ZipCrypto`。名称为`main.76.jp.co.taito.groovecoasterzero.obb`.
+
+覆盖`Android/obb/jp.co.groovecoasterzero`里的`obb`文件。如文件夹不存在，需要手动创建。
+
+打开游戏，观察私服的输出。
+
+（提供的apk已经执行了如下的修改，可以忽略）
 你可以通过修改apk里的obb校验函数然后修改`obb`里的`settings.cfg`来直连私服，无需中继软件。用顺手的`smali`反编译器来反编译`classes.dex`，然后去`jp.co.groovecoasterzero/BootActivity`。删除`e()`里循环检查文件大小的部分。这部分会检查obb文件的大小，如果不一致会修改一个变量跳至`DownloadActivity`。我们想强制游戏读取。
 
-然后打开游戏的`obb`，密码是`eiprblFFv69R83J5`。提取全部文件，打开`settings.cfg`，将`serverUrl`改成私服的`http://ip:端口/`。用`WinRAR`压缩全部文件至zip，用密码加密。用`ZIP legacy encryption`。覆盖`Android/obb/jp.co.groovecoasterzero`里的`obb`，应该就可以直连了。打开游戏，观察私服的输出。
+#### iOS
 
-iOS简单得多，只要修改```ipa```中的`settings.cfg`并侧载即可。
+下载网盘里`install packages`里的`ipa`文件。
+
+将`ipa`用压缩包软件打开。进`Payload`,`GROOVE 2`. 将`settings.cfg`提出。
+
+文本编辑器打开`settings.cfg`，将`serverUrl`改成私服的`http://ip:端口/`。将`settings.cfg`拖回`ipa`。
+
+侧载`ipa`即可。打开游戏，观察私服的输出。
+
 </details>
-
 
 ## Admin Function 管理员功能
 

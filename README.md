@@ -2,6 +2,34 @@
 
 A small local server for ```Groove Coaster 2: Original Style```, implemented with ```Python``` and ```Flask```. 
 
+This project is for game preservation purposes only. Creative liberty and conveniences have been taken when it comes to specific implementation. The goal is not to ensure 1:1 behavior, but to guarrantee the minimum viability of playing this game. It is provided as-is, per the MIT license.
+
+You are not allowed to use it for commercial purposes. You shall bare all the responsibility for any potential consequences as a result of running this server. If you do not agree to these requirements, you are not allowed to replicate or run this program.
+
+Inspiration: [Lost-MSth/Arcaea-server](https://github.com/Lost-MSth/Arcaea-server)
+
+Special thanks: [Walter-o/gcm-downloader]https://github.com/Walter-o/gcm-downloader
+
+Warning: Do not put personal files under the folders in the private server directory - all files within these sub-folders will be accessible by anyone with your server address! Security and performance are not guaranteed, and it is not recommended to host this server on the internet. You have been warned.
+
+一个基于```Python```和```Flask```的微型```Groove Coaster 2: Original Style```本地服务器。
+
+此项目的目标是保持游戏的长远可用性 (game preservation)。在具体实施上，我采取了一些便利及创意性的措施（偷懒）。此项目的目标不是确保 1:1 还原官服，而是保证游戏长久可玩。此项目在MIT许可证的“按现状” (as-is) 条件下提供。
+
+你不得将此项目用于商业行为。你应对因运行本服务器而产生的任何潜在后果承担全部责任。如果您不同意这些要求，则不允许您复制或运行该程序。
+
+灵感: [Lost-MSth/Arcaea-server](https://github.com/Lost-MSth/Arcaea-server)
+
+鸣谢: [Walter-o/gcm-downloader](https://github.com/Walter-o/gcm-downloader)
+
+警告：不要将私人文件放至私服内的文件夹里。自带的文件夹内所有文件都可被私服抓取！安全性和效率无法保证，不建议在公网上搭建。这不是强制要求，不过别怪我没提醒过你。
+
+### Supported Features 支持的功能
+
+<details>
+<summary>English</summary>
+<br>
+
 | Features            | Degree of support                                                                                                      |
 |---------------------|------------------------------------------------------------------------------------------------------------------------|
 | Asset delivery      | .pak, stage and music zip files                                                                                        |
@@ -14,17 +42,11 @@ A small local server for ```Groove Coaster 2: Original Style```, implemented wit
 | Progress Grid       | Not supported.                                                                                                         |
 | Additional features | Account/device whitelisting and banning.                                                                               |
 
-This project is for game preservation purposes only. Creative liberty and conveniences have been taken when it comes to specific implementation. The goal is not to ensure 1:1 behavior, but to guarrantee the minimum viability of playing this game. It is provided as-is, per the MIT license.
+</details>
 
-You are not allowed to use it for commercial purposes. You shall bare all the responsibility for any potential consequences as a result of running this server. If you do not agree to these requirements, you are not allowed to replicate or run this program.
-
-Inspiration: [Lost-MSth/Arcaea-server](https://github.com/Lost-MSth/Arcaea-server)
-
-Special thanks: [Walter-o/gcm-downloader]https://github.com/Walter-o/gcm-downloader
-
-Warning: Do not put personal files under the folders in the private server directory - all files within these sub-folders will be accessible by anyone with your server address! Security and performance are not guaranteed, and it is not recommended to host this server on the internet. You have been warned.
-
-一个基于```Python```和```Flask```的微型```Groove Coaster 2: Original Style```本地服务器。
+<details>
+<summary>中文</summary>
+<br>
 
 | 功能         | 支持程度                                                                                     |
 |--------------|---------------------------------------------------------------------------------------------|
@@ -38,15 +60,7 @@ Warning: Do not put personal files under the folders in the private server direc
 | 进度表       | 不支持。                                                                                     |
 | 其他功能     | 账号/设备白名单和封禁。                                                                       |
 
-此项目的目标是保持游戏的长远可用性 (game preservation)。在具体实施上，我采取了一些便利及创意性的措施（偷懒）。此项目的目标不是确保 1:1 还原官服，而是保证游戏长久可玩。此项目在MIT许可证的“按现状” (as-is) 条件下提供。
-
-你不得将此项目用于商业行为。你应对因运行本服务器而产生的任何潜在后果承担全部责任。如果您不同意这些要求，则不允许您复制或运行该程序。
-
-灵感: [Lost-MSth/Arcaea-server](https://github.com/Lost-MSth/Arcaea-server)
-
-鸣谢: [Walter-o/gcm-downloader](https://github.com/Walter-o/gcm-downloader)
-
-警告：不要将私人文件放至私服内的文件夹里。自带的文件夹内所有文件都可被私服抓取！安全性和效率无法保证，不建议在公网上搭建。这不是强制要求，不过别怪我没提醒过你。
+</details>
 
 ## Download 下载
 
@@ -106,8 +120,6 @@ server/
 
 │  │  ├─ webpage assets
 
-├─ fs.json
-
 ├─ 7001.py
 
 ├─ config.py
@@ -149,9 +161,11 @@ For method 2, use the `Instruction for Use (For modified client)` section.
 两种方式来设置连接。选一个吧。
 
 1. 代理。需要更多配置，不过安装包不需要修改。
-2. 修改文件。配置更加简单，不过。。必须修改文件。
+   
+3. 修改文件。配置更加简单，不过。。必须修改文件。
 
 方法1，请使用`原版安装包的使用说明`。
+
 方法2，请使用`改版安装包的使用说明`。
 
 </details>

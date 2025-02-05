@@ -66,6 +66,10 @@ For method 2, use the `Instruction for Use (For modified client)` section.
 
 ## Instruction for Use (for official client) 
 
+<details>
+<summary>Details</summary>
+<br>
+
 ### Server
 
 Download the server and assets, and extract everything according to the `Download` section.
@@ -108,7 +112,13 @@ Make sure the private server is running on your PC. Make sure Charles acknowledg
 
 I did not test this method on iOS. If you know how to proxy stuff there, feel free read the Android guide and try the equivalent on iOS.
 
+<details>
+
 ## Instruction for Use (For modified client) 
+
+<details>
+<summary>Details</summary>
+<br>
 
 ### Server
 
@@ -150,6 +160,8 @@ Open the `ipa` file with your favorite zip viewer。Go into`Payload`,`GROOVE 2`.
 Open `settings.cfg` with a text editor，Edit `serverUrl` to your server's `http://ip:port/`.Drag`settings.cfg` back into the `ipa`。
 
 Sideload the `ipa`. Open the game, and observe the server.
+
+<details>
 
 ## Admin Functionalities
 
@@ -229,6 +241,10 @@ Account is only used for save file saving/loading (song ownership and coins are 
 
 ## 原版安装包的使用说明
 
+<details>
+<summary>细节</summary>
+<br>
+
 ### 服务器
 
 按照`下载`章节来下载解压服务器和资源。
@@ -269,7 +285,13 @@ PC打开 ```cmd``` 输入 ```ipconfig```。MAC 打开 ```terminal``` 输入 ```i
 
 我不了解iOS系统，如果你了解ios的代理软件，可以阅读安卓部分，然后照葫芦画瓢（
 
+<details>
+
 ## 改版安装包的使用说明
+
+<details>
+<summary>细节</summary>
+<br>
 
 ### 服务器
 
@@ -314,6 +336,8 @@ PC打开 ```cmd``` 输入 ```ipconfig```。MAC 打开 ```terminal``` 输入 ```i
 文本编辑器打开`settings.cfg`，将`serverUrl`改成私服的`http://ip:端口/`。将`settings.cfg`拖回`ipa`。
 
 侧载`ipa`即可。打开游戏，观察私服的输出。
+
+<details>
 
 ## 管理员功能
 

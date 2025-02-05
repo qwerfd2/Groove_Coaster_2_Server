@@ -54,7 +54,9 @@ Download common.zip and a platform of your choosing. Unzip them to the private s
 
 ## At the Start
 
-There are 2 ways of setting up the connection. Pick one.
+First, you need to set up the server. Use the `Setup the Server First` section.
+
+Next, there are 2 ways to set up the connection. Pick one.
 
 1. Proxy. Requires more setup, but the install package can remain unmodified.
 
@@ -64,13 +66,7 @@ For method 1, use the `Instruction for Use (for official client)` section.
 
 For method 2, use the `Instruction for Use (For modified client)` section.
 
-## Instruction for Use (for official client) 
-
-<details>
-<summary>Details</summary>
-<br>
-
-### Server
+## Setup the Server First
 
 Download the server and assets, and extract everything according to the `Download` section.
 
@@ -80,9 +76,13 @@ Note that MAC uses ```python3```. Code examples in this document will use the de
 
 Open command on windows. Type “ipconfig”, and remember your IPV4 address. This assumes that you are connected to a WIFI, and it should start with 192 or 172. Open the ```config.py``` of the private server, and change the IP accordingly. Type ```cmd``` in the file directory on the top of the file explorer, and press enter. A command prompt will be opened for that directory. Type ```python 7001.py``` to start the server. If an error pops up, resolve it now – did you install all the dependencies? Is the IP correct?
 
-### Application
+## Instruction for Use (for official client) 
 
-#### Android
+<details>
+<summary>Details</summary>
+<br>
+
+### Android
 
 For android 9+ devices, you need to bypass the `https protection` in order to MITM the connection between game client and server. If you have root, you can install Certificate Authorities to system level, allowing the device to trust it. If you don't have root, I don't think it is possible and you might have to modify the client.
 
@@ -108,7 +108,7 @@ On your `android` device, open `VProxid`. Create a new profile, with the server 
 
 Make sure the private server is running on your PC. Make sure Charles acknowledges the connection from the device. Make sure VProxid is running. Make sure your phone and laptop are under the same network. Start the game, and ovserve the server.
 
-#### iOS
+### iOS
 
 I did not test this method on iOS. If you know how to proxy stuff there, feel free read the Android guide and try the equivalent on iOS.
 
@@ -120,19 +120,7 @@ I did not test this method on iOS. If you know how to proxy stuff there, feel fr
 <summary>Details</summary>
 <br>
 
-### Server
-
-Download the server and assets, and extract everything according to the `Download` section.
-
-Install ```python``` and ```pip``` on your PC/MAC. 
-
-Note that MAC uses ```python3```. Code examples in this document will use the default of Windows, which is ```python```. After the installation, install dependencies using ```pip install ...```.
-
-Open command on windows. Type “ipconfig”, and remember your IPV4 address. This assumes that you are connected to a WIFI, and it should start with 192 or 172. Open the ```config.py``` of the private server, and change the IP accordingly. Type ```cmd``` in the file directory on the top of the file explorer, and press enter. A command prompt will be opened for that directory. Type ```python 7001.py``` to start the server. If an error pops up, resolve it now – did you install all the dependencies? Is the IP correct?
-
-### Application
-
-#### Android
+### Android
 
 Download the `apk` file from the link's `install packages` folder. Install it.
 
@@ -151,7 +139,7 @@ Open the game and observe the server output.
 (The provided apk has the following modifications. Skip if you are not interested in it)
 By modifying the apk's obb verification function and `obb`'s `settings.cfg`, you can connect to the server without using any proxy software. To do so, decompile `classes.dex` using your favorite `smali` decompiler, and go to `jp.co.groovecoasterzero/BootActivity`. Delete the part in `e()` where the loop is checking for a size, and, if mismatch, override a variable that causes the code to branch into `DownloadActivity`. We want the game to load the obb regardless of its size.
 
-#### iOS
+### iOS
 
 Download the `ipa` package from the link's `install packages` folder.
 
@@ -229,7 +217,9 @@ Account is only used for save file saving/loading (song ownership and coins are 
 
 ## 如何开始
 
-两种方式来设置连接。选一个吧。
+首先，你需要配置服务器。请使用`配置服务器`。
+
+接下来，有两种方式来设置连接。选一个吧。
 
 1. 代理。需要更多配置，不过安装包不需要修改。
    
@@ -239,13 +229,7 @@ Account is only used for save file saving/loading (song ownership and coins are 
 
 方法2，请使用`改版安装包的使用说明`。
 
-## 原版安装包的使用说明
-
-<details>
-<summary>细节</summary>
-<br>
-
-### 服务器
+## 配置服务器
 
 按照`下载`章节来下载解压服务器和资源。
 
@@ -258,7 +242,13 @@ PC打开 ```cmd``` 输入 ```ipconfig```。MAC 打开 ```terminal``` 输入 ```i
 
 服务器文件夹上方的路径清空，输入 ```cmd```。命令行窗口会弹出。输入 ```python 7001.py```来开启服务器。如果出现错误，就解决他们吧。检查依赖项是否安装，网络配置是否正确。
 
-#### 安卓
+## 原版安装包的使用说明
+
+<details>
+<summary>细节</summary>
+<br>
+
+### 安卓
 
 对于 Android 9+ 设备，您需要绕过 `https 保护`才能对游戏客户端和服务器之间的连接进行中间人攻击。如果您拥有 root 权限，则可以将证书安装到系统级别，从而允许设备信任中间人软件。若您没有root，此方法可能不可用。
 
@@ -281,7 +271,7 @@ PC打开 ```cmd``` 输入 ```ipconfig```。MAC 打开 ```terminal``` 输入 ```i
 
 确保您的`PC`上正在运行私服。 确保`Charles`提示并正在接收来自设备的连接。 确保`VProxid`正在运行。 确保您的设备和电脑在同一网络下。 开始游戏吧。
 
-#### iOS
+### iOS
 
 我不了解iOS系统，如果你了解ios的代理软件，可以阅读安卓部分，然后照葫芦画瓢（
 
@@ -293,22 +283,7 @@ PC打开 ```cmd``` 输入 ```ipconfig```。MAC 打开 ```terminal``` 输入 ```i
 <summary>细节</summary>
 <br>
 
-### 服务器
-
-按照`下载`章节来下载解压服务器和资源。
-
-PC/MAC安装 ```python```，安装 ```pip```。
-
-注意 MAC 默认为 ```python3```。往后的示例默认用 windows 的默认，即 ```python```。安装完成后，使用
-```pip install ...```安装所有依赖项。
-
-PC打开 ```cmd``` 输入 ```ipconfig```。MAC 打开 ```terminal``` 输入 ```ifconfig```。记住你的`IPV4`,一串为192或172开头的数字。PC用文本编辑器打开服务器文件夹的 ```config.py```，将`IPV4`填写至`IP`。`PORT`(端口)也可以更改。
-
-服务器文件夹上方的路径清空，输入 ```cmd```。命令行窗口会弹出。输入 ```python 7001.py```来开启服务器。如果出现错误，就解决他们吧。检查依赖项是否安装，网络配置是否正确。
-
-### 程序
-
-#### 安卓
+### 安卓
 
 下载网盘里`install packages`里的`apk`文件。安装。
 
@@ -327,7 +302,7 @@ PC打开 ```cmd``` 输入 ```ipconfig```。MAC 打开 ```terminal``` 输入 ```i
 （提供的apk已经执行了如下的修改，可以忽略）
 你可以通过修改apk里的obb校验函数然后修改`obb`里的`settings.cfg`来直连私服，无需中继软件。用顺手的`smali`反编译器来反编译`classes.dex`，然后去`jp.co.groovecoasterzero/BootActivity`。删除`e()`里循环检查文件大小的部分。这部分会检查obb文件的大小，如果不一致会修改一个变量跳至`DownloadActivity`。我们想强制游戏读取。
 
-#### iOS
+### iOS
 
 下载网盘里`install packages`里的`ipa`文件。
 

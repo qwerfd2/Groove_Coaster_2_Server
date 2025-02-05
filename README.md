@@ -329,6 +329,10 @@ PC打开 ```cmd``` 输入 ```ipconfig```。MAC 打开 ```terminal``` 输入 ```i
 
 </details>
 
+
+![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/stage_back10_big.png)
+![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/test2.JPG)
+
 <details>
 <summary>File Structure 文件结构</summary>
 <br>
@@ -362,10 +366,6 @@ server/
 ├─ config.py
 
 </details>
-
-
-![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/stage_back10_big.png)
-![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/test2.JPG)
 
 ## Journal
 

@@ -112,7 +112,7 @@ Make sure the private server is running on your PC. Make sure Charles acknowledg
 
 I did not test this method on iOS. If you know how to proxy stuff there, feel free read the Android guide and try the equivalent on iOS.
 
-<details>
+</details>
 
 ## Instruction for Use (For modified client) 
 
@@ -161,7 +161,7 @@ Open `settings.cfg` with a text editor，Edit `serverUrl` to your server's `http
 
 Sideload the `ipa`. Open the game, and observe the server.
 
-<details>
+</details>
 
 ## Admin Functionalities
 
@@ -285,7 +285,7 @@ PC打开 ```cmd``` 输入 ```ipconfig```。MAC 打开 ```terminal``` 输入 ```i
 
 我不了解iOS系统，如果你了解ios的代理软件，可以阅读安卓部分，然后照葫芦画瓢（
 
-<details>
+</details>
 
 ## 改版安装包的使用说明
 
@@ -337,7 +337,7 @@ PC打开 ```cmd``` 输入 ```ipconfig```。MAC 打开 ```terminal``` 输入 ```i
 
 侧载`ipa`即可。打开游戏，观察私服的输出。
 
-<details>
+</details>
 
 ## 管理员功能
 

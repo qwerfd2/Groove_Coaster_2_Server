@@ -3,13 +3,14 @@ from config import Config
 import os
 import sqlite3
 import binascii
-import bcrypt
+from passlib.hash import bcrypt
 import re
 from datetime import datetime
 import xml.etree.ElementTree as ET
 from Crypto.Cipher import AES
 import urllib.parse
 import json
+import requests
 
 try:
     with open("song_list.json", 'r', encoding="utf-8") as file:
@@ -82,6 +83,49 @@ title_lists = {
     2: master_titles,
     3: god_titles,
 }
+
+fmax_res = []
+fmax_ver = 0
+
+def get_4max_version_string():
+    url = "https://studio.code.org/v3/sources/3-aKHy16Y5XaAPXQHI95RnFOKlyYT2O95ia2HN2jKIs/main.json"
+    global fmax_ver
+    try:
+        with open("./files/4max_ver.txt", 'r') as file:
+            fmax_ver = file.read().strip()
+    except Exception as e:
+        print(f"An unexpected error occurred when loading files/4max_ver.txt: {e}")
+    
+    def fetch():
+        global fmax_res
+        try:
+            response = requests.get(url)
+            if 200 <= response.status_code <= 207:
+                try:
+                    fmax_res = json.loads(json.loads(response.text)['source'])
+                except (json.JSONDecodeError, KeyError):
+                    fmax_res = 500
+            else:
+                fmax_res = response.status_code
+        except requests.RequestException:
+            fmax_res = 400
+    
+    fetch()
+
+if (os.path.isfile('./files/dlc_4max.html')):
+    get_4max_version_string()
+
+def parse_res(res):
+    parsed_data = []
+    if isinstance(res, int):
+        return "Failed to fetch version info: Error " + str(res)
+    
+    for item in res:
+        if item.get("isOpen"):
+            version = item.get("version", "Unknown Version")
+            changelog = "<br>".join(item.get("changeLog", {}).get("en", []))
+            parsed_data.append(f"<strong>Version: {version}</strong><p><strong>Changelog:</strong><br>{changelog}</p>")
+    return "".join(parsed_data)
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -162,12 +206,10 @@ def crc32_decimal(data):
     return int(crc32_hex & 0xFFFFFFFF)
 
 def hash_password(password):
-    salt = bcrypt.gensalt()
-    hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
-    return hashed_password
+    return bcrypt.hash(password)
 
 def verify_password(password, hashed_password):
-    return bcrypt.checkpw(password.encode('utf-8'), hashed_password)
+    return bcrypt.verify(password, hashed_password)
 
 def is_alphanumeric(username):
     pattern = r"^[a-zA-Z0-9]+$"
@@ -621,8 +663,8 @@ def result():
         do_update_sid = False
         do_update_vid = False
         last_row_id = 0
-
-        if (int(id) not in range(616, 1000) or int(mode) not in range(10, 14)):
+        print(int(id), int(mode))
+        if (int(id) not in range(616, 1000) or int(mode) not in range(0, 4)):
             # Increment coin for user, if track is not 4max dlx pack mobile difficulty.
             with sqlite3.connect(DATABASE) as connection:
                 cursor = connection.cursor()
@@ -786,6 +828,7 @@ def web_shop():
         cnt_type = decrypted_fields[b'cnt_type'][0].decode()
         device_id = decrypted_fields[b'vid'][0].decode()
         inc = 0
+        fmax_inc = 0
         buttons_html = ""
         # Define the path for the HTML template
         html_path = f"files/web_shop_{cnt_type}.html"
@@ -805,6 +848,14 @@ def web_shop():
             if (700 not in my_stage and os.path.isfile('./files/dlc_4max.html')):
                 buttons_html += """
                     <a href="wwic://web_shop_detail?&cnt_type=1&cnt_id=-1">
+                        <img src="/files/web/dlc_4max.jpg" style="width: 84%; margin-bottom: 20px; margin-top: -100px;" />
+                    </a><br>
+                """
+                fmax_inc = 1
+
+            elif (700 in my_stage and os.path.isfile('./files/dlc_4max.html')):
+                buttons_html += """
+                    <a href="wwic://web_shop_detail?&cnt_type=1&cnt_id=-2">
                         <img src="/files/web/dlc_4max.jpg" style="width: 84%; margin-bottom: 20px; margin-top: -100px;" />
                     </a><br>
                 """
@@ -850,7 +901,7 @@ def web_shop():
                 if (idx + 1) % 4 == 0:
                     buttons_html += "<br>"
             
-        if (inc == 0):
+        if (inc == 0 and fmax_inc == 0):
             buttons_html += f"""<div>Everything has been purchased!</div>"""
         # Read and format the HTML template
         with open(html_path, "r", encoding="utf-8") as file:
@@ -881,7 +932,7 @@ def web_shop_detail():
         html = ""
 
         if (cnt_type == "1"):
-            if (cnt_id != -1):
+            if (cnt_id > -1):
                 song = song_list[cnt_id]
                 difficulty_levels = "/".join(map(str, song.get("difficulty_levels", [])))
                 song_stage_price = stage_price
@@ -901,6 +952,41 @@ def web_shop_detail():
                     <span style="color: #FFFFFF; font-size: 44px; font-family: Hiragino Kaku Gothic ProN, sans-serif;">{song_stage_price}</span>
                 </div>
                 """
+            else:
+                if cnt_id == -2:
+                    log = parse_res(fmax_res)
+                    html = f"""
+                        <div class="text-content">
+                            <p>You have unlocked the GC4MAX expansion!</p>
+                            <p>Please report bugs/missing tracks to Discord: #AnTcfgss, or QQ 3421587952.</p>
+                            <button class="quit-button" onclick="window.location.href='wwic://web_shop?&cnt_type=1'">
+                                Go Back
+                            </button><br>
+                            <strong>This server has version {fmax_ver}.</strong>
+                            <p>Update log: </p>
+                            <p>{log}<p><br>
+                        </div>
+                    """
+                elif cnt_id == -1:
+                    html = f"""
+                        <div class="text-content">
+                            <p>Experience the arcade with the GC4MAX expansion! This DLC unlocks 320+ exclusive songs for your 2OS experience.</p>
+                            <p>Note that these songs don't have mobile difficulties. A short placeholder is used, and GCoin reward is not available for playing them. You must clear the Normal difficulty to unlock AC content.</p>
+                            <p>Due to technical limitations, Extra level charts cannot be ported as of now. After purchasing, you will have access to support information and update logs.</p>
+                        </div>
+
+                        <button class="buy-button" onclick="window.location.href='wwic://web_purchase_coin?&cnt_type=1&cnt_id=-1&num=1'">
+                            Buy
+                            <div class="coin-container">
+                            <img src="/files/web/coin_icon.png" alt="Coin Icon" class="coin-icon">
+                            <span style="font-size: 22px; font-weight: bold;"> 300</span>
+                            </div>
+                        </button>
+                        <br><br>
+                        <button class="quit-button" onclick="window.location.href='wwic://web_shop?&cnt_type=1'">
+                            Go Back
+                        </button>
+                    """
 
         elif (cnt_type == "2"):
             avatar = next((item for item in avatar_list if item.get("id") == cnt_id), None)
@@ -942,7 +1028,7 @@ def web_shop_detail():
             else:
                 html = "<p>Item not found.</p>"
 
-        if (cnt_type == "1" and cnt_id == -1):
+        if (cnt_type == "1" and cnt_id < 0):
             source_html = f"files/dlc_4max.html"
         else:
             source_html = f"files/web_shop_detail.html"
@@ -1143,6 +1229,10 @@ def ranking_detail():
         if (len(difficulty_levels) == 6):
             button_labels.extend(["AC-Easy", "AC-Normal", "AC-Hard"])
             button_modes.extend([11, 12, 13])
+
+        if song_id > 615:
+            button_modes = [x for x in button_modes if x not in [1, 2, 3]]
+            button_labels = [x for x in button_labels if x not in ["Easy", "Normal", "Hard"]]
 
         row_start = '<div class="button-row">'
         row_end = '</div>'
@@ -1394,7 +1484,7 @@ def status():
             query = "SELECT * FROM daily_reward WHERE device_id = ?"
             cursor.execute(query, (device_id,))
             user_data = cursor.fetchone()
-            user_name = user_data[1]
+            user_name = "Guest(" + user_data[1][-6:] + ")"
 
             query = "SELECT username FROM user WHERE device_id = ?"
             cursor.execute(query, (user_data[1],))

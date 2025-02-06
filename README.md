@@ -110,6 +110,16 @@ change `config.py`'s `IP` to `127.0.0.1` (this is `loopback`. Feel free to use y
 
 </details>
 
+### iOS (Hard)
+
+<details>
+<summary>Details</summary>
+<br>
+
+I did some research on `Pythonista` and it seems possible, but you are on your own for this one.
+
+</details>
+
 ## Instruction for Use (for official client) 
 
 <details>
@@ -307,6 +317,16 @@ PC打开 ```cmd``` 输入 ```ipconfig```。MAC 打开 ```terminal``` 输入 ```i
 `cd storage/shared/.... (服务器在安卓文件系统的位置)`
 
 `python 7001.py` 来运行服务器。
+
+</details>
+
+### iOS (难)
+
+<details>
+<summary>细节</summary>
+<br>
+
+`Pythonista`貌似可用，不过我祝你好运。
 
 </details>
 

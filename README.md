@@ -52,6 +52,10 @@ Download common.zip and a platform of your choosing. Unzip them to the private s
 
 - Crypto (pycryptodome)
 
+- Passlib
+
+- requests
+
 ## At the Start
 
 First, you need to set up the server. Use the `Setup the Server First` section.
@@ -76,7 +80,13 @@ Install ```python``` and ```pip``` on your PC/MAC.
 
 Note that MAC uses ```python3```. Code examples in this document will use the default of Windows, which is ```python```. After the installation, install dependencies using ```pip install ...```.
 
-Open command on windows. Type “ipconfig”, and remember your IPV4 address. This assumes that you are connected to a WIFI, and it should start with 192 or 172. Open the ```config.py``` of the private server, and change the IP accordingly. Type ```cmd``` in the file directory on the top of the file explorer, and press enter. A command prompt will be opened for that directory. Type ```python 7001.py``` to start the server. If an error pops up, resolve it now – did you install all the dependencies? Is the IP correct?
+Open command on Windows (MAC open terminal). Type `ipconfig` (MAC `ifconfig`), and obtain your IPV4 address. This assumes that you are connected to a WIFI, and it should start with 192 or 172.
+
+Open the ```config.py``` of the private server, and change the `IP` accordingly.
+
+Type ```cmd``` in the file directory on the top of the file explorer, and press enter. A command prompt will be opened for that directory.
+
+Type ```python 7001.py``` to start the server. If an error pops up, resolve it now – did you install all the dependencies? Is the IP correct?
 
 ### Android (Harder)
 
@@ -257,7 +267,9 @@ Account is only used for save file saving/loading (song ownership and coins are 
 
 - Crypto (pycryptodome)
 
-- urllib3
+- Passlib
+
+- requests
 
 ## 如何开始
 
@@ -284,9 +296,13 @@ PC/MAC安装 ```python```，安装 ```pip```。
 注意 MAC 默认为 ```python3```。往后的示例默认用 windows 的默认，即 ```python```。安装完成后，使用
 ```pip install ...```安装所有依赖项。
 
-PC打开 ```cmd``` 输入 ```ipconfig```。MAC 打开 ```terminal``` 输入 ```ifconfig```。记住你的`IPV4`,一串为192或172开头的数字。PC用文本编辑器打开服务器文件夹的 ```config.py```，将`IPV4`填写至`IP`。`PORT`(端口)也可以更改。
+PC打开 ```cmd``` 输入 ```ipconfig```。MAC 打开 ```terminal``` 输入 ```ifconfig```。获得你的`IPV4`,一串为192或172开头的数字。
 
-服务器文件夹上方的路径清空，输入 ```cmd```。命令行窗口会弹出。输入 ```python 7001.py```来开启服务器。如果出现错误，就解决他们吧。检查依赖项是否安装，网络配置是否正确。
+PC用文本编辑器打开服务器文件夹的 ```config.py```，将`IPV4`填写至`IP`。`PORT`(端口)也可以更改。
+
+文件管理器上方的文件夹路径清空，输入 ```cmd```。命令行窗口会弹出。
+
+输入 ```python 7001.py```来开启服务器。如果出现错误，就解决他们吧。检查依赖项是否安装，网络配置是否正确。
 
 ### 安卓(稍难)
 

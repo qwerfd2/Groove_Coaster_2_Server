@@ -102,13 +102,13 @@ Type the following commands.
 
 `pkg install python`
 
-`pkg up ssl -y`
-
 Use
 
 `pip install ...`
 
 to install `flask`, `passlib`, `pycryptodome`, `requests`.
+
+If ssl errors pop up, you might need to ``pkg up ssl -y``.
 
 Copy the server to phone, or upzip the server files on the phone. (Skip the iOS files if not needed, it takes up a lot of space)
 
@@ -318,13 +318,13 @@ PC用文本编辑器打开服务器文件夹的 ```config.py```，将`IPV4`填�
 
 `pkg install python`
 
-`pkg up ssl -y`
-
 用
 
 `pip install ...`
 
 来安装 `flask`, `passlib`, `pycryptodome`, `requests`.
+
+如果出现ssl问题，可能需要``pkg up ssl -y``.
 
 将服务器拷到手机上，或者在手机上解压服务器文件。（如不需要iOS文件，就省点手机空间，别拷贝ios的东西了）
 

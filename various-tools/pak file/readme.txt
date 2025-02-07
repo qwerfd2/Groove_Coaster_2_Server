@@ -1,1 +1,1 @@
-Tool for packing/unpaking the stage, skin, and tunFile paks.
+Tool for packing/unpaking the stage, skin, and tuneFile paks.

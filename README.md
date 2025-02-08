@@ -186,12 +186,12 @@ Open `settings.cfg` with your text editor, and change `serverUrl` to your server
 
 Use `WinRAR` or `7-zip` to compress everything within the folder with the original password. Use `ZIP legacy encryption` for `WinRAR`, `ZipCrypto` for `7-zip`。Name the compressed zip to `main.76.jp.co.taito.groovecoasterzero.obb`.
 
-Paste (overwrite) the `obb` already inside `Android/obb/jp.co.groovecoasterzero`. If the folder does not exist yet, you need to create it manually.
+Paste (overwrite) the `obb` already inside `Android/obb/jp.co.taito.groovecoasterzero`. If the folder does not exist yet, you need to create it manually.
 
 Open the game and observe the server output.
 
 (The provided apk has the following modifications. Skip if you are not interested in it)
-By modifying the apk's obb verification function and `obb`'s `settings.cfg`, you can connect to the server without using any proxy software. To do so, decompile `classes.dex` using your favorite `smali` decompiler, and go to `jp.co.groovecoasterzero/BootActivity`. Delete the part in `e()` where the loop is checking for a size, and, if mismatch, override a variable that causes the code to branch into `DownloadActivity`. We want the game to load the obb regardless of its size.
+By modifying the apk's obb verification function and `obb`'s `settings.cfg`, you can connect to the server without using any proxy software. To do so, decompile `classes.dex` using your favorite `smali` decompiler, and go to `jp.co.taito.groovecoasterzero/BootActivity`. Delete the part in `e()` where the loop is checking for a size, and, if mismatch, override a variable that causes the code to branch into `DownloadActivity`. We want the game to load the obb regardless of its size.
 
 ### iOS
 
@@ -407,12 +407,12 @@ PC用文本编辑器打开服务器文件夹的 ```config.py```，将`IPV4`填�
 
 用`WinRAR`或者`7-zip`压缩全部文件至zip，用密码加密。用`ZIP legacy encryption`/`ZipCrypto`。名称为`main.76.jp.co.taito.groovecoasterzero.obb`.
 
-覆盖`Android/obb/jp.co.groovecoasterzero`里的`obb`文件。如文件夹不存在，需要手动创建。
+覆盖`Android/obb/jp.co.taito.groovecoasterzero`里的`obb`文件。如文件夹不存在，需要手动创建。
 
 打开游戏，观察私服的输出。
 
 （提供的apk已经执行了如下的修改，可以忽略）
-你可以通过修改apk里的obb校验函数然后修改`obb`里的`settings.cfg`来直连私服，无需中继软件。用顺手的`smali`反编译器来反编译`classes.dex`，然后去`jp.co.groovecoasterzero/BootActivity`。删除`e()`里循环检查文件大小的部分。这部分会检查obb文件的大小，如果不一致会修改一个变量跳至`DownloadActivity`。我们想强制游戏读取。
+你可以通过修改apk里的obb校验函数然后修改`obb`里的`settings.cfg`来直连私服，无需中继软件。用顺手的`smali`反编译器来反编译`classes.dex`，然后去`jp.co.taito.groovecoasterzero/BootActivity`。删除`e()`里循环检查文件大小的部分。这部分会检查obb文件的大小，如果不一致会修改一个变量跳至`DownloadActivity`。我们想强制游戏读取。
 
 ### iOS
 

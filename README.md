@@ -26,7 +26,7 @@ Warning: Do not put personal files under the folders in the private server direc
 |---------------------|------------------------------------------------------------------------------------------------------------------------|
 | Asset delivery      | .pak, stage and music zip files                                                                                        |
 | Shop                | Purchase individual songs, avatars, and items using GCoin. GCoins are earned by playing the game. Does not support music preview. Does not support song pack. |
-| Ranking             | Individual song-difficulty ranking. Does not support Regional ranking. Does not support viewing player profile.        |
+| Ranking             | Individual song-difficulty ranking. Support total score ranking, but does not support regional ranking. Does not support viewing player profile.        |
 | Save backup         | Support save/load via an Account system. Support password and username changes. Support logging out.                   |
 | Titles              | Static full-unlock and setting titles via "Status".                                                                    |
 | Mission             | Basic automatic song unlock after reaching in-game levels. Everything else is not supported.                           |
@@ -217,6 +217,14 @@ If you want to make your service only available to whitelisted devices, turn on 
 
 Account is only used for save file saving/loading (song ownership and coins are tied to devices. However, songs unlocked in the save file will remain unlocked on a new device). Unlike the official version, you can rename and log out of your account. However, only one device may be connected to an account at a time. The old device will be logged off if a new device logs in.
 
+## Ranking System Implementation
+
+I speculate that the official server's behavior hinges upon the fact that you cannot log out of your account, and that there is a maximum device count (5). This means that each `account` is connected to 5 `devices` via `foreign keys`, and the owned `entitlements` (stages, avatars, etc) and `play records` can be tallied.
+
+In the private server, you can log out of devices with ease. This means that `entitlements` and `play records` is not possible to remain consistent, unless we treat `account` as `devices`, which is clearly not the offical behavior.
+
+With the current setup, if a `device` is playing with an associated `account`, the `account` information is saved at the same time and will continue to be shown on ranking in the future. The `Avatar` information is saved with the `play records` and will not follow the `account` or `device`. The `Title` information is not in the `play records`, nor in the `account`, so it will be tied to the `Title` of the `device`.
+
 </details>
 
 <details>
@@ -241,7 +249,7 @@ Account is only used for save file saving/loading (song ownership and coins are 
 |--------------|---------------------------------------------------------------------------------------------|
 | 文件下载      | .pak, 谱面及音频zip文件                                                                      |
 | 商店         | 用GCoin购买单独的歌曲，头像，和道具。 GCoins可通过玩游戏来获得。不支持音频预览。不支持曲包。       |
-| 排行榜       | 每首歌曲/难度的单独排行榜。不支持地区排行榜。不支持查看其他玩家的详细信息。                        |
+| 排行榜       | 每首歌曲/难度的单独排行榜。总分排行榜。不支持地区排行榜。不支持查看其他玩家的详细信息。            |
 | 存档备份     | 支持通过账号系统的保存/加载。支持修改密码和用户名。支持登出。                                     |
 | Titles      | 通过Status观看并使用全解锁的Titles。                                                           |
 | 任务         | 支持达到游戏内经验等级后歌曲自动解锁。其他功能均不支持。                                         |
@@ -429,6 +437,14 @@ PC用文本编辑器打开服务器文件夹的 ```config.py```，将`IPV4`填�
 ## 账号系统实装
 
 账号仅用于保存/同步存档。Gcoin和歌曲所有权和设备绑定。不过，存档中已经解锁的曲目将在新的设备上可用。官方版不允许重命名及登出账号。私服则可以进行这些操作。不过，一个账号只能同时登陆一台设备，如果登录第二台设备，第一台设备将被挤掉。
+
+## 排行榜系统实装
+
+我推测官方服务器的行为取决于一个事实，即你不能注销你的账号，而且有一个最大设备数（5）。这意味着每个`账户`通过 `foreign key` 连接到 5 个`设备`，这样就可以统计所有拥有的 `权益`（`音乐`、`头像`等）和`游玩记录`。
+
+在私服，用户可以任意注销设备。这意味着`权益`和`游玩记录`不可能保持一致，除非我们把`账户`当作`设备`，而这显然不是官服的行为。
+
+目前的设置下，假如一台`设备`游玩时有关联`账户`，`账户`信息会同时保存，并且未来将持续显示当时连接的`账户`信息。`头像`信息随`游玩记录`保存，将不跟随`账户`或者`设备`。`Title`信息不在`游玩记录`里，也不在`账户`里，所以将和该设备的`Title`绑定。
 
 </details>
 

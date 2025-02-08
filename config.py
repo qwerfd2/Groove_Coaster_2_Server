@@ -13,9 +13,9 @@ class Config:
     Datecode of the 3 pak files.
     三个pak文件的时间戳。
     '''
-    MODEL = '202404221228'
-    TUNEFILE = '202404221250'
-    SKIN = '202404191147'
+    MODEL = '202404221226'
+    TUNEFILE = '202404221247'
+    SKIN = '202404191148'
     '''
     Groove Coin-related settings.
     GCoin相关设定。

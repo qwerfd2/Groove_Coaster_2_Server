@@ -1,0 +1,1 @@
+Same-ish implementation from sysmes, but without the bodge. Usage is similar too.

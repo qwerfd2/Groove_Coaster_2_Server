@@ -23,7 +23,7 @@ def read_byte(f):
 
 def parse_pak_file(file_path, output_xlsx):
     with open(file_path, "rb") as f:
-        num_elements = read_int_old(f, 2)
+        num_elements = read_int_old(f, 2)  # Read header (2 bytes)
         data = []
         
         for _ in range(num_elements):
@@ -39,12 +39,7 @@ def parse_pak_file(file_path, output_xlsx):
                 "String4": read_string(f),
                 "String5": read_string(f),
                 "String6": read_string(f),
-                "Field5": read_int(f),
-                "Float1": read_int(f, 1),
-                "Float2": read_int(f, 1),
-                "Float3": read_int(f, 1),
-                "Float4": read_int(f, 1),
-                "Field6": read_byte(f),
+                "Field5": read_int(f, 9),
                 "Field7": read_byte(f),
                 "Field8": read_int(f),
                 "Field9": read_byte(f),
@@ -76,13 +71,9 @@ def parse_pak_file(file_path, output_xlsx):
                 "Field35": read_int(f),
                 "Field36": read_int(f),
                 "Field37": read_int(f),
-                "Field38": read_byte(f)
+                "Field38": read_int(f, 2)
             }
-            # This is a hack (not derived from IDA) but there are discrepancies here that can be addressed this way
-            if (entry["String5"] != "" or entry["String6"] != "" ):
-                entry["Field39"] = read_int(f)
-            
-            entry["Field40"] = read_byte(f)
+
             data.append(entry)
 
     df = pd.DataFrame(data)

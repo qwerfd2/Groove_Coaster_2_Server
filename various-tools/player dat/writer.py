@@ -3,7 +3,7 @@ import pandas as pd
 
 def write_string(f, s):
     if pd.isna(s):
-        f.write(struct.pack("B", 0))  # Write 00 if string is empty
+        f.write(struct.pack("B", 0))
     else:
         encoded = s.encode("utf-8")
         f.write(struct.pack("B", len(encoded)))
@@ -14,7 +14,7 @@ def write_int(f, value, size=4):
 
 def write_byte(f, value):
     if pd.isna(value):
-        f.write(struct.pack("B", 0))  # Write 00 if string is empty
+        f.write(struct.pack("B", 0))
     else:
         f.write(bytes.fromhex(value))
 
@@ -23,7 +23,7 @@ def convert_xlsx_to_dat(input_xlsx, output_dat):
     
     with open(output_dat, "wb") as f:
         num_elements = len(df)
-        write_int(f, f"{num_elements:04X}", 2)  # Header (2 bytes for number of elements)
+        write_int(f, f"{num_elements:04X}", 2)
         
         for _, row in df.iterrows():
             write_int(f, row["Field1"])
@@ -70,5 +70,4 @@ def convert_xlsx_to_dat(input_xlsx, output_dat):
             write_int(f, row["Field37"])
             write_byte(f, row["Field38"])
             
-    
 convert_xlsx_to_dat("player.xlsx", "out_player.dat")

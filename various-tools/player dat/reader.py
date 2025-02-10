@@ -4,7 +4,6 @@ import pandas as pd
 def read_string(f):
     length = struct.unpack("B", f.read(1))[0]
     str = f.read(length).decode("utf-8")
-    print("str ", str)
     return str
 
 def read_int_old(f, size=4):
@@ -13,21 +12,18 @@ def read_int_old(f, size=4):
 
 def read_int(f, size=4):
     result = " ".join(f"{b:02X}" for b in f.read(size))
-    print("int ", result)
     return result
 
 def read_byte(f):
     result = " ".join(f"{b:02X}" for b in f.read(1))
-    print("byte ", result)
     return result
 
 def parse_pak_file(file_path, output_xlsx):
     with open(file_path, "rb") as f:
-        num_elements = read_int_old(f, 2)  # Read header (2 bytes)
+        num_elements = read_int_old(f, 2)
         data = []
         
         for _ in range(num_elements):
-            print("prd", _)
             entry = {
                 "Field1": read_int(f),
                 "Field2": read_byte(f),
@@ -79,5 +75,4 @@ def parse_pak_file(file_path, output_xlsx):
     df = pd.DataFrame(data)
     df.to_excel(output_xlsx, index=False)
 
-# Example usage
 parse_pak_file("player.dat", "player.xlsx")

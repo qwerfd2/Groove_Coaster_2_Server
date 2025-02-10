@@ -1,8 +1,8 @@
 # Groove-Coaster-2OS-Server
 
-A small local server for ```Groove Coaster 2: Original Style```, implemented with ```Python``` and ```Flask```. 
+A small local server for `Groove Coaster 2: Original Style`, implemented with `Python` and `Flask`. 
 
-一个基于```Python```和```Flask```的微型```Groove Coaster 2: Original Style```本地服务器。
+一个基于`Python`和`Flask`的微型`Groove Coaster 2: Original Style`本地服务器。
 
 <details>
 <summary>English</summary>
@@ -16,7 +16,7 @@ You are not allowed to use it for commercial purposes. You shall bare all the re
 
 Inspiration: [Lost-MSth/Arcaea-server](https://github.com/Lost-MSth/Arcaea-server)
 
-Special thanks: [Walter-o/gcm-downloader]https://github.com/Walter-o/gcm-downloader
+Special thanks: [Walter-o/gcm-downloader](https://github.com/Walter-o/gcm-downloader)
 
 Warning: Do not put personal files under the folders in the private server directory - all files within these sub-folders will be accessible by anyone with your server address! Security and performance are not guaranteed, and it is not recommended to host this server on the internet. You have been warned.
 
@@ -76,17 +76,17 @@ For method 2, use the `Instruction for Use (For modified client)` section.
 
 Download the server and assets, and extract everything according to the `Download` section.
 
-Install ```python``` and ```pip``` on your PC/MAC. 
+Install `python` and `pip` on your PC/MAC. 
 
-Note that MAC uses ```python3```. Code examples in this document will use the default of Windows, which is ```python```. After the installation, install dependencies using ```pip install ...```.
+Note that MAC uses `python3`. Code examples in this document will use the default of Windows, which is `python`. After the installation, install dependencies using `pip install ...`.
 
 Open command on Windows (MAC open terminal). Type `ipconfig` (MAC `ifconfig`), and obtain your IPV4 address. This assumes that you are connected to a WIFI, and it should start with 192 or 172.
 
-Open the ```config.py``` of the private server, and change the `IP` accordingly.
+Open the `config.py` of the private server, and change the `IP` accordingly.
 
-Type ```cmd``` in the file directory on the top of the file explorer, and press enter. A command prompt will be opened for that directory.
+Type `cmd` in the file directory on the top of the file explorer, and press enter. A command prompt will be opened for that directory.
 
-Type ```python 7001.py``` to start the server. If an error pops up, resolve it now – did you install all the dependencies? Is the IP correct?
+Type `python 7001.py` to start the server. If an error pops up, resolve it now – did you install all the dependencies? Is the IP correct?
 
 ### Android (Harder)
 
@@ -138,7 +138,7 @@ I did some research on `Pythonista` and it seems possible, but you are on your o
 
 ### Android
 
-For android 9+ devices, you need to bypass the `https protection` in order to MITM the connection between game client and server. If you have root, you can install Certificate Authorities to system level, allowing the device to trust it. If you don't have root, I don't think it is possible and you might have to modify the client.
+For android 9+ devices, you need to bypass `https` in order to MITM the connection between game client and server. If you have root, you can install Certificate Authorities to system level, allowing the device to trust it. If you don't have root, I don't think it is possible and you might have to modify the client.
 
 I will demonstrate the `VProxid` + `Charles` method.
 
@@ -191,6 +191,7 @@ Paste (overwrite) the `obb` already inside `Android/obb/jp.co.taito.groovecoaste
 Open the game and observe the server output.
 
 (The provided apk has the following modifications. Skip if you are not interested in it)
+
 By modifying the apk's obb verification function and `obb`'s `settings.cfg`, you can connect to the server without using any proxy software. To do so, decompile `classes.dex` using your favorite `smali` decompiler, and go to `jp.co.taito.groovecoasterzero/BootActivity`. Delete the part in `e()` where the loop is checking for a size, and, if mismatch, override a variable that causes the code to branch into `DownloadActivity`. We want the game to load the obb regardless of its size.
 
 ### iOS
@@ -209,9 +210,9 @@ Sideload the `ipa`. Open the game, and observe the server.
 
 Database can be opened with DB Browser.
 
-If you want to make your service only available to whitelisted devices, turn on ```AUTHORIZATION_NEEDED``` in ```config.py``` and add the device id after the .php request to the ```whitelist table```. If you want to ban a device/taito ID, add the device ID or the username of the taito ID to the blacklist table. The ```reason``` column is for your own reference. If a device is logged in to that Taito ID, they cannot download asset, cannot log out, and cannot change name. If a device is not in the whitelist (if enabled) or is banned by device ID, they will not be able to download anything.
+If you want to make your service only available to whitelisted devices, turn on `AUTHORIZATION_NEEDED` in `config.py` and add the device id after the .php request to the `whitelist table`. If you want to ban a device/taito ID, add the device ID or the username of the taito ID to the blacklist table. The `reason` column is for your own reference. If a device is logged in to that Taito ID, they cannot download asset, cannot log out, and cannot change name. If a device is not in the whitelist (if enabled) or is banned by device ID, they will not be able to download anything.
 
-```getCrypt.py``` is a standalone script used to decrypt the mass inside the ```GET``` requests.
+`getCrypt.py` is a standalone script used to decrypt the mass inside the `GET` requests.
 
 ## Account System Implementation
 
@@ -299,18 +300,18 @@ With the current setup, if a `device` is playing with an associated `account`, t
 
 按照`下载`章节来下载解压服务器和资源。
 
-PC/MAC安装 ```python```，安装 ```pip```。
+PC/MAC安装 `python`，安装 `pip`。
 
-注意 MAC 默认为 ```python3```。往后的示例默认用 windows 的默认，即 ```python```。安装完成后，使用
-```pip install ...```安装所有依赖项。
+注意 MAC 默认为 `python3`。往后的示例默认用 windows 的默认，即 `python`。安装完成后，使用
+`pip install ...`安装所有依赖项。
 
-PC打开 ```cmd``` 输入 ```ipconfig```。MAC 打开 ```terminal``` 输入 ```ifconfig```。获得你的`IPV4`,一串为192或172开头的数字。
+PC打开 `cmd` 输入 `ipconfig`。MAC 打开 `terminal` 输入 `ifconfig`。获得你的`IPV4`,一串为192或172开头的数字。
 
-PC用文本编辑器打开服务器文件夹的 ```config.py```，将`IPV4`填写至`IP`。`PORT`(端口)也可以更改。
+PC用文本编辑器打开服务器文件夹的 `config.py`，将`IPV4`填写至`IP`。`PORT`(端口)也可以更改。
 
-文件管理器上方的文件夹路径清空，输入 ```cmd```。命令行窗口会弹出。
+文件管理器上方的文件夹路径清空，输入 `cmd`。命令行窗口会弹出。
 
-输入 ```python 7001.py```来开启服务器。如果出现错误，就解决他们吧。检查依赖项是否安装，网络配置是否正确。
+输入 `python 7001.py`来开启服务器。如果出现错误，就解决他们吧。检查依赖项是否安装，网络配置是否正确。
 
 ### 安卓(稍难)
 
@@ -362,7 +363,7 @@ PC用文本编辑器打开服务器文件夹的 ```config.py```，将`IPV4`填�
 
 ### 安卓
 
-对于 Android 9+ 设备，您需要绕过 `https 保护`才能对游戏客户端和服务器之间的连接进行中间人攻击。如果您拥有 root 权限，则可以将证书安装到系统级别，从而允许设备信任中间人软件。若您没有root，此方法可能不可用。
+对于 Android 9+ 设备，您需要绕过 `https`才能对游戏客户端和服务器之间的连接进行中间人攻击。如果您拥有 root 权限，则可以将证书安装到系统级别，从而允许设备信任中间人软件。若您没有root，此方法可能不可用。
 
 这里展示`VProxid`加`Charles`方法。 在您的`Android`设备上安装`VProxid`。 在`Windows PC`上安装`Charles`。 `Charles`有免费试用期，但有多种方法可以免费注册。 请对此主题进行自己的研究。
 
@@ -412,6 +413,7 @@ PC用文本编辑器打开服务器文件夹的 ```config.py```，将`IPV4`填�
 打开游戏，观察私服的输出。
 
 （提供的apk已经执行了如下的修改，可以忽略）
+
 你可以通过修改apk里的obb校验函数然后修改`obb`里的`settings.cfg`来直连私服，无需中继软件。用顺手的`smali`反编译器来反编译`classes.dex`，然后去`jp.co.taito.groovecoasterzero/BootActivity`。删除`e()`里循环检查文件大小的部分。这部分会检查obb文件的大小，如果不一致会修改一个变量跳至`DownloadActivity`。我们想强制游戏读取。
 
 ### iOS
@@ -430,9 +432,9 @@ PC用文本编辑器打开服务器文件夹的 ```config.py```，将`IPV4`填�
 
 数据库可以用DB Browser打开。
 
-如果你想只对在白名单里的设备提供服务，开启```config.py```里的```AUTHORIZATION_NEEDED```，并将.php请求后面的设备ID加入```whitelist```列表。如果你想封禁设备或者Taito ID，将设备ID或者用户名加入```blacklist```列表。```reason```列可供你记录封禁原因。如果设备登陆该Taito ID，它将无法下载数据，不能登出，而且不能改名。如果设备在白名单开启后不在白名单里，或者设备被封禁，它将无法下载任何东西。
+如果你想只对在白名单里的设备提供服务，开启`config.py`里的`AUTHORIZATION_NEEDED`，并将.php请求后面的设备ID加入`whitelist`列表。如果你想封禁设备或者Taito ID，将设备ID或者用户名加入`blacklist`列表。`reason`列可供你记录封禁原因。如果设备登陆该Taito ID，它将无法下载数据，不能登出，而且不能改名。如果设备在白名单开启后不在白名单里，或者设备被封禁，它将无法下载任何东西。
 
-```getCrypt.py``` 是一个用来单独解密```GET```请求后缀的脚本.
+`getCrypt.py` 是一个用来单独解密`GET`请求后缀的脚本.
 
 ## 账号系统实装
 

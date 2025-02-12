@@ -176,7 +176,7 @@ I did not test this method on iOS. If you know how to proxy stuff there, feel fr
 
 ### Android
 
-Download the `apk` file from the link's `install packages` folder. Install it.
+Download the `apk` file from the link's `install packages` folder. Install it. For `Android 14+` devices, you might need to use `lucky patcher` to rebuild the app (`Menu of Patches` - `Create Modified APK File` - `APK with changed permissions and activities` - toggle `Removes integrity check and signature verification` and `Re-sign with original signature for android patch "Disable .apk Signature Verification"`).
 
 This `apk` has been modified. If you'd like to edit it on your own, see the last paragraph.
 
@@ -398,7 +398,7 @@ PC用文本编辑器打开服务器文件夹的 `config.py`，将`IPV4`填写至
 
 ### 安卓
 
-下载网盘里`install packages`里的`apk`文件。安装。
+下载网盘里`install packages`里的`apk`文件。安装。`安卓14+` 设备可能需要用`幸运破解器`重构APK (`Menu of Patches` - `Create Modified APK File` - `APK with changed permissions and activities` - 打开 `Removes integrity check and signature verification` 和 `Re-sign with original signature for android patch "Disable .apk Signature Verification"`)。
 
 此`apk`被修改过。若想自己修改,请看最后一段。
 

@@ -66,8 +66,8 @@ def parse_pak_file(file_path, output_xlsx):
                 "Field34": read_byte(f),
                 "Field35": read_int(f),
                 "Field36": read_int(f),
-                "Field37": read_int(f),
-                "Field38": read_int(f, 2)
+                "Field37": read_int(f, 2),
+                "Field38": read_int(f)
             }
 
             data.append(entry)

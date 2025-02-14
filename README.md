@@ -42,7 +42,7 @@ Asset download: [MEGA](https://mega.nz/folder/frxWHRrQ#v6tth7Zo5rrj9foDhGYCBA) [
 
 If you'd like to upload it somewhere else and contribute the link, please contact #AnTcfgss or QQ 3421587952， thanks!
 
-Download common.zip and a platform of your choosing. Unzip them to the private server directory.
+Download common.zip and a platform of your choosing. Unzip the folders within to the private server root directory. If in doubt, check the `File Structure` section at the end.
 
 ## Dependencies
 
@@ -266,7 +266,7 @@ With the current setup, if a `device` is playing with an associated `account`, t
 
 如果你想将资源备份到别的网盘并贡献链接，请联系#AnTcfgss or QQ 3421587952，感谢！
 
-下载 common.zip 和您设备的平台。将所有文件解压到服务器根目录。
+下载 common.zip 和您设备的平台。将里面的所有文件夹解压到服务器根目录。如有疑惑，请参照文末`文件结构`章节。
 
 ## 环境依赖
 
@@ -450,10 +450,6 @@ PC用文本编辑器打开服务器文件夹的 `config.py`，将`IPV4`填写至
 
 </details>
 
-
-![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/stage_back10_big.png)
-![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/test2.JPG)
-
 <details>
 <summary>File Structure 文件结构</summary>
 <br>
@@ -464,29 +460,42 @@ server/
 
 │  ├─ gc2/
 
-│  │  ├─ audio/
+│  │  ├─ audio/ (found in android/ios.zip)
 
 │  │  │  ├─ ogg and m4a zips
 
-│  │  ├─ stage/
+│  │  ├─ stage/ (found in android/ios.zip)
 
 │  │  │  ├─ zip files for stage
 
-│  │  ├─ model.pak
+│  │  ├─ model.pak (found in common.zip)
 
-│  │  ├─ skin.pak
+│  │  ├─ skin.pak (found in common.zip)
 
-│  │  ├─ tunefile.pak
+│  │  ├─ tunefile.pak (found in common.zip)
 
-│  ├─ web/
+│  ├─ image/ (found in common.zip)
+
+│  │  ├─ icon
+
+│  │  ├─ title
+
+│  ├─ web/ (found in common.zip)
 
 │  │  ├─ webpage assets
 
-├─ 7001.py
+├─ 7001.py (main script)
 
-├─ config.py
+├─ getCrypt.py (debug purpose only)
+
+├─ config.py (configuration script)
 
 </details>
+
+
+![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/stage_back10_big.png)
+![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/test2.JPG)
+
 
 ## Journal
 

@@ -3,7 +3,7 @@ from config import Config
 import os
 import sqlite3
 import binascii
-from passlib.hash import bcrypt
+import bcrypt
 import re
 from datetime import datetime
 import xml.etree.ElementTree as ET
@@ -206,10 +206,12 @@ def crc32_decimal(data):
     return int(crc32_hex & 0xFFFFFFFF)
 
 def hash_password(password):
-    return bcrypt.hash(password)
+    salt = bcrypt.gensalt()
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
+    return hashed_password
 
 def verify_password(password, hashed_password):
-    return bcrypt.verify(password, hashed_password)
+    return bcrypt.checkpw(password.encode('utf-8'), hashed_password)
 
 def is_alphanumeric(username):
     pattern = r"^[a-zA-Z0-9]+$"

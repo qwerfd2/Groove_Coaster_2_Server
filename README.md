@@ -52,7 +52,7 @@ Download common.zip and a platform of your choosing. Unzip the folders within to
 
 - Crypto (pycryptodome)
 
-- Passlib
+- bcrypt
 
 - requests
 
@@ -106,7 +106,7 @@ Use
 
 `pip install ...`
 
-to install `flask`, `passlib`, `pycryptodome`, `requests`.
+to install `rust`, `flask`, `passlib`, `pycryptodome`, `requests`.
 
 If ssl errors pop up, you might need to ``pkg up ssl -y``.
 
@@ -276,7 +276,7 @@ With the current setup, if a `device` is playing with an associated `account`, t
 
 - Crypto (pycryptodome)
 
-- Passlib
+- bcrypt
 
 - requests
 
@@ -331,7 +331,7 @@ PC用文本编辑器打开服务器文件夹的 `config.py`，将`IPV4`填写至
 
 `pip install ...`
 
-来安装 `flask`, `passlib`, `pycryptodome`, `requests`.
+来安装 `rust`, `flask`, `bcrypt`, `pycryptodome`, `requests`.
 
 如果出现ssl问题，可能需要``pkg up ssl -y``.
 

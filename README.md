@@ -36,7 +36,7 @@ Warning: Do not put personal files under the folders in the private server direc
 
 ## Download
 
-Server download: Simply download the project as zip.
+Server download: Download the project as zip. To do so, click the green `Code` button on the top, then `Download ZIP` at the bottom of the popup.
 
 Asset download: [MEGA](https://mega.nz/folder/frxWHRrQ#v6tth7Zo5rrj9foDhGYCBA) [Baidu(code: aaaa)](https://pan.baidu.com/s/1YVFfKBq1ULOgCkdrVQhFFg)
 
@@ -260,7 +260,7 @@ With the current setup, if a `device` is playing with an associated `account`, t
 
 ## 下载
 
-服务器下载：将此repo以zip形式下载。
+服务器下载：将此repo以zip形式下载。点击上栏绿色的`Code`按钮，然后点击弹窗下面的`Download ZIP`按钮。
 
 资源下载：[MEGA](https://mega.nz/folder/frxWHRrQ#v6tth7Zo5rrj9foDhGYCBA) [Baidu(密码aaaa)](https://pan.baidu.com/s/1YVFfKBq1ULOgCkdrVQhFFg)
 

@@ -666,7 +666,7 @@ def result():
         do_update_vid = False
         last_row_id = 0
         print(int(id), int(mode))
-        if (int(id) not in range(616, 1000) or int(mode) not in range(0, 4)):
+        if (int(id) not in range(616, 1024) or int(mode) not in range(0, 4)):
             # Increment coin for user, if track is not 4max dlx pack mobile difficulty.
             with sqlite3.connect(DATABASE) as connection:
                 cursor = connection.cursor()
@@ -871,14 +871,15 @@ def web_shop():
                                     onclick="window.location.href='wwic://web_shop_detail?&cnt_type={cnt_type}&cnt_id={i}'">
                             </button>
                         """
-
-                        # Add a new row every 4 buttons
                         inc += 1
                         if inc % 4 == 0:
                             buttons_html += "<br>"
 
         elif (cnt_type == "2"):
-            for idx, i in enumerate(range(15, 173)):
+            up_range = 173
+            if (fmax_ver != 0):
+                up_range = 267
+            for idx, i in enumerate(range(15, up_range)):
                 if i not in my_avatar:
                     if i not in exclude_avatar_exp:
                         buttons_html += f"""
@@ -886,7 +887,6 @@ def web_shop():
                                     onclick="window.location.href='wwic://web_shop_detail?&cnt_type={cnt_type}&cnt_id={i}'">
                             </button>
                         """
-                        # Add a new row every 4 buttons
                         inc += 1
                         if inc % 4 == 0:
                             buttons_html += "<br>"
@@ -899,7 +899,6 @@ def web_shop():
                                 onclick="window.location.href='wwic://web_shop_detail?&cnt_type={cnt_type}&cnt_id={i}'">
                         </button>
                     """
-                # Add a new row every 4 buttons
                 if (idx + 1) % 4 == 0:
                     buttons_html += "<br>"
             

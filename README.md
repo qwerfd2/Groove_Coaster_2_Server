@@ -42,7 +42,9 @@ Asset download: [MEGA](https://mega.nz/folder/frxWHRrQ#v6tth7Zo5rrj9foDhGYCBA) [
 
 If you'd like to upload it somewhere else and contribute the link, please contact #AnTcfgss or QQ 3421587952， thanks!
 
-Download common.zip and a platform of your choosing. Unzip the folders within to the private server root directory. If in doubt, check the `File Structure` section at the end.
+Download `common.zip` and a platform of your choosing. Unzip the folders within to the private server root directory. If in doubt, check the `File Structure` section at the end.
+
+To install the `GC4MAX` expansion, which ports arcade exclusive tracks, avatars, and skins to 2OS, download the `4max expansion` folder's `common.zip` and a platform of your choosing. Unzip the folders within to the privates server root directory. Overwrite existing files. Note that the included installation `apk` or `ipa` must be used for correct avatar rendering.
 
 ## Dependencies
 
@@ -266,7 +268,9 @@ With the current setup, if a `device` is playing with an associated `account`, t
 
 如果你想将资源备份到别的网盘并贡献链接，请联系#AnTcfgss or QQ 3421587952，感谢！
 
-下载 common.zip 和您设备的平台。将里面的所有文件夹解压到服务器根目录。如有疑惑，请参照文末`文件结构`章节。
+下载 `common.zip` 和您设备的平台。将里面的所有文件夹解压到服务器根目录。如有疑惑，请参照文末`文件结构`章节。
+
+如想下载`GC4MAX`扩展包（包含了街机独占曲目，皮肤，和角色），下载`4max expansion`里的`common.zip`和和您设备的平台。将里面的所有文件夹解压到服务器根目录。如有重复，覆盖所有文件。请注意，必须使用包含的`apk`或`ipa`安装包来正确渲染角色。
 
 ## 环境依赖
 

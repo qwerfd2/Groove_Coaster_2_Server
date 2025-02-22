@@ -50,6 +50,8 @@ To install the `GC4MAX` expansion, which ports arcade exclusive tracks, avatars,
 
 Edit `config.py`'s `MODEL`, `TUNEFILE`, and `SKIN` value to match the `pak`'s timestamp. `paks` can be found at `/files/gc2/`.
 
+Important: You must use the `common.zip` inside the `4max expansion` folder, not the `common.zip` in the root directory.
+
 
 ## Dependencies
 
@@ -280,6 +282,8 @@ With the current setup, if a `device` is playing with an associated `account`, t
 如想下载`GC4MAX`扩展包（包含了街机独占曲目，皮肤，和角色），下载`4max expansion`里的`common.zip`和和您设备的平台。将里面的所有文件夹解压到服务器根目录。如有重复，覆盖所有文件。请注意，必须使用包含的`apk`或`ipa`安装包来正确渲染角色。
 
 修改`config.py`的`MODEL`, `TUNEFILE`, and `SKIN` 值至现有`pak`文件的时间戳. `paks`文件的位置在`/files/gc2/`.
+
+重要: 必须使用`4max expansion`文件夹里的`common.zip`，而不是根目录里的`common.zip`.
 
 ## 环境依赖
 

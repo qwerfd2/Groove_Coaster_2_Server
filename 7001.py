@@ -211,7 +211,7 @@ def hash_password(password):
     return hashed_password
 
 def verify_password(password, hashed_password):
-    return bcrypt.checkpw(password.encode('utf-8'), hashed_password)
+    return bcrypt.checkpw(password.encode('utf-8'), hashed_password.encode('utf-8'))
 
 def is_alphanumeric(username):
     pattern = r"^[a-zA-Z0-9]+$"

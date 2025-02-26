@@ -579,6 +579,9 @@ def bonus():
 
     daily_reward_elem = root.find(".//login_bonus")
     last_count_elem = daily_reward_elem.find("last_count")
+
+
+
     if last_count_elem is None or not last_count_elem.text.isdigit():
         return jsonify({"error": "Invalid or missing last_count in XML"}), 500
     last_count = int(last_count_elem.text)
@@ -587,14 +590,14 @@ def bonus():
         cursor = connection.cursor()
 
         # Check for an existing row
-        cursor.execute("SELECT day, timestamp FROM daily_reward WHERE device_id = ?", (device_id,))
+        cursor.execute("SELECT day, timestamp, my_avatar, my_stage FROM daily_reward WHERE device_id = ?", (device_id,))
         row = cursor.fetchone()
 
         time = datetime.now()
         formatted_time = time.strftime("%Y-%m-%d %H:%M:%S")
 
         if row is not None:
-            current_day, last_timestamp = row
+            current_day, last_timestamp, my_avatar, my_stage = row
             last_date = datetime.strptime(last_timestamp, "%Y-%m-%d %H:%M:%S")
 
             # Check if one day has passed
@@ -604,9 +607,26 @@ def bonus():
 
                 if (current_day > last_count):
                     current_day = 1
+
+                reward_elem = daily_reward_elem.find(f".//reward[count='{current_day}']")
+                if reward_elem is not None:
+                    cnt_type = int(reward_elem.find("cnt_type").text)
+                    cnt_id = int(reward_elem.find("cnt_id").text)
+
+                    if cnt_type == 1:
+                        stages = set(json.loads(my_stage)) if my_stage else set()
+                        if cnt_id not in stages:
+                            stages.add(cnt_id)
+                        my_stage = json.dumps(list(stages))
+
+                    elif cnt_type == 2:
+                        avatars = set(json.loads(my_avatar)) if my_avatar else set()
+                        if cnt_id not in avatars:
+                            avatars.add(cnt_id)
+                        my_avatar = json.dumps(list(avatars))
  
                 # Update the table
-                cursor.execute("""UPDATE daily_reward SET timestamp = ?, day = ? WHERE device_id = ?""", (formatted_time, current_day, device_id))
+                cursor.execute("""UPDATE daily_reward SET timestamp = ?, day = ?, my_avatar = ?, my_stage = ? WHERE device_id = ?""", (formatted_time, current_day, my_avatar, my_stage, device_id))
 
                 # return 0 obj
                 xml_response = "<response><code>0</code></response>"

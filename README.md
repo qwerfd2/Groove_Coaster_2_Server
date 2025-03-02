@@ -38,7 +38,7 @@ Warning: Do not put personal files under the folders in the private server direc
 
 Server download: Download the project as zip. To do so, click the green `Code` button on the top, then `Download ZIP` at the bottom of the popup.
 
-Asset download: [MEGA](https://mega.nz/folder/frxWHRrQ#v6tth7Zo5rrj9foDhGYCBA) [Baidu(code: aaaa)](https://pan.baidu.com/s/1YVFfKBq1ULOgCkdrVQhFFg)
+Asset download: [MEGA](https://mega.nz/folder/frxWHRrQ#v6tth7Zo5rrj9foDhGYCBA) [Google Drive](https://discord.com/channels/@me/1336032777728036894/1345654214822461564) [Baidu(code: aaaa)](https://pan.baidu.com/s/1YVFfKBq1ULOgCkdrVQhFFg)
 
 If you'd like to upload it somewhere else and contribute the link, please contact #AnTcfgss or QQ 3421587952， thanks!
 
@@ -271,7 +271,7 @@ With the current setup, if a `device` is playing with an associated `account`, t
 
 服务器下载：将此repo以zip形式下载。点击上栏绿色的`Code`按钮，然后点击弹窗下面的`Download ZIP`按钮。
 
-资源下载：[MEGA](https://mega.nz/folder/frxWHRrQ#v6tth7Zo5rrj9foDhGYCBA) [Baidu(密码aaaa)](https://pan.baidu.com/s/1YVFfKBq1ULOgCkdrVQhFFg)
+资源下载：[MEGA](https://mega.nz/folder/frxWHRrQ#v6tth7Zo5rrj9foDhGYCBA) [Google Drive](https://discord.com/channels/@me/1336032777728036894/1345654214822461564) [Baidu(密码aaaa)](https://pan.baidu.com/s/1YVFfKBq1ULOgCkdrVQhFFg)
 
 如果你想将资源备份到别的网盘并贡献链接，请联系#AnTcfgss or QQ 3421587952，感谢！
 

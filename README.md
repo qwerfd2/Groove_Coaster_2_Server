@@ -52,6 +52,12 @@ Edit `config.py`'s `MODEL`, `TUNEFILE`, and `SKIN` value to match the `pak`'s ti
 
 Important: You must use the `common.zip` inside the `4max expansion` folder, not the `common.zip` in the root directory.
 
+#### Updates
+
+The `GC4MAX` expansion will receive updates to fix bugs. You can check the latest version by going to the ingame `shop` - `songs page` - `GC4MAX banner` after purchasing the expansion. A server restart is required to fetch the latest update.
+
+The server owner must install the update on their instance. They can download it through the usual links. Simply download the `update-vx.zip` and unzip the content to the server root directory. Make sure to check the timestamp of the latest `pak` files and update them accordingly inside the `config.py`. A server restart is required after the installation.
+
 
 ## Dependencies
 
@@ -284,6 +290,12 @@ With the current setup, if a `device` is playing with an associated `account`, t
 修改`config.py`的`MODEL`, `TUNEFILE`, and `SKIN` 值至现有`pak`文件的时间戳. `paks`文件的位置在`/files/gc2/`.
 
 重要: 必须使用`4max expansion`文件夹里的`common.zip`，而不是根目录里的`common.zip`.
+
+#### 更新
+
+`GC4MAX` 扩展包会不定期接受bug修复更新。你可以在购买扩展包之后，通过游戏内的 `shop` - `songs 页面` - `GC4MAX 标题图片` 来查看最新的版本。为获取最新的版本更新，服务器应当不定期重启。
+
+服务器拥有者需要在TA的系统上安装更新。他们可以通过以往的链接下载更新文件。下载 `update-vx.zip` 并将所有内容解压至服务器根目录。确保最新的 `pak` 时间戳已在 `config.py` 里更新。安装完成后，需要重启服务器。
 
 ## 环境依赖
 

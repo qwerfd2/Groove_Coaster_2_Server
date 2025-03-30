@@ -241,6 +241,10 @@ In the private server, you can log out of devices with ease. This means that `en
 
 With the current setup, if a `device` is playing with an associated `account`, the `account` information is saved at the same time and will continue to be shown on ranking in the future. The `Avatar` information is saved with the `play records` and will not follow the `account` or `device`. The `Title` information is not in the `play records`, nor in the `account`, so it will be tied to the `Title` of the `device`.
 
+## Ranking Data
+
+A rather comprehenxive data scrape was conducted prior to the server shutdown, containing at least first `99950` ranks of any given song. The data and metadata can be acquired at [Google Drive](https://drive.google.com/file/d/1tsZnRnxPdUAoFPLfCzuXJFf9GgHR6rGz/view?usp=drive_link)
+
 </details>
 
 <details>
@@ -476,6 +480,10 @@ PC用文本编辑器打开服务器文件夹的 `config.py`，将`IPV4`填写至
 在私服，用户可以任意注销设备。这意味着`权益`和`游玩记录`不可能保持一致，除非我们把`账户`当作`设备`，而这显然不是官服的行为。
 
 目前的设置下，假如一台`设备`游玩时有关联`账户`，`账户`信息会同时保存，并且未来将持续显示当时连接的`账户`信息。`头像`信息随`游玩记录`保存，将不跟随`账户`或者`设备`。`Title`信息不在`游玩记录`里，也不在`账户`里，所以将和该设备的`Title`绑定。
+
+## 排行榜数据
+
+在停服前完成了一次较完整的数据抓取。每个难度的前`99950`位均被保留。数据和元数据可在这里下载。 [Google Drive](https://drive.google.com/file/d/1tsZnRnxPdUAoFPLfCzuXJFf9GgHR6rGz/view?usp=drive_link)
 
 </details>
 

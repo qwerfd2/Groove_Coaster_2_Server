@@ -243,7 +243,7 @@ With the current setup, if a `device` is playing with an associated `account`, t
 
 ## Ranking Data
 
-A rather comprehenxive data scrape was conducted prior to the server shutdown, containing at least first `99950` ranks of any given song. The data and metadata can be acquired at [Google Drive](https://drive.google.com/file/d/1tsZnRnxPdUAoFPLfCzuXJFf9GgHR6rGz/view?usp=drive_link)
+A rather comprehensive data scrape was conducted prior to the server shutdown, containing at least first `99950` ranks of any given song. The data and metadata can be acquired at [Google Drive](https://drive.google.com/file/d/1tsZnRnxPdUAoFPLfCzuXJFf9GgHR6rGz/view?usp=drive_link)
 
 </details>
 

@@ -245,6 +245,8 @@ With the current setup, if a `device` is playing with an associated `account`, t
 
 A rather comprehensive data scrape was conducted prior to the server shutdown, containing at least first `99950` ranks of any given song. The data and metadata can be acquired at [Google Drive](https://drive.google.com/file/d/1tsZnRnxPdUAoFPLfCzuXJFf9GgHR6rGz/view?usp=drive_link)
 
+Note that this data is for analytics only, and the functionality to embed this data inside the private server is not and will not be supported by me. Feel free to Fork and create your own implementation.
+
 </details>
 
 <details>
@@ -484,6 +486,8 @@ PC用文本编辑器打开服务器文件夹的 `config.py`，将`IPV4`填写至
 ## 排行榜数据
 
 在停服前完成了一次较完整的数据抓取。每个难度的前`99950`位均被保留。数据和元数据可在这里下载。 [Google Drive](https://drive.google.com/file/d/1tsZnRnxPdUAoFPLfCzuXJFf9GgHR6rGz/view?usp=drive_link)
+
+请注意，此数据仅用于分析，私服内置不会被实现。如果有需求，请Fork然后自行设计。
 
 </details>
 

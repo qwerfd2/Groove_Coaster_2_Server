@@ -564,4 +564,15 @@ Effort was spent on the PC and Switch (waiwai) port, investigating the possiblil
 The PC version has exclusive songs/packs, and the chart/model files are an exact match from mobile asset. Music is in header-appended OGG, which is also compatible with Mobile. Porting is technically feasible if the format of stage_param can be RE'd.
 
 On Jan. 24, 2025, Taito announced the end of service of the game. This prompted the creation of this repo and release of private server.
+
+Effort was spent on porting charts from the arcade port (4max) to 2OS, and this process has been automated. The work and related tools has been added to the repo.
+
+Additional avatars and skins were ported, but a 256 hard amount limit was encountered for avatar, after addressing a 200 soft limit.
+
+Leaderboard ranking was scraped as a dataset just prior to the server shutdown and added to the repo.
+
+Taito shutted down the server on March 31st, 2025, marking the completion of project Taiyo.
+
+Overall, the project was a resounding success. The initial goal of creating a feature-rich private server was accomplished, with bonus points such as the toolchain, 4MAX expansion, and leaderboard dataset. If we were to nitpick, the save data hard limit was not addressed, various promotional material was not acquired from the server, and the leaderboard was not completely scraped.
+
 </details>

@@ -433,7 +433,7 @@ PC用文本编辑器打开服务器文件夹的 `config.py`，将`IPV4`填写至
 
 ### 安卓
 
-下载网盘里`install packages`里的`apk`文件。安装。`安卓14+` 设备可能需要用`幸运破解器`重构APK (`Menu of Patches` - `Create Modified APK File` - `APK with changed permissions and activities` - 打开 `Removes integrity check and signature verification` 和 `Re-sign with original signature for android patch "Disable .apk Signature Verification"`)。
+下载网盘里`install packages`里的`apk`文件。安装。`安卓14+` 设备可能需要用`幸运破解器`重构APK (`Menu of Patches` - `Create Modified APK File` - `APK with changed permissions and activities` - 打开 `Removes integrity check and signature verification` 和 `Re-sign with original signature for android patch "Disable .apk Signature Verification"` 有人反馈中文路径如下：点 `破解菜单` 然后点 `已更改权限和活动项的APK文件` )。
 
 此`apk`被修改过。若想自己修改,请看最后一段。
 

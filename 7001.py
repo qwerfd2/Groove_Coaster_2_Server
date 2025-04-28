@@ -1103,7 +1103,7 @@ def buy_by_coin():
                     
                     stages = set(json.loads(my_stage)) if my_stage else set()
 
-                    for i in range(617, 950):
+                    for i in range(616, 950):
                         if i not in stages:
                             stages.add(i)
                     coin -= song_stage_price

@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, send_file
-from config import Config
+from config_old import Config
 import os
 import sqlite3
 import binascii
@@ -13,19 +13,19 @@ import json
 import requests
 
 try:
-    with open("song_list.json", 'r', encoding="utf-8") as file:
+    with open("api/config/song_list.json", 'r', encoding="utf-8") as file:
         song_list = json.load(file)
 except Exception as e:
     print(f"An unexpected error occurred when loading song_list.json: {e}")
 
 try:
-    with open("avatar_list.json", 'r', encoding="utf-8") as file:
+    with open("api/config/avatar_list.json", 'r', encoding="utf-8") as file:
         avatar_list = json.load(file)
 except Exception as e:
     print(f"An unexpected error occurred when loading avatar_list.json: {e}")
 
 try:
-    with open("item_list.json", 'r', encoding="utf-8") as file:
+    with open("api/config/item_list.json", 'r', encoding="utf-8") as file:
         item_list = json.load(file)
 except Exception as e:
     print(f"An unexpected error occurred when loading item_list.json: {e}")
@@ -64,7 +64,7 @@ exclude_stage_exp = [121,134,166,167,168,169,170,213,214,215,225,277] # 134 and 
 exclude_avatar_exp = [28,29]
 
 try:
-    with open("exp_unlocked_songs.json", 'r', encoding="utf-8") as file:
+    with open("api/config/exp_unlocked_songs.json", 'r', encoding="utf-8") as file:
         exp_unlocked_songs = json.load(file)
 except Exception as e:
     print(f"An unexpected error occurred when loading exp_unlocked_songs.json: {e}")
@@ -330,9 +330,7 @@ def inform_page(text, mode):
     with open("files/inform.html", "r") as file:
         return file.read().format(text=text, img=mode)
 
-#Serving CDN files
 root_folder = os.path.dirname(os.path.abspath(__file__))
-allowed_folders = ["files"]
 
 @app.route('/info.php', methods=['GET'])
 def info():
@@ -579,9 +577,6 @@ def bonus():
 
     daily_reward_elem = root.find(".//login_bonus")
     last_count_elem = daily_reward_elem.find("last_count")
-
-
-
     if last_count_elem is None or not last_count_elem.text.isdigit():
         return jsonify({"error": "Invalid or missing last_count in XML"}), 500
     last_count = int(last_count_elem.text)
@@ -590,14 +585,14 @@ def bonus():
         cursor = connection.cursor()
 
         # Check for an existing row
-        cursor.execute("SELECT day, timestamp, my_avatar, my_stage FROM daily_reward WHERE device_id = ?", (device_id,))
+        cursor.execute("SELECT day, timestamp FROM daily_reward WHERE device_id = ?", (device_id,))
         row = cursor.fetchone()
 
         time = datetime.now()
         formatted_time = time.strftime("%Y-%m-%d %H:%M:%S")
 
         if row is not None:
-            current_day, last_timestamp, my_avatar, my_stage = row
+            current_day, last_timestamp = row
             last_date = datetime.strptime(last_timestamp, "%Y-%m-%d %H:%M:%S")
 
             # Check if one day has passed
@@ -626,7 +621,7 @@ def bonus():
                         my_avatar = json.dumps(list(avatars))
  
                 # Update the table
-                cursor.execute("""UPDATE daily_reward SET timestamp = ?, day = ?, my_avatar = ?, my_stage = ? WHERE device_id = ?""", (formatted_time, current_day, my_avatar, my_stage, device_id))
+                cursor.execute("""UPDATE daily_reward SET timestamp = ?, day = ? WHERE device_id = ?""", (formatted_time, current_day, device_id))
 
                 # return 0 obj
                 xml_response = "<response><code>0</code></response>"
@@ -1264,7 +1259,7 @@ def ranking_detail():
                 row_content.append(f"""<div class="bt_bg01_ac">{label}</div>""")
             else:
                 encrypted_mass = encryptAES(("vid=" + device_id + "&song_id=" + str(song_id) + "&mode=" + str(mode_value) + "&dummy=").encode("utf-8"))
-                row_content.append(f"""<a href="/ranking_detail.php?{encrypted_mass}" class="bt_bg01">{label}</a>""")
+                row_content.append(f"""<a href="/ranking_detail.php?{encrypted_mass}" class="bt_bg01_xnarrow">{label}</a>""")
 
             if len(row_content) == 3:
                 html += row_start + ''.join(row_content) + row_end
@@ -1466,7 +1461,7 @@ def ranking_detail():
 
         encrypted_mass = encryptAES(("vid=" + device_id + "&dummy=").encode("utf-8"))
         html += f"""
-        <a href="/ranking.php?{encrypted_mass}" class="bt_bg01_ifedup" style="margin: 20px auto; display: block; text-align: center;">
+        <a href="/ranking.php?{encrypted_mass}" class="bt_bg01" style="margin: 20px auto; display: block; text-align: center;">
             Go Back
         </a>
         """
@@ -1541,7 +1536,7 @@ def status():
             else:
                 encrypted_mass = encryptAES(f"vid={device_id}&page_id={i}&dummy=".encode("utf-8"))
                 buttons_html += f"""
-                    <a href="/status.php?{encrypted_mass}" class="bt_bg01" >
+                    <a href="/status.php?{encrypted_mass}" class="bt_bg01_xnarrow" >
                         {page_name[i]}
                     </a>
                 """
@@ -1820,6 +1815,10 @@ def save():
 def delete_account():
     # this only tricks the client to clear its local data for now
     return """<?xml version="1.0" encoding="UTF-8"?><response><code>0</code><taito_id></taito_id></response>"""
+
+#Serving CDN files
+root_folder = os.path.dirname(os.path.abspath(__file__))
+allowed_folders = ["files"]
 
 @app.route('/<path:path>', methods=['GET'])
 def get_file(path):

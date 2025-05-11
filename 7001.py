@@ -613,15 +613,14 @@ def bonus():
                         if cnt_id not in stages:
                             stages.add(cnt_id)
                         my_stage = json.dumps(list(stages))
+                        cursor.execute("""UPDATE daily_reward SET timestamp = ?, day = ?, my_stage = ? WHERE device_id = ?""", (formatted_time, current_day, my_stage, device_id))
 
                     elif cnt_type == 2:
                         avatars = set(json.loads(my_avatar)) if my_avatar else set()
                         if cnt_id not in avatars:
                             avatars.add(cnt_id)
                         my_avatar = json.dumps(list(avatars))
- 
-                # Update the table
-                cursor.execute("""UPDATE daily_reward SET timestamp = ?, day = ?, my_avatar = ?, my_stage = ? WHERE device_id = ?""", (formatted_time, current_day, my_avatar, my_stage, device_id))
+                        cursor.execute("""UPDATE daily_reward SET timestamp = ?, day = ?, my_avatar = ? WHERE device_id = ?""", (formatted_time, current_day, my_avatar, device_id))
 
                 # return 0 obj
                 xml_response = "<response><code>0</code></response>"

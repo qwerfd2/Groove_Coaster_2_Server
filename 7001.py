@@ -585,14 +585,14 @@ def bonus():
         cursor = connection.cursor()
 
         # Check for an existing row
-        cursor.execute("SELECT day, timestamp FROM daily_reward WHERE device_id = ?", (device_id,))
+        cursor.execute("SELECT day, timestamp, my_avatar, my_stage FROM daily_reward WHERE device_id = ?", (device_id,))
         row = cursor.fetchone()
 
         time = datetime.now()
         formatted_time = time.strftime("%Y-%m-%d %H:%M:%S")
 
         if row is not None:
-            current_day, last_timestamp = row
+            current_day, last_timestamp, my_avatar, my_stage = row
             last_date = datetime.strptime(last_timestamp, "%Y-%m-%d %H:%M:%S")
 
             # Check if one day has passed

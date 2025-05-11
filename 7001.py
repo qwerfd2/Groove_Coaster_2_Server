@@ -621,7 +621,7 @@ def bonus():
                         my_avatar = json.dumps(list(avatars))
  
                 # Update the table
-                cursor.execute("""UPDATE daily_reward SET timestamp = ?, day = ?, my_avatar = ?, my_stage = ? WHERE device_id = ?""", (formatted_time, current_day, json.dumps(my_avatar), json.dumps(my_stage), device_id))
+                cursor.execute("""UPDATE daily_reward SET timestamp = ?, day = ?, my_avatar = ?, my_stage = ? WHERE device_id = ?""", (formatted_time, current_day, my_avatar, my_stage, device_id))
 
                 # return 0 obj
                 xml_response = "<response><code>0</code></response>"

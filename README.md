@@ -498,43 +498,26 @@ PC用文本编辑器打开服务器文件夹的 `config.py`，将`IPV4`填写至
 <details>
 <summary>File Structure 文件结构</summary>
 <br>
-
+<pre>
 server/
-
 ├─ files/
-
 │  ├─ gc2/
-
 │  │  ├─ audio/ (found in android/ios.zip)
-
-│  │  │  ├─ ogg and m4a zips
-
+│  │  │  └─ ogg and m4a zips
 │  │  ├─ stage/ (found in android/ios.zip)
-
-│  │  │  ├─ zip files for stage
-
+│  │  │  └─ zip files for stage
 │  │  ├─ model.pak (found in common.zip)
-
 │  │  ├─ skin.pak (found in common.zip)
-
-│  │  ├─ tunefile.pak (found in common.zip)
-
+│  │  └─ tunefile.pak (found in common.zip)
 │  ├─ image/ (found in common.zip)
-
 │  │  ├─ icon
-
-│  │  ├─ title
-
+│  │  └─ title
 │  ├─ web/ (found in common.zip)
-
-│  │  ├─ webpage assets
-
+│  │  └─ webpage assets
 ├─ 7001.py (main script)
-
 ├─ getCrypt.py (debug purpose only)
-
-├─ config.py (configuration script)
-
+└─ config.py (configuration script)
+</pre>
 </details>
 
 

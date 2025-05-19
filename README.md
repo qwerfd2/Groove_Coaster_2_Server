@@ -99,9 +99,11 @@ Note that MAC uses `python3`. Code examples in this document will use the defaul
 
 Open command on Windows (MAC open terminal). Type `ipconfig` (MAC `ifconfig`), and obtain your IPV4 address. This assumes that you are connected to a WIFI, and it should start with 192 or 172.
 
-Open the `config.py` of the private server, and change the `IP` accordingly.
+Open the `config_old.py` of the private server, and change the `IP` accordingly.
 
 Type `cmd` in the file directory on the top of the file explorer, and press enter. A command prompt will be opened for that directory.
+
+Type `pip install -r requirements.txt` to install all the dependencies.
 
 Type `python 7001.py` to start the server. If an error pops up, resolve it now – did you install all the dependencies? Is the IP correct?
 

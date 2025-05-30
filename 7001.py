@@ -881,9 +881,12 @@ def web_shop():
                     if i not in exclude_stage_exp:
                         # Add a button for this stage
                         buttons_html += f"""
-                            <button style="width: 180px; height: 180px; margin: 10px; background-size: cover; background-image: url('/files/image/icon/shop/{i}.jpg');"
-                                    onclick="window.location.href='wwic://web_shop_detail?&cnt_type={cnt_type}&cnt_id={i}'">
-                            </button>
+                            <div style="width: 180px; height: 280px; margin: 10px; text-align: center; align-items: center; position: relative; display: block;" onclick="window.location.href='wwic://web_shop_detail?&cnt_type={cnt_type}&cnt_id={i}'">
+                            <img style="width: 180px; height: 180px; margin: 10px; background-size: 180px;" src="/files/image/icon/shop/{i}.jpg" alt={a}>
+                            </img>
+                            <div style="font-weight: bold; font-size: 16px; word-wrap: break-word; line-height: 1.4">{n}</div>
+                            <div style="font-size: 12px; word-wrap: break-word; line-height: 1.4">{a}</div>
+                            </div>
                         """
                         inc += 1
                         if inc % 4 == 0:

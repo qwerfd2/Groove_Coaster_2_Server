@@ -2,7 +2,7 @@
 
 A small local server for `Groove Coaster 2: Original Style`, implemented with `Python` and `Flask`. 
 
-一个基于`Python`和`Flask`的微型`Groove Coaster 2: Original Style`本地服务器。
+一个基于`Python`和~~`Flask`~~`Starlette`的微型`Groove Coaster 2: Original Style`本地服务器。
 
 <details>
 <summary>English</summary>
@@ -14,7 +14,9 @@ This project is for game preservation purposes only. Creative liberty and conven
 
 You shall bare all the responsibility for any potential consequences as a result of running this server. If you do not agree to these requirements, you are not allowed to replicate or run this program.
 
-It is designed as a **local** server, as Flask face issues with high concurrency. There is an optimized, `async` server, but the code is not open source. Only vetted server owners that will not violate the license terms will be given access. Contact the repo owner for more information.
+~~It is designed as a **local** server, as Flask face issues with high concurrency. There is an optimized, `async` server, but the code is not open source. Only vetted server owners that will not violate the license terms will be given access. Contact the repo owner for more information.~~
+
+The async server is now open source under the GPLv2 license. It has superceded the old server in terms of functionality and performance.
 
 Inspiration: [Lost-MSth/Arcaea-server](https://github.com/Lost-MSth/Arcaea-server)
 
@@ -65,7 +67,7 @@ The server owner must install the update on their instance. They can download it
 
 - Python
 
-- Flask
+- ~~Flask~~ `Starlette`
 
 - Crypto (pycryptodome)
 
@@ -99,13 +101,13 @@ Note that MAC uses `python3`. Code examples in this document will use the defaul
 
 Open command on Windows (MAC open terminal). Type `ipconfig` (MAC `ifconfig`), and obtain your IPV4 address. This assumes that you are connected to a WIFI, and it should start with 192 or 172.
 
-Open the `config_old.py` of the private server, and change the `IP` accordingly.
+Open the `config.env` of the private server, and change the `IP` accordingly.
 
 Type `cmd` in the file directory on the top of the file explorer, and press enter. A command prompt will be opened for that directory.
 
 Type `pip install -r requirements.txt` to install all the dependencies.
 
-Type `python 7001.py` to start the server. If an error pops up, resolve it now – did you install all the dependencies? Is the IP correct?
+Type `python 7002.py` to start the server. If an error pops up, resolve it now – did you install all the dependencies? Is the IP correct?
 
 ### Android (Harder)
 
@@ -125,7 +127,7 @@ Use
 
 `pip install ...`
 
-to install `rust`, `flask`, `passlib`, `pycryptodome`, `requests`.
+to install `rust`, `starlette`, `passlib`, `pycryptodome`, `requests`.
 
 If ssl errors pop up, you might need to ``pkg up ssl -y``.
 
@@ -135,7 +137,7 @@ change `config.py`'s `IP` to `127.0.0.1` (this is `loopback`. Feel free to use y
 
 `cd storage/shared/.... (server location on android file system)`
 
-`python 7001.py` to start the server.
+`python 7002.py` to start the server.
 
 </details>
 
@@ -263,7 +265,9 @@ Note that this data is for analytics only, and the functionality to embed this d
 
 你应对因运行本服务器而产生的任何潜在后果承担全部责任。如果您不同意这些要求，则不允许您复制或运行该程序。
 
-此服务器仅为**本地**运行设计，鉴于Flask糟糕的并发性能。一个高效，`异步`的服务器可供使用，不过代码并非开源。只有经过审核，不会违反许可条款的服务器所有者才能获得访问权限。请联系repo所有者了解更多信息。
+~~此服务器仅为**本地**运行设计，鉴于Flask糟糕的并发性能。一个高效，`异步`的服务器可供使用，不过代码并非开源。只有经过审核，不会违反许可条款的服务器所有者才能获得访问权限。请联系repo所有者了解更多信息。~~
+
+基于`Starlette`的异步服务器已经在功能和性能上超越了老服务器，现在以`GPLv2`许可证开源。
 
 灵感: [Lost-MSth/Arcaea-server](https://github.com/Lost-MSth/Arcaea-server)
 
@@ -313,7 +317,7 @@ Note that this data is for analytics only, and the functionality to embed this d
 
 - Python
 
-- Flask
+- ~~Flask~~`Starlette`
 
 - Crypto (pycryptodome)
 
@@ -348,11 +352,11 @@ PC/MAC安装 `python`，安装 `pip`。
 
 PC打开 `cmd` 输入 `ipconfig`。MAC 打开 `terminal` 输入 `ifconfig`。获得你的`IPV4`,一串为192或172开头的数字。
 
-PC用文本编辑器打开服务器文件夹的 `config.py`，将`IPV4`填写至`IP`。`PORT`(端口)也可以更改。
+PC用文本编辑器打开服务器文件夹的 `config.env`，将`IPV4`填写至`IP`。`PORT`(端口)也可以更改。
 
 文件管理器上方的文件夹路径清空，输入 `cmd`。命令行窗口会弹出。
 
-输入 `python 7001.py`来开启服务器。如果出现错误，就解决他们吧。检查依赖项是否安装，网络配置是否正确。
+输入 `python 7002.py`来开启服务器。如果出现错误，就解决他们吧。检查依赖项是否安装，网络配置是否正确。
 
 ### 安卓(稍难)
 
@@ -372,7 +376,7 @@ PC用文本编辑器打开服务器文件夹的 `config.py`，将`IPV4`填写至
 
 `pip install ...`
 
-来安装 `rust`, `flask`, `bcrypt`, `pycryptodome`, `requests`.
+来安装 `rust`, `starlette`, `bcrypt`, `pycryptodome`, `requests`.
 
 如果出现ssl问题，可能需要``pkg up ssl -y``.
 
@@ -382,7 +386,7 @@ PC用文本编辑器打开服务器文件夹的 `config.py`，将`IPV4`填写至
 
 `cd storage/shared/.... (服务器在安卓文件系统的位置)`
 
-`python 7001.py` 来运行服务器。
+`python 7002.py` 来运行服务器。
 
 </details>
 
@@ -516,8 +520,11 @@ server/
 │  │  └─ title
 │  ├─ web/ (found in common.zip)
 │  │  └─ webpage assets
-├─ 7001.py (main script)
+├─ 7002.py (main script)
+├─ api/ (API scripts)
+│  ├─ config/ (various configuration files)
 ├─ getCrypt.py (debug purpose only)
+├─ old_server (Flask old server (depricated))
 └─ config.py (configuration script)
 </pre>
 </details>

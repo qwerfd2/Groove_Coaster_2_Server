@@ -1,4 +1,4 @@
-flask
+starlette
 bcrypt
 pycryptodome
 requests

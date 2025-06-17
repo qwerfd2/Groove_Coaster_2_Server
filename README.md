@@ -1,8 +1,8 @@
 # Groove-Coaster-2OS-Server
 
-A small local server for `Groove Coaster 2: Original Style`, implemented with `Python` and `Flask`. 
+A small local server for `Groove Coaster 2: Original Style`, implemented with `Python` and ~~Flask~~ `Starlette`. 
 
-一个基于`Python`和~~`Flask`~~`Starlette`的微型`Groove Coaster 2: Original Style`本地服务器。
+一个基于`Python`和~~Flask~~`Starlette`的微型`Groove Coaster 2: Original Style`本地服务器。
 
 <details>
 <summary>English</summary>
@@ -234,6 +234,20 @@ Database can be opened with DB Browser.
 If you want to make your service only available to whitelisted devices, turn on `AUTHORIZATION_NEEDED` in `config.py` and add the device id after the .php request to the `whitelist table`. If you want to ban a device/taito ID, add the device ID or the username of the taito ID to the blacklist table. The `reason` column is for your own reference. If a device is logged in to that Taito ID, they cannot download asset, cannot log out, and cannot change name. If a device is not in the whitelist (if enabled) or is banned by device ID, they will not be able to download anything.
 
 `getCrypt.py` is a standalone script used to decrypt the mass inside the `GET` requests.
+
+## QOL Features
+
+### Save file migration
+
+A `save_id` will be generated upon saving the data to the server. It is available at your user page. You can share it, or input someone else's `save_id`, to have their save file applied to your record.
+
+Note that your old record is not backed up. Thus, this feature should only be used to migrate your own save file, or some save file that you trust.
+
+## Coin Multiplier
+
+A coin multiplier [0, 5] can be set by the user in the user center.
+
+That's about it actually
 
 ## Account System Implementation
 
@@ -480,6 +494,20 @@ PC用文本编辑器打开服务器文件夹的 `config.env`，将`IPV4`填写�
 如果你想只对在白名单里的设备提供服务，开启`config.py`里的`AUTHORIZATION_NEEDED`，并将.php请求后面的设备ID加入`whitelist`列表。如果你想封禁设备或者Taito ID，将设备ID或者用户名加入`blacklist`列表。`reason`列可供你记录封禁原因。如果设备登陆该Taito ID，它将无法下载数据，不能登出，而且不能改名。如果设备在白名单开启后不在白名单里，或者设备被封禁，它将无法下载任何东西。
 
 `getCrypt.py` 是一个用来单独解密`GET`请求后缀的脚本.
+
+## 质量更新
+
+### 存档迁移
+
+一个 `save_id` 会在保存数据时生成，可在用户中心复制。你可以分享它，也可以输入别人的 `save_id` 来将他们的存档覆盖到你自己的账号下。
+
+小心，你的旧存档不会被备份。因此，此功能仅适合来迁移自己的存档，或者迁移受信任的存档。
+
+## 金币倍数调整
+
+你可以在用户中心调整获得的金币倍数 [0, 5]。
+
+嗯就这些（
 
 ## 账号系统实装
 

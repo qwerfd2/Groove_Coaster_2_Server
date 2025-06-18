@@ -154,10 +154,12 @@ async def save_migration(request: Request):
 
     user_exist = await get_user_data(decrypted_fields, "username")
     if user_exist:
-        query = select(user.c.data, user.c.crc).where(user.c.save_id == save_id)
+        query = select(user.c.username, user.c.data, user.c.crc).where(user.c.save_id == save_id)
         existing_save_data = await database.fetch_one(query)
 
         if existing_save_data:
+            if existing_save_data['username'] == user_exist:
+                return HTMLResponse(inform_page("FAILED:<br>Save ID is already associated with your account.", 0))
             query = update(user).where(user.c.device_id == decrypted_fields[b'vid'][0].decode()).values(
                 data=existing_save_data["data"],
                 crc=existing_save_data["crc"],
@@ -690,6 +692,8 @@ async def result_request(request: Request):
         row = await database.fetch_one(query)
         query = select(user.c.coin_mp).where(user.c.device_id == device_id)
         coin_mp_row = await database.fetch_one(query)
+        if coin_mp_row is None:
+            coin_mp_row = {"coin_mp": 1}
         current_coin = row["coin"] if row and row["coin"] else START_COIN
         updated_coin = current_coin + COIN_REWARD * coin_mp_row["coin_mp"]
 

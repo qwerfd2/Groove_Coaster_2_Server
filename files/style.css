@@ -75,9 +75,11 @@ body {
     font-family: Hiragino Kaku Gothic ProN,Hiragino Kaku Gothic Pro,Meiryo,Helvetica,Arial,sans-serif;
     font-size: 34pt;
     line-height: 36pt;
+    overflow-x: hidden;
+    overscroll-behavior-x: none;
 }
-html{
-    overscroll-behavior: none;
+html {
+    overscroll-behavior-x: none;
 }
 .d_bl{display:block;}
 .a_left{text-align:left;}

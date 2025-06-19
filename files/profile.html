@@ -50,6 +50,38 @@
                         </div>
                         <input class="bt_bg01_narrow" type=submit value='Edit Username'>
                     </form>
+                    <form action=/coin_mp/?{pid} method=post>
+                        <div class="f60 a_center">
+                            <label for="coin_mp">GCoin multiplier:</label>
+                            <br>
+                            <select class="input" id="coin_mp" name="coin_mp">
+                                <option value="0" {gcoin_mp_0}>0x</option>
+                                <option value="1" {gcoin_mp_1}>1x</option>
+                                <option value="2" {gcoin_mp_2}>2x</option>
+                                <option value="3" {gcoin_mp_3}>3x</option>
+                                <option value="4" {gcoin_mp_4}>4x</option>
+                                <option value="5" {gcoin_mp_5}>5x</option>
+                            </select>
+                            <input class="bt_bg01_narrow" type=submit value='Edit Multiplier'>
+                            <br>
+                        </div>
+                    </form>
+                    <div class="f60 a_center" style="margin-top: 20px;">
+                        <label for="savefile_id">savefile ID:</label>
+                        <br>
+                        <button type="button" onclick="document.getElementById('savefile_id_container').style.display='block'; this.style.display='none';" class="bt_bg01_narrow">
+                            Reveal
+                        </button>
+                        <div id="savefile_id_container" style="display:none; margin-top:10px;">
+                            <input id="savefile_id" type="text" value="{savefile_id}" readonly style="text-align: center;" onclick="this.select();" />
+                        </div>
+                    </div>
+                    <form action="/save_migration/?{pid}" method="post" class="f60 a_center" style="margin-top: 10px;">
+                        <label for="save_id">Enter savefile ID:</label>
+                        <br>
+                        <input class="input" id="save_id" name="save_id"/>
+                        <input class="bt_bg01_narrow" type="submit" value="Migrate Save">
+                    </form>
                 </div>
             </div>
         </div>  

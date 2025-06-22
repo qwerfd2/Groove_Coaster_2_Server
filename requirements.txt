@@ -1,4 +1,8 @@
-starlette
-bcrypt
-pycryptodome
+cryptography
+databases
+multipart
 requests
+sqlalchemy
+starlette
+urllib
+uvicorn

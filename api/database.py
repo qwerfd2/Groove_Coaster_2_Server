@@ -53,20 +53,19 @@ result = Table(
     Column("rid", Integer, primary_key=True, autoincrement=True),
     Column("vid", String(512), nullable=False),
     Column("tid", String(512), nullable=False),
-    Column("sid", String(512), nullable=False),
+    Column("sid", Integer, nullable=False),
     Column("stts", String(64)),
-    Column("id", String(8)),
-    Column("mode", String(4)),
-    Column("avatar", String(4)),
-    Column("score", String(16)),
+    Column("id", Integer),
+    Column("mode", Integer),
+    Column("avatar", Integer),
+    Column("score", Integer),
     Column("high_score", String(128)),
     Column("play_rslt", String(128)),
-    Column("item", String(16)),
+    Column("item", Integer),
     Column("os", String(16)),
     Column("os_ver", String(16)),
     Column("ver", String(16)),
-    Column("mike", String(8)),
-
+    Column("mike", Integer),
 )
 
 whitelist = Table(
@@ -93,6 +92,7 @@ async def init_db():
     
     await engine.dispose()
     print("[DB] Database initialized successfully.")
+    await ensure_user_columns()
 
 async def get_user_data(uid, data_field):
     query = select(user.c[data_field]).where(user.c.device_id == uid[b'vid'][0].decode())
@@ -126,3 +126,21 @@ async def check_blacklist(uid):
     async with database.transaction():
         result = await database.fetch_one(query)
     return result is None
+
+async def ensure_user_columns():
+    import aiosqlite
+
+    async with aiosqlite.connect(DB_PATH) as db:
+        async with db.execute("PRAGMA table_info(user);") as cursor:
+            columns = [row[1] async for row in cursor]
+
+        alter_needed = False
+        if "save_id" not in columns:
+            await db.execute("ALTER TABLE user ADD COLUMN save_id TEXT;")
+            alter_needed = True
+        if "coin_mp" not in columns:
+            await db.execute("ALTER TABLE user ADD COLUMN coin_mp INTEGER DEFAULT 1;")
+            alter_needed = True
+        if alter_needed:
+            await db.commit()
+            print("[DB] Added missing columns to user table.")

@@ -81,7 +81,6 @@ async def ranking_detail(request: Request):
         html = f"""<div style="text-align: center; font-size: 36px; margin-bottom: 20px;">{song_name}</div>"""
 
         button_modes = [1, 2, 3]
-        print(len(difficulty_levels))
 
         if (len(difficulty_levels) == 6):
             button_labels.extend(["AC-Easy", "AC-Normal", "AC-Hard"])
@@ -215,10 +214,9 @@ async def ranking_detail(request: Request):
                 """
 
         else:
-            query = select(result).where(
-                (result.c.id == song_id) & (result.c.mode == mode)
-            ).order_by(result.c.score.desc())
+            query = select(result).where((result.c.id == song_id) & (result.c.mode == mode))
             play_results = await database.fetch_all(query)
+            play_results = sorted(play_results, key=lambda x: int(x[8]), reverse=True)
 
             query = select(user).where(user.c.device_id == device_id)
             user_result = await database.fetch_one(query)

@@ -13,6 +13,7 @@ from api.misc import get_4max_version_string
 from api.user import routes as user_routes
 from api.ranking import routes as rank_routes
 from api.shop import routes as shop_routes
+from api.play import routes as play_routes
 
 from config import HOST, PORT, DEBUG, SSL_CERT, SSL_KEY, ROOT_FOLDER, ACTUAL_HOST, ACTUAL_PORT
 
@@ -33,7 +34,7 @@ async def serve_file(request):
 
 routes = []
 
-routes = routes + user_routes + rank_routes + shop_routes
+routes = routes + user_routes + rank_routes + shop_routes + play_routes
 
 routes.append(Route("/{path:path}", serve_file))
 

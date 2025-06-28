@@ -15,7 +15,7 @@ from api.ranking import routes as rank_routes
 from api.shop import routes as shop_routes
 from api.play import routes as play_routes
 
-from config import HOST, PORT, DEBUG, SSL_CERT, SSL_KEY, ROOT_FOLDER, ACTUAL_HOST, ACTUAL_PORT
+from config import DEBUG, SSL_CERT, SSL_KEY, ROOT_FOLDER, ACTUAL_HOST, ACTUAL_PORT
 
 if (os.path.isfile('./files/dlc_4max.html')):
     get_4max_version_string()
@@ -42,6 +42,7 @@ app = Starlette(debug=DEBUG, routes=routes)
 
 @app.on_event("startup")
 async def startup():
+    global redis
     await database.connect()
     await init_db()
 

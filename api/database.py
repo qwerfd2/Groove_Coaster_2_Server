@@ -1,14 +1,17 @@
-from starlette.responses import JSONResponse, Response
-from starlette.requests import Request
-
 import sqlalchemy
-from sqlalchemy import Table, Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy import Table, Column, Integer, String, DateTime
 from sqlalchemy.ext.asyncio import create_async_engine
 from sqlalchemy import select, update
+
+from config import REDIS_ADDRESS, USE_REDIS_CACHE
 
 import os
 import databases
 import datetime
+if USE_REDIS_CACHE:
+    import redis.asyncio as aioredis
+
+redis = None
 
 DB_NAME = "player.db"
 DB_PATH = os.path.join(os.getcwd(), DB_NAME)
@@ -81,7 +84,7 @@ blacklist = Table(
 )
 
 async def init_db():
-
+    global redis
     if not os.path.exists(DB_PATH):
         print("[DB] Creating new database:", DB_PATH)
     
@@ -93,6 +96,9 @@ async def init_db():
     await engine.dispose()
     print("[DB] Database initialized successfully.")
     await ensure_user_columns()
+    if USE_REDIS_CACHE:
+        print("[DB] Connecting to Redis at", REDIS_ADDRESS)
+        redis = await aioredis.from_url("redis://" + REDIS_ADDRESS)
 
 async def get_user_data(uid, data_field):
     query = select(user.c[data_field]).where(user.c.device_id == uid[b'vid'][0].decode())

@@ -279,7 +279,7 @@ async def load(request: Request):
 async def save(request: Request):
     decrypted_fields, _ = await decrypt_fields(request)
     if not decrypted_fields:
-        return Response("""<response><code>10</code></response>""", media_type="application/xml")
+        return Response("""<response><code>10</code><message><ja>この機能を使用するには、まずアカウントを登録する必要があります。</ja><en>You need to register an account first before this feature can be used.</en><fr>Vous devez d'abord créer un compte avant de pouvoir utiliser cette fonctionnalité.</fr><it>È necessario registrare un account prima di poter utilizzare questa funzione.</it></message></response>""", media_type="application/xml")
 
     data = await request.body()
     data = data.decode("utf-8")
@@ -306,7 +306,7 @@ async def save(request: Request):
 
         return Response("""<response><code>0</code></response>""", media_type="application/xml")
     else:
-        return Response("""<response><code>10</code></response>""", media_type="application/xml")
+        return Response("""<response><code>10</code><message><ja>この機能を使用するには、まずアカウントを登録する必要があります。</ja><en>You need to register an account first before this feature can be used.</en><fr>Vous devez d'abord créer un compte avant de pouvoir utiliser cette fonctionnalité.</fr><it>È necessario registrare un account prima di poter utilizzare questa funzione.</it></message></response>""", media_type="application/xml")
     
 async def start(request: Request):
     decrypted_fields, _ = await decrypt_fields(request)

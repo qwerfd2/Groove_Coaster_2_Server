@@ -544,7 +544,8 @@ async def ttag(request: Request):
                 gcoin_mp_3='selected' if gcoin_mp == 3 else '',
                 gcoin_mp_4='selected' if gcoin_mp == 4 else '',
                 gcoin_mp_5='selected' if gcoin_mp == 5 else '',
-                savefile_id=savefile_id
+                savefile_id=savefile_id,
+                debug_info=original_field
             )
     else:
         with open("files/register.html", "r") as file:
@@ -593,7 +594,7 @@ async def bonus(request: Request):
                 cnt_id = int(reward_elem.find("cnt_id").text)
 
                 if cnt_type == 1:
-                    stages = set(json.loads(my_stage)) if my_stage else set()
+                    stages = set(my_stage) if my_stage else set()
                     if cnt_id not in stages:
                         stages.add(cnt_id)
                     my_stage = json.dumps(list(stages))

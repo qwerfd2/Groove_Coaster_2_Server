@@ -9,10 +9,10 @@ IP and port of the server.
 服务器的IP和端口。
 '''
 
-HOST = "192.168.0.106"
+HOST = "0.0.0.0"
 PORT = 9070
 
-ACTUAL_HOST = "192.168.0.106"
+ACTUAL_HOST = "0.0.0.0"
 ACTUAL_PORT = 9068
 
 '''
@@ -20,8 +20,8 @@ Redis leaderboard caching configuration.
 Redis排行榜缓存设置。
 '''
 
-REDIS_ADDRESS = "localhost"
-USE_REDIS_CACHE = False
+REDIS_ADDRESS = "redis"
+USE_REDIS_CACHE = True
 
 '''
 Datecode of the 3 pak files.

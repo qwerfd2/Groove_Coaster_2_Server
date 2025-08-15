@@ -1,0 +1,21 @@
+services:
+  server:
+    build: .
+    restart: always
+    links:
+      - redis
+    ports:
+      - 9068:9068
+    volumes:
+      - ./config.py:/app/config.py:ro
+      - ./files:/app/files
+      - ./database:/app/database
+  redis:
+    restart: always
+    image: redis:7-alpine
+    volumes:
+      - ./redis:/data
+    healthcheck:
+      test: "redis-cli ping"
+      interval: 5s
+      retries: 20

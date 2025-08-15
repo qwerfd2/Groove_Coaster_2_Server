@@ -14,7 +14,7 @@ if USE_REDIS_CACHE:
 redis = None
 
 DB_NAME = "player.db"
-DB_PATH = os.path.join(os.getcwd(), DB_NAME)
+DB_PATH = os.path.join(os.getcwd(), "database/" + DB_NAME)
 DATABASE_URL = f"sqlite+aiosqlite:///{DB_PATH}"
 
 database = databases.Database(DATABASE_URL)

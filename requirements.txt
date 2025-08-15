@@ -1,8 +1,12 @@
+pycryptodome
+aiosqlite
+bcrypt
 cryptography
 databases
 multipart
 requests
 sqlalchemy
 starlette
-urllib
+urllib3
 uvicorn
+redis

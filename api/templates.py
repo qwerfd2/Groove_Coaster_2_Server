@@ -34,7 +34,7 @@ TITLE_LISTS = {
 def init_templates():
     global SONG_LIST, AVATAR_LIST, ITEM_LIST, EXP_UNLOCKED_SONGS
 
-    base_path = 'api/config/'   
+    base_path = 'api/config/'
     print("[TEMPLATES] Initializing templates...")
 
     try:

@@ -8,6 +8,8 @@ from config import REDIS_ADDRESS, USE_REDIS_CACHE
 import os
 import databases
 import datetime
+import time
+
 if USE_REDIS_CACHE:
     import redis.asyncio as aioredis
 
@@ -83,6 +85,17 @@ blacklist = Table(
     Column("reason", String(256))
 )
 
+batch_token = Table(
+    "batch_token",
+    metadata,
+    Column("id", Integer, primary_key=True, autoincrement=True),
+    Column("token", String(512), nullable=False, unique=True),
+    Column("sid", Integer, nullable=False),
+    Column("verification_name", String(64), nullable=False, default=False),
+    Column("verification_id", String(64), nullable=False),
+    Column("expire_at", Integer, default=int(time.time()) + 1800),
+)
+
 async def init_db():
     global redis
     if not os.path.exists(DB_PATH):
@@ -102,8 +115,7 @@ async def init_db():
 
 async def get_user_data(uid, data_field):
     query = select(user.c[data_field]).where(user.c.device_id == uid[b'vid'][0].decode())
-    async with database.transaction():
-        result = await database.fetch_one(query)
+    result = await database.fetch_one(query)
     return result[data_field] if result else None
 
 async def set_user_data(uid, data_field, new_data):
@@ -117,8 +129,7 @@ async def set_user_data(uid, data_field, new_data):
         
 async def check_whitelist(uid):
     query = select(whitelist.c.id).where(whitelist.c.id == uid[b'vid'][0].decode())
-    async with database.transaction():
-        result = await database.fetch_one(query)
+    result = await database.fetch_one(query)
     return result is not None
 
 async def check_blacklist(uid):
@@ -129,8 +140,7 @@ async def check_blacklist(uid):
     query = select(blacklist.c.id).where(
         (blacklist.c.id == device_id) | (blacklist.c.id == username)
     )
-    async with database.transaction():
-        result = await database.fetch_one(query)
+    result = await database.fetch_one(query)
     return result is None
 
 async def ensure_user_columns():

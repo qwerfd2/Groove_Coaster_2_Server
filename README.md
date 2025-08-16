@@ -33,10 +33,10 @@ Warning: Do not put personal files under the folders in the private server direc
 | Ranking             | Individual song-difficulty ranking. Support total score ranking, but does not support regional ranking. Does not support viewing player profile.        |
 | Save backup         | Support save/load via an Account system. Support password and username changes. Support logging out.                   |
 | Titles              | Static full-unlock and setting titles via "Status".                                                                    |
-| Mission             | Basic automatic song unlock after reaching in-game levels. Everything else is not supported.                           |
+| Mission             | Basic automatic song unlock after reaching in-game levels. Everything else is not supported.                 |
 | Friend              | Not supported.                                                                                                         |
 | Progress Grid       | Not supported.                                                                                                         |
-| Additional features | Account/device whitelisting and banning.                                                                               |
+| Additional features | Account/device whitelisting and banning, batch download API                                         |
 
 ## Download
 
@@ -266,6 +266,10 @@ With the current setup, if a `device` is playing with an associated `account`, t
 A rather comprehensive data scrape was conducted prior to the server shutdown, containing at least first `99950` ranks of any given song. The data and metadata can be acquired at [Google Drive](https://drive.google.com/file/d/1tsZnRnxPdUAoFPLfCzuXJFf9GgHR6rGz/view?usp=drive_link)
 
 Note that this data is for analytics only, and the functionality to embed this data inside the private server is not and will not be supported by me. Feel free to Fork and create your own implementation.
+
+## Asset Batch Downloading
+
+Since this game features tons of downloadable music and stage files that cannot be natively acquired, a `flutter` app has been programmed to download all the files using a server API endpoint. the package can be resigned to have the same app id and signature, thus allowing overwrite installation with the game. It supports both Android and iOS. Development is still ongoing about the permission/authorization side of things, stay tuned...
 
 </details>
 
@@ -526,6 +530,10 @@ PC用文本编辑器打开服务器文件夹的 `config.env`，将`IPV4`填写�
 在停服前完成了一次较完整的数据抓取。每个难度的前`99950`位均被保留。数据和元数据可在这里下载。 [Google Drive](https://drive.google.com/file/d/1tsZnRnxPdUAoFPLfCzuXJFf9GgHR6rGz/view?usp=drive_link)
 
 请注意，此数据仅用于分析，私服内置不会被实现。如果有需求，请Fork然后自行设计。
+
+## 资源批量下载
+
+由于这款游戏包含大量无法通过程序自身自动获取的可下载音乐和谱面文件，因此已开发了一个 `flutter` 应用程序，通过服务器 API 接口下载所有文件。该包可重新签名以使用相同的应用程序 ID 和签名，从而实现与游戏的覆盖安装。该应用支持 Android 和 iOS 系统。目前仍在开发权限/授权相关功能，敬请期待...
 
 </details>
 

@@ -8,7 +8,7 @@ import xml.etree.ElementTree as ET
 
 from config import ROOT_FOLDER, START_COIN, COIN_REWARD, AUTHORIZATION_NEEDED
 
-from api.database import database, user, daily_reward, result, result, check_blacklist, check_whitelist
+from api.database import database, user, daily_reward, result, check_blacklist, check_whitelist
 from api.crypt import decrypt_fields
 from api.templates import START_STAGES, EXP_UNLOCKED_SONGS
 

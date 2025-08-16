@@ -7,7 +7,7 @@ import math
 from sqlalchemy import select, update
 import xml.etree.ElementTree as ET
 
-from config import START_COIN, AUTHORIZATION_NEEDED, STAGE_PRICE, START_COIN, AVATAR_PRICE, ITEM_PRICE
+from config import START_COIN, AUTHORIZATION_NEEDED, STAGE_PRICE, START_COIN, AVATAR_PRICE, ITEM_PRICE, FMAX_PRICE, EX_PRICE
 
 from api.crypt import decrypt_fields
 from api.misc import inform_page, parse_res, FMAX_VER, FMAX_RES
@@ -46,7 +46,7 @@ async def web_shop(request: Request):
 
         if cnt_type == "1":
             low_range = 100
-            up_range = 616
+            up_range = 615
 
             if page < 0 or page > math.ceil(up_range - low_range) / 80:
                 return HTMLResponse("""<html><body><h1>Invalid page number</h1></body></html>""", status_code=400)
@@ -59,17 +59,31 @@ async def web_shop(request: Request):
             low_range = low_range + page * 80
             up_range = min(up_range, low_range + 80)
 
-            if 700 not in my_stage and os.path.isfile('./files/dlc_4max.html'):
+            if 700 not in my_stage and os.path.isfile('./files/dlc_4max.html') and not spawn_prev_page:
                 buttons_html += """
                     <a href="wwic://web_shop_detail?&cnt_type=1&cnt_id=-1">
-                        <img src="/files/web/dlc_4max.jpg" style="width: 84%; margin-bottom: 20px; margin-top: -100px;" />
+                        <img src="/files/web/dlc_4max.jpg" style="width: 84%; margin-bottom: 110px; margin-top: -100px;" />
                     </a><br>
                 """
                 fmax_inc = 1
-            elif 700 in my_stage and os.path.isfile('./files/dlc_4max.html'):
+            elif 700 in my_stage and os.path.isfile('./files/dlc_4max.html') and not spawn_prev_page:
+                buttons_html += """
+                    <a href="wwic://web_shop_detail?&cnt_type=1&cnt_id=-3">
+                        <img src="/files/web/dlc_4max.jpg" style="width: 84%; margin-bottom: 110px; margin-top: -100px;" />
+                    </a><br>
+                """
+
+            if 980 not in my_stage and os.path.isfile('./files/dlc_extra.html') and not spawn_prev_page:
                 buttons_html += """
                     <a href="wwic://web_shop_detail?&cnt_type=1&cnt_id=-2">
-                        <img src="/files/web/dlc_4max.jpg" style="width: 84%; margin-bottom: 20px; margin-top: -100px;" />
+                        <img src="/files/web/dlc_extra.jpg" style="width: 84%; margin-bottom: 20px; margin-top: -100px;" />
+                    </a><br>
+                """
+                fmax_inc = 1
+            elif 980 in my_stage and os.path.isfile('./files/dlc_4max.html') and not spawn_prev_page:
+                buttons_html += """
+                    <a href="wwic://web_shop_detail?&cnt_type=1&cnt_id=-4">
+                        <img src="/files/web/dlc_extra.jpg" style="width: 84%; margin-bottom: 20px; margin-top: -100px;" />
                     </a><br>
                 """
 
@@ -204,7 +218,7 @@ async def web_shop_detail(request: Request):
                     <span style="color: #FFFFFF; font-size: 44px; font-family: Hiragino Kaku Gothic ProN, sans-serif;">{song_stage_price}</span>
                 </div>
                 """
-            elif cnt_id == -2:
+            elif cnt_id == -3:
                 log = parse_res(FMAX_RES)
                 html = f"""
                     <div class="text-content">
@@ -218,6 +232,36 @@ async def web_shop_detail(request: Request):
                         <p>{log}<p><br>
                     </div>
                 """
+            elif cnt_id == -4:
+                html = f"""
+                    <div class="text-content">
+                        <p>You have unlocked the EXTRA Challenge!</p>
+                        <p>Please report bugs/missing tracks to Discord: #AnTcfgss, or QQ 3421587952.</p>
+                        <button class="quit-button-extra" onclick="window.location.href='wwic://web_shop?&cnt_type=1'">
+                            Go Back
+                        </button>
+                    </div>
+                """
+            elif cnt_id == -2:
+                html = f"""
+                    <div class="text-content">
+                        <p>Brace the Ultimate - Extra - Challenge.</p>
+                        <p>170+ Arcade Extra difficulty charts await you.</p>
+                        <p>You have been warned.</p>
+                    </div>
+
+                    <button class="buy-button-extra" onclick="window.location.href='wwic://web_purchase_coin?&cnt_type=1&cnt_id=-2&num=1'">
+                        Buy
+                        <div class="coin-container">
+                        <img src="/files/web/coin_icon.png" alt="Coin Icon" class="coin-icon">
+                        <span style="font-size: 22px; font-weight: bold;"> {EX_PRICE}</span>
+                        </div>
+                    </button>
+                    <br><br>
+                    <button class="quit-button-extra" onclick="window.location.href='wwic://web_shop?&cnt_type=1'">
+                        Go Back
+                    </button>
+                """
             elif cnt_id == -1:
                 html = f"""
                     <div class="text-content">
@@ -230,7 +274,7 @@ async def web_shop_detail(request: Request):
                         Buy
                         <div class="coin-container">
                         <img src="/files/web/coin_icon.png" alt="Coin Icon" class="coin-icon">
-                        <span style="font-size: 22px; font-weight: bold;"> 300</span>
+                        <span style="font-size: 22px; font-weight: bold;"> {FMAX_PRICE}</span>
                         </div>
                     </button>
                     <br><br>
@@ -279,8 +323,10 @@ async def web_shop_detail(request: Request):
             else:
                 html = "<p>Item not found.</p>"
 
-        if cnt_type == "1" and cnt_id < 0:
+        if cnt_type == "1" and (cnt_id == -1 or cnt_id == -3):
             source_html = f"files/dlc_4max.html"
+        elif cnt_type == "1" and (cnt_id == -2 or cnt_id == -4):
+            source_html = f"files/dlc_extra.html"
         else:
             source_html = f"files/web_shop_detail.html"
             html += f"""
@@ -331,11 +377,19 @@ async def buy_by_coin(request: Request):
 
         if cnt_type == "1":
             if cnt_id == -1:
-                song_stage_price = 300
+                song_stage_price = FMAX_PRICE
                 if coin < song_stage_price:
                     return Response(fail_url, media_type="application/xml")
 
-                for i in range(616, 950):
+                for i in range(615, 926):
+                    my_stage.add(i)
+                coin -= song_stage_price
+            elif cnt_id == -2:
+                song_stage_price = EX_PRICE
+                if coin < song_stage_price:
+                    return Response(fail_url, media_type="application/xml")
+
+                for i in range(926, 985):
                     my_stage.add(i)
                 coin -= song_stage_price
             else:

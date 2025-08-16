@@ -606,7 +606,7 @@ async def bonus(request: Request):
                     await database.execute(update_query)
 
                 elif cnt_type == 2:
-                    avatars = set(json.loads(my_avatar)) if my_avatar else set()
+                    avatars = set(my_avatar) if my_avatar else set()
                     if cnt_id not in avatars:
                         avatars.add(cnt_id)
                     my_avatar = json.dumps(list(avatars))

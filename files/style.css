@@ -13,10 +13,25 @@
     margin: 0px auto;
     padding: 20px;
 }
+.dlc_container_extra {
+    max-width: 800px;
+    height: 70vh;
+    margin: 0px auto;
+    padding: 20px;
+}
 .dlc_logo {
     width: 100%;
     max-width: 500px;
     margin-bottom: 10px;
+}
+.dlc_extra_body {
+    background: url('/files/web/extra_bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: red;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
 }
 .text-content {
     font-size: 18px;
@@ -42,6 +57,33 @@
     width: 150px;
     height: 30px;
     background: url('/files/web/quit_button.png') no-repeat center center;
+    background-size: contain;
+    border: none;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+}
+.buy-button-extra {
+    display: inline-block;
+    width: 160px;
+    height: 110px;
+    background: url('/files/web/frame_buy_extra.png') no-repeat center center;
+    background-size: contain;
+    border: none;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    padding: 15px;
+    cursor: pointer;
+    position: relative;
+}
+.quit-button-extra {
+    display: inline-block;
+    width: 150px;
+    height: 30px;
+    background: url('/files/web/quit_button_extra.png') no-repeat center center;
     background-size: contain;
     border: none;
     color: white;

@@ -11,7 +11,7 @@ START_STAGES = [7,23,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,55,56,57
 
 START_AVATARS = []
 
-EXCLUDE_STAGE_EXP = [121,134,166,167,168,169,170,213,214,215,225,277,397] # 134 and 170 unoccupied dummy tracks (filled with Departure -Remix-),
+EXCLUDE_STAGE_EXP = [121,134,166,167,168,169,170,213,214,215,225,277,396] # 134 and 170 unoccupied dummy tracks (filled with Departure -Remix-),
 #121 (and 93-96 lady gaga songs) removed (can be enabled by patching stageParam:isAvailable, or change the last byte before next song's name - 1 from 01 to 03 in stage_param.dat. 
 # Rest are exp unlocked songs.
 EXCLUDE_AVATAR_EXP = [28,29]

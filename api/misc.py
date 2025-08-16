@@ -36,12 +36,12 @@ def get_4max_version_string():
 
 def parse_res(res):
     parsed_data = []
-    if isinstance(res, int):
+    if isinstance(res, int) or res == None:
         return "Failed to fetch version info: Error " + str(res)
     
     for item in res:
         if item.get("isOpen"):
-            version = item.get("version", "Unknown Version")
+            version = item.get("version", 0)
             changelog = "<br>".join(item.get("changeLog", {}).get("en", []))
             parsed_data.append(f"<strong>Version: {version}</strong><p><strong>Changelog:</strong><br>{changelog}</p>")
     return "".join(parsed_data)

@@ -48,9 +48,9 @@ If you'd like to upload it somewhere else and contribute the link, please contac
 
 Download `common.zip` and a platform of your choosing. Unzip the folders within to the private server root directory. If in doubt, check the `File Structure` section at the end.
 
-### GC4MAX Expansion
+### GC4MAX Expansion and Extra Challenge Expansion
 
-To install the `GC4MAX` expansion, which ports arcade exclusive tracks, avatars, and skins to 2OS, download the `4max expansion` folder's `common.zip` and a platform of your choosing. Unzip the folders within to the privates server root directory. Overwrite existing files. Note that the included installation `apk` or `ipa` must be used for correct avatar rendering.
+To install the `GC4MAX Expansion` (which includes the `Extra Challenge Expansion`), which ports arcade exclusive tracks, avatars, and skins to 2OS, download the `4max expansion` folder's `common.zip` and a platform of your choosing. Unzip the folders within to the privates server root directory. Overwrite existing files. Note that the included installation `apk` or `ipa` must be used for correct avatar rendering.
 
 Edit `config.py`'s `MODEL`, `TUNEFILE`, and `SKIN` value to match the `pak`'s timestamp. `paks` can be found at `/files/gc2/`.
 
@@ -313,9 +313,9 @@ Note that this data is for analytics only, and the functionality to embed this d
 
 下载 `common.zip` 和您设备的平台。将里面的所有文件夹解压到服务器根目录。如有疑惑，请参照文末`文件结构`章节。
 
-## GC4MAX扩展包
+## GC4MAX扩展包和Extra Challenge扩展包
 
-如想下载`GC4MAX`扩展包（包含了街机独占曲目，皮肤，和角色），下载`4max expansion`里的`common.zip`和和您设备的平台。将里面的所有文件夹解压到服务器根目录。如有重复，覆盖所有文件。请注意，必须使用包含的`apk`或`ipa`安装包来正确渲染角色。
+如想下载`GC4MAX扩展包`（内含`Extra Challenge扩展包`）（包含了街机独占曲目，皮肤，和角色），下载`4max expansion`里的`common.zip`和和您设备的平台。将里面的所有文件夹解压到服务器根目录。如有重复，覆盖所有文件。请注意，必须使用包含的`apk`或`ipa`安装包来正确渲染角色。
 
 修改`config.py`的`MODEL`, `TUNEFILE`, and `SKIN` 值至现有`pak`文件的时间戳. `paks`文件的位置在`/files/gc2/`.
 

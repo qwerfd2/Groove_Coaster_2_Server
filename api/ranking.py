@@ -248,7 +248,10 @@ async def ranking_detail(request: Request):
             play_record = None
 
             if user_id:
-                play_record = next((record for record in play_results if int(record[3]) == user_id), None)
+                play_record = play_record = next(
+                    (record for record in play_results if record[3] not in (None, '') and int(record[3]) == user_id),
+                    None
+                )
 
             if not play_record:
                 play_record = next((record for record in play_results if record[1] == device_id and record[3] is None), None)
@@ -257,10 +260,10 @@ async def ranking_detail(request: Request):
             avatar_index = str(play_record[7]) if play_record else "1"
             user_score = play_record[8] if play_record else 0
             for rank, result_obj in enumerate(play_results, start=1):
-                if user_result and int(result_obj[3]) == user_id:
+                if user_result and result_obj[3] not in (None, '') and int(result_obj[3]) == user_id:
                     player_rank = rank
                     break
-                elif result_obj[1] == device_id and result_obj[3] is None:
+                elif result_obj[1] == device_id and result_obj[3] in (None, ''):
                     player_rank = rank
                     break
 

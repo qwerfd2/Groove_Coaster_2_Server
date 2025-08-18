@@ -125,3 +125,9 @@ def inform_page(text, mode):
         mode = "/files/web/ttl_title.png"
     with open("files/inform.html", "r") as file:
         return file.read().format(text=text, img=mode)
+    
+def safe_int(val):
+    try:
+        return int(val)
+    except (TypeError, ValueError):
+        return None

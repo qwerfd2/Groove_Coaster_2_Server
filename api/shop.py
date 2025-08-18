@@ -91,7 +91,7 @@ async def web_shop(request: Request):
                 if i not in my_stage and i not in EXCLUDE_STAGE_EXP:
                     buttons_html += f"""
                         <button style="width: 170px; height: 170px; margin: 10px; background-size: cover; background-image: url('/files/image/icon/shop/{i}.jpg');"
-                                onclick="window.location.href='wwic://web_shop_detail?&cnt_type={cnt_type}&cnt_id={i}'">
+                                onclick="window.location.href='wwic://web_shop_detail?&cnt_type={cnt_type}&cnt_id={i}&return_page={page}'">
                         </button>
                     """
                     inc += 1
@@ -133,7 +133,7 @@ async def web_shop(request: Request):
                 if i not in my_avatar and i not in EXCLUDE_STAGE_EXP:
                     buttons_html += f"""
                         <button style="width: 170px; height: 170px; margin: 10px; background-color: black; background-size: contain; background-repeat: no-repeat; background-position: center center; background-image: url('/files/image/icon/avatar/{i}.png');"
-                                onclick="window.location.href='wwic://web_shop_detail?&cnt_type={cnt_type}&cnt_id={i}'">
+                                onclick="window.location.href='wwic://web_shop_detail?&cnt_type={cnt_type}&cnt_id={i}&return_page={page}'">
                         </button>
                     """
                     inc += 1
@@ -193,6 +193,10 @@ async def web_shop_detail(request: Request):
         cnt_type = decrypted_fields[b'cnt_type'][0].decode()
         cnt_id = int(decrypted_fields[b'cnt_id'][0].decode())
         device_id = decrypted_fields[b'vid'][0].decode()
+        if b'return_page' in decrypted_fields:
+            return_page = decrypted_fields[b'return_page'][0].decode()
+        else:
+            return_page = "1"
 
         query = select(daily_reward.c.coin).where(daily_reward.c.device_id == device_id)
         result = await database.fetch_one(query)
@@ -245,8 +249,9 @@ async def web_shop_detail(request: Request):
             elif cnt_id == -2:
                 html = f"""
                     <div class="text-content">
-                        <p>Brace the Ultimate - Extra - Challenge.</p>
-                        <p>170+ Arcade Extra difficulty charts await you.</p>
+                        <p>Are you looking for a bad time?</p>
+                        <p>If so, this is the Ultimate - Extra - Challenge.</p>
+                        <p>180+ Arcade Extra difficulty charts await you.</p>
                         <p>You have been warned.</p>
                     </div>
 
@@ -333,7 +338,7 @@ async def web_shop_detail(request: Request):
                 <br>
                 <div class="buttons" style="margin-top: 20px;">
                     <a href="wwic://web_purchase_coin?cnt_type={cnt_type}&cnt_id={cnt_id}&num=1" class="bt_bg01" >Buy</a><br>
-                    <a href="wwic://web_shop?cnt_type={cnt_type}" class="bt_bg01" >Go Back</a>
+                    <a href="wwic://web_shop?cnt_type={cnt_type}&page={return_page}" class="bt_bg01" >Go Back</a>
                 </div>
             """
 

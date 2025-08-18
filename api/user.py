@@ -8,7 +8,7 @@ import secrets
 from sqlalchemy import select, update, insert
 import xml.etree.ElementTree as ET
 
-from config import ROOT_FOLDER, START_COIN, AUTHORIZATION_NEEDED, HOST, PORT
+from config import ROOT_FOLDER, START_COIN, AUTHORIZATION_NEEDED, HOST, PORT, OVERRIDE_HOST
 
 from api.misc import is_alphanumeric, inform_page, verify_password, hash_password, crc32_decimal, get_model_pak, get_tune_pak, get_skin_pak, get_m4a_path, get_stage_path, get_stage_zero
 from api.database import database, user, daily_reward, get_user_data, set_user_data, check_blacklist, check_whitelist
@@ -331,7 +331,7 @@ async def start(request: Request):
     if not should_serve:
         return Response("""<response><code>403</code><message>Access denied.</message></response>""", media_type="application/xml")
 
-    host_string = "http://" + HOST + ":" + str(PORT) + "/"
+    host_string = OVERRIDE_HOST if OVERRIDE_HOST is not None else ("http://" + HOST + ":" + str(PORT) + "/")
     device_id = decrypted_fields[b'vid'][0].decode()
 
     for generator in [get_model_pak, get_tune_pak, get_skin_pak, get_m4a_path, get_stage_path]:

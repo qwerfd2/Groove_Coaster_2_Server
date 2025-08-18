@@ -14,8 +14,9 @@ from api.user import routes as user_routes
 from api.ranking import routes as rank_routes
 from api.shop import routes as shop_routes
 from api.play import routes as play_routes
+from api.batch import routes as batch_routes
 
-from config import DEBUG, SSL_CERT, SSL_KEY, ROOT_FOLDER, ACTUAL_HOST, ACTUAL_PORT
+from config import DEBUG, SSL_CERT, SSL_KEY, ROOT_FOLDER, ACTUAL_HOST, ACTUAL_PORT, BATCH_DOWNLOAD_ENABLED
 
 if (os.path.isfile('./files/dlc_4max.html')):
     get_4max_version_string()
@@ -35,6 +36,9 @@ async def serve_file(request):
 routes = []
 
 routes = routes + user_routes + rank_routes + shop_routes + play_routes
+
+if BATCH_DOWNLOAD_ENABLED:
+    routes = routes + batch_routes
 
 routes.append(Route("/{path:path}", serve_file))
 

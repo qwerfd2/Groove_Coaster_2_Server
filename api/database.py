@@ -32,7 +32,7 @@ user = Table(
     Column("data", String, nullable=True),
     Column("save_id", String, nullable=True),
     Column("crc", Integer, nullable=True),
-    Column("timestamp", DateTime, default=datetime.datetime.utcnow),
+    Column("timestamp", DateTime, default=None),
     Column("coin_mp", Integer, default=1),
 )
 

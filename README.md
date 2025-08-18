@@ -56,6 +56,16 @@ Edit `config.py`'s `MODEL`, `TUNEFILE`, and `SKIN` value to match the `pak`'s ti
 
 Important: You must use the `common.zip` inside the `4max expansion` folder, not the `common.zip` in the root directory.
 
+⚠️For players/servers already equipped with the 4MAX expansion, updating to the EX expansion means that your play results will be offsetted. While the server side can be corrected with a script in `various-tools`, your local save can't. The only way to fix this would be to clear your local and cloud save. Please beware.
+
+<details>
+<summary>Details</summary>
+<br>
+
+Because of a duplicate song, and 2 AC Alts being misplaced into 4MAX normal roster, the song list has changed order. As a result, your old play result would no longer match the song list. There is another solution - that is, to leave the 3 songs blank and hide them on both client and server side. However, since the remaining song list capacity is minimal (12 left), and the resulting code changes will pigeon-hole the 4max server code, resulting in discomfort in development later down the line. As a result, I chose to sacrifice the old user's save file. Sorry about that.
+
+</details>
+
 #### Updates
 
 The `GC4MAX` expansion will receive updates to fix bugs. You can check the latest version by going to the ingame `shop` - `songs page` - `GC4MAX banner` after purchasing the expansion. A server restart is required to fetch the latest update.
@@ -325,6 +335,16 @@ Since this game features tons of downloadable music and stage files that cannot 
 
 重要: 必须使用`4max expansion`文件夹里的`common.zip`，而不是根目录里的`common.zip`.
 
+⚠️针对已安装游玩4MAX扩展包的服务器/用户，更新至EX扩展包会造成歌曲游玩记录偏移。服务器端可使用tools里的脚本进行更正，但是本地存档将无法更正。唯一解决方法为清空本地和云存档。敬请注意。
+
+<details>
+<summary>细节</summary>
+<br>
+
+由于一首歌曲重复，两首AC Alt误放至4MAX正常曲目中，歌曲列表发生了偏移。你的游玩记录会跟着偏移。其实有一个解决办法，就是把这三首位置留空，然后在本地文件和服务器端隐藏他们。不过，鉴于总曲目限制所剩无几（仅剩12首），以及所带来的代码更新会将4MAX服务器陷入自己的鸽子洞，造成开发的不愉快，我选择了牺牲老用户的存档。非常抱歉。
+
+</details>
+
 #### 更新
 
 `GC4MAX` 扩展包会不定期接受bug修复更新。你可以在购买扩展包之后，通过游戏内的 `shop` - `songs 页面` - `GC4MAX 标题图片` 来查看最新的版本。为获取最新的版本更新，服务器应当不定期重启。
@@ -462,6 +482,12 @@ PC用文本编辑器打开服务器文件夹的 `config.env`，将`IPV4`填写�
 ### 安卓
 
 下载网盘里`install packages`里的`apk`文件。安装。`安卓14+` 设备可能需要用`幸运破解器`重构APK (`Menu of Patches` - `Create Modified APK File` - `APK with changed permissions and activities` - 打开 `Removes integrity check and signature verification` 和 `Re-sign with original signature for android patch "Disable .apk Signature Verification"` 有人反馈中文路径如下：点 `破解菜单` 然后点 `已更改权限和活动项的APK文件` )。
+
+![](https://studio.code.org/v3/assets/ywLEIWMnUvIOCJAgDvB6Qi2WCialf3EiqCW4qy_vrsM/w1.jpg)
+
+![](https://studio.code.org/v3/assets/ywLEIWMnUvIOCJAgDvB6Qi2WCialf3EiqCW4qy_vrsM/w2.jpg)
+
+(已获得授权，感谢@SaltNyaako)
 
 此`apk`被修改过。若想自己修改,请看最后一段。
 

@@ -181,9 +181,13 @@ Your server should already be running.
 
 Install `Charles Certificate Authority` on your `android` device by going to Charles UI `top bar`: `Help` – `SSL Proxying` – `Install Charles Root Certificate on a mobile device`. Follow its instructions. Install the downloaded certificate on the `android` device. Follow [this](https://gist.github.com/pwlin/8a0d01e6428b7a96e2eb) guide to move the user-level certificate to system level. Once done, go to the `android` device's `system setting` – `certificates`, and double check that `Charles` certificate appears at the bottom of the system certificates.
 
-In `Charles`, open `top bar`: `Proxy` – `Proxy Settings`. Enable `SOCKS` proxy on port `8889`. Enable `http proxying over socks`, include default ports. Then, in `top bar`: `Tools` – `Map Remote`, map a URL to your Server `IP address:port`, under `http`. The URL is: `https://gc2018.gczero.com`. 
+In `Charles`, open `top bar`: `Proxy` – `Proxy Settings`. Enable `SOCKS` proxy on port `8889`. Enable `http proxying over socks`, include default ports. 
 
 ![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/help1.JPG)
+
+Then, in `top bar`: `Tools` – `Map Remote`, map a URL to your Server `IP address:port`, under `http`. The URL is: `https://gc2018.gczero.com`. 
+
+![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/help3.png)
 
 ![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/test2.JPG)
 
@@ -454,10 +458,13 @@ PC用文本编辑器打开服务器文件夹的 `config.env`，将`IPV4`填写�
 
 在您的`Android`设备上安装`Charles 根证书`：Charles用户界面`顶栏`：`Help` – `SSL Proxying` – `Install Charles Root Certificate on a mobile device`. 按照其说明进行操作。`Android`设备上安装下载的证书。请按照此[指南]((https://gist.github.com/pwlin/8a0d01e6428b7a96e2eb))将用户级证书移至系统级。 完成后，转到系统设置 - 证书，仔细检查`Charles`证书是否出现在系统证书页面底部。
 
-在`Charles`中，打开顶部栏：`Proxy` – `Proxy Settings`。 在端口`8889`上启用`SOCKS`代理。打开``http proxying over socks``，配置默认端口。然后，在顶部栏中： `Tools` – `Map Remote`，将如下`URL`映射到`服务器IP:端口`（http协议）。URL为：`https://gc2018.gczero.com`。
+在`Charles`中，打开顶部栏：`Proxy` – `Proxy Settings`。 在端口`8889`上启用`SOCKS`代理。打开``http proxying over socks``，配置默认端口。
 
 ![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/help1.JPG)
 
+然后，在顶部栏中： `Tools` – `Map Remote`，将如下`URL`映射到`服务器IP:端口`（http协议）。URL为：`https://gc2018.gczero.com`。
+
+![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/help3.png)
 
 ![](https://studio.code.org/v3/assets/BDOGr35iuNT4hc06y6O_ES5P96xr3SMqhQ2tdwI1KOY/test2.JPG)
 

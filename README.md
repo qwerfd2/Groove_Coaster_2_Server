@@ -111,7 +111,7 @@ Note that MAC uses `python3`. Code examples in this document will use the defaul
 
 Open command on Windows (MAC open terminal). Type `ipconfig` (MAC `ifconfig`), and obtain your IPV4 address. This assumes that you are connected to a WIFI, and it should start with 192 or 172.
 
-Open the `config.env` of the private server, and change the `IP` accordingly.
+Open the `config.py` of the private server, and change the `IP` accordingly.
 
 Type `cmd` in the file directory on the top of the file explorer, and press enter. A command prompt will be opened for that directory.
 

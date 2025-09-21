@@ -257,6 +257,10 @@ A `save_id` will be generated upon saving the data to the server. It is availabl
 
 Note that your old record is not backed up. Thus, this feature should only be used to migrate your own save file, or some save file that you trust.
 
+### Admin Console
+
+A database CRUD web console can be accessed at /Login. Create your own username and bcrypt hash in the database `admins` table first.
+
 ## Coin Multiplier
 
 A coin multiplier [0, 5] can be set by the user in the user center.
@@ -539,6 +543,10 @@ PC用文本编辑器打开服务器文件夹的 `config.env`，将`IPV4`填写�
 一个 `save_id` 会在保存数据时生成，可在用户中心复制。你可以分享它，也可以输入别人的 `save_id` 来将他们的存档覆盖到你自己的账号下。
 
 小心，你的旧存档不会被备份。因此，此功能仅适合来迁移自己的存档，或者迁移受信任的存档。
+
+### 管理员平台
+
+一个数据库增删改查网页在/Login。先在数据库`admins`表创建自己的账号和bcrypt密码哈希。
 
 ## 金币倍数调整
 

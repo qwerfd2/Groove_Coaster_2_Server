@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GC2OS Admin</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/tabulator-tables@5.5.2/dist/css/tabulator.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/tabulator-tables@5.5.2/dist/js/tabulator.min.js"></script>
+    <style>
+    body {
+        background: #343a40;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        min-height: 100vh;
+    }
+    .container {
+        max-width: 1700px;
+    }
+    #tabulatorTable {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-x pan-y;
+    }
+    .tabulator .tabulator-header .tabulator-col {
+        font-size: clamp(0.4rem, 2vw, 0.7rem);
+    }
+    #changeModal .modal-dialog {
+        max-height: 80vh;
+        margin-top: 5vh;
+        margin-bottom: 5vh;
+        display: flex;
+        align-items: center;
+    }
+    #changeModal .modal-content {
+        max-height: 80vh;
+        display: flex;
+        flex-direction: column;
+    }
+    #changeModal .modal-body {
+        overflow-y: auto;
+        max-height: 55vh;
+    }
+    
+
+    #insertModal .modal-dialog {
+        max-height: 80vh;
+        margin-top: 5vh;
+        margin-bottom: 5vh;
+        display: flex;
+        align-items: center;
+    }
+    #insertModal .modal-content {
+        max-height: 80vh;
+        display: flex;
+        flex-direction: column;
+    }
+    #insertModal .modal-body {
+        overflow-y: auto;
+        max-height: 55vh;
+    }
+</style>
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container-fluid">
+        <span class="navbar-brand mb-0 h4 text-white">GC2OS Management</span>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav ms-4">
+                <li class="nav-item"><a class="nav-link" href="#" id="usersTab">Users</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" id="resultsTab">Results</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" id="dailyRewardsTab">DailyRewards</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" id="whitelistTab">Whitelist</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" id="blacklistTab">Blacklist</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" id="batchTokensTab">BatchTokens</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" id="adminsTab">Admins</a></li>
+            </ul>
+            <div class="d-flex ms-auto">
+                <button class="btn btn-primary me-2" id="searchBtn">
+                    <i class="bi bi-search"></i>
+                </button>
+                <button class="btn btn-success me-2" id="addRowBtn">
+                    <i class="bi bi-plus-lg"></i>
+                </button>
+                <button class="btn btn-outline-danger" id="logoutBtn">
+                    <i class="bi bi-box-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+        </div>
+    </div>
+</nav>
+
+    <div class="container">
+        <div id="tabulatorTable" class="mt-4"></div>
+    </div>
+
+    <!-- Change Modal -->
+    <div class="modal fade" id="changeModal" tabindex="-1" aria-labelledby="changeModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="changeModalLabel"></h5>
+            </div>
+            <div class="modal-body" id="changeModalBody"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Insert Modal -->
+<div class="modal fade" id="insertModal" tabindex="-1" aria-labelledby="insertModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="insertModalLabel">Insert New Row</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="insertRowForm">
+                <div class="modal-body" id="insertModalBody">
+                    <!-- Dynamic form fields will be inserted here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Insert</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Save data Modal -->
+<div class="modal fade" id="dataModal" tabindex="-1" aria-labelledby="dataModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="dataModalLabel">Edit Save Data</h5>
+            </div>
+            <div class="modal-body">
+                <textarea id="dataModalTextarea" class="form-control" style="height: 300px; width: 100%;"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="dataModalSaveBtn">Save</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Search Modal -->
+<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">Search</h5>
+      </div>
+      <div class="modal-body">
+        <input type="text" id="searchInput" class="form-control" placeholder="Enter search term">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="searchModalBtn">Search</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+window.currentTableName = null;
+let dataUserId = -1;
+function showTable(tabName) {
+    window.currentTableName = tabName;
+    if (window.currentTable) {
+        window.currentTable.destroy();
+    }
+    setCookie("lastTab", tabName, {path: '/'});
+
+    window.currentTable = new Tabulator("#tabulatorTable", {
+    ajaxURL: "/Admin/Table",
+    ajaxConfig: "GET",
+    pagination: true,
+    paginationMode:"remote",
+    paginationSize: 25,
+    paginationSizeSelector: [25, 50, 100],
+    layout: "fitColumns",
+    height: window.innerHeight * 0.9 + "px",
+    autoColumns: true,
+    responsiveLayout: "collapse",
+    sortMode: "remote",
+    autoColumnsDefinitions: function(definitions){
+        if (tabName === "users") {
+            definitions.push({
+                title: "data",
+                field: "__data",
+                hozAlign: "center",
+                formatter: function(cell, formatterParams, onRendered){
+                    return `<button class="btn btn-sm btn-info">View</button>`;
+                },
+                cellClick: async function(e, cell){
+                    const rowData = cell.getRow().getData();
+                    const userId = rowData.id;
+                    dataUserId = userId;
+                    const resp = await fetch(`/Admin/Data?id=${userId}`);
+                    const result = await resp.json();
+                    document.getElementById('dataModalTextarea').value = typeof result.data === "object"
+                        ? JSON.stringify(result.data, null, 2)
+                        : result.data;
+                    const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('dataModal'));
+                    modal.show();
+                }
+            });
+        }
+        definitions.push({
+        title: "Delete",
+        field: "__delete",
+        hozAlign: "center",
+        formatter: function(cell, formatterParams, onRendered){
+            return `<button class="btn btn-sm btn-danger">Delete</button>`;
+        },
+        cellClick: function(e, cell){
+            const rowData = cell.getRow().getData();
+            const idValue = rowData.id !== undefined ? rowData.id : rowData.objectId;
+            const tableName = window.currentTableName;
+
+            document.getElementById('changeModalLabel').innerText = "Confirm Delete";
+            document.getElementById('changeModalBody').innerHTML =
+                `<strong>ID:</strong> ${idValue}<br>
+                <strong>Table:</strong> ${tableName}<br>
+                <p class="text-danger">Are you sure you want to delete this row?</p>`;
+
+            const modalFooter = document.querySelector("#changeModal .modal-footer");
+            modalFooter.innerHTML = "";
+            const confirmBtn = document.createElement('button');
+            confirmBtn.className = "btn btn-danger";
+            confirmBtn.textContent = "Delete";
+            confirmBtn.onclick = async function() {
+                modal.hide();
+                const response = await fetch("/Admin/Table/Delete", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({
+                        table: tableName,
+                        id: rowData.id !== undefined ? rowData.id : rowData.objectId
+                    })
+                });
+                const result = await response.json();
+                if (result.status === "failed") {
+                    alert(result.message || "Delete failed.");
+                } else {
+                    showTable(tableName);
+                }
+            };
+            modalFooter.appendChild(confirmBtn);
+            const cancelBtn = document.createElement('button');
+            cancelBtn.className = "btn btn-secondary ms-2";
+            cancelBtn.textContent = "Cancel";
+            cancelBtn.setAttribute("data-bs-dismiss", "modal");
+            modalFooter.appendChild(cancelBtn);
+
+            const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('changeModal'));
+            modal.show();
+        }
+    });
+        definitions.forEach(function(col){
+            col.formatter = function(cell){
+                const value = cell.getValue();
+                if (typeof value === "object" && value !== null) {
+                    let str = JSON.stringify(value);
+                    if (str.length > 60) {
+                        str = str.substring(0, 57) + "...";
+                    }
+                    return `<span title="${JSON.stringify(value, null, 2)}">${str}</span>`;
+                }
+                return value;
+            };
+            if (col.field !== "id" && col.field !== "objectId" && col.field !== "__delete" && col.field !== "__data") {
+                col.editor = function(cell, onRendered, success, cancel){
+                    const value = cell.getValue();
+                    let input;
+                    if ((typeof value === "object" && value !== null) ||
+                        (typeof value === "string" && value.includes('\n'))) {
+                        input = document.createElement("textarea");
+                        input.style.width = "100%";
+                        input.style.height = "8em";
+                        input.value = (typeof value === "object" && value !== null) ? JSON.stringify(value, null, 2) : value;
+                    } else {
+                        input = document.createElement("input");
+                        input.type = "text";
+                        input.style.width = "100%";
+                        input.value = value;
+                    }
+
+                    onRendered(function(){
+                        input.focus();
+                        input.select();
+                    });
+
+                    function parseValue(original, edited) {
+                        if (typeof original === "boolean") {
+                            return (edited === "true");
+                        }
+                        else if (typeof original === "number" && Number.isInteger(original)) {
+                            let parsed = parseInt(edited, 10);
+                            return isNaN(parsed) ? original : parsed;
+                        }
+                        else if (typeof original === "number") {
+                            let parsed = parseFloat(edited);
+                            return isNaN(parsed) ? original : parsed;
+                        }
+                        else if (typeof original === "object" && original !== null) {
+                            try {
+                                return JSON.parse(edited);
+                            } catch {
+                                alert("Invalid JSON format. Please correct your input.");
+                                return "__CANCEL__";
+                            }
+                        }
+                        return edited;
+                    }
+
+                    function handleEdit() {
+                        let original = cell.getValue();
+                        let edited = input.value;
+                        let parsed = parseValue(original, edited);
+
+                        if (parsed === "__CANCEL__") {
+                            cancel();
+                            return;
+                        }
+
+                        let changed = false;
+                        if (typeof original === "object" && original !== null) {
+                            changed = JSON.stringify(original) !== JSON.stringify(parsed);
+                        } else {
+                            changed = original !== parsed;
+                        }
+
+                        if (changed) {
+                            success(parsed);
+                        } else {
+                            cancel();
+                        }
+                    }
+
+                    input.addEventListener("keydown", function(e){
+                        if(e.keyCode == 13 && !(input instanceof HTMLTextAreaElement)){
+                            handleEdit();
+                        } else if(e.keyCode == 27){
+                            cancel();
+                        }
+                    });
+                    input.addEventListener("blur", handleEdit);
+
+                    return input;
+                };
+            }
+        });
+        return definitions;
+    },
+    ajaxURLGenerator: function(url, config, params) {
+        let query = [];
+        query.push(`table=${tabName.toLowerCase()}`);
+        if (params.page) query.push(`page=${params.page}`);
+        if (params.size) query.push(`size=${params.size}`);
+        if (params.sort && params.sort.length) {
+            query.push(`sort=${params.sort[0].field}`);
+            query.push(`dir=${params.sort[0].dir}`);
+        }
+        if (params.filters && params.filters.length) {
+            query.push(`filter=${params.filters.map(f => `${f.field}:${f.value}`).join(",")}`);
+        }
+        if (searchTerm) {
+            query.push(`search=${encodeURIComponent(searchTerm)}`);
+        }
+        return url + "?" + query.join("&");
+    },
+    ajaxResponse: function(url, params, response) {
+        return response;
+    },
+    paginationDataReceived: {
+        last_page: "last_page",
+        total: "total"
+    }
+});
+
+window.currentTable.on('cellEdited', (cell) => {
+    const updatedRow = cell.getRow().getData();
+    const field = cell.getField();
+    const newValue = cell.getValue();
+    const idValue = updatedRow.id !== undefined ? updatedRow.id : updatedRow.objectId;
+
+    window.pendingUpdateRow = updatedRow;
+    window.pendingUpdateTable = cell.getTable().options.ajaxParams.table;
+    window.pendingUpdateCell = cell;
+    window.pendingOldValue = cell.getOldValue();
+
+    const oldType = typeof window.pendingOldValue;
+    const newType = typeof newValue;
+
+    document.getElementById('changeModalLabel').innerText = "Confirm Update";
+    document.getElementById('changeModalBody').innerHTML =
+        `<strong>ID:</strong> ${idValue}<br>
+        <strong>Field:</strong> ${field}<br>
+        <strong>Old Value:</strong> <pre>${typeof window.pendingOldValue === "object" ? JSON.stringify(window.pendingOldValue, null, 2) : window.pendingOldValue}</pre>
+        <strong>Old Type:</strong> ${oldType}<br>
+        <strong>New Value:</strong> <pre>${typeof newValue === "object" ? JSON.stringify(newValue, null, 2) : newValue}</pre>
+        <strong>New Type:</strong> ${newType}<br>
+        <p>Do you want to update this cell?</p>`;
+
+    const modalFooter = document.querySelector("#changeModal .modal-footer");
+    modalFooter.innerHTML = "";
+    const confirmBtn = document.createElement('button');
+    confirmBtn.className = "btn btn-primary";
+    confirmBtn.textContent = "Confirm";
+    confirmBtn.onclick = async function() {
+        modal.hide();
+        const response = await fetch("/Admin/Table/Update", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                table: window.currentTableName,
+                row: window.pendingUpdateRow
+            })
+        });
+        const result = await response.json();
+        if (result.status === "failed") {
+            alert(result.message || "Update failed.");
+        } else {
+            showTable(window.currentTableName);
+        }
+    };
+    modalFooter.appendChild(confirmBtn);
+    const cancelBtn = document.createElement('button');
+    cancelBtn.className = "btn btn-secondary ms-2";
+    cancelBtn.textContent = "Cancel";
+    cancelBtn.setAttribute("data-bs-dismiss", "modal");
+    cancelBtn.onclick = function() {
+        window.pendingUpdateCell.setValue(window.pendingOldValue, true);
+    };
+    modalFooter.appendChild(cancelBtn);
+
+    const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('changeModal'));
+    modal.show();
+});
+}
+
+document.getElementById('dataModalSaveBtn').onclick = async function() {
+    const dataContent = document.getElementById('dataModalTextarea').value;
+
+    const resp = await fetch("/Admin/Data/Save", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            id: dataUserId,
+            data: dataContent
+        })
+    });
+    const result = await resp.json();
+    if (result.status === "failed") {
+        alert(result.message || "Save failed.");
+    } else {
+        const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('dataModal'));
+        modal.hide();
+        showTable("users");
+    }
+};
+
+document.getElementById('usersTab').onclick = () => showTable("users");
+document.getElementById('resultsTab').onclick = () => showTable("results");
+document.getElementById('dailyRewardsTab').onclick = () => showTable("daily_rewards");
+document.getElementById('whitelistTab').onclick = () => showTable("whitelist");
+document.getElementById('blacklistTab').onclick = () => showTable("blacklist");
+document.getElementById('batchTokensTab').onclick = () => showTable("batch_tokens");
+document.getElementById('adminsTab').onclick = () => showTable("admins");
+
+document.getElementById('logoutBtn').addEventListener('click', function() {
+    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    window.location.href = "/Login";
+});
+
+let searchTerm = "";
+
+document.getElementById('searchBtn').onclick = function() {
+    const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('searchModal'));
+    document.getElementById('searchInput').value = searchTerm;
+    modal.show();
+};
+
+document.getElementById('searchModalBtn').onclick = function() {
+    searchTerm = document.getElementById('searchInput').value.trim();
+    const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('searchModal'));
+    modal.hide();
+    showTable(window.currentTableName);
+
+    // Highlight searchBtn if search is active
+    const searchBtn = document.getElementById('searchBtn');
+    if (searchTerm) {
+        searchBtn.style.backgroundColor = "yellow";
+        searchBtn.style.color = "black";
+    } else {
+        searchBtn.style.backgroundColor = "";
+        searchBtn.style.color = "";
+    }
+};
+
+document.getElementById('addRowBtn').onclick = async function() {
+    const tableName = window.currentTableName;
+    const schemaResp = await fetch(`/Admin/Table?table=${tableName}&schema=1`);
+    const schema = await schemaResp.json();
+
+    const modalBody = document.getElementById('insertModalBody');
+    modalBody.innerHTML = "";
+    Object.entries(schema).forEach(([field, type]) => {
+        if (field === "id" || field === "objectId") return;
+        let inputType = "text";
+        if (type.startsWith("INTEGER")) inputType = "number";
+        if (type.startsWith("BOOLEAN")) inputType = "checkbox";
+        modalBody.innerHTML += `
+            <div class="mb-3">
+                <label class="form-label">${field} (${type})</label>
+                ${inputType === "checkbox"
+                    ? `<input type="checkbox" class="form-check-input" name="${field}">`
+                    : `<input type="${inputType}" class="form-control" name="${field}">`
+                }
+            </div>
+        `;
+    });
+    const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('insertModal'));
+    modal.show();
+};
+
+document.getElementById('insertRowForm').onsubmit = async function(e) {
+    e.preventDefault();
+    const tableName = window.currentTableName;
+    const form = e.target;
+    const data = {};
+    Array.from(form.elements).forEach(el => {
+        if (!el.name) return;
+        if (el.type === "checkbox") {
+            data[el.name] = el.checked;
+        } else if (el.type === "number") {
+            data[el.name] = el.value ? parseInt(el.value, 10) : null;
+        } else {
+            data[el.name] = el.value;
+        }
+    });
+
+    const response = await fetch("/Admin/Table/Insert", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            table: tableName,
+            row: data
+        })
+    });
+    const result = await response.json();
+    if (result.status === "failed") {
+        alert(result.message || "Insert failed.");
+    } else {
+        const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('insertModal'));
+        modal.hide();
+        showTable(tableName);
+    }
+};
+
+const validTabs = ["users", "results", "daily_rewards", "whitelist", "blacklist", "batch_tokens", "admins"];
+const lastTab = getCookie("lastTab");
+if (validTabs.includes(lastTab)) {
+    showTable(lastTab);
+} else {
+    showTable("users");
+}
+
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+}
+
+function setCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+    </script>
+</body>
+</html>

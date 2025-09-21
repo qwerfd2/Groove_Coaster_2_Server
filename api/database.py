@@ -1,5 +1,5 @@
 import sqlalchemy
-from sqlalchemy import Table, Column, Integer, String, DateTime
+from sqlalchemy import Table, Column, Integer, String, DateTime, Boolean
 from sqlalchemy.ext.asyncio import create_async_engine
 from sqlalchemy import select, update
 
@@ -94,6 +94,15 @@ batch_token = Table(
     Column("verification_name", String(64), nullable=False, default=False),
     Column("verification_id", String(64), nullable=False),
     Column("expire_at", Integer, default=int(time.time()) + 1800),
+)
+
+admins = Table(
+    "admins",
+    metadata,
+    Column("id", Integer, primary_key=True, autoincrement=True),
+    Column("username", String(32), unique=True, nullable=False),
+    Column("password", String(64), nullable=False),
+    Column("token", String(256), unique=True, nullable=True)
 )
 
 async def init_db():

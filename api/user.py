@@ -116,7 +116,7 @@ async def password_reset(request: Request):
         return HTMLResponse(inform_page("FAILED:<br>User does not exist.<br>This should not happen.", 0))
 
 
-async def coin_mp(request: Request):
+async def user_coin_mp(request: Request):
     form = await request.form()
     mp = int(form.get("coin_mp"))
 
@@ -207,8 +207,9 @@ async def register(request: Request):
         username=username,
         password_hash=hash_password(password),
         device_id=decrypted_fields[b'vid'][0].decode(),
-        data="",
-        crc=0,
+        data=None,
+        timestamp=None,
+        crc=None,
         coin_mp=1,
     )
     await database.execute(insert_query)
@@ -661,7 +662,7 @@ routes = [
     Route('/gcm/php/register.php', reg, methods=['GET']),
     Route('/name_reset/', name_reset, methods=['POST']),
     Route('/password_reset/', password_reset, methods=['POST']),
-    Route('/coin_mp/', coin_mp, methods=['POST']),
+    Route('/coin_mp/', user_coin_mp, methods=['POST']),
     Route('/save_migration/', save_migration, methods=['POST']),
     Route('/register/', register, methods=['POST']),
     Route('/logout/', logout, methods=['POST']),

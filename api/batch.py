@@ -21,6 +21,9 @@ async def batch_handler(request: Request):
     query = batch_token.select().where(batch_token.c.token == token)
     result = await database.fetch_one(query)
 
+    if not result:
+        return HTMLResponse(content="Invalid token", status_code=400)
+
     if result['expire_at'] < int(time.time()):
         return HTMLResponse(content="Token expired", status_code=400)
     

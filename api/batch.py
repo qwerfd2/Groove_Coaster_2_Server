@@ -13,16 +13,16 @@ async def batch_handler(request: Request):
     token = data.get("token")
     platform = data.get("platform")
     if not token:
-        return HTMLResponse(content=json.dumps({"error": "Token is required"}), status_code=400)
+        return HTMLResponse(content="Token is required", status_code=400)
     
     if platform not in ["Android", "iOS"]:
-        return HTMLResponse(content=json.dumps({"error": "Invalid platform"}), status_code=400)
-    
+        return HTMLResponse(content="Invalid platform", status_code=400)
+
     query = batch_token.select().where(batch_token.c.token == token)
     result = await database.fetch_one(query)
 
     if result['expire_at'] < int(time.time()):
-        return HTMLResponse(content=json.dumps({"error": "Token expired"}), status_code=400)
+        return HTMLResponse(content="Token expired", status_code=400)
     
     with open(os.path.join('api/config/', 'download_manifest.json'), 'r', encoding='utf-8') as f:
             stage_manifest = json.load(f)

@@ -49,6 +49,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> initBatch(String serverUrl, String token) async {
     setState(() => _result = "Checking...");
 
+    if (serverUrl.endsWith("/")) {
+      serverUrl = serverUrl.substring(0, serverUrl.length - 1);
+    }
+
     try {
       final url = Uri.parse('$serverUrl/batch');
       final payload = {
@@ -71,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
             context,
             MaterialPageRoute(
               builder: (_) => DownloadScreen(
-                files: data["stage"] ?? {},
+                files: Map<String, int>.from(data["stage"] ?? {}),
                 threadCount: data["thread"] ?? 1,
                 title: "Downloading Stages",
                 serverUrl: serverUrl,
@@ -83,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
             context,
             MaterialPageRoute(
               builder: (_) => DownloadScreen(
-                files: data["audio"] ?? {},
+                files: Map<String, int>.from(data["audio"] ?? {}),
                 threadCount: data["thread"] ?? 1,
                 title: "Downloading Music",
                 serverUrl: serverUrl,
@@ -96,7 +100,10 @@ class _HomeScreenState extends State<HomeScreen> {
           );
         }
       } else {
-        setState(() => _result = "Server error: ${response.statusCode}");
+        setState(
+          () => _result =
+              "Server error: ${response.statusCode}, ${response.body}",
+        );
       }
     } catch (e) {
       setState(() => _result = "Request failed: $e");

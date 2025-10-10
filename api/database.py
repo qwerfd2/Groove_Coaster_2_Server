@@ -1,5 +1,5 @@
 import sqlalchemy
-from sqlalchemy import Table, Column, Integer, String, DateTime, Boolean
+from sqlalchemy import Table, Column, Integer, String, DateTime, Boolean, JSON
 from sqlalchemy.ext.asyncio import create_async_engine
 from sqlalchemy import select, update
 
@@ -18,6 +18,13 @@ redis = None
 DB_NAME = "player.db"
 DB_PATH = os.path.join(os.getcwd(), DB_NAME)
 DATABASE_URL = f"sqlite+aiosqlite:///{DB_PATH}"
+
+CACHE_DB_NAME = "cache.db"
+CACHE_DB_PATH = os.path.join(os.getcwd(), CACHE_DB_NAME)
+CACHE_DATABASE_URL = f"sqlite+aiosqlite:///{CACHE_DB_PATH}"
+
+cache_database = databases.Database(CACHE_DATABASE_URL)
+cache_metadata = sqlalchemy.MetaData()
 
 database = databases.Database(DATABASE_URL)
 metadata = sqlalchemy.MetaData()
@@ -105,10 +112,27 @@ admins = Table(
     Column("token", String(256), unique=True, nullable=True)
 )
 
+ranking_cache = Table(
+    "ranking_cache",
+    cache_metadata,
+    Column("id", Integer, primary_key=True, autoincrement=True),
+    Column("key", String(16), nullable=False),
+    Column("value", JSON, nullable=False),
+    Column("expire_at", Integer)
+)
+
 async def init_db():
     global redis
     if not os.path.exists(DB_PATH):
         print("[DB] Creating new database:", DB_PATH)
+
+    if not os.path.exists(CACHE_DB_PATH):
+        print("[DB] Creating new cache database:", CACHE_DB_PATH)
+    
+    cache_engine = create_async_engine(CACHE_DATABASE_URL, echo=False)
+    async with cache_engine.begin() as conn:
+        await conn.run_sync(cache_metadata.create_all)
+    await cache_engine.dispose()
     
     engine = create_async_engine(DATABASE_URL, echo=False)
     

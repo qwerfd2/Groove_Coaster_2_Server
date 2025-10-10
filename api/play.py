@@ -8,7 +8,7 @@ import xml.etree.ElementTree as ET
 
 from config import ROOT_FOLDER, START_COIN, COIN_REWARD, AUTHORIZATION_NEEDED
 
-from api.database import database, user, daily_reward, result, check_blacklist, check_whitelist
+from api.database import database, cache_database, ranking_cache, user, daily_reward, result, check_blacklist, check_whitelist
 from api.crypt import decrypt_fields
 from api.templates import START_STAGES, EXP_UNLOCKED_SONGS
 
@@ -46,6 +46,15 @@ async def result_request(request: Request):
     tid = decrypted_fields[b'tid'][0].decode()
     ver = decrypted_fields[b'ver'][0].decode()
     mike = decrypted_fields[b'mike'][0].decode()
+
+    cache_key = f"{track_id}-{mode}"
+
+    # delete cache with key first
+
+    delete_query = ranking_cache.delete().where(ranking_cache.c.key == cache_key)
+    await cache_database.execute(delete_query)
+
+    # add coins, skip 4max placeholder songs
 
     if int(track_id) not in range(616, 1024) or int(mode) not in range(0, 4):
         query = select(daily_reward.c.coin).where(daily_reward.c.device_id == device_id)

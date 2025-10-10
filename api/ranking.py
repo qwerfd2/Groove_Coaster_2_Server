@@ -3,11 +3,12 @@ from starlette.requests import Request
 from starlette.routing import Route
 import os
 import json
+import time
 from sqlalchemy import select, update
 
 from config import AUTHORIZATION_NEEDED, USE_REDIS_CACHE
 
-from api.database import database, check_whitelist, check_blacklist, redis, result, daily_reward, user
+from api.database import database, cache_database, ranking_cache, check_whitelist, check_blacklist, redis, result, daily_reward, user
 from api.crypt import decrypt_fields, encryptAES
 from api.templates import EXP_UNLOCKED_SONGS, TITLE_LISTS, SONG_LIST
 from api.misc import inform_page, safe_int
@@ -109,11 +110,24 @@ async def ranking_detail(request: Request):
         play_results = None
         user_result = None
         device_result = None
+        cache_key = f"{song_id}-{mode}"
         if USE_REDIS_CACHE:
-            cache_key = f"{song_id}-{mode}"
             cached = await redis.get(cache_key)
         else:
-            cached = False
+            cache_db_query = ranking_cache.select().where(ranking_cache.c.key == cache_key)
+            cache_db_result = await cache_database.fetch_one(cache_db_query)
+            if cache_db_result:
+                timestamp = time.time()
+                if cache_db_result["expire_at"] and cache_db_result["expire_at"] < timestamp and song_id == -1:
+                    # Global LB, Cache expired, delete it
+                    delete_query = ranking_cache.delete().where(ranking_cache.c.key == cache_key)
+                    await cache_database.execute(delete_query)
+                    cached = False
+                else:
+                    # individual LB result invalidated upon score submission, no need to check expire time
+                    cached = cache_db_result["value"]
+            else:
+                cached = False
 
         if (song_id == -1):
             # Filter out the mobile/AC modes
@@ -124,9 +138,10 @@ async def ranking_detail(request: Request):
             else:
                 exclude = [1, 2, 3]
 
-            
             if cached and USE_REDIS_CACHE:
                 sorted_players = json.loads(cached)
+            elif cached:
+                sorted_players = cached
 
             else:
                 query = select(result.c.vid, result.c.sid, result.c.mode, result.c.avatar, result.c.score)
@@ -175,6 +190,15 @@ async def ranking_detail(request: Request):
                 sorted_players = sorted(player_scores.items(), key=lambda x: x[1]["score"], reverse=True)
                 if USE_REDIS_CACHE:
                     await redis.set(cache_key, json.dumps(sorted_players), ex=300)
+
+                # log to cache db
+                query = ranking_cache.insert().values(
+                    key=cache_key,
+                    value=sorted_players,
+                    expire_at=int(time.time()) + 180 # 3 minutes expiration
+                )
+                await cache_database.execute(query)
+                
 
             username = cur_user[1] if cur_user else f"Guest({device_id[-6:]})"
 
@@ -229,19 +253,32 @@ async def ranking_detail(request: Request):
         else:
             if cached and USE_REDIS_CACHE:
                 play_results = json.loads(cached)
+            
+            elif cached:
+                play_results = cached
 
             else:
-                query = select(result).where((result.c.id == song_id) & (result.c.mode == mode))
+                query = select(result).where((result.c.id == song_id) & (result.c.mode == mode)).order_by(result.c.score.desc())
                 play_results = await database.fetch_all(query)
-                play_results = sorted(play_results, key=lambda x: int(x[8]), reverse=True)
+                play_results = [dict(row) for row in play_results]
+                
                 if USE_REDIS_CACHE:
                     await redis.set(cache_key, json.dumps(play_results), ex=300)
+
+                # log to cache db
+                query = ranking_cache.insert().values(
+                    key=cache_key,
+                    value=play_results,
+                    expire_at=None  # individual LB, no expiration needed
+                )
+                await cache_database.execute(query)
 
             query = select(user).where(user.c.device_id == device_id)
             user_result = await database.fetch_one(query)
 
             query = select(daily_reward).where(daily_reward.c.device_id == device_id)
             device_result = await database.fetch_one(query)
+            device_result = dict(device_result) if device_result else {"title": "1", "avatar": 1}
 
             user_id = user_result[0] if user_result else None
             username = user_result[1] if user_result else f"Guest({device_id[-6:]})"
@@ -254,16 +291,16 @@ async def ranking_detail(request: Request):
                 )
 
             if not play_record:
-                play_record = next((record for record in play_results if record[1] == device_id and record[3] is None), None)
+                play_record = next((record for record in play_results if record['vid'] == device_id and record['sid'] is None), None)
 
             player_rank = None
-            avatar_index = str(play_record[7]) if play_record else "1"
-            user_score = play_record[8] if play_record else 0
+            avatar_index = str(play_record['avatar']) if play_record else "1"
+            user_score = play_record['score'] if play_record else 0
             for rank, result_obj in enumerate(play_results, start=1):
-                if user_result and safe_int(result_obj[3]) == user_id:
+                if user_result and safe_int(result_obj['sid']) == user_id:
                     player_rank = rank
                     break
-                elif result_obj[1] == device_id and result_obj[3] in (None, ''):
+                elif result_obj['vid'] == device_id and result_obj['sid'] in (None, ''):
                     player_rank = rank
                     break
 
@@ -273,7 +310,7 @@ async def ranking_detail(request: Request):
                 <img src="/files/image/icon/avatar/{avatar_index}.png" class="avatar" alt="Player Avatar">
                 <div class="player-info">
                     <div class="name">{username}</div>
-                    <img src="/files/image/title/{device_result[9]}.png" class="title" alt="Player Title">
+                    <img src="/files/image/title/{device_result['title']}.png" class="title" alt="Player Title">
                 </div>
                 <div class="player-score">{user_score}</div>
             </div>
@@ -284,25 +321,25 @@ async def ranking_detail(request: Request):
             """
 
             for rank, record in enumerate(play_results, start=1):
-                username = f"Guest({record[1][-6:]})"
+                username = f"Guest({record['vid'][-6:]})"
                 device_info = None
-                if record[3]:
-                    query = select(user.c.username).where(user.c.id == record[3])
+                if record['sid']:
+                    query = select(user.c.username).where(user.c.id == record['sid'])
                     user_data = await database.fetch_one(query)
                     if user_data:
                         username = user_data["username"]
 
-                    query = select(daily_reward.c.title).where(daily_reward.c.device_id == record[1])
+                    query = select(daily_reward.c.title).where(daily_reward.c.device_id == record['vid'])
                     device_title = await database.fetch_one(query)
                     if device_title:
                         device_info = device_title["title"]
                     else:
                         device_info = "1"
 
-                avatar_id = record[7] if record[7] else 1
+                avatar_id = record['avatar'] if record['avatar'] else 1
                 avatar_url = f"/files/image/icon/avatar/{avatar_id}.png"
 
-                score = record[8]
+                score = record['score']
 
                 html += f"""
                 <div class="leaderboard-player">

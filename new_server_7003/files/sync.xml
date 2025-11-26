@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><response>
+<code>0</code>
+<area>en</area>
+<is_tutorial>0</is_tutorial>
+<icon_badge>
+	<icon_no>98</icon_no>
+	<icon_index>4</icon_index>
+	<badge_id>0</badge_id>
+</icon_badge>
+<result_banner>0</result_banner>
+<information_badge>
+	<icon_index>1</icon_index>
+	<badge_id>2</badge_id>
+</information_badge>
+
+</response>

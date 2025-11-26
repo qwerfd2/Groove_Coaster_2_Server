@@ -10,13 +10,11 @@ A small local server for `Groove Coaster 2: Original Style`, implemented with `P
 
 ## Introduction
 
-This project is for game preservation purposes only. Creative liberty and conveniences have been taken when it comes to specific implementation. The goal is not to ensure 1:1 behavior, but to guarrantee the minimum viability of playing this game. It is provided as-is, per the MIT license.
+This project is for game preservation purposes only. Creative liberty and conveniences have been taken when it comes to specific implementation. The goal is not to ensure 1:1 behavior, but to guarrantee the minimum viability of playing this game. It is provided as-is, per the GPLv2 license.
+
+It has been rewritten multiple times to ~~nuke my poor code~~ optimize and improve. The latest iteration is 7003, which is experimental. Improvements were made but the data structure are different than the previous versions. If you are running 7002 or prior, please wait until the guide of migration is published.
 
 You shall bare all the responsibility for any potential consequences as a result of running this server. If you do not agree to these requirements, you are not allowed to replicate or run this program.
-
-~~It is designed as a **local** server, as Flask face issues with high concurrency. There is an optimized, `async` server, but the code is not open source. Only vetted server owners that will not violate the license terms will be given access. Contact the repo owner for more information.~~
-
-The async server is now open source under the GPLv2 license. It has superceded the old server in terms of functionality and performance.
 
 Inspiration: [Lost-MSth/Arcaea-server](https://github.com/Lost-MSth/Arcaea-server)
 
@@ -297,13 +295,13 @@ Since this game features tons of downloadable music and stage files that cannot 
 
 ## 简介
 
-此项目的目标是保持游戏的长远可用性 (game preservation)。在具体实施上，我采取了一些便利及创意性的措施（偷懒）。此项目的目标不是确保 1:1 还原官服，而是保证游戏长久可玩。此项目在MIT许可证的“按现状” (as-is) 条件下提供。
+此项目的目标是保持游戏的长远可用性 (game preservation)。在具体实施上，我采取了一些便利及创意性的措施（偷懒）。此项目的目标不是确保 1:1 还原官服，而是保证游戏长久可玩。此项目在GPLv2许可证的“按现状” (as-is) 条件下提供。
+
+It has been rewritten multiple times to ~~nuke my poor code~~ optimize and improve. The latest iteration is 7003, which is experimental. Improvements were made but the data structure are different than the previous versions. If you are running 7002 or prior, please wait until the guide of migration is published.
+
+此服务器已经重写多次，以~~让屎山代码消失~~提升性能和功能。最新版为7003，尚在试验中。为提升性能，底层数据结构已经修改。如果你在运行7002及之前的版本，请稍等至指南攥写完成再进行迁移。
 
 你应对因运行本服务器而产生的任何潜在后果承担全部责任。如果您不同意这些要求，则不允许您复制或运行该程序。
-
-~~此服务器仅为**本地**运行设计，鉴于Flask糟糕的并发性能。一个高效，`异步`的服务器可供使用，不过代码并非开源。只有经过审核，不会违反许可条款的服务器所有者才能获得访问权限。请联系repo所有者了解更多信息。~~
-
-基于`Starlette`的异步服务器已经在功能和性能上超越了老服务器，现在以`GPLv2`许可证开源。
 
 灵感: [Lost-MSth/Arcaea-server](https://github.com/Lost-MSth/Arcaea-server)
 

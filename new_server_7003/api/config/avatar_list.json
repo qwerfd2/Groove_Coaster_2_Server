@@ -1,0 +1,1332 @@
+[
+    {
+        "id": 1,
+        "name": "GENE",
+        "effect": "A guide is displayed along with the TARGETS. G:20 L:110 E:100%"
+    },
+    {
+        "id": 2,
+        "name": "ENERGY",
+        "effect": "Max GROOVE percentage is now 140% G:0 L:140 E:100%"
+    },
+    {
+        "id": 3,
+        "name": "LIGHT",
+        "effect": "A tutorial is displayed during play. G:30 L:100 E:100%"
+    },
+    {
+        "id": 4,
+        "name": "SPARK",
+        "effect": "The accurate track is played regardless of player input. G:20 L:110 E:100%"
+    },
+    {
+        "id": 5,
+        "name": "OCTOPUS",
+        "effect": "The level gauge fills at a rate of 103%. G:0 L:120 E:103%"
+    },
+    {
+        "id": 6,
+        "name": "CRAB",
+        "effect": "The timing required for a GOOD rating is less strict. G:20 L:100 E:100%"
+    },
+    {
+        "id": 7,
+        "name": "SQUID",
+        "effect": "The GROOVE requirement to beat a stage is lessened by 10%. G:0 L:120 E:100%"
+    },
+    {
+        "id": 8,
+        "name": "UFO",
+        "effect": "The accurate track is played and a tutorial is displayed during play. G:0 L:100 E:100%"
+    },
+    {
+        "id": 9,
+        "name": "RAPID",
+        "effect": "GROOVE accumulates at a rate of 110%. G:0 L:100 E:103%"
+    },
+    {
+        "id": 10,
+        "name": "GOLDFISH",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 11,
+        "name": "BUTTERFLY",
+        "effect": "The stage layout is flipped, left/right. *Same effect will be given even if concurrently using the MIRROR. G:30 L:100 E:100%"
+    },
+    {
+        "id": 12,
+        "name": "BIRD",
+        "effect": "The level gauge fills at a rate of 300%. G:30 L:100 E:300%"
+    },
+    {
+        "id": 13,
+        "name": "HUMAN",
+        "effect": "The GROOVE requirement to beat a stage is lessened by 30%. G:0 L:100 E:100%"
+    },
+    {
+        "id": 14,
+        "name": "ENE(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 15,
+        "name": "KING METAL DRAGON",
+        "effect": "The level gauge fills at a rate of 300%. G:20 L:100 E:200%"
+    },
+    {
+        "id": 16,
+        "name": "CANNON",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 17,
+        "name": "PHOENIX",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 18,
+        "name": "IA",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 19,
+        "name": "ENE(3D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 20,
+        "name": "GC CRAB",
+        "effect": "The accurate track is played, regardless of player input. G:20 L:110 E:100%"
+    },
+    {
+        "id": 21,
+        "name": "R-GRAY0",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 22,
+        "name": "RAIN",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 23,
+        "name": "R-GRAY1",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 24,
+        "name": "FB777",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 25,
+        "name": "KIKKUN",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 26,
+        "name": "aromahot",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 27,
+        "name": "eoheoh",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 28,
+        "name": "DOLPHIN",
+        "effect": "The default GROOVE percentage is now 15% G:15 L:100 E:100%"
+    },
+    {
+        "id": 29,
+        "name": "HORSE",
+        "effect": "Max GROOVE percentage is now 120%. G:0 L:120 E:100%"
+    },
+    {
+        "id": 30,
+        "name": "GC SQUID",
+        "effect": "The accurate track is played, regardless of player input. G:20 L:110 E:100%"
+    },
+    {
+        "id": 31,
+        "name": "TAMADRA",
+        "effect": "The level gauge fills at a rate of 200%. G:20 L:100 E:200%"
+    },
+    {
+        "id": 32,
+        "name": "DRAGON",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 33,
+        "name": "HITO",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 34,
+        "name": "v-No.13-",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 35,
+        "name": "SHEEP",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 36,
+        "name": "Fess up",
+        "effect": "G:0 L:100 E:100%"
+    },
+    {
+        "id": 37,
+        "name": "PEGASUS",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 38,
+        "name": "HELICOPTER",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 39,
+        "name": "GC OCTOPUS",
+        "effect": "The accurate track is played, regardless of player input. G:20 L:110 E:100%"
+    },
+    {
+        "id": 40,
+        "name": "SAYO",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 41,
+        "name": "PAPER CRANE",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 42,
+        "name": "INTER GRAY",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 43,
+        "name": "BLACK FLY",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 44,
+        "name": "UFO-CO",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 45,
+        "name": "March & Arch",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 46,
+        "name": "SPACE INVADERS",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 47,
+        "name": "NICO",
+        "effect": "The level gauge fills at a rate of 200%. G:0 L:100 E:105%"
+    },
+    {
+        "id": 48,
+        "name": "REIMU",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 49,
+        "name": "MARISA",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 50,
+        "name": "HATSUNE MIKU(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 51,
+        "name": "HATSUNE MIKU(3D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 52,
+        "name": "SHOHEI",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 53,
+        "name": "BABI",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 54,
+        "name": "COSIO",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 55,
+        "name": "RANKO",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 56,
+        "name": "RONMEI",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 57,
+        "name": "FULLMETAL ZUNDOKO",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 58,
+        "name": "CANDICE BONBON",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 59,
+        "name": "OMAKE",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 60,
+        "name": "Carte",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 61,
+        "name": "t+pazolite",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 62,
+        "name": "KNITTY",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 63,
+        "name": "FB777(RPG)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 64,
+        "name": "KIKKUN(RPG)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 65,
+        "name": "aromahot(RPG)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 66,
+        "name": "eoheoh(RPG)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 67,
+        "name": "LINKA",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 68,
+        "name": "MIRIN",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 69,
+        "name": "RISA",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 70,
+        "name": "NEMU",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 71,
+        "name": "EIMI",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 72,
+        "name": "MOGA",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 73,
+        "name": "AYANE",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 74,
+        "name": "SPOOKY STORY",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 75,
+        "name": "Pikarin",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 76,
+        "name": "AKIRA",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 77,
+        "name": "SYAMEIMARU",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 78,
+        "name": "EDM BOW",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 79,
+        "name": "SANAE",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 80,
+        "name": "Massive New Krew",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 81,
+        "name": "Sakuya",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 82,
+        "name": "MASAKI",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 83,
+        "name": "BUBBLEN",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 84,
+        "name": "FRANDRE",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 85,
+        "name": "RACHEL",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 86,
+        "name": "REIMU(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 87,
+        "name": "ONE(3D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 88,
+        "name": "CHICK",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 89,
+        "name": "MARISA(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 90,
+        "name": "ALICE(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 91,
+        "name": "CHIBI LINKA",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 92,
+        "name": "YOUMU",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 93,
+        "name": "SILVER HAWK",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 94,
+        "name": "MIKO(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 95,
+        "name": "DOG(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 96,
+        "name": "SHINMYOUMARU",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 97,
+        "name": "RITMO",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 98,
+        "name": "FISICA",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 99,
+        "name": "SANAE(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 100,
+        "name": "LINKA(SCHOOL)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 101,
+        "name": "YUME(SCHOOL)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 102,
+        "name": "SEINE(SCHOOL)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 103,
+        "name": "KOGASA(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 104,
+        "name": "Voidoll",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 105,
+        "name": "Rilyca",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 106,
+        "name": "Gustav Heydrich",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 107,
+        "name": "13",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 108,
+        "name": "DJ NOBUNAGA",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 109,
+        "name": "SARASSY",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 110,
+        "name": "MIKOKO(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 111,
+        "name": "AKANE(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 112,
+        "name": "GUMI(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 113,
+        "name": "GUMI(Guitar)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 114,
+        "name": "REMILIA SCARLET",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 115,
+        "name": "LINKA&BOAR",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 116,
+        "name": "DOG",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 117,
+        "name": "Human",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 118,
+        "name": "SOUL",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 119,
+        "name": "Flowey",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 120,
+        "name": "HIKARI",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 121,
+        "name": "TARITSU",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 122,
+        "name": "aran",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 123,
+        "name": "UDONGEIN(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 124,
+        "name": "ATTACK THE MUSIC",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 125,
+        "name": "IA(ninja)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 126,
+        "name": "ONE(ninja)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 127,
+        "name": "Xenoa",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 128,
+        "name": "SAKUYA(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 129,
+        "name": "El Clear",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 130,
+        "name": "El Fail",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 131,
+        "name": "ANDROMEDAKO",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 132,
+        "name": "POLYVINYL DONTSUKU",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 133,
+        "name": "OKINA(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 134,
+        "name": "CIRNO(2D,TAN)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 135,
+        "name": "ANNOYING DOG",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 136,
+        "name": "NAPSTA BLOOK",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 137,
+        "name": "TEMMIE",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 138,
+        "name": "B.B.K.K.B.K.K.",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 139,
+        "name": "B.B.K.K.B.K.K. 2",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 140,
+        "name": "LINKA&MOUSE",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 141,
+        "name": "NERO",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 142,
+        "name": "ROSSA",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 143,
+        "name": "CIRNO(3D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 144,
+        "name": "FRANDRE(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 145,
+        "name": "GEAR",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 146,
+        "name": "SWALLOWTAIL",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 147,
+        "name": "LINKA(MIKO)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 148,
+        "name": "YUME(MIKO)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 149,
+        "name": "SEINE(MIKO)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 150,
+        "name": "SUI",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 151,
+        "name": "BURO",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 152,
+        "name": "RIN",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 153,
+        "name": "MARIJA",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 154,
+        "name": "SAKI(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 155,
+        "name": "KEIKI(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 156,
+        "name": "MAYUMI(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 157,
+        "name": "ELIZABETH(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 158,
+        "name": "LILY(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 159,
+        "name": "UDONGEIN(3D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 160,
+        "name": "KEINE(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 161,
+        "name": "TERUYAMA",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 162,
+        "name": "HANERU HIDA",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 163,
+        "name": "LINKA(Fairy)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 164,
+        "name": "YUME(Fairy)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 165,
+        "name": "SEINE(Fairy)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 166,
+        "name": "RINKU",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 167,
+        "name": "KYOKO",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 168,
+        "name": "SURVIVAL ZUNDOKO",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 169,
+        "name": "SATORI(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 170,
+        "name": "UTSUHO(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 171,
+        "name": "Papyrus",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 172,
+        "name": "Sans",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 173,
+        "name": "2Foot",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 174,
+        "name": "AKATSUKI(3D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 175,
+        "name": "MEGURINE LUKA(3D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 176,
+        "name": "SUN(3D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 177,
+        "name": "CASPER",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 178,
+        "name": "BIPLANE",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 179,
+        "name": "Deltasword",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 180,
+        "name": "EREN",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 181,
+        "name": "FIGHTING THUNDER",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 182,
+        "name": "Great Thing",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 183,
+        "name": "GUARDIAN",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 184,
+        "name": "HINA",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 185,
+        "name": "KUMI",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 186,
+        "name": "KAGAMINE LEN",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 187,
+        "name": "MIRIA",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 188,
+        "name": "MONKEY",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 189,
+        "name": "MOSYNE(HUMANOID)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 190,
+        "name": "MOSYNE(FLIGHT)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 191,
+        "name": "SILVER HAWK(M)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 192,
+        "name": "NINJA SLAYER",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 193,
+        "name": "MIKOKO(3D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 194,
+        "name": "OTOMON",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 195,
+        "name": "SCISSORS",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 196,
+        "name": "SKULL",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 197,
+        "name": "STRANIA",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 198,
+        "name": "TAKUYA & YUKI",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 199,
+        "name": "Reindeer",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 200,
+        "name": "Tone Sphere Cricro",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 201,
+        "name": "Tone Sphere Tessera",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 202,
+        "name": "VKL5.03(P)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 203,
+        "name": "WINDIA",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 204,
+        "name": "WR-02R",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 205,
+        "name": "YUGI",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 206,
+        "name": "BOAR",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 207,
+        "name": "hito3/2",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 208,
+        "name": "AKANE(Seyana.)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 209,
+        "name": "AKARI HOSHIZAKI",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 210,
+        "name": "AKARI KIZUNA",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 211,
+        "name": "AOI(2Ddot)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 212,
+        "name": "AOI MISUMI",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 213,
+        "name": "aromahot(Phoenix)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 214,
+        "name": "AYANE(S)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 215,
+        "name": "BOBBLEN",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 216,
+        "name": "SYAMEIMARU(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 217,
+        "name": "CADENCE",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 218,
+        "name": "CHEN(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 219,
+        "name": "CHIBI KAITO",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 220,
+        "name": "CHIBI LEN",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 221,
+        "name": "CHIBI LUKA",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 222,
+        "name": "CHIBI MEIKO",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 223,
+        "name": "CHIBI MIKU",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 224,
+        "name": "CHIBI RIN",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 225,
+        "name": "CHUNI PENGUIN",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 226,
+        "name": "CIRNO(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 227,
+        "name": "CIRNO(CHIRUPA)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 228,
+        "name": "COMP(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 229,
+        "name": "HINATA(VirtuaREAL)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 230,
+        "name": "SIRO",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 231,
+        "name": "DOGUMA & MAGUMA(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 232,
+        "name": "DOROTHY",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 233,
+        "name": "EIMI(S)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 234,
+        "name": "JUNKO ENOSHIMA",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 235,
+        "name": "eoheoh(Phoenix)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 236,
+        "name": "ETO",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 237,
+        "name": "Lalari Fairy",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 238,
+        "name": "FB777(Phoenix)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 239,
+        "name": "FIER",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 240,
+        "name": "flower",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 241,
+        "name": "FUBUKI SHIRAKAMI",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 242,
+        "name": "DJ Genki",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 243,
+        "name": "GOARE",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 244,
+        "name": "GUMI(school)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 245,
+        "name": "GUMI(goggles)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 246,
+        "name": "HIME(Ver.2)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 247,
+        "name": "HIME TANAKA",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 248,
+        "name": "HINA(Ver.2)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 249,
+        "name": "HINA SUZUKI",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 250,
+        "name": "RAIKO(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 251,
+        "name": "IA(Cheerleader)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 252,
+        "name": "Io",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 253,
+        "name": "SIYO",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 254,
+        "name": "JUNKO(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 255,
+        "name": "KAGURANANA(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 256,
+        "name": "KANAKO(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 257,
+        "name": "KEFIR",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 258,
+        "name": "KEN",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 259,
+        "name": "KIKKUN(Phoenix)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 260,
+        "name": "KOISHI(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 261,
+        "name": "KYOKA(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 262,
+        "name": "KYO(VirtuaREAL)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 263,
+        "name": "KAGAMINE LEN(2D)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 264,
+        "name": "LEYLA",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 265,
+        "name": "LINKA(Cranky)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    },
+    {
+        "id": 266,
+        "name": "LINKA(MIKO2)",
+        "effect": "GROOVE accumulates at a rate of 150%. G:30 L:100 E:100%"
+    }
+]

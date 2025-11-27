@@ -1,6 +1,7 @@
 from starlette.responses import HTMLResponse
 from starlette.requests import Request
 from starlette.routing import Route
+from datetime import datetime
 import os
 import json
 import time
@@ -26,6 +27,15 @@ async def batch_handler(request: Request):
 
     if result['expire_at'] < int(time.time()):
         return HTMLResponse(content="Token expired", status_code=400)
+    
+    if result['uses_left'] <= 0:
+        return HTMLResponse(content="No uses left for this token", status_code=400)
+    
+    update_query = batch_tokens.update().where(batch_tokens.c.token == token).values(
+        uses_left=result['uses_left'] - 1,
+        updated_at=datetime.utcnow()
+    )
+    await player_database.execute(update_query)
     
     with open(os.path.join('api/config/', 'download_manifest.json'), 'r', encoding='utf-8') as f:
             stage_manifest = json.load(f)

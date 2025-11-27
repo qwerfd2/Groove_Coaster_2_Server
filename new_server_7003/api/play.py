@@ -101,7 +101,8 @@ async def result_request(request: Request):
                     item=item,
                     os=device_os,
                     os_ver=os_ver,
-                    ver=ver
+                    ver=ver,
+                    created_at=datetime.utcnow()
                 )
                 await player_database.execute(update_query)
 
@@ -123,8 +124,7 @@ async def result_request(request: Request):
                 os=device_os,
                 os_ver=os_ver,
                 ver=ver,
-                created_at=datetime.utcnow(),
-                updated_at=datetime.utcnow()
+                created_at=datetime.utcnow()
             )
             result = await player_database.execute(insert_query)
             target_row_id = result

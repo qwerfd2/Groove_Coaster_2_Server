@@ -4,8 +4,8 @@ from starlette.routing import Route
 from datetime import datetime
 import secrets
 
-from api.misc import is_alphanumeric, inform_page, verify_password, hash_password, crc32_decimal, read_user_save_file, write_user_save_file, should_serve, generate_salt
-from api.database import check_blacklist, user_name_to_user_info, decrypt_fields_to_user_info, set_user_data_using_decrypted_fields, get_user_from_save_id, create_user, logout_user, login_user, get_bind
+from api.misc import is_alphanumeric, inform_page, verify_password, hash_password, crc32_decimal, should_serve, generate_salt
+from api.database import check_blacklist, user_name_to_user_info, decrypt_fields_to_user_info, set_user_data_using_decrypted_fields, get_user_from_save_id, create_user, logout_user, login_user, get_bind, read_user_save_file, write_user_save_file
 from api.crypt import decrypt_fields
 from config import AUTHORIZATION_MODE
 
@@ -76,7 +76,6 @@ async def password_reset(request: Request):
             return inform_page("FAILED:<br>Password must have 6 or more characters.", 0)
 
         old_hash = user_info['password_hash']
-        print("hash type", type(old_hash))
         if old_hash:
             if verify_password(old_password, old_hash):
                 hashed_new_password = hash_password(new_password)
@@ -228,7 +227,7 @@ async def login(request: Request):
         user_id = user_record['id']
 
         password_hash_record = user_record['password_hash']
-        if password_hash_record and verify_password(password, password_hash_record[0]):
+        if password_hash_record and verify_password(password, password_hash_record):
             device_id = decrypted_fields[b'vid'][0].decode()
             await login_user(user_id, device_id)
 

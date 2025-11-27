@@ -168,9 +168,11 @@ function showDetailTotal(mode, page) {
 
                 // Mode boxes
 
-                html = `<div>${songName}</div>`;
+                html = `<div id="ranking_content">
+                    <div class="song-name">${songName}</div>
+                `;
 
-                rowStart = '<div class="button-row">'
+                rowStart = '<div class="button-row mode-buttons">'
                 rowEnd = '</div>'
                 rowContent = []
 
@@ -182,7 +184,7 @@ function showDetailTotal(mode, page) {
                         rowContent.push(`<div class="bt_bg01_ac">${label}</div>`);
                     } else {
                         rowContent.push(
-                            `<a onclick="showDetailTotal(${modeValue});" class="bt_bg01_xnarrow">${label}</a>`
+                            `<a onclick="showDetailTotal(${modeValue}, 0);" class="bt_bg01_xnarrow">${label}</a>`
                         );
                     }
                 }
@@ -210,25 +212,29 @@ function showDetailTotal(mode, page) {
                 `;
 
                 // generate pagination buttons
-                if (generatePrevButton) {
-                    html += `
-                        <button style="width: 170px; height: 40px; margin: 10px; background-color: #000000; color: #FFFFFF;"
-                                onclick="showDetailTotal(${mode}, ${page - 1})">
-                            Prev Page
-                        </button>
-                    `;
-                }
+                html += `
+                    <div class="pagination-container">
+                        ${generatePrevButton ? `
+                            <button class="pagination-button prev-button"
+                                    onclick="showDetailTotal(${mode}, ${page - 1})">
+                                Prev Page
+                            </button>
+                        ` : '<div class="placeholder"></div>'} <!-- Placeholder for alignment -->
 
-                if (generateNextButton) {
-                    html += `
-                        <button style="width: 170px; height: 40px; margin: 10px; background-color: #000000; color: #FFFFFF;"
-                                onclick="showDetailTotal(${mode}, ${page + 1})">
-                            Next Page
+                        <button onclick='restoreBaseStructure();loadUI();filterList();loadList();' class="pagination-button">
+                            Back
                         </button>
-                    `;
-                }
+                        ${generateNextButton ? `
+                            <button class="pagination-button next-button"
+                                    onclick="showDetailTotal(${mode}, ${page + 1})">
+                                Next Page
+                            </button>
+                        ` : ''}
+                    </div>
+                `;
 
                 // Loop leaderboard ranks
+                html += `<div class="leaderboard-players">`;
 
                 for (let i = 0; i < rankingList.length; i++) {
                     userData = rankingList[i];
@@ -245,32 +251,8 @@ function showDetailTotal(mode, page) {
                     `;
 
                 }
-                
-                // Generate pagination buttons again
 
-                if (generatePrevButton) {
-                    html += `
-                        <button style="width: 170px; height: 40px; margin: 10px; background-color: #000000; color: #FFFFFF;"
-                                onclick="showDetailTotal(${mode}, ${page - 1})">
-                            Prev Page
-                        </button>
-                    `;
-                }
-
-                if (generateNextButton) {
-                    html += `
-                        <button style="width: 170px; height: 40px; margin: 10px; background-color: #000000; color: #FFFFFF;"
-                                onclick="showDetailTotal(${mode}, ${page + 1})">
-                            Next Page
-                        </button>
-                    `;
-                }
-
-                html += `
-                    <button onclick='restoreBaseStructure();loadUI();filterList();loadList();' style="margin-top: 20px;" class="bt_bg01">
-                        Back
-                    </button>
-                `;
+                html += `</div>`;
 
                 document.getElementById('ranking_box').innerHTML = html;
 
@@ -358,6 +340,7 @@ function showDetailIndividual(songId, mode, page = 0) {
                 if (page > 0) {
                     generatePrevButton = true;
                 }
+
                 if ((page + 1) * pageCount < totalCount) {
                     generateNextButton = true;
                 }
@@ -413,25 +396,29 @@ function showDetailIndividual(songId, mode, page = 0) {
                 `;
 
                 // generate pagination buttons
-                if (generatePrevButton) {
-                    html += `
-                        <button style="width: 170px; height: 40px; margin: 10px; background-color: #000000; color: #FFFFFF;"
-                                onclick="showDetailIndividual(${songId}, ${mode}, ${page - 1})">
-                            Prev Page
-                        </button>
-                    `;
-                }
+                html += `
+                    <div class="pagination-container">
+                        ${generatePrevButton ? `
+                            <button class="pagination-button prev-button"
+                                    onclick="showDetailIndividual(${songId}, ${mode}, ${page - 1})">
+                                Prev Page
+                            </button>
+                        ` : '<div class="placeholder"></div>'}
 
-                if (generateNextButton) {
-                    html += `
-                        <button style="width: 170px; height: 40px; margin: 10px; background-color: #000000; color: #FFFFFF;"
-                                onclick="showDetailIndividual(${songId}, ${mode}, ${page + 1})">
-                            Next Page
+                        <button onclick='restoreBaseStructure();loadUI();filterList();loadList();' class="pagination-button">
+                            Back
                         </button>
-                    `;
-                }
+                        ${generateNextButton ? `
+                            <button class="pagination-button next-button"
+                                    onclick="showDetailIndividual(${songId}, ${mode}, ${page + 1})">
+                                Next Page
+                            </button>
+                        ` : '<div class="placeholder"></div>'}
+                    </div>
+                `;
 
                 // Loop leaderboard ranks
+                html += `<div class="leaderboard-players">`;
 
                 for (let i = 0; i < rankingList.length; i++) {
                     userData = rankingList[i];
@@ -448,33 +435,9 @@ function showDetailIndividual(songId, mode, page = 0) {
                     `;
 
                 }
+
+                html += `</div>`;
                 
-                // Generate pagination buttons again
-
-                if (generatePrevButton) {
-                    html += `
-                        <button style="width: 170px; height: 40px; margin: 10px; background-color: #000000; color: #FFFFFF;"
-                                onclick="showDetailIndividual(${songId}, ${mode}, ${page - 1})">
-                            Prev Page
-                        </button>
-                    `;
-                }
-
-                if (generateNextButton) {
-                    html += `
-                        <button style="width: 170px; height: 40px; margin: 10px; background-color: #000000; color: #FFFFFF;"
-                                onclick="showDetailIndividual(${songId}, ${mode}, ${page + 1})">
-                            Next Page
-                        </button>
-                    `;
-                }
-
-                html += `
-                    <button onclick='restoreBaseStructure();loadUI();filterList();loadList();' style="margin-top: 20px;" class="bt_bg01">
-                        Back
-                    </button>
-                `;
-
                 document.getElementById('ranking_box').innerHTML = html;
 
             } else {

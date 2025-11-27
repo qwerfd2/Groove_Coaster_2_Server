@@ -33,7 +33,7 @@
 <body>
     <div class="login-card">
         <div class="d-flex justify-content-center align-items-center mb-4">
-            <h3 class="text-center mb-0">Admin Login</h3>
+            <h3 class="text-center mb-0">GC2OS Login</h3>
             <button type="button" class="btn btn-link ms-2 p-0" id="infoBtn" aria-label="Info" style="font-size:1.5rem;">
                 <span class="bi bi-info-circle" style="vertical-align:middle;"></span>
             </button>
@@ -95,7 +95,12 @@
     document.getElementById('infoBtn').addEventListener('click', function() {
         document.getElementById('loginModalLabel').innerText = "User Center Login";
         document.getElementById('loginModalBody').innerHTML =
-            `<p>Don't do anything funny! Don't even think about it!</p>`;
+            `
+            <p>Don't do anything funny! Don't even think about it!</p>
+            <p>Jokes aside, this login is for accessing your user center where you can view your stats and manage your account.</p>
+            <p>If you don't have an account yet, please register in-game first.</p>
+            <p>Depending on binding settings, you might need to bind your account to email/discord before the user center becomes accessible.</p>
+            `;
         const modal = new bootstrap.Modal(document.getElementById('loginModal'));
         modal.show();
     });

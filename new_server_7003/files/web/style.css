@@ -20,8 +20,8 @@
     padding: 20px;
 }
 .dlc_logo {
-    width: 100%;
-    max-width: 500px;
+    width: 70vw;
+    max-width: 1000px;
     margin-bottom: 10px;
 }
 .dlc_extra_body {
@@ -34,19 +34,19 @@
     padding: 0;
 }
 .text-content {
-    font-size: 18px;
+    font-size: 36px;
     line-height: 1.6;
     margin-bottom: 30px;
 }
 .buy-button {
     display: inline-block;
-    width: 160px;
-    height: 110px;
+    width: 30vw;
+    height: 20vw;
     background: url('/files/web/frame_buy.png') no-repeat center center;
     background-size: contain;
     border: none;
     color: white;
-    font-size: 22px;
+    font-size: 30px;
     font-weight: bold;
     padding: 15px;
     cursor: pointer;
@@ -54,26 +54,26 @@
 }
 .quit-button {
     display: inline-block;
-    width: 150px;
-    height: 30px;
+    width: 33vw;
+    height: 10vw;
     background: url('/files/web/quit_button.png') no-repeat center center;
     background-size: contain;
     border: none;
     color: white;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
     cursor: pointer;
     position: relative;
 }
 .buy-button-extra {
     display: inline-block;
-    width: 160px;
-    height: 110px;
+    width: 30vw;
+    height: 20vw;
     background: url('/files/web/frame_buy_extra.png') no-repeat center center;
     background-size: contain;
     border: none;
     color: white;
-    font-size: 22px;
+    font-size: 30px;
     font-weight: bold;
     padding: 15px;
     cursor: pointer;
@@ -81,13 +81,13 @@
 }
 .quit-button-extra {
     display: inline-block;
-    width: 150px;
-    height: 30px;
+    width: 33vw;
+    height: 10vw;
     background: url('/files/web/quit_button_extra.png') no-repeat center center;
     background-size: contain;
     border: none;
     color: white;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
     cursor: pointer;
     position: relative;
@@ -99,8 +99,13 @@
     margin-top: 10px;
 }
 .coin-icon {
-    width: 30px;
-    height: 30px;
+    width: 7vw;
+    height: 7vw;
+    margin-left: 5px;
+}
+.coin-price {
+    font-size: 30px;
+    font-weight: bold;
     margin-left: 5px;
 }
 body {
@@ -131,7 +136,12 @@ html {
 .d_ib{display:inline-block;}
 .mb10p{margin-bottom:10%;}
 .f90{font-size:90%;}
+.f80{font-size:70%;}
 .pt50{padding-top:50px;}
+.f20{font-size:20%;}
+.f30{font-size:30%;}
+.f40{font-size:40%;}
+.f50{font-size:50%;}
 .f60{font-size:60%;}
 .f70{font-size:70%;}
 .plr25{padding-left:25px;padding-right:25px;}
@@ -156,7 +166,6 @@ div#wrapper{
 .wrapper_box{
     text-align:center;
     margin-top:5%;
-    margin-bottom:-10%;
     display: inline-block;
     position: relative;
     width: 100%;
@@ -261,6 +270,12 @@ div#wrapper{
     list-style: none;
     padding: 0;
     margin: 0;
+    flex-grow: 1;
+    overflow-y: auto;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 .song-item {
@@ -295,6 +310,11 @@ div#wrapper{
 
 .song-name {
     font-size: 26px;
+    flex-shrink: 0;
+}
+
+.mode-buttons {
+    flex-shrink: 0;
 }
 
 .composer-name-owned {
@@ -319,7 +339,6 @@ div#wrapper{
     display: flex;
     justify-content: center;
     gap: 10px;
-    margin-bottom: 20px;
 }
 .player-element {
     display: flex;
@@ -333,6 +352,7 @@ div#wrapper{
     height: 100px;
     width: 98%;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0;
 }
 
 .player-info {
@@ -375,14 +395,6 @@ div#wrapper{
     margin-right: 10px;
     border-radius: 8px;
     padding: 20px;
-}
-.leaderboard-container {
-    height: calc(53vh);
-    overflow-y: auto; 
-    border: 1px solid #444; 
-    margin: 20px auto;
-    padding: 10px;
-    background-color: #111; 
 }
 
 .leaderboard-player {
@@ -459,4 +471,77 @@ div#wrapper{
     border: none;
     cursor: pointer;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+
+#ranking_content {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+.song-list {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+#ranking_searchbar,
+#ranking_sort {
+    flex-shrink: 0;
+}
+
+#ranking_box {
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+    overflow: hidden;
+}
+
+.leaderboard-players {
+    flex-grow: 1;
+    height: 90%;
+    overflow-y: auto;
+    margin: 0;
+    list-style: none;
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    width: 100%;
+    margin: 10px 0;
+}
+
+.pagination-button {
+    width: 170px; 
+    height: 40px; 
+    background-color: #000000; 
+    color: #FFFFFF; 
+    border: 1px solid #808080; 
+    cursor: pointer;
+    font-size: 30px;
+    text-align: center;
+}
+
+.pagination-button:hover {
+    background-color: #333333; 
+}
+
+.placeholder {
+    flex: 0.25;
+}
+
+.pagination-button-shop {
+    width: 170px;
+    height: 40px; 
+    margin: 10px; 
+    background-color: #000000; 
+    color: #FFFFFF;
+    font-size: 24px;
 }

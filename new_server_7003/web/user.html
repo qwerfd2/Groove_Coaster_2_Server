@@ -20,60 +20,150 @@
 <body>
     <div class="container mt-5">
         <div class="text-center">
-            <!-- Title -->
             <h1 id="welcome-title">Hello, {username}</h1>
             <!-- Export Data Button -->
-            <button id="export-button" class="btn btn-primary mt-3">Export Data</button>
+            <button id="export-button" class="btn btn-primary mt-3" onclick="openExportModal()">Export Data</button>
         </div>
     </div>
 
-    <script>
-        // Function to get a cookie value by name
-        function getCookie(name) {
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) return parts.pop().split(';').shift();
+    <!-- Export Save Data Modal -->
+    <div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exportModalLabel">Export Save Data</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>You can export your save data to back it up or transfer it to another server.</p>
+                    <p id="next-export-time"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="export-data-button" onclick="exportSaveData()">Export Data</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<script>
+
+    let nextSaveExportTimestamp = 0;
+
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    async function fetchUserData() {
+        const token = getCookie("token");
+        if (!token) {
+            console.error("Token not found in cookies.");
+            return;
         }
 
-        // Fetch user data from the API
-        async function fetchUserData() {
-            const token = getCookie("token"); // Read the token from the cookie
-            if (!token) {
-                console.error("Token not found in cookies.");
+        try {
+            const response = await fetch("/usercenter/api", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    token: token,
+                    action: "basic"
+                })
+            });
+
+            if (!response.ok) {
+                console.error("Failed to fetch user data:", response.statusText);
                 return;
             }
 
-            try {
-                // Query the API
-                const response = await fetch("/usercenter/api", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        token: token,
-                        action: "basic"
-                    })
-                });
+            // Parse the response data
+            const response_data = await response.json();
+            const username = response_data.data.username || "User";
+            nextSaveExportTimestamp = response_data.data.next_save_export || 0;
+            
 
-                if (!response.ok) {
-                    console.error("Failed to fetch user data:", response.statusText);
-                    return;
-                }
+            document.getElementById("welcome-title").textContent = `Hello, ${username}`;
+        } catch (error) {
+            console.error("Error fetching user data:", error);
+        }
+    }
 
-                // Parse the response data
-                const response_data = await response.json();
-                const username = response_data.data.username || "User";
+    async function openExportModal() {
+        const nextExportTime = new Date(nextSaveExportTimestamp * 1000); // Convert UNIX timestamp to milliseconds
+        const now = new Date();
 
-                // Update the username in the title
-                document.getElementById("welcome-title").textContent = `Hello, ${username}`;
-            } catch (error) {
-                console.error("Error fetching user data:", error);
-            }
+        // Check if the export is available
+        if (nextSaveExportTimestamp > Math.floor(now.getTime() / 1000)) {
+            const timeRemaining = Math.ceil((nextSaveExportTimestamp - now.getTime() / 1000) / 60);
+            document.getElementById("next-export-time").textContent = `You can export your data again in approximately ${timeRemaining} minutes.`;
+            document.getElementById("export-data-button").disabled = true; // Disable the button if export is not available
+        } else {
+            document.getElementById("next-export-time").textContent = "You can export your data now.";
+            document.getElementById("export-data-button").disabled = false; // Enable the button
         }
 
-        // Call the function to fetch user data when the page loads
-        document.addEventListener("DOMContentLoaded", fetchUserData);
-    </script>
+        // Show the modal
+        const exportModal = new bootstrap.Modal(document.getElementById("exportModal"));
+        exportModal.show();
+    }
+
+    async function exportSaveData() {
+        const token = getCookie("token");
+        if (!token) {
+            console.error("Token not found in cookies.");
+            return;
+        }
+
+        try {
+            const response = await fetch("/usercenter/export_data", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+
+            if (!response.ok) {
+                console.error("Failed to export data:", response.statusText);
+                return;
+            }
+
+            // Check if the response is JSON or a file stream
+            const contentType = response.headers.get("Content-Type");
+            if (contentType && contentType.includes("application/json")) {
+                const responseData = await response.json();
+                if (responseData.status === "failed") {
+                    alert(responseData.message); // Show the failure message
+                }
+            } else {
+                // Handle file download
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = "save_export.xlsx"; // Default filename
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                const exportModal = bootstrap.Modal.getInstance(document.getElementById("exportModal"));
+                if (exportModal) {
+                    exportModal.hide();
+                }
+                fetchUserData();
+            }
+        } catch (error) {
+            console.error("Error exporting save data:", error);
+        }
+    }
+
+
+
+    document.addEventListener("DOMContentLoaded", fetchUserData);
+</script>
 </body>
 </html>

@@ -215,7 +215,7 @@ async def user_ranking_individual(request: Request):
     ranking_list = []
     player_ranking = {"username": user_info["username"] if user_info else "Guest (Not Ranked)", "score": 0, "position": -1, "title": user_info["title"] if user_info else device_info['title'], "avatar": device_info["avatar"]}
 
-    cache_key = f"{song_id}-{mode}"
+    cache_key = f"{str(song_id)}-{str(mode)}"
     cached_data = await get_rank_cache(cache_key)
 
     if cached_data:
@@ -232,13 +232,14 @@ async def user_ranking_individual(request: Request):
     for index, record in enumerate(records):
         if index >= page_number * page_count and index < (page_number + 1) * page_count:
             rank_user = await user_id_to_user_info_simple(record["user_id"])
-            ranking_list.append({
-                "position": index + 1,
-                "username": rank_user["username"],
-                "score": record["score"],
-                "title": rank_user["title"],
-                "avatar": record["avatar"]
-            })
+            if rank_user:
+                ranking_list.append({
+                    "position": index + 1,
+                    "username": rank_user["username"],
+                    "score": record["score"],
+                    "title": rank_user["title"],
+                    "avatar": record["avatar"]
+                })
         if user_id and record["user_id"] == user_id:
             player_ranking = {
                 "username": user_info["username"],
@@ -257,6 +258,8 @@ async def user_ranking_individual(request: Request):
             "total_count": total_count
         }
     }
+
+    print("toital_count: " + str(total_count))
 
     return JSONResponse(payload)
 
@@ -290,7 +293,7 @@ async def user_ranking_total(request: Request):
 
     score_obj = ["total_delta", "mobile_delta", "arcade_delta"]
 
-    cache_key = f"0-{mode}"
+    cache_key = f"0-{str(mode)}"
     cached_data = await get_rank_cache(cache_key)
     if cached_data:
         records = cached_data
@@ -302,24 +305,29 @@ async def user_ranking_total(request: Request):
             accounts.c[score_obj[mode]],
             accounts.c.title,
             accounts.c.avatar,
-        ).order_by(accounts.c[score_obj[mode]].desc())
+        ).where(
+            accounts.c[score_obj[mode]] > 0
+        ).order_by(
+            accounts.c[score_obj[mode]].desc()
+        )
 
         records = await player_database.fetch_all(query)
         records = [dict(record) for record in records]
         await write_rank_cache(cache_key, records, expire_seconds=120)
 
     total_count = len(records)
+    print("total_count fetched: " + str(total_count))
     for index, record in enumerate(records):
-        print(record)
         if index >= page_number * page_count and index < (page_number + 1) * page_count:
             rank_user = await user_id_to_user_info_simple(record["id"])
-            ranking_list.append({
-                "position": index + 1,
-                "username": rank_user["username"],
-                "score": record[score_obj[mode]],
-                "title": rank_user["title"],
-                "avatar": record["avatar"]
-            })
+            if rank_user:
+                ranking_list.append({
+                    "position": index + 1,
+                    "username": rank_user["username"],
+                    "score": record[score_obj[mode]],
+                    "title": rank_user["title"],
+                    "avatar": record["avatar"]
+                })
         if user_id and record["id"] == user_id:
             player_ranking = {
                 "username": user_info["username"],

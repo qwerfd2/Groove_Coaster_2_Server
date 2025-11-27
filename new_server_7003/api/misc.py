@@ -65,6 +65,8 @@ def hash_password(password):
 def verify_password(password, hashed_password):
     if type(hashed_password) == str:
         hashed_password = hashed_password.encode('utf-8')
+
+    print("hashed_password:", hashed_password)
     return bcrypt.checkpw(password.encode('utf-8'), hashed_password)
 
 def is_alphanumeric(username):
@@ -245,33 +247,6 @@ def hash_otp(otp):
 def check_email(email):
     STRICT_EMAIL_REGEX = r"^[A-Za-z0-9]+(?:[._-][A-Za-z0-9]+)*@[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*(?:\.[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*)*\.[A-Za-z]{2,}$"
     return re.match(STRICT_EMAIL_REGEX, email) is not None
-
-async def read_user_save_file(user_id):
-    if user_id is None:
-        return ""
-    elif type(user_id) != int:
-        return ""
-    else:
-        try:
-            async with aiofiles.open(f"./save/{user_id}.dat", "rb") as file:
-                result = await file.read()
-                result = result.decode("utf-8")
-                return result
-            
-        except FileNotFoundError:
-            return ""
-        
-async def write_user_save_file(user_id, data):
-    if user_id is None:
-        return
-    elif type(user_id) != int:
-        return
-    else:
-        try:
-            async with aiofiles.open(f"./save/{user_id}.dat", "wb") as file:
-                await file.write(data.encode("utf-8"))
-        except Exception as e:
-            print(f"An error occurred while writing the file: {e}")
 
 async def should_serve(decrypted_fields):
     should_serve = True

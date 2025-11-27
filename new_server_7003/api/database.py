@@ -1,8 +1,10 @@
 import sqlalchemy
 from sqlalchemy import Table, Column, Integer, String, DateTime, JSON, ForeignKey, Index
 from sqlalchemy.ext.asyncio import create_async_engine
-from sqlalchemy import select, update, insert
+from sqlalchemy import select, update
 import base64
+import aiofiles
+import json
 
 from config import START_COIN, SIMULTANEOUS_LOGINS
 from api.template import START_AVATARS, START_STAGES
@@ -82,8 +84,7 @@ results = Table(
     Column("os", String(8), nullable=False),
     Column("os_ver", String(16), nullable=False),
     Column("ver", String(8), nullable=False),
-    Column("created_at", DateTime, default=datetime.utcnow),
-    Column("updated_at", DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    Column("created_at", DateTime, default=datetime.utcnow)
 )
 
 Index(
@@ -100,6 +101,7 @@ webs = Table(
     Column("user_id", Integer, ForeignKey("accounts.id")),
     Column("permission", Integer, default=1),
     Column("web_token", String(128), unique=True, nullable=False),
+    Column("last_save_export", Integer, nullable=True),
     Column("created_at", DateTime, default=datetime.utcnow),
     Column("updated_at", DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 )
@@ -108,7 +110,7 @@ batch_tokens = Table(
     "batch_tokens",
     player_metadata,
     Column("id", Integer, primary_key=True, autoincrement=True),
-    Column("bind_token", String(128), unique=True, nullable=False),
+    Column("batch_token", String(128), unique=True, nullable=False),
     Column("expire_at", DateTime, nullable=False),
     Column("uses_left", Integer, default=1),
     Column("auth_id", String(64), nullable=False),
@@ -139,7 +141,7 @@ binds = Table(
     Column("bind_account", String(128), unique=True, nullable=False),
     Column("bind_code", String(6), nullable=False),
     Column("is_verified", Integer, default=0),
-    Column("bind_token", String(64), unique=True, nullable=False),
+    Column("auth_token", String(64), unique=True),
     Column("bind_date", DateTime, default=datetime.utcnow)
 )
 
@@ -215,7 +217,7 @@ async def refresh_bind(user_id):
     if existing_bind and existing_bind['is_verified'] == 1:
         new_auth_token = base64.urlsafe_b64encode(os.urandom(64)).decode("utf-8")
         update_query = update(binds).where(binds.c.id == existing_bind['id']).values(
-            bind_token=new_auth_token
+            auth_token=new_auth_token
         )
         await player_database.execute(update_query)
 
@@ -425,7 +427,7 @@ async def create_device(device_id, current_time):
 async def is_admin(token):
     if not token:
         return False
-    query = webs.select().where(webs.c.token == token)
+    query = webs.select().where(webs.c.web_token == token)
     web_data = await player_database.fetch_one(query)
     if not web_data:
         return False
@@ -468,3 +470,59 @@ async def get_rank_cache(key):
             return None
         return dict(result)['value']
     return None
+
+async def get_user_export_data(user_id):
+    user_data = {}
+    user_info, device_list = await user_id_to_user_info(user_id)
+
+    user_save = await read_user_save_file(user_id)
+    user_info['save_data'] = user_save
+
+    user_data['account'] = [user_info]
+    user_data['devices'] = device_list
+
+    all_results_query = results.select().where(results.c.user_id == user_id)
+    all_results = await player_database.fetch_all(all_results_query)
+    user_data['results'] = [dict(result) for result in all_results]
+
+    user_binds_query = binds.select().where(binds.c.user_id == user_id)
+    user_binds = await player_database.fetch_all(user_binds_query)
+
+    user_data['binds'] = [dict(bind) for bind in user_binds]
+    # Convert JSON fields to strings
+    for key, value in user_data.items():
+        if isinstance(value, list):
+            for item in value:
+                if isinstance(item, dict):
+                    for field, field_value in item.items():
+                        if isinstance(field_value, (dict, list)):
+                            item[field] = json.dumps(field_value)
+
+    return user_data
+
+async def read_user_save_file(user_id):
+    if user_id is None:
+        return ""
+    elif type(user_id) != int:
+        return ""
+    else:
+        try:
+            async with aiofiles.open(f"./save/{user_id}.dat", "rb") as file:
+                result = await file.read()
+                result = result.decode("utf-8")
+                return result
+            
+        except FileNotFoundError:
+            return ""
+        
+async def write_user_save_file(user_id, data):
+    if user_id is None:
+        return
+    elif type(user_id) != int:
+        return
+    else:
+        try:
+            async with aiofiles.open(f"./save/{user_id}.dat", "wb") as file:
+                await file.write(data.encode("utf-8"))
+        except Exception as e:
+            print(f"An error occurred while writing the file: {e}")

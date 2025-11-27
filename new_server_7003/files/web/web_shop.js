@@ -101,17 +101,17 @@ function generateMenuContent() {
     if (shopMode === 0 && stagePage === 0) {
         html += `
         <a onclick="showFMax()">
-            <img src="/files/web/dlc_4max.jpg" style="width: 90%; margin-bottom: 110px; margin-top: -100px;" />
+            <img src="/files/web/dlc_4max.jpg" style="width: 90%; margin-bottom: 110px; margin-top: -80px;" />
         </a><br>
         <a onclick="showExtra()">
-            <img src="/files/web/dlc_extra.jpg" style="width: 90%; margin-bottom: 20px; margin-top: -100px;" />
+            <img src="/files/web/dlc_extra.jpg" style="width: 90%; margin-bottom: 20px; margin-top: -80px;" />
         </a><br>
         `;
     }
 
     if (generatePrevButton) {
         html += `
-            <button style="width: 170px; height: 40px; margin: 10px; background-color: #000000; color: #FFFFFF;"
+            <button class="pagination-button-shop"
                     onclick="prevPage(${shopMode})">
                 Prev Page
             </button>
@@ -120,7 +120,7 @@ function generateMenuContent() {
 
     if (generateNextButton) {
         html += `
-            <button style="width: 170px; height: 40px; margin: 10px; background-color: #000000; color: #FFFFFF;"
+            <button class="pagination-button-shop"
                     onclick="nextPage(${shopMode})">
                 Next Page
             </button>
@@ -144,7 +144,7 @@ function generateMenuContent() {
 
     if (generatePrevButton) {
         html += `
-            <button style="width: 170px; height: 40px; margin: 10px; background-color: #000000; color: #FFFFFF;"
+            <button class="pagination-button-shop"
                     onclick="prevPage(${shopMode})">
                 Prev Page
             </button>
@@ -153,7 +153,7 @@ function generateMenuContent() {
 
     if (generateNextButton) {
         html += `
-            <button style="width: 170px; height: 40px; margin: 10px; background-color: #000000; color: #FFFFFF;"
+            <button class="pagination-button-shop"
                     onclick="nextPage(${shopMode})">
                 Next Page
             </button>
@@ -231,10 +231,10 @@ function showItemDetail(mode, itemId) {
                         <div class="image-container">
                             <img src="/files/image/icon/shop/${itemId}.jpg" alt="Item Image" style="width: 180px; height: 180px;" />
                         </div>
-                        <p>Would you like to purchase this song?</p>
+                        <p class="f80">Would you like to purchase this song?</p>
                         <div>
-                            <p>${payload.data.property_first} - ${payload.data.property_second}</p>
-                            <p>Difficulty Levels: ${payload.data.property_third}</p>
+                            <p class="f80">${payload.data.property_first} - ${payload.data.property_second}</p>
+                            <p class="f80">Difficulty Levels: ${payload.data.property_third}</p>
                         </div>
                         <div>
                             <img src="/files/web/coin_icon.png" class="coin-icon" style="width: 40px; height: 40px;" alt="Coin Icon" />
@@ -247,10 +247,10 @@ function showItemDetail(mode, itemId) {
                         <div class="image-container">
                             <img src="/files/image/icon/avatar/${itemId}.png" alt="Item Image" style="width: 180px; height: 180px; background-color: black; object-fit: contain;" />
                         </div>
-                        <p>Would you like to purchase this avatar?</p>
+                        <p class="f80">Would you like to purchase this avatar?</p>
                         <div>
-                            <p>${payload.data.property_first}</p>
-                            <p>Effect: ${payload.data.property_second}</p>
+                            <p class="f80">${payload.data.property_first}</p>
+                            <p class="f80">Effect: ${payload.data.property_second}</p>
                         </div>
                         <div>
                             <img src="/files/web/coin_icon.png" class="coin-icon" style="width: 40px; height: 40px;" alt="Coin Icon" />
@@ -263,10 +263,10 @@ function showItemDetail(mode, itemId) {
                         <div class="image-container">
                             <img src="/files/image/icon/item/${itemId}.png" alt="Item Image" style="width: 180px; height: 180px;" />
                         </div>
-                        <p>Would you like to purchase this item?</p>
+                        <p class="f80">Would you like to purchase this item?</p>
                         <div>
-                            <p>${payload.data.property_first}</p>
-                            <p>Effect: ${payload.data.property_second}</p>
+                            <p class="f80">${payload.data.property_first}</p>
+                            <p class="f80">Effect: ${payload.data.property_second}</p>
                         </div>
                         <div>
                             <img src="/files/web/coin_icon.png" class="coin-icon" style="width: 40px; height: 40px;" alt="Coin Icon" />
@@ -329,19 +329,17 @@ function purchaseItem(mode, itemId) {
             if (payload.state === 1) {
                 contentElement.innerHTML = `
                     <p>${payload.message}</p>
-                    <button style="margin-top: 20px;" class="bt_bg01"
-                            onclick="on_initialize();">
-                        Back
-                    </button>
+                    <div style="margin-top: 20px;">
+                        <a onclick="on_initialize();" class="bt_bg01">Back</a><br>
+                    </div>
                 `;
                 document.getElementById('coinCounter').innerText = payload.data.coin;
             } else {
                 contentElement.innerHTML = `
                     <p>Purchase failed: ${payload.message}</p>
-                    <button style="margin-top: 20px;" class="bt_bg01"
-                            onclick="on_initialize();">
-                        Back
-                    </button>
+                    <div style="margin-top: 20px;">
+                        <a onclick="on_initialize();" class="bt_bg01">Back</a><br>
+                    </div>
                 `;
             }
         })
@@ -349,10 +347,9 @@ function purchaseItem(mode, itemId) {
             console.error('Error processing purchase:', error);
             contentElement.innerHTML = `
                 <p>Failed to process your purchase. Please try again later.</p>
-                <button style="margin-top: 20px;" class="bt_bg01"
-                        onclick="on_initialize();">
-                    Back
-                </button>
+                <div style="margin-top: 20px;">
+                    <a onclick="on_initialize();" class="bt_bg01">Back</a><br>
+                </div>
             `;
         });
 }
@@ -373,7 +370,7 @@ function restoreBaseStructure() {
         <div id="wrapper">
             <div class="wrapper_box">
                 <div class="a_left w100 d_ib mb10p">
-                        <ul style="list-style-type: none; padding: 0; margin-top: 100px; text-align: center;" id="menuList">
+                        <ul style="list-style-type: none; padding: 0; margin-top: 60px; text-align: center;" id="menuList">
                         </ul>
                     <div class="f90 a_center pt50" id="content">
                         Loading...
@@ -446,13 +443,13 @@ function showFMax() {
                         <div class="text-content">
                             <p>Experience the arcade with the GC4MAX expansion! This DLC unlocks 320+ exclusive songs for your 2OS experience.</p>
                             <p>Note that these songs don't have mobile difficulties. A short placeholder is used, and GCoin reward is not available for playing them. You must clear the Normal difficulty to unlock AC content.</p>
-                            <p>Due to technical limitations, Extra level charts cannot be ported as of now. After purchasing, you will have access to support information and update logs.</p>
+                            <p>After purchasing, you will have access to support information and update logs.</p>
                         </div>
                         <button class="buy-button" onclick="purchaseItem(3, 1);">
                             Buy
                             <div class="coin-container">
                                 <img src="/files/web/coin_icon.png" alt="Coin Icon" class="coin-icon">
-                                <span style="font-size: 22px; font-weight: bold;">${payload.data.price}</span>
+                                <span class="coin-price">${payload.data.price}</span>
                             </div>
                         </button>
                         <br><br>
@@ -537,7 +534,7 @@ function showExtra() {
                 let html = '';
                 if (extraPurchased) {
                     html = `
-                        <br><br><br><br><br><br><br>
+                        <br><br><br><br><br><br><br><br><br>
                         <div class="text-content">
                             <p>You have unlocked the EXTRA Challenge!</p>
                             <p>Please report bugs/missing tracks to Discord: #AnTcfgss, or QQ 3421587952.</p>
@@ -548,7 +545,7 @@ function showExtra() {
                     `;
                 } else {
                     html = `
-                        <br><br><br><br><br><br><br>
+                        <div style="margin-top: 30vh;"></div>
                         <div class="text-content">
                             <p>Are you looking for a bad time?</p>
                             <p>If so, this is the Ultimate - Extra - Challenge.</p>
@@ -560,7 +557,7 @@ function showExtra() {
                             Buy
                             <div class="coin-container">
                             <img src="/files/web/coin_icon.png" alt="Coin Icon" class="coin-icon">
-                            <span style="font-size: 22px; font-weight: bold;">${payload.data.price}</span>
+                            <span class="coin-price">${payload.data.price}</span>
                             </div>
                         </button>
                         <br><br>
@@ -570,7 +567,12 @@ function showExtra() {
                     `;
                 }
 
-                document.body.innerHTML = html;
+
+                document.body.innerHTML = `
+                    <div class="dlc_container">
+                        ${html}
+                    </div>
+                `;;
             } else {
                 document.body.innerHTML = `
                     <div class="dlc_container">

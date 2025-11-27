@@ -20,7 +20,7 @@ async def serve_file(request: Request):
     if not filename.endswith(".zip") and not filename.endswith(".pak"):
         return Response("Unauthorized", status_code=403)
     
-    existing_batch_token = select(batch_tokens).where(batch_tokens.c.batch_token == auth_token)
+    existing_batch_token = select(batch_tokens).where((batch_tokens.c.batch_token == auth_token) & (batch_tokens.c.uses_left > -1))
     batch_result = await player_database.fetch_one(existing_batch_token)
     if batch_result:
         pass

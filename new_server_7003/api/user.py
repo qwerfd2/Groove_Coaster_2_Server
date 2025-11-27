@@ -113,8 +113,6 @@ async def start(request: Request):
         my_stage, my_avatar = await get_user_entitlement_from_devices(user_id)
         coin = device_info['coin'] if device_info is not None else 0
 
-        print("user has entitlements:", my_stage, my_avatar)
-
     elif device_info:
         # This is a guest user with existing data
         my_avatar = set(device_info['my_avatar']) if device_info['my_avatar'] else START_AVATARS

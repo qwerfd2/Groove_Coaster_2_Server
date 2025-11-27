@@ -9,13 +9,13 @@ from api.database import player_database, accounts, results, devices, whitelists
 from api.misc import crc32_decimal
 
 TABLE_MAP = {
-        "accounts": (accounts, ["id", "username", "password_hash", "save_crc", "save_timestamp", "save_id", "coin_mp", "title", "avatar", "created_at", "updated_at"]),
-        "results": (results, ["id", "device_id", "stts", "song_id", "mode", "avatar", "score", "high_score", "play_rslt", "item", "os", "os_ver", "ver", "created_at", "updated_at"]),
-        "devices": (devices, ["device_id", "user_id", "my_stage", "my_avatar", "item", "daily_day", "coin", "lvl", "title", "avatar", "mobile_sum", "arcade_sum", "total_sum", "created_at", "updated_at", "last_login_at"]),
+        "accounts": (accounts, ["id", "username", "password_hash", "save_crc", "save_timestamp", "save_id", "coin_mp", "title", "avatar", "mobile_delta", "arcade_delta", "total_delta", "created_at", "updated_at"]),
+        "results": (results, ["id", "device_id", "stts", "song_id", "mode", "avatar", "score", "high_score", "play_rslt", "item", "os", "os_ver", "ver", "created_at"]),
+        "devices": (devices, ["device_id", "user_id", "my_stage", "my_avatar", "item", "daily_day", "coin", "lvl", "title", "avatar", "created_at", "updated_at", "last_login_at"]),
         "whitelist": (whitelists, ["id", "device_id"]),
         "blacklist": (blacklists, ["id", "ban_terms", "reason"]),
         "batch_tokens": (batch_tokens, ["id", "batch_token", "expire_at", "uses_left", "auth_id", "created_at", "updated_at"]),
-        "binds": (binds, ["id", "user_id", "bind_account", "bind_code", "is_verified", "auth_token", "created_at", "updated_at"]),
+        "binds": (binds, ["id", "user_id", "bind_account", "bind_code", "is_verified", "auth_token", "bind_date"]),
         "webs": (webs, ["id", "user_id", "permission", "web_token", "last_save_export", "created_at", "updated_at"]),
         "logs": (logs, ["id", "user_id", "filename", "filesize", "timestamp"]),
     }

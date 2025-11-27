@@ -73,9 +73,9 @@
         </button>
         <div class="collapse navbar-collapse" id="mainNavbar">
             <ul class="navbar-nav ms-4">
-                <li class="nav-item"><a class="nav-link" href="#" id="usersTab">Users</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" id="accountsTab">Accounts</a></li>
                 <li class="nav-item"><a class="nav-link" href="#" id="resultsTab">Results</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" id="dailyRewardsTab">DailyRewards</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" id="devicesTab">Devices</a></li>
                 <li class="nav-item"><a class="nav-link" href="#" id="whitelistTab">Whitelist</a></li>
                 <li class="nav-item"><a class="nav-link" href="#" id="blacklistTab">Blacklist</a></li>
                 <li class="nav-item"><a class="nav-link" href="#" id="batchTokensTab">BatchTokens</a></li>
@@ -196,7 +196,7 @@ function showTable(tabName) {
     responsiveLayout: "collapse",
     sortMode: "remote",
     autoColumnsDefinitions: function(definitions){
-        if (tabName === "users") {
+        if (tabName === "accounts") {
             definitions.push({
                 title: "data",
                 field: "__data",
@@ -281,7 +281,7 @@ function showTable(tabName) {
                 }
                 return value;
             };
-            if (col.field !== "id" && col.field !== "objectId" && col.field !== "__delete" && col.field !== "__data") {
+            if (col.field !== "id" && col.field !== "__delete" && col.field !== "__data") {
                 col.editor = function(cell, onRendered, success, cancel){
                     const value = cell.getValue();
                     let input;
@@ -473,13 +473,13 @@ document.getElementById('dataModalSaveBtn').onclick = async function() {
     }
 };
 
-document.getElementById('usersTab').onclick = () => showTable("users");
+document.getElementById('accountsTab').onclick = () => showTable("accounts");
 document.getElementById('resultsTab').onclick = () => showTable("results");
-document.getElementById('dailyRewardsTab').onclick = () => showTable("daily_rewards");
+document.getElementById('devicesTab').onclick = () => showTable("devices");
 document.getElementById('whitelistTab').onclick = () => showTable("whitelist");
 document.getElementById('blacklistTab').onclick = () => showTable("blacklist");
 document.getElementById('batchTokensTab').onclick = () => showTable("batch_tokens");
-document.getElementById('bindTab').onclick = () => showTable("bind");
+document.getElementById('bindTab').onclick = () => showTable("binds");
 document.getElementById('logsTab').onclick = () => showTable("logs");
 
 document.getElementById('logoutBtn').addEventListener('click', function() {
@@ -570,12 +570,12 @@ document.getElementById('insertRowForm').onsubmit = async function(e) {
     }
 };
 
-const validTabs = ["users", "results", "daily_rewards", "whitelist", "blacklist", "batch_tokens", "bind", "logs"];
+const validTabs = ["accounts", "results", "devices", "whitelist", "blacklist", "batch_tokens", "binds", "logs"];
 const lastTab = getCookie("lastTab");
 if (validTabs.includes(lastTab)) {
     showTable(lastTab);
 } else {
-    showTable("users");
+    showTable("accounts");
 }
 
 function getCookie(name) {

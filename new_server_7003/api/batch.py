@@ -28,11 +28,16 @@ async def batch_handler(request: Request):
     if result['expire_at'] < int(time.time()):
         return HTMLResponse(content="Token expired", status_code=400)
     
-    if result['uses_left'] <= 0:
-        return HTMLResponse(content="No uses left for this token", status_code=400)
+    uses_left = result['uses_left']
+    if uses_left > 0:
+        uses_left -= 1
+    
+    else:
+        uses_left = -1
+        return HTMLResponse(content="No uses left", status_code=400)
     
     update_query = batch_tokens.update().where(batch_tokens.c.token == token).values(
-        uses_left=result['uses_left'] - 1,
+        uses_left=uses_left,
         updated_at=datetime.utcnow()
     )
     await player_database.execute(update_query)

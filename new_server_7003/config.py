@@ -67,6 +67,7 @@ SMTP_PASSWORD = "test"
 # For auth mode 2
 DISCORD_BOT_SECRET = "test"
 DISCORD_BOT_API_KEY = "test"
+BIND_SALT = "SET YOUR SALT HERE"
 
 # Daily download limit per account in bytes (only activates for AUTHORIZATION_MODE 1 and 2)
 

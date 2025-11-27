@@ -259,8 +259,6 @@ async def user_ranking_individual(request: Request):
         }
     }
 
-    print("toital_count: " + str(total_count))
-
     return JSONResponse(payload)
 
 async def user_ranking_total(request: Request):
@@ -316,7 +314,6 @@ async def user_ranking_total(request: Request):
         await write_rank_cache(cache_key, records, expire_seconds=120)
 
     total_count = len(records)
-    print("total_count fetched: " + str(total_count))
     for index, record in enumerate(records):
         if index >= page_number * page_count and index < (page_number + 1) * page_count:
             rank_user = await user_id_to_user_info_simple(record["id"])

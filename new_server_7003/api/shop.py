@@ -81,7 +81,6 @@ async def api_shop_player_data(request: Request):
         item_id for item_id in range(item_low_end, item_high_end)
     ]
 
-    print(my_stage)
     if 700 in my_stage and os.path.isfile('./files/4max_ver.txt'):
         is_fmax_purchased = True
 
@@ -263,7 +262,6 @@ async def api_shop_purchase_item(request: Request):
             return JSONResponse({"state": 0, "message": "EXTRA already owned. Exit the shop and it will be added to the game."}, status_code=400)
         
         if price > device_info['coin']:
-            print("Insufficient coins for purchase.")
             return JSONResponse({"state": 0, "message": "Insufficient coins."}, status_code=400)
         
         new_coin_amount = device_info['coin'] - price

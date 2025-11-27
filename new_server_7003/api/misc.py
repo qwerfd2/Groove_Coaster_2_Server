@@ -6,9 +6,8 @@ import secrets
 import bcrypt
 import hashlib
 import re
-import aiofiles
 import xml.etree.ElementTree as ET
-from config import MODEL, TUNEFILE, SKIN, AUTHORIZATION_NEEDED, AUTHORIZATION_MODE, GRANDFATHERED_ACCOUNT_LIMIT
+from config import MODEL, TUNEFILE, SKIN, AUTHORIZATION_NEEDED, AUTHORIZATION_MODE, GRANDFATHERED_ACCOUNT_LIMIT, BIND_SALT
 from api.database import get_bind, check_whitelist, check_blacklist, decrypt_fields_to_user_info, user_id_to_user_info_simple
 
 FMAX_VER = None
@@ -66,7 +65,6 @@ def verify_password(password, hashed_password):
     if type(hashed_password) == str:
         hashed_password = hashed_password.encode('utf-8')
 
-    print("hashed_password:", hashed_password)
     return bcrypt.checkpw(password.encode('utf-8'), hashed_password)
 
 def is_alphanumeric(username):
@@ -281,12 +279,11 @@ async def should_serve_web(user_id):
     return should_serve
 
 async def generate_salt(user_id):
-    SALT = "jHENR3wq$zX9@LpO"
     user_info = await user_id_to_user_info_simple(user_id)
     user_pw_hash = user_info['password_hash']
     username = user_info['username']
 
-    combined = f"{username}{user_id}{user_pw_hash}{SALT}".encode('utf-8')
+    combined = f"{username}{user_id}{user_pw_hash}{BIND_SALT}".encode('utf-8')
     crc32_hash = binascii.crc32(combined) & 0xFFFFFFFF
     return str(crc32_hash)
 

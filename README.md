@@ -12,7 +12,7 @@ A small local server for `Groove Coaster 2: Original Style`, implemented with `P
 
 This project is for game preservation purposes only. Creative liberty and conveniences have been taken when it comes to specific implementation. The goal is not to ensure 1:1 behavior, but to guarrantee the minimum viability of playing this game. It is provided as-is, per the GPLv2 license.
 
-It has been rewritten multiple times to ~~nuke my poor code~~ optimize and improve. The latest iteration is 7003, which is experimental. Improvements were made but the data structure are different than the previous versions. If you are running 7002 or prior, please wait until the guide of migration is published.
+It has been rewritten multiple times to ~~nuke my poor code~~ optimize and improve. The latest iteration is 7003. For migration, visit the `Version Migration` section directly.
 
 You shall bare all the responsibility for any potential consequences as a result of running this server. If you do not agree to these requirements, you are not allowed to replicate or run this program.
 
@@ -20,7 +20,7 @@ Inspiration: [Lost-MSth/Arcaea-server](https://github.com/Lost-MSth/Arcaea-serve
 
 Special thanks: [Walter-o/gcm-downloader](https://github.com/Walter-o/gcm-downloader)
 
-Warning: Do not put personal files under the folders in the private server directory - all files within these sub-folders will be accessible by anyone with your server address! Security and performance are not guaranteed, and it is not recommended to host this server on the internet. You have been warned.
+Warning: Do not put personal files under the folders in the private server directory `files` - all files within these sub-folders will be accessible by anyone with your server address! Security and performance are not guaranteed, and it is not recommended to host this server on the internet. You have been warned.
 
 ### Supported Features
 
@@ -34,7 +34,7 @@ Warning: Do not put personal files under the folders in the private server direc
 | Mission             | Basic automatic song unlock after reaching in-game levels. Everything else is not supported.                 |
 | Friend              | Not supported.                                                                                                         |
 | Progress Grid       | Not supported.                                                                                                         |
-| Additional features | Account/device whitelisting and banning, batch download API                                         |
+| Additional features | Account/device whitelisting and banning, batch download API, user center, admin panel, MFA authentication modes                                      |
 
 ## Download
 
@@ -82,6 +82,8 @@ The server owner must install the update on their instance. They can download it
 - bcrypt
 
 - requests
+
+- openpyxl (For data export feature)
 
 ## At the Start
 
@@ -255,25 +257,53 @@ A `save_id` will be generated upon saving the data to the server. It is availabl
 
 Note that your old record is not backed up. Thus, this feature should only be used to migrate your own save file, or some save file that you trust.
 
-### Admin Console
+### Web User Center
 
-A database CRUD web console can be accessed at /Login. Create your own username and bcrypt hash in the database `admins` table first.
+A simple web center can be accessed at `host:port/login`. Log in with your in-game account username and password.
 
-## Coin Multiplier
+A row will be created in `webs` table. Configure the permission to `2` to gain the ability to access the admin panel `host:port/admin`. There will be a redirection button in the user center.
+
+The user center is fairly crude for now, and only support one feature: User data migration. You can download your own `account`, `devices`, `results`, and `bind` if any, via an excel sheet. These data can then be manually imported into other databases, or stored for safekeeping.
+
+The admin panel supports basic CRUD actions to the database tables. Perfect for maintenance in a pinch.
+
+### Coin Multiplier
 
 A coin multiplier [0, 5] can be set by the user in the user center.
 
 That's about it actually
 
-## Account System Implementation
+### Asset Batch Downloading
+
+Since this game features tons of downloadable music and stage files that cannot be natively acquired, a `flutter` app has been programmed to download all the files using a server API endpoint. the package can be resigned to have the same app id and signature, thus allowing overwrite installation with the game. It supports both Android and iOS.
+
+In the database's `batch-token` table, create a token manually.
+
+## Implementation Detail
+
+### Account System
+
+For 7003:
+
+While ownership is stil tied to devices, the ability to log in to multiple devices means that the ownership data (stage, avatar) is now aggregated across devices. Coins and `items` are still device-specific.
+
+For 7002 and prior:
 
 Account is only used for save file saving/loading (song ownership and coins are tied to devices. However, songs unlocked in the save file will remain unlocked on a new device). Unlike the official version, you can rename and log out of your account. However, only one device may be connected to an account at a time. The old device will be logged off if a new device logs in.
 
-## Ranking System Implementation
+### Ranking System
 
-I speculate that the official server's behavior hinges upon the fact that you cannot log out of your account, and that there is a maximum device count (5). This means that each `account` is connected to 5 `devices` via `foreign keys`, and the owned `entitlements` (stages, avatars, etc) and `play records` can be tallied.
+I speculate that the official server's behavior hinges upon the fact that you cannot log out of your account, and that there is a maximum device count (6). This means that each `account` is connected to 5 `devices` via `foreign keys`, and the owned `entitlements` (stages, avatars, etc) and `play records` can be tallied.
 
-In the private server, you can log out of devices with ease. This means that `entitlements` and `play records` is not possible to remain consistent, unless we treat `account` as `devices`, which is clearly not the offical behavior.
+In the private server, you can log out of devices with ease. This means that song ownership and results are not possible to remain consistent, unless we treat `account` as `devices`, which is clearly not the offical behavior.
+
+Update for 7003: The above is true, and to make multiple device login possible, I had to make the choice to either disable guest result submission & ranking, or disable logouts.
+
+With changes to the data structure, if you are not logged in to an account while submitting a score, your result will not be saved. 
+
+Title is still tied to account, if possible. While accounts can have avatars, in individual song ranking, the result's play avatar is used (since avatars have effects).
+
+For 7002 and below:
 
 With the current setup, if a `device` is playing with an associated `account`, the `account` information is saved at the same time and will continue to be shown on ranking in the future. The `Avatar` information is saved with the `play records` and will not follow the `account` or `device`. The `Title` information is not in the `play records`, nor in the `account`, so it will be tied to the `Title` of the `device`.
 
@@ -283,9 +313,37 @@ A rather comprehensive data scrape was conducted prior to the server shutdown, c
 
 Note that this data is for analytics only, and the functionality to embed this data inside the private server is not and will not be supported by me. Feel free to Fork and create your own implementation.
 
-## Asset Batch Downloading
+## Migration from 7002 to 7003
 
-Since this game features tons of downloadable music and stage files that cannot be natively acquired, a `flutter` app has been programmed to download all the files using a server API endpoint. the package can be resigned to have the same app id and signature, thus allowing overwrite installation with the game. It supports both Android and iOS. Development is still ongoing about the permission/authorization side of things, stay tuned...
+This is still experimental, always make backups!!
+
+1. Get `db-conv.py`, copy your 7002 `player.db`, put it in a new folder with the script, and name it `player_d.db`.
+
+2. Run `db-conv.py`. Depending on the amount of records, this could take a while.
+
+3. Place the generated `player.db` and `save` folder into the 7003 server directory.
+
+4. Move the asset files according to the `folder structure`.
+
+Done.
+
+Features and improvements:
+
+1. Multi-device logins are supported. Configure in `config.py`.
+
+2. Asset and API authentication via device ID, email, and discord verification (discord bot not included)
+
+3. Client-rendered shop, ranking, and status for more features, robust caching, and user experience.
+
+4. Save data outside of database (massive size savings)
+
+5. Web user center (more features to come)
+
+6. Enhanced performance and security, and more that I cannot remember at the time of writing.
+
+Features lost:
+
+1. Guest result will not be recorded, ranked, and displayed.
 
 </details>
 
@@ -297,9 +355,9 @@ Since this game features tons of downloadable music and stage files that cannot 
 
 此项目的目标是保持游戏的长远可用性 (game preservation)。在具体实施上，我采取了一些便利及创意性的措施（偷懒）。此项目的目标不是确保 1:1 还原官服，而是保证游戏长久可玩。此项目在GPLv2许可证的“按现状” (as-is) 条件下提供。
 
-It has been rewritten multiple times to ~~nuke my poor code~~ optimize and improve. The latest iteration is 7003, which is experimental. Improvements were made but the data structure are different than the previous versions. If you are running 7002 or prior, please wait until the guide of migration is published.
 
-此服务器已经重写多次，以~~让屎山代码消失~~提升性能和功能。最新版为7003，尚在试验中。为提升性能，底层数据结构已经修改。如果你在运行7002及之前的版本，请稍等至指南攥写完成再进行迁移。
+
+此服务器已经重写多次，以~~让屎山代码消失~~提升性能和功能。最新版为7003. 如想迁移，请直接参考`版本迁移`章节。
 
 你应对因运行本服务器而产生的任何潜在后果承担全部责任。如果您不同意这些要求，则不允许您复制或运行该程序。
 
@@ -321,7 +379,7 @@ It has been rewritten multiple times to ~~nuke my poor code~~ optimize and impro
 | 任务         | 支持达到游戏内经验等级后歌曲自动解锁。其他功能均不支持。                                         |
 | 好友         | 不支持。                                                                                     |
 | 进度表       | 不支持。                                                                                     |
-| 其他功能     | 账号/设备白名单和封禁。                                                                       |
+| 其他功能     | 账号/设备白名单和封禁，批量下载API，网页用户中心和管理员面板，多重验证模式。                                                                     |
 
 ## 下载
 
@@ -368,6 +426,8 @@ It has been rewritten multiple times to ~~nuke my poor code~~ optimize and impro
 - bcrypt
 
 - requests
+
+- openpyxl (用于用户数据导出)
 
 ## 如何开始
 
@@ -542,25 +602,57 @@ PC用文本编辑器打开服务器文件夹的 `config.env`，将`IPV4`填写�
 
 小心，你的旧存档不会被备份。因此，此功能仅适合来迁移自己的存档，或者迁移受信任的存档。
 
+### 网页用户中心
+
+及其原始的用户中心，可通过`host:port/login`访问。使用游戏内账号和密码登录。
+
+`webs`表将自动填充。将`permission`设为`2`来给予在`host:port/admin`的管理员面板访问权限。用户中心也会多出一个跳转按钮。
+
+目前功能单一，只支持用户数据导出功能。你可以通过一张xlsx表获得自己的`账户`，`设备`，`结果`，`绑定`信息(如有)。这些数据可以手工加入其他的数据库，或者用于备份。
+
+管理员面板支持数据库表基础CRUD，可以解燃眉之急。
+
 ### 管理员平台
 
 一个数据库增删改查网页在/Login。先在数据库`admins`表创建自己的账号和bcrypt密码哈希。
 
-## 金币倍数调整
+### 金币倍数调整
 
 你可以在用户中心调整获得的金币倍数 [0, 5]。
 
 嗯就这些（
 
-## 账号系统实装
+### 资源批量下载
+
+由于这款游戏包含大量无法通过程序自身自动获取的可下载音乐和谱面文件，因此已开发了一个 `flutter` 应用程序，通过服务器 API 接口下载所有文件。该包可重新签名以使用相同的应用程序 ID 和签名，从而实现与游戏的覆盖安装。该应用支持 Android 和 iOS 系统。如想添加下载token，请至`batch_token`表添加。
+
+## 系统实装
+
+### 账号系统
+
+7003新增:
+
+虽然歌曲和头像依然和设备绑定，因为支持多设备登录，单账号的解锁项将从所有已登入的设备集合。金币和`items`依然和设备绑定。
+
+7002及之前版本:
 
 账号仅用于保存/同步存档。Gcoin和歌曲所有权和设备绑定。不过，存档中已经解锁的曲目将在新的设备上可用。官方版不允许重命名及登出账号。私服则可以进行这些操作。不过，一个账号只能同时登陆一台设备，如果登录第二台设备，第一台设备将被挤掉。
 
-## 排行榜系统实装
+### 排行榜系统
 
-我推测官方服务器的行为取决于一个事实，即你不能注销你的账号，而且有一个最大设备数（5）。这意味着每个`账户`通过 `foreign key` 连接到 5 个`设备`，这样就可以统计所有拥有的 `权益`（`音乐`、`头像`等）和`游玩记录`。
+我推测官方服务器的行为取决于一个事实，即你不能注销你的账号，而且有一个最大设备数（6）。这意味着每个`账户`通过 `foreign key` 连接到 5 个`设备`，这样就可以统计所有拥有的 `解锁`（`曲目`、`头像`等）和`游玩记录`。
 
-在私服，用户可以任意注销设备。这意味着`权益`和`游玩记录`不可能保持一致，除非我们把`账户`当作`设备`，而这显然不是官服的行为。
+在私服，用户可以任意注销设备。这意味着`解锁`和`游玩记录`不可能保持一致，除非我们把`账户`当作`设备`，而这显然不是官服的行为。
+
+7003新增：
+
+以上推论基本属实。在实装多设备登录时，必须做出妥协：停止游客的成绩上传和排行，或者禁止登出。
+
+此版本修改了数据结构，在没有登入时，游玩结果不会被保存。
+
+`Title`的获取位置依然是`账户`，`头像`依然和`游玩记录`，因为其特殊效果。
+
+7002及之前版本：
 
 目前的设置下，假如一台`设备`游玩时有关联`账户`，`账户`信息会同时保存，并且未来将持续显示当时连接的`账户`信息。`头像`信息随`游玩记录`保存，将不跟随`账户`或者`设备`。`Title`信息不在`游玩记录`里，也不在`账户`里，所以将和该设备的`Title`绑定。
 
@@ -570,9 +662,37 @@ PC用文本编辑器打开服务器文件夹的 `config.env`，将`IPV4`填写�
 
 请注意，此数据仅用于分析，私服内置不会被实现。如果有需求，请Fork然后自行设计。
 
-## 资源批量下载
+## 版本升级（7002到7003）
 
-由于这款游戏包含大量无法通过程序自身自动获取的可下载音乐和谱面文件，因此已开发了一个 `flutter` 应用程序，通过服务器 API 接口下载所有文件。该包可重新签名以使用相同的应用程序 ID 和签名，从而实现与游戏的覆盖安装。该应用支持 Android 和 iOS 系统。目前仍在开发权限/授权相关功能，敬请期待...
+仍在试验中，谨记备份！！
+
+1. 获得`db-conv.py`, 把7002的 `player.db` 复制到同一个文件夹并重命名 `player_d.db`.
+
+2. 运行`db-conv.py`. 如果数据较多，可能需要一段时间执行。
+
+3. 将生成的`player.db`和`save`文件夹放至7003服务器文件夹。
+
+4. 将新的数据文件根据文件夹结构移入。
+
+完成。
+
+功能和改善：
+
+1. 支持多设备登录，可在`config.py`配置。
+
+2. 基于设备ID，电子邮件，和Discord的素材和API鉴权 (不包含discord机器人)
+
+3. 客户端渲染的商店，排行榜，和状态页面。提供了更多功能，更强大的缓存，和更好的体验。
+
+4. 存档外置，缩小数据库。
+
+5. 网页用户中心(更多功能TBD)
+
+6. 改善性能和安全性，以及现在想不起来的一些东西
+
+失去的功能:
+
+1. 游客游玩记录将不记录，不排行，不显示。
 
 </details>
 
@@ -585,22 +705,33 @@ server/
 │  ├─ gc2/
 │  │  ├─ audio/ (found in android/ios.zip)
 │  │  │  └─ ogg and m4a zips
+│  │  │ 
 │  │  ├─ stage/ (found in android/ios.zip)
 │  │  │  └─ zip files for stage
-│  │  ├─ model.pak (found in common.zip)
-│  │  ├─ skin.pak (found in common.zip)
-│  │  └─ tunefile.pak (found in common.zip)
+│  │  │ 
+│  │  └─ pak/ (found in android/ios.zip)
+│  │     └─ model/skin/tunefile.pak(found in common.zip)(actual paks)
+│  │  
+│  ├─ gc/
+│  │  └─ model1/skin1/tunefile1.pak(found in common.zip)(placeholder/unauthenticated paks)
+│  │  
 │  ├─ image/ (found in common.zip)
 │  │  ├─ icon
 │  │  └─ title
 │  ├─ web/ (found in common.zip)
-│  │  └─ webpage assets
-├─ 7002.py (main script)
-├─ api/ (API scripts)
+│  │  └─ webpage assets, including javascript/css found in this repo
+│  │  
+│  ├─ 4max_ver.txt (for 4max pack versioning, optional)
+│  └─ various xml templates (found in this repo)
+│ 
+├─ 7003.py (main script)
+├─ config.py (configuration script)
+│ 
+├─ api/ 
 │  ├─ config/ (various configuration files)
-├─ getCrypt.py (debug purpose only)
-├─ old_server (Flask old server (depricated))
-└─ config.py (configuration script)
+│  └─ various .py (API scripts)
+│  
+└─ old_servers (old server (depricated))
 </pre>
 </details>
 

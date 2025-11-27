@@ -2,6 +2,8 @@
 
 This is a flutter app for batch downloading GC2OS server assets (music and charts) to the user's device (their application folder).
 
+Note: For 7003, the code has changed. Go to `lib` folder and replace `main.dart` with `main-7003.dart`.
+
 To use it, you need to
 
 1) Compile the project to .apk or .ipa. learn how to [here](https://docs.flutter.dev/deployment). A pre-compiled apk is provided, it has the same name and signature as the 4max version apk.

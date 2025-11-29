@@ -366,12 +366,20 @@ async def convert_db():
     all_devices = await old_database.fetch_all(select(old_metadata.tables["daily_reward"]))
     all_devices = [dict(d) for d in all_devices]
     for device in all_devices:
-        connected_user = await old_database.fetch_one(
+        connected_old_user = await old_database.fetch_one(
             select(old_metadata.tables["user"]).where(old_metadata.tables["user"].c.device_id == device['device_id'])
         )
+        new_user_id = None
+        old_user_username = connected_old_user['username'] if connected_old_user else None
+        if old_user_username:
+            connected_user = await player_database.fetch_one(
+                select(accounts).where(accounts.c.username == old_user_username)
+            )
+            new_user_id = connected_user['id'] if connected_user else None
+
         insert_query = insert(devices).values(
             device_id=device['device_id'],
-            user_id=connected_user['id'] if connected_user else None,
+            user_id=new_user_id,
             my_stage=device['my_stage'],
             my_avatar=device['my_avatar'],
             item=device['item'],

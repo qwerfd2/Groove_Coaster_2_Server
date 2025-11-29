@@ -3,7 +3,7 @@ from starlette.routing import Route
 from starlette.responses import HTMLResponse, JSONResponse, RedirectResponse
 import sqlalchemy
 import json
-import datetime
+from datetime import datetime
 
 from api.database import player_database, accounts, results, devices, whitelists, blacklists, batch_tokens, binds, webs, logs, is_admin, read_user_save_file, write_user_save_file
 from api.misc import crc32_decimal
@@ -67,7 +67,7 @@ async def web_admin_get_table(request: Request):
     # Validate size
     if size < 10:
         size = 10
-    if size > 100:
+    elif size > 100:
         size = 100
 
     table, allowed_fields = TABLE_MAP[table_name]
@@ -199,12 +199,12 @@ async def web_admin_table_set(request: Request):
                 # Try to convert to datetime object
                 try:
                     if isinstance(value, str):
-                        dt_obj = datetime.datetime.fromisoformat(value)
+                        dt_obj = datetime.fromisoformat(value)
                         row_data[key] = dt_obj
                     elif isinstance(value, (int, float)):
-                        dt_obj = datetime.datetime.fromtimestamp(value)
+                        dt_obj = datetime.fromtimestamp(value)
                         row_data[key] = dt_obj
-                    elif isinstance(value, datetime.datetime):
+                    elif isinstance(value, datetime):
                         pass  # already datetime
                     else:
                         raise ValueError
@@ -297,12 +297,12 @@ async def web_admin_table_insert(request: Request):
             elif expected_type.startswith("DATETIME"):
                 try:
                     if isinstance(value, str):
-                        dt_obj = datetime.datetime.fromisoformat(value)
+                        dt_obj = datetime.fromisoformat(value)
                         row_data[key] = dt_obj
                     elif isinstance(value, (int, float)):
-                        dt_obj = datetime.datetime.fromtimestamp(value)
+                        dt_obj = datetime.fromtimestamp(value)
                         row_data[key] = dt_obj
-                    elif isinstance(value, datetime.datetime):
+                    elif isinstance(value, datetime):
                         pass
                     else:
                         raise ValueError
@@ -338,7 +338,7 @@ async def web_admin_data_save(request: Request):
     save_data = params['data']
 
     crc = crc32_decimal(save_data)
-    formatted_time = datetime.datetime.now()
+    formatted_time = datetime.now()
 
     query = accounts.update().where(accounts.c.id == uid).values(save_crc=crc, save_timestamp=formatted_time)
     await player_database.execute(query)

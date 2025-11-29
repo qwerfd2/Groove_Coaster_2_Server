@@ -252,7 +252,7 @@ async def should_serve(decrypted_fields):
         should_serve = await check_whitelist(decrypted_fields) and not await check_blacklist(decrypted_fields)
     
     if AUTHORIZATION_MODE and should_serve:
-        user_info, device_info = await decrypt_fields_to_user_info(decrypted_fields, "id")
+        user_info, _ = await decrypt_fields_to_user_info(decrypted_fields)
         bind_info = await get_bind(user_info["id"])
         if not bind_info or bind_info['is_verified'] != 1:
             should_serve = False

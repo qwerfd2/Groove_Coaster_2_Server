@@ -2,9 +2,6 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from datetime import datetime
-import uuid
-
-from starlette.responses import JSONResponse
 
 from config import SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASSWORD
 
@@ -28,7 +25,7 @@ def init_email():
 async def send_email(to_addr, code, lang):
     global server
     title = {"en": "Project Taiyo - Email Verification", "zh": "项目 Taiyo - 邮件验证", "tc": "專案 Taiyo - 郵件驗證", "jp": "プロジェクト Taiyo - メール認証"}
-    with open(f"api/web/email_{lang}.html", "r", encoding="utf-8") as file:
+    with open(f"web/email_{lang}.html", "r", encoding="utf-8") as file:
         body = file.read()
 
     body = body.format(code=code)

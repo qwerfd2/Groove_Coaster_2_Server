@@ -226,14 +226,14 @@ async def log_download(user_id, filename, filesize):
         user_id=user_id,
         filename=filename,
         filesize=filesize,
-        timestamp=datetime.datetime.utcnow()
+        timestamp=datetime.utcnow()
     )
     await player_database.execute(query)
 
 async def get_downloaded_bytes(user_id, hours):
     query = select(sqlalchemy.func.sum(logs.c.filesize)).where(
         (logs.c.user_id == user_id) &
-        (logs.c.timestamp >= datetime.datetime.utcnow() - datetime.timedelta(hours=hours))
+        (logs.c.timestamp >= datetime.utcnow() - timedelta(hours=hours))
     )
     result = await player_database.fetch_one(query)
     return result[0] if result[0] is not None else 0
@@ -247,7 +247,7 @@ async def verify_user_code(code, user_id):
         (binds.c.bind_code == code) &
         (binds.c.user_id == user_id) &
         (binds.c.is_verified == 0) &
-        (binds.c.bind_date >= datetime.datetime.utcnow() - datetime.timedelta(minutes=10))
+        (binds.c.bind_date >= datetime.utcnow() - timedelta(minutes=10))
     )
     result = await player_database.fetch_one(query)
     if not result:
@@ -304,14 +304,14 @@ async def user_name_to_user_info(username):
 
 async def check_whitelist(decrypted_fields):
     device_id = decrypted_fields[b'vid'][0].decode()
-    user_info, device_info = await decrypt_fields_to_user_info(decrypted_fields)
+    user_info, _ = await decrypt_fields_to_user_info(decrypted_fields)
     query = select(whitelists.c.device_id).where((whitelists.c.device_id == device_id) | (whitelists.c.device_id == user_info['username']))
     result = await player_database.fetch_one(query)
     return result is not None
 
 async def check_blacklist(decrypted_fields):
     device_id = decrypted_fields[b'vid'][0].decode()
-    user_info, device_info = await decrypt_fields_to_user_info(decrypted_fields)
+    user_info, _ = await decrypt_fields_to_user_info(decrypted_fields)
     query = select(blacklists.c.ban_terms).where((blacklists.c.ban_terms == device_id) | (blacklists.c.ban_terms == user_info['username']))
     result = await player_database.fetch_one(query)
     return result is None

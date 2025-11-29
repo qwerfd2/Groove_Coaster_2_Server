@@ -1,5 +1,5 @@
 
-from starlette.responses import HTMLResponse, JSONResponse
+from starlette.responses import JSONResponse
 from starlette.requests import Request
 from starlette.routing import Route
 from datetime import datetime

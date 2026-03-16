@@ -4,7 +4,7 @@ from starlette.routing import Route
 from datetime import datetime
 import secrets
 
-from api.misc import is_alphanumeric, inform_page, verify_password, hash_password, crc32_decimal, should_serve, generate_salt
+from api.misc import is_alphanumeric, inform_page, verify_password, hash_password, crc32_decimal, should_serve, generate_salt, validate_password
 from api.database import check_blacklist, user_name_to_user_info, decrypt_fields_to_user_info, set_user_data_using_decrypted_fields, get_user_from_save_id, create_user, logout_user, login_user, get_bind, read_user_save_file, write_user_save_file
 from api.crypt import decrypt_fields
 from config import AUTHORIZATION_MODE
@@ -69,11 +69,9 @@ async def password_reset(request: Request):
     user_info, device_info = await decrypt_fields_to_user_info(decrypted_fields)
 
     if user_info:
-        username = user_info['username']
-        if username == new_password:
-            return inform_page("FAILED:<br>Username cannot be the same as password.", 0)
-        if len(new_password) < 6:
-            return inform_page("FAILED:<br>Password must have 6 or more characters.", 0)
+        result, str = validate_password(user_info['username'], new_password)
+        if not result:
+            return inform_page("FAILED:<br>" + str, 0)
 
         old_hash = user_info['password_hash']
         if old_hash:
@@ -172,18 +170,16 @@ async def register(request: Request):
 
     if not username or not password:
         return inform_page("FAILED:<br>Missing username or password.", 0)
-
-    if username == password:
-        return inform_page("FAILED:<br>Username cannot be the same as password.", 0)
-
+    
     if len(username) < 6 or len(username) > 20:
         return inform_page("FAILED:<br>Username must be between 6 and 20<br>characters long.", 0)
 
-    if len(password) < 6:
-        return inform_page("FAILED:<br>Password must have<br>6 or above characters.", 0)
-
     if not is_alphanumeric(username):
         return inform_page("FAILED:<br>Username must consist entirely of<br>alphanumeric characters.", 0)
+    
+    result, str = validate_password(username, password)
+    if not result:
+        return inform_page("FAILED:<br>" + str, 0)
 
     decrypted_fields, _ = await decrypt_fields(request)
     if not decrypted_fields:

@@ -4,7 +4,7 @@ from starlette.requests import Request
 from starlette.routing import Route
 from datetime import datetime
 
-from api.misc import is_alphanumeric, inform_page, generate_salt, check_email, generate_otp
+from api.misc import is_alphanumeric, inform_page, generate_salt, check_email, generate_otp, validate_password, hash_password
 from api.database import player_database, accounts, binds, decrypt_fields_to_user_info, get_bind, verify_user_code, user_name_to_user_info
 from api.crypt import decrypt_fields
 from api.email_hook import send_email_to_user
@@ -140,6 +140,38 @@ async def discord_get_bind(request: Request, form):
     return JSONResponse({"state": 1, "message": "Your account is binded to: " + user_record['username']})
 
 @require_authorization(mode_required=[2])
+@validate_form_fields(["discord_id", "password"])
+@check_discord_api_key()
+async def discord_reset_password(request: Request, form):
+    discord_id = form.get("discord_id")
+    password = form.get("password")
+
+    query = binds.select().where(binds.c.bind_account == discord_id).where(binds.c.is_verified == 1)
+    bind_record = await player_database.fetch_one(query)
+    bind_record = dict(bind_record) if bind_record else None
+    if not bind_record:
+        return JSONResponse({"state": 0, "message": "No verified bind found for this Discord ID."}, status_code=404)
+    
+    user_query = accounts.select().where(accounts.c.id == bind_record['user_id'])
+    user_record = await player_database.fetch_one(user_query)
+
+    user_record = dict(user_record) if user_record else None
+    if not user_record:
+        return JSONResponse({"state": 0, "message": "User associated with this bind does not exist."}, status_code=405)
+    
+    result, str = validate_password(user_record['username'], password)
+    if not result:
+        return JSONResponse({"state": 0, "message": str}, status_code=406)
+    
+    hashed_new_password = hash_password(password)
+    query = accounts.update().where(accounts.c.id == user_record['id']).values(
+        password_hash=hashed_new_password
+    )
+    await player_database.execute(query)
+    
+    return JSONResponse({"state": 1, "message": "Your password is reset."})
+
+@require_authorization(mode_required=[2])
 @validate_form_fields(["discord_id"])
 @check_discord_api_key()
 async def discord_ban(request: Request, form):
@@ -183,6 +215,7 @@ routes = [
     Route('/send_email', send_email, methods=['POST']),
     Route('/discord_get_token', discord_get_token, methods=['POST']),
     Route('/discord_get_bind', discord_get_bind, methods=['POST']),
+    Route('/discord_reset_password', discord_reset_password, methods=['POST']),
     Route('/discord_ban', discord_ban, methods=['POST']),
     Route('/discord_unban', discord_unban, methods=['POST']),
     Route('/verify', verify_user, methods=['POST'])

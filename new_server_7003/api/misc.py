@@ -319,3 +319,12 @@ async def get_start_xml():
             root.append(child)
 
     return root
+
+def validate_password(username, password):
+    if username == password:
+        return 0, "Username cannot be the same as password."
+
+    if len(password) < 6:
+        return 0, "Password must have<br>6 or above characters."
+    
+    return 1, ""

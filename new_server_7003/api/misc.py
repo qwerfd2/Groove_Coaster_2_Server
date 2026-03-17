@@ -325,6 +325,6 @@ def validate_password(username, password):
         return 0, "Username cannot be the same as password."
 
     if len(password) < 6:
-        return 0, "Password must have<br>6 or above characters."
+        return 0, "Password must have 6 or above characters."
     
     return 1, ""

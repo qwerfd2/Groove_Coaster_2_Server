@@ -275,7 +275,6 @@ async def save(request: Request):
     user_info, _ = await decrypt_fields_to_user_info(decrypted_fields)
 
     username = user_info['username']
-    user_id = user_info['id']
     if username:
         crc = crc32_decimal(data)
         formatted_time = datetime.now()

@@ -88,7 +88,7 @@ async def reset_password(password: str, discord_id: str):
 
     async with httpx.AsyncClient() as client:
         response = await client.post(request_url, data=request_post, headers=request_headers)
-        print("get_otp called by ", discord_id, " response payload:", response.text)
+        print("reset_password called by ", discord_id, " response payload:", response.text)
         response_data = response.json()
 
         prefix = "✅ " if response_data.get("state") == 1 else "❌ "
@@ -178,7 +178,7 @@ class BindModal(Modal, title="Bind Your Account"):
 
 class PasswordResetModal(Modal, title="Password Reset"):
     password = TextInput(
-        label="New Password (Requirement: )",
+        label="New Password (Requirement: 6 characters or longer)",
         placeholder="Your New Password",
         style=TextStyle.short,
         required=True,
